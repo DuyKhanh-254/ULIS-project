@@ -1,21 +1,23 @@
 import {roles, personas, quizQuestions, levels, leaderTree, leaderEndings, quickScenarios, reversal} from './data.js';
+import {drawPersonaCard, personaStyles} from './persona-card.js';
 
 const ROOT=document.getElementById('app');
 const TOAST=document.getElementById('toast');
-const STORE='teamcraft-redesign-v3';
+const STORE='teamcraft-redesign-v4';
 let saved={}; try{saved=JSON.parse(localStorage.getItem(STORE)||'{}')}catch{}
-const state={screen:'home',level:1,stage:0,role:saved.role||'leader',outfit:saved.outfit||'blue',persona:saved.persona||null,quizAnswers:[],quizIndex:0,quizTime:60,gameTime:20,game:null,done:saved.done||[],wallet:saved.wallet||[]};
+const state={screen:'home',level:1,stage:0,role:saved.role||'leader',outfit:saved.outfit||'blue',persona:saved.persona||null,previewPersona:null,nickname:saved.nickname||'CUT3FROG247',quizAnswers:[],quizIndex:0,quizTime:60,gameTime:20,game:null,done:saved.done||[],wallet:saved.wallet||[]};
 let clock=null;
 const allOutfits=[{id:'blue',name:'Xanh ULIS'},{id:'rose',name:'Hồng pastel'},{id:'leaf',name:'Xanh lá'},{id:'violet',name:'Tím nhạt'},{id:'gold',name:'Vàng mật ong'}];
 const safe=s=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
 const role=id=>roles.find(r=>r.id===id)||roles[0];
 const level=id=>levels.find(l=>l.id===Number(id))||levels[0];
-function save(){try{localStorage.setItem(STORE,JSON.stringify({role:state.role,outfit:state.outfit,persona:state.persona,done:state.done,wallet:state.wallet}))}catch{}}
-const icon=(name,cls='')=>`<img class="icon ${cls}" src="assets/ui/${name}.svg" alt="">`;
-const sprite=(id,pose='idle')=>`assets/characters/${id}_${pose}.svg`;
+function save(){try{localStorage.setItem(STORE,JSON.stringify({role:state.role,outfit:state.outfit,persona:state.persona,nickname:state.nickname,done:state.done,wallet:state.wallet}))}catch{}}
+const assetPath=path=>window.__assetMap?.[path]||path;
+const icon=(name,cls='')=>`<img class="icon ${cls}" src="${assetPath('assets/ui/'+name+'.svg')}" alt="">`;
+const sprite=(id,pose='idle')=>assetPath(`assets/characters/${id}_${pose}.svg`);
 const avatar=(id,cl='',pose='idle')=>`<img class="character ${cl}" src="${sprite(id,pose)}" alt="">`;
 const player=(pose='idle',cl='')=>avatar(state.role,cl,pose);
-const outfitted=(cl='')=>`<img class="character ${cl}" src="assets/characters/${state.role}_outfit_${state.outfit}.svg" alt="">`;
+const outfitted=(cl='')=>`<img class="character ${cl}" src="${assetPath(`assets/characters/${state.role}_outfit_${state.outfit}.svg`)}" alt="">`;
 const logo=(sm=false)=>`<div class="brand ${sm?'brand-sm':''}"><span>TEAM</span><span>CRAFT</span></div>`;
 const shell=(cls,html)=>`<main class="device"><section class="page ${cls}">${html}</section></main>`;
 const btn=(label,action='map',variant='green',extras='')=>`<button class="game-btn ${variant}" data-go="${action}" ${extras}>${label}</button>`;
@@ -37,7 +39,8 @@ function home(){return shell('home-page',`
   <div class="talk-label">Chọn cách ứng xử. Xem điều gì sẽ xảy ra!</div>
 </section>
 <section class="home-cta"><button class="game-btn green large" data-go="map">${icon('play')} BẮT ĐẦU CHƠI</button>
-<button class="game-btn pale large" data-action="start-quiz">${icon('star')} LÀM QUIZ 60 GIÂY</button></section>
+<button class="game-btn pale large" data-action="start-quiz">${icon('star')} LÀM QUIZ 60 GIÂY</button>
+<button class="peek-card-cta" data-go="personaGallery">✦ KHÁM PHÁ 7 THẺ NHÂN VẬT VUI NHỘN <span>›</span></button></section>
 <div class="home-feature-strip"><div>${icon('team')}<span>5 VAI TRÒ</span></div><div>${icon('rotate')}<span>ĐẢO VAI</span></div><div>${icon('book')}<span>BÀI HỌC</span></div></div>
 <p class="footer-note">Phiên bản trải nghiệm • 2 ải đầu có gameplay mẫu</p>
 `)}
@@ -53,7 +56,7 @@ function map(){const nodes=[
  {n:2,x:52,y:65.4,cap:'TRUNG BÌNH',name:'Người Lạ Ơi',theme:'blue'},
  {n:1,x:31,y:79.7,cap:'DỄ',name:'Nhóm Bạn Thân',theme:'green'}];
 return shell('map-page',`
-<img class="map-scene" src="assets/campus-map.webp" alt="Khuôn viên trường học phong cách hoạt hình, con đường đi qua năm ải">
+<img class="map-scene" src="${assetPath('assets/campus-map.webp')}" alt="Khuôn viên trường học phong cách hoạt hình, con đường đi qua năm ải">
 <div class="map-hud"><button class="map-logo" data-go="home" aria-label="Trang chủ">${logo(true)}</button>
   <div class="resources"><span>${icon('heart')} <b>120</b></span><span>${icon('coin')} <b>500</b></span></div></div>
 ${mapNPCLayout.map(([name,x,y,pose,id])=>`<img class="map-npc ${id}" src="${sprite(name,pose)}" style="left:${x}%;top:${y}%" alt="" loading="lazy">`).join('')}
@@ -67,21 +70,30 @@ ${nodes.map(n=>`<button class="level-spot ${n.theme}" style="left:${n.x}%;top:${
 
 function rolesView(){const r=role(state.role);return shell('interior-page',`${topbar('Chọn vai trò','map')}
 <div class="page-body"><div class="page-intro">Mỗi vai trò có cách nhìn và nhiệm vụ khác nhau.</div>
-<div class="role-grid">${roles.map(item=>`<button class="role-tile ${state.role===item.id?'active':''}" data-role="${item.id}">
-<div class="role-figure">${avatar(item.id,'role-char',state.role===item.id?'talk':'idle')}</div><b>${safe(item.name)}</b><small>${item.en}</small>${state.role===item.id?`<span class="checkmark">${icon('check')}</span>`:''}</button>`).join('')}</div>
+<div class="role-grid">${roles.map(item=>`<div class="role-tile ${state.role===item.id?'active':''}">
+<button class="role-select" data-role="${item.id}" aria-label="Nhập vai ${safe(item.name)}"><div class="role-figure">${avatar(item.id,'role-char',state.role===item.id?'talk':'idle')}</div><b>${safe(item.name)}</b><small>${item.en}</small><em>NHẬP VAI</em></button>
+<button class="role-quick-edit" data-custom-role="${item.id}" aria-label="Tùy chỉnh ${safe(item.name)}">${icon('edit')}</button>
+${state.role===item.id?`<span class="checkmark">${icon('check')}</span>`:''}</div>`).join('')}</div>
 <div class="role-summary"><div class="role-portrait">${avatar(state.role,'portrait-char')}</div><div><strong>${safe(r.name)}</strong><p>${safe(r.skill)}</p></div></div>
 <div class="button-pair">${btn(`${icon('edit')} Tùy chỉnh`,'custom','sky')}${btn('Xác nhận','map','green')}</div>
 </div>`)}
 
 function customView(){return shell('interior-page',`${topbar('Tùy chỉnh nhân vật','roles')}
 <div class="page-body"><div class="preview-stage"><div class="preview-ring"></div>${outfitted('preview-character')}<div class="preview-name">${safe(role(state.role).name)}</div></div>
-<h2 class="subheading">Bộ trang phục</h2><div class="outfit-row">${allOutfits.map(x=>`<button class="outfit-item ${x.id===state.outfit?'active':''}" data-outfit="${x.id}"><img src="assets/characters/${state.role}_outfit_${x.id}.svg" alt=""><span>${x.name}</span></button>`).join('')}</div>
+<h2 class="subheading">Bộ trang phục</h2><div class="outfit-row">${allOutfits.map(x=>`<button class="outfit-item ${x.id===state.outfit?'active':''}" data-outfit="${x.id}"><img src="${assetPath(`assets/characters/${state.role}_outfit_${x.id}.svg`)}" alt=""><span>${x.name}</span></button>`).join('')}</div>
 ${btn(`${icon('check')} Hoàn tất`,'roles','green full')}</div>`)}
 
 function stagesView(){const l=level(state.level);return shell('interior-page',`${topbar('Ải '+l.id+': '+l.name,'map')}
 <div class="page-body"><div class="stage-banner"><div><span>CHƯƠNG ${l.id}</span><h2>${safe(l.name)}</h2><p>${safe(l.description)}</p></div>${avatar(l.roles[0],'banner-char','talk')}</div>
 <div class="level-info">Vai trò ở ải này: ${l.roles.map(id=>role(id).name).join(' • ')}</div>
-<div class="stage-list">${l.stages.map((s,i)=>`<button class="stage-item ${i===0&&l.id<=2?'is-ready':'is-locked'}" data-stage="${i}"><span class="stage-image">${avatar(l.roles[i%l.roles.length],'stage-char',i===0?'talk':'idle')}</span><span class="stage-text"><b>MÀN ${i+1} · ${safe(s[0])}</b><small>${safe(s[1])}</small><em>${i===0&&l.id<=2?'CHƠI MÀN NÀY':'CHƯA CÓ HỘI THOẠI'}</em></span><span class="stage-icon">${icon(i===0&&l.id<=2?'play':'lock')}</span></button>`).join('')}</div>
+<div class="stage-list">${l.stages.map((s,i)=>`<button class="stage-item ${i===0&&l.id<=2?'is-ready':'is-locked'}" data-stage="${i}"><span class="stage-image">${avatar(l.roles[i%l.roles.length],'stage-char',i===0?'talk':'idle')}</span><span class="stage-text"><b>MÀN ${i+1} · ${safe(s[0])}</b><span class="stage-mode">${(l.id===1&&[0,3].includes(i))||(l.id===2&&[0,1,5].includes(i))?'CHAT NHÓM':l.id<=2?'LÀM VIỆC TRỰC TIẾP':'CHƯA ĐỊNH DẠNG'}</span><small>${safe(s[1])}</small><em>${i===0&&l.id<=2?'CHƠI MÀN NÀY':'CHƯA CÓ HỘI THOẠI'}</em></span><span class="stage-icon">${icon(i===0&&l.id<=2?'play':'lock')}</span></button>`).join('')}</div>
+</div>`)}
+function stageIntro(){const l=level(state.level); const s=l.stages[state.stage];return shell('interior-page',`${topbar('Thẻ bối cảnh','stages')}
+<div class="page-body"><div class="stage-intro-meta"><span>ẢI ${l.id} • MÀN ${state.stage+1}</span><span>CHAT NHÓM</span>${l.id===1?'<span>CÒN 48 GIỜ</span>':''}</div>
+<div class="stage-intro-art">${avatar('leader','stage-pola','idle')}${avatar('doer','stage-pola','talk')}${avatar(l.id===1?'mediator':'follower','stage-pola','idle')}</div>
+<h2 class="stage-intro-title">${safe(s[0])}</h2><p class="stage-intro-desc">${safe(s[1])}</p>
+<div class="stage-intro-tip"><strong>Bạn là ${safe(role(state.role).name)}.</strong> Phản ứng của NPC và kết cục phụ thuộc vào lựa chọn của bạn. Có thể chơi lại để thử một cách xử lý khác.</div>
+${btn(`${icon('play')} BẮT ĐẦU MÔ PHỎNG`,'beginStage','green full')}
 </div>`)}
 function stagePreview(){const l=level(state.level);const s=l.stages[state.stage];return shell('interior-page',`${topbar('Thông tin màn','stages')}<div class="page-body centered"><div class="preview-stage small">${avatar(l.roles[0],'preview-character')}</div><div class="lesson-card"><b>ẢI ${l.id} / MÀN ${state.stage+1}</b><h2>${safe(s[0])}</h2><p>${safe(s[1])}</p><p class="muted">Màn này đã có tên và mô tả trong đề xuất nhưng chưa có cây thoại hoàn chỉnh để chơi.</p></div>${btn('Các màn khác','stages','sky full')}</div>`)}
 
@@ -89,9 +101,52 @@ function quizView(){const q=quizQuestions[state.quizIndex];return shell('quiz-pa
 <div class="page-body"><div class="progress-header"><strong>CÂU ${state.quizIndex+1} / 5</strong><span id="quiz-count">${state.quizTime}s</span></div><div class="progress-track"><span style="width:${(state.quizIndex+1)*20}%"></span></div>
 <div class="quiz-panel"><div class="quiz-figure">${avatar(state.quizIndex%2?'mediator':'follower','quiz-char')}</div><h2>${safe(q.question)}</h2><div class="quiz-options">${q.answers.map((ans,i)=>`<button class="answer" data-quiz="${i}"><span>${String.fromCharCode(65+i)}</span>${safe(ans[0])}</button>`).join('')}</div></div>
 <p class="small-note">Quiz chỉ mang tính khám phá phong cách làm việc, không phải kiểm tra EQ.</p></div>`)}
-function quizResult(){const p=personas.find(x=>x.id===state.persona)||personas[0];return shell('quiz-page',`${topbar('Thẻ phong cách','home')}
-<div class="page-body"><div class="persona-card"><span class="persona-heading">TEAM CRAFT / CHARACTER CARD</span><div class="persona-inner">${player('talk','persona-char')}<div><h2>${safe(p.title)}</h2><p>${safe(p.desc)}</p></div></div><div class="persona-footer">THẺ KHÁM PHÁ PHONG CÁCH LÀM VIỆC NHÓM</div></div>
-<div class="lesson-card"><strong>Gợi ý của TEAM-CRAFT</strong><p>${safe(p.tip)}</p></div>${btn(`${icon('play')} Vào game mô phỏng`,'map','green full')}</div>`)}
+function quizResult(){
+  const p=personas.find(x=>x.id===(state.previewPersona||state.persona))||personas[0];
+  const isPreview=Boolean(state.previewPersona);
+  return shell('quiz-page persona-result-page',`${topbar(isPreview?'Xem thử thẻ':'Thẻ nhân vật của bạn','home')}
+<div class="page-body persona-result-body">
+  <div class="card-context"><span class="card-context-spark">✦</span><div><strong>${isPreview?'Bộ sưu tập phong cách':'Xin chào, đồng đội!'}</strong><p>${isPreview?'Bản xem thử · Hoàn thành Quiz để nhận thẻ của chính bạn':'Thẻ nhân vật đã sẵn sàng để lưu và đăng Story'}</p></div></div>
+  <div class="persona-canvas-wrap"><canvas id="persona-render" width="900" height="1190" role="img" aria-label="Thẻ vui nhộn ${safe(p.title)}"></canvas></div>
+  <label class="nickname-label" for="player-nickname">TÊN HIỂN THỊ TRÊN THẺ <small>(không cần tên thật)</small></label>
+  <div class="nick-wrap"><input id="player-nickname" type="text" maxlength="18" autocomplete="off" value="${safe(state.nickname)}" aria-label="Tên người chơi trên thẻ"><span>✎</span></div>
+  <div class="card-actions"><button class="card-action download" data-action="download-card">⬇ TẢI ẢNH PNG</button><button class="card-action share" data-action="share-card">↗ CHIA SẺ</button></div>
+  <button class="game-btn green full persona-enter" data-go="map">${icon('play')} VÀO GAME MÔ PHỎNG NGAY!</button>
+  <div class="persona-secondary"><button data-action="start-quiz">↻ Làm Quiz lại</button><button data-go="personaGallery">Xem 7 thẻ khác</button></div>
+  <p class="card-privacy">Kết quả để khám phá và giải trí, không phải chẩn đoán hay điểm EQ. Tính năng chia sẻ sử dụng trình chia sẻ của thiết bị khi được hỗ trợ.</p>
+</div>`);
+}
+function personaGallery(){return shell('quiz-page persona-gallery-page',`${topbar('7 hình mẫu trong Quiz','home')}
+<div class="page-body"><div class="gallery-intro"><span>✦ BỘ SƯU TẬP ✦</span><h2>Bạn thuộc team nào?</h2><p>Nhấn vào một thẻ để xem giao diện. Đây là 7 kiểu phong cách từ đề xuất TEAM-CRAFT; kết quả cá nhân được tạo sau 5 câu Quiz.</p></div>
+<div class="persona-grid">${personas.map(p=>`<button class="persona-mini-card" style="--persona-color:${personaStyles[p.id]?.bg||'#ffdfed'}" data-persona-preview="${p.id}"><img src="${assetPath(`assets/personas/${p.id}.svg`)}" alt=""><strong>${safe(p.title)}</strong><small>Xem thẻ ›</small></button>`).join('')}</div>
+<button class="game-btn pale full" data-action="start-quiz">${icon('star')} LÀM QUIZ NHẬN THẺ</button></div>`)}
+async function updatePersonaCanvas(){
+ if(state.screen!=='quizResult')return;
+ const canvas=document.getElementById('persona-render');if(!canvas)return;
+ const current=state.previewPersona||state.persona||'bee';
+ const p=personas.find(x=>x.id===current)||personas[0];
+ try {await drawPersonaCard(canvas,p,state.nickname)} catch(err){console.error(err); toast('Không tải được hình linh vật. Vui lòng thử mở bằng localhost.');}
+}
+function imageBlob(canvas){return new Promise(resolve=>canvas.toBlob(resolve,'image/png'))}
+async function getCardFile(){
+ const canvas=document.getElementById('persona-render');if(!canvas)return null;
+ await updatePersonaCanvas();
+ const blob=await imageBlob(canvas);if(!blob)return null;
+ const id=(state.previewPersona||state.persona||'bee').replace(/[^a-z0-9_-]/gi,'');
+ return new File([blob],`TEAM-CRAFT-card-${id}.png`,{type:'image/png'});
+}
+function saveFile(file){
+ const a=document.createElement('a');const url=URL.createObjectURL(file);a.href=url;a.download=file.name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)
+}
+async function downloadPersonaCard(){const file=await getCardFile();if(!file)return toast('Chưa tạo được ảnh.');saveFile(file);toast('Đã tạo ảnh PNG để đăng Story!')}
+async function sharePersonaCard(){
+ const file=await getCardFile();if(!file)return toast('Chưa tạo được ảnh.');
+ try {
+  if(navigator.share && navigator.canShare?.({files:[file]})){
+   await navigator.share({files:[file],title:'Thẻ TEAM-CRAFT của mình',text:'Còn bạn thuộc phong cách làm việc nhóm nào?'});
+  } else {saveFile(file);toast('Thiết bị chưa hỗ trợ chia sẻ ảnh trực tiếp. Đã tải PNG để bạn đăng Story.');}
+ } catch(e){ if(e.name!=='AbortError'){saveFile(file);toast('Đã tải ảnh PNG để chia sẻ thủ công.');} }
+}
 
 const talkSprites={'Minh':'doer','Lan':'mediator','Huy':'follower','An':'leader','Bạn':null,'Hệ thống':'follower','Minh (suy nghĩ)':'doer'};
 function bubble(name,msg){const mine=name==='Bạn';const id=talkSprites[name]||state.role;return `<div class="bubble-row ${mine?'self':''}"><span class="bubble-avatar">${avatar(id,'bubble-character',name==='Hệ thống'?'idle':'talk')}</span><div class="bubble-content"><small>${safe(name)}</small><p>${safe(msg)}</p></div></div>`}
@@ -111,15 +166,15 @@ ${o.template?`<div class="lesson-card template-card"><strong>VÍ KỊCH BẢN �
 <div class="action-stack">${g.mode==='reversal'?'':`<button class="game-btn pale full" data-action="reversal">${icon('rotate')} THỬ ĐẢO VAI</button>`}<div class="button-pair">${btn('Chơi lại','replay','sky')}${btn('Bản đồ','map','green')}</div></div><p class="small-note">Kết quả chỉ là tình huống mô phỏng, không dự đoán chắc chắn phản ứng ngoài đời.</p></div>`)}
 function walletView(){return shell('interior-page',`${topbar('Ví kịch bản','map')}<div class="page-body"><div class="page-intro">Lưu và sao chép các mẫu tin nhắn từ màn chơi đã hoàn thành.</div>${state.wallet.length?state.wallet.map((w,i)=>`<article class="lesson-card wallet-item"><strong>Mẫu tin nhắn ${i+1}</strong><p>${safe(w.text)}</p><button class="small-button" data-copy="${i}">${icon('chat')} Sao chép</button></article>`).join(''):`<div class="empty-wallet">${avatar('follower','empty-char')}<h2>Ví của bạn đang trống</h2><p>Hoàn thành một màn chơi để lưu tin nhắn thực chiến.</p></div>`}${btn('Quay lại bản đồ','map','green full')}</div>`)}
 
-function render(){const mapRender={home,map,roles:rolesView,custom:customView,stages:stagesView,stagePreview,quiz:quizView,quizResult,chat:chatView,ending:endingView,wallet:walletView,replay:()=>{startGame();return ''}};
-ROOT.innerHTML=(mapRender[state.screen]||home)();if(state.screen==='chat'){document.getElementById('message-zone')?.scrollTo(0,9999)}if(state.screen==='quiz')runQuizClock();if(state.screen==='chat')runGameClock();}
+function render(){const mapRender={home,map,roles:rolesView,custom:customView,stages:stagesView,stagePreview,quiz:quizView,quizResult,personaGallery,stageIntro,chat:chatView,ending:endingView,wallet:walletView,replay:()=>{startGame();return ''}};
+ROOT.innerHTML=(mapRender[state.screen]||home)();if(state.screen==='quizResult')updatePersonaCanvas();if(state.screen==='chat'){document.getElementById('message-zone')?.scrollTo(0,9999)}if(state.screen==='quiz')runQuizClock();if(state.screen==='chat')runGameClock();}
 function runQuizClock(){stopClock();clock=setInterval(()=>{if(state.screen!=='quiz'){stopClock();return;}state.quizTime=Math.max(0,state.quizTime-1);const el=document.getElementById('quiz-count');if(el)el.textContent=state.quizTime+'s';if(state.quizTime===0)finishQuiz()},1000)}
 function runGameClock(){stopClock();clock=setInterval(()=>{if(state.screen!=='chat'){stopClock();return;}state.gameTime=Math.max(0,state.gameTime-1);const el=document.getElementById('game-count');const bar=document.getElementById('time-fill');if(el)el.textContent=state.gameTime+'s';if(bar)bar.style.width=(state.gameTime*5)+'%';if(state.gameTime===0)autoGameEnd()},1000)}
-function startQuiz(){state.quizIndex=0;state.quizAnswers=[];state.quizTime=60;route('quiz')}
+function startQuiz(){state.previewPersona=null;state.quizIndex=0;state.quizAnswers=[];state.quizTime=60;route('quiz')}
 function chooseQuiz(index){const ans=quizQuestions[state.quizIndex].answers[index];if(!ans)return;state.quizAnswers.push(ans[1]);if(state.quizIndex===4)finishQuiz();else {state.quizIndex++;render()}}
-function finishQuiz(){const tally={};state.quizAnswers.forEach(x=>tally[x]=(tally[x]||0)+1);state.persona=Object.entries(tally).sort((a,b)=>b[1]-a[1])[0]?.[0]||'bee';save();route('quizResult')}
+function finishQuiz(){state.previewPersona=null;const tally={};state.quizAnswers.forEach(x=>tally[x]=(tally[x]||0)+1);state.persona=Object.entries(tally).sort((a,b)=>b[1]-a[1])[0]?.[0]||'bee';save();route('quizResult')}
 function openLevel(id){state.level=Number(id);route('stages')}
-function openStage(index){state.stage=Number(index);const l=level(state.level);if(state.stage!==0||l.id>2)return route('stagePreview');if(!l.roles.includes(state.role)){state.role=l.roles[0];save();toast('Đã chọn vai phù hợp cho ải này')}startGame()}
+function openStage(index){state.stage=Number(index);const l=level(state.level);if(state.stage!==0||l.id>2)return route('stagePreview');if(!l.roles.includes(state.role)){state.role=l.roles[0];save();toast('Đã chọn vai phù hợp cho ải này')}route('stageIntro')}
 function startGame(){state.game={level:state.level,role:state.role,mode:'main',node:'start',history:[],ending:null,quickOutcome:null,reversalOutcome:null};state.gameTime=20;route('chat')}
 function finishMain(){const key=`${state.game.level}:${state.stage}:${state.role}`;if(!state.done.includes(key))state.done.push(key);save();route('ending')}
 function answerGame(index){const g=state.game;const node=currentNode();const o=node.options[index];if(!o)return;g.history.push(...node.messages.map(([name,text])=>({name,text})),{name:'Bạn',text:o.text});
@@ -130,17 +185,22 @@ function startReversal(){state.game={...state.game,mode:'reversal',history:[]};s
 function saveTemplate(){const o=getEnding();if(!o?.template)return;state.wallet.unshift({level:state.game.level,text:o.template});state.wallet=state.wallet.slice(0,30);save();toast('Đã lưu mẫu tin nhắn vào ví')}
 async function copyWallet(index){const w=state.wallet[index];if(!w)return;try{await navigator.clipboard.writeText(w.text);toast('Đã sao chép')}catch{toast('Trình duyệt không cho phép sao chép tự động')}}
 ROOT.addEventListener('click',e=>{
- let x=e.target.closest('[data-go]');if(x){if(x.dataset.go==='replay')return startGame();return route(x.dataset.go)}
+ let x=e.target.closest('[data-go]');if(x){if(x.dataset.go==='replay'||x.dataset.go==='beginStage')return startGame();return route(x.dataset.go)}
  x=e.target.closest('[data-level]');if(x)return openLevel(x.dataset.level);
  x=e.target.closest('[data-role]');if(x){state.role=x.dataset.role;save();return render()}
+ x=e.target.closest('[data-custom-role]');if(x){state.role=x.dataset.customRole;save();return route('custom')}
  x=e.target.closest('[data-outfit]');if(x){state.outfit=x.dataset.outfit;save();return render()}
  x=e.target.closest('[data-stage]');if(x)return openStage(x.dataset.stage);
  x=e.target.closest('[data-quiz]');if(x)return chooseQuiz(Number(x.dataset.quiz));
+ x=e.target.closest('[data-persona-preview]');if(x){state.previewPersona=x.dataset.personaPreview;return route('quizResult')}
  x=e.target.closest('[data-choice]');if(x)return answerGame(Number(x.dataset.choice));
  x=e.target.closest('[data-copy]');if(x)return copyWallet(Number(x.dataset.copy));
  x=e.target.closest('[data-action]');if(!x)return;
  if(x.dataset.action==='start-quiz')startQuiz();
  if(x.dataset.action==='save-template')saveTemplate();
  if(x.dataset.action==='reversal')startReversal();
+ if(x.dataset.action==='download-card')downloadPersonaCard();
+ if(x.dataset.action==='share-card')sharePersonaCard();
 });
+ROOT.addEventListener('input',e=>{if(e.target.id==='player-nickname'){state.nickname=e.target.value.slice(0,18);save();updatePersonaCanvas();}});
 route('home');

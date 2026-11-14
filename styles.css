@@ -166,3 +166,59 @@ button:focus-visible{outline:3px solid #2674dd;outline-offset:3px}
 @media(min-width:700px){#app{padding:20px 0}.device{border:5px solid #fff7;border-radius:29px;min-height:770px}.map-page{height:min(850px,calc(100dvh - 40px))}}
 @media(max-width:360px){.home-ribbon{font-size:9px}.brand{font-size:57px}.home-person.left,.home-person.right{width:113px}.home-person.lead{width:157px}.character-group{height:213px}.home-feature-strip{margin-top:18px}.level-copy b{font-size:11px}.map-dock{grid-template-columns:65px 1fr 65px;gap:5px;left:8px;right:8px}.map-dock .dock-play{font-size:13px}.role-tile{min-height:145px}.role-figure{height:94px}.role-char{width:81px;height:96px}.stage-item{grid-template-columns:74px 1fr 20px}.stage-image{width:74px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important}}
+/* ----- V4: playful cards from Pthu design tab ----- */
+.peek-card-cta{font-weight:1000;color:#aa547f;background:#fff8fd;border:2px dashed #eeb3cf;border-radius:15px;padding:10px 14px;font-size:11px;display:flex;align-items:center;justify-content:center;gap:7px;min-height:39px;box-shadow:0 3px 0 #deacc3}
+.peek-card-cta span{font-size:22px;line-height:1;color:#c65c8d}
+.persona-result-page{min-height:100dvh;background:radial-gradient(circle at 12% 7%,#fff5cc 0 10%,transparent 11%),linear-gradient(155deg,#ffe3ef,#fff4ec 60%,#ffe9f4)}
+.persona-result-body{gap:12px!important}
+.card-context{display:flex;align-items:center;gap:10px;background:#fffafa;border:2px solid #f0cade;border-radius:14px;padding:9px 12px}
+.card-context-spark{color:#f2b54c;font-size:30px}
+.card-context strong{color:#8c496c;font-size:14px}
+.card-context p{margin:3px 0 0;font-size:11px;line-height:1.35;color:#9a7890}
+.persona-canvas-wrap{width:100%;background:#fff;box-shadow:0 9px 0 #c986aa,0 16px 20px #98637e35;border-radius:18px;overflow:hidden;border:3px solid #fff;position:relative}
+#persona-render{width:100%;height:auto;display:block;aspect-ratio:900 / 1190}
+.nickname-label{font-weight:1000;color:#91486c;font-size:11px;letter-spacing:.5px;margin-top:4px}
+.nickname-label small{font-weight:650;letter-spacing:normal;color:#a08092}
+.nick-wrap{border:2px solid #e7b4cf;border-radius:13px;background:#fff;display:flex;align-items:center;box-shadow:0 3px 0 #e4c7d5}
+.nick-wrap input{border:none;background:transparent;outline:none;width:100%;padding:13px 14px;font-size:15px;font-weight:900;color:#77435e}
+.nick-wrap span{color:#bd6a94;font-size:19px;padding-right:13px}
+.card-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.card-action{border-radius:15px;padding:13px 9px;border:3px solid #c681a5;background:#fff5fb;color:#8f4671;font-weight:1000;font-size:12px;box-shadow:0 4px 0 #d9a7c1}
+.card-action.download{background:linear-gradient(#ffeaf5,#ffbadb)}
+.card-action.share{background:linear-gradient(#e2f4ff,#a8d9fa);border-color:#7db4dc;color:#396b99;box-shadow:0 4px 0 #89b9d7}
+.persona-enter{min-height:54px;font-size:14px!important}
+.persona-secondary{display:flex;gap:10px;justify-content:space-between}
+.persona-secondary button{border:0;background:transparent;text-decoration:underline;color:#a5537b;font-size:12px;font-weight:900;padding:6px 1px}
+.card-privacy{font-size:10px;color:#9c8c96;line-height:1.55;text-align:center;margin:0 0 9px}
+.gallery-intro{background:#fff9fd;border:2px solid #edc6dc;border-radius:18px;padding:18px;box-shadow:0 4px 0 #e6bed5;text-align:center}
+.gallery-intro span{color:#ba6595;font-size:11px;font-weight:1000;letter-spacing:2px}
+.gallery-intro h2{font-size:25px;color:#854a6d;margin:9px 0}
+.gallery-intro p{margin:0;color:#906f84;font-size:12px;line-height:1.6}
+.persona-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}
+.persona-mini-card{background:linear-gradient(#fff,var(--persona-color));border:2px solid #fff;outline:2px solid #eccbd9;border-radius:19px;box-shadow:0 6px 0 #d8b7c8;padding:8px 9px 12px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;min-height:202px}
+.persona-mini-card img{height:133px;width:100%;object-fit:contain}
+.persona-mini-card strong{font-weight:1000;text-align:center;color:#835270;font-size:11px;line-height:1.25;min-height:29px}
+.persona-mini-card small{font-size:10px;color:#bb6590;font-weight:900}
+/* Role selector improvements from Linh and Pthu */
+.role-grid>.role-tile{padding:0;overflow:visible;min-height:167px}
+.role-grid .role-select{border:0;background:transparent;display:flex;flex-direction:column;align-items:center;width:100%;height:100%;padding:4px 5px 7px;flex:1;color:inherit}
+.role-grid .role-select em{margin-top:5px;font-size:9px;font-style:normal;background:#62b7ed;color:#fff;border-radius:12px;padding:3px 9px;font-weight:1000;box-shadow:0 2px 0 #438fbd}
+.role-grid .role-quick-edit{position:absolute;right:5px;top:5px;background:#fff9e5;border:2px solid #e9d6b7;box-shadow:0 2px 0 #d5be9e;border-radius:11px;z-index:4;width:26px;height:26px;padding:3px;display:grid;place-items:center}
+.role-grid .role-quick-edit .icon{width:18px;height:18px}
+.role-grid .checkmark{left:6px!important;right:auto!important;top:4px!important}
+/* Stage polaroids / alternate chat-in-person modes */
+.stage-image{background:#fff!important;border:5px solid #fff!important;border-bottom-width:13px!important;transform:rotate(-3deg);box-shadow:0 3px 5px #70687b26}
+.stage-item:nth-child(2n) .stage-image{transform:rotate(3deg)}
+.stage-item:not(.is-ready) .stage-image{filter:grayscale(.9)!important;opacity:.65}
+.stage-mode{display:inline-block;font-size:9px;font-weight:1000;padding:4px 8px;border-radius:9px;background:#f0f7ff;color:#6986ae;margin:4px 0 1px}
+.stage-intro-art{height:280px;display:flex;align-items:center;justify-content:center;position:relative;background:linear-gradient(#a7e1f0 0 49%,#a9d48d 49%);border:7px solid #fff;border-bottom-width:35px;border-radius:5px;box-shadow:0 5px 0 #c3b9b5;transform:rotate(-1deg);margin:6px 9px}
+.stage-intro-art .character{width:144px;position:relative;z-index:1}
+.stage-intro-art .character:nth-child(2){width:130px;transform:translateY(20px)}
+.stage-intro-art .character:nth-child(3){width:130px;transform:translateY(10px)}
+.stage-intro-art::after{content:'TEAM-CRAFT / SNAPSHOT';position:absolute;bottom:-27px;color:#7e7d82;font-size:10px;font-weight:1000;letter-spacing:1px}
+.stage-intro-meta{display:flex;gap:8px;flex-wrap:wrap}
+.stage-intro-meta span{background:#fff6d7;color:#876331;border:1px solid #e3cf97;padding:6px 10px;border-radius:9px;font-size:11px;font-weight:900}
+.stage-intro-title{font-size:24px;line-height:1.2;margin:0;color:#3b5469}
+.stage-intro-desc{line-height:1.6;font-size:13px;color:#62778a;margin:0}
+.stage-intro-tip{padding:12px 14px;border:2px dashed #d9bfe0;border-radius:13px;background:#fffaff;font-size:12px;line-height:1.5;color:#806282}
+@media(max-width:360px){.persona-canvas-wrap{border-width:2px}.persona-mini-card{min-height:180px}.persona-mini-card img{height:115px}}

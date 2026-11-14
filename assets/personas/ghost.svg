@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="520" viewBox="0 0 480 520"><defs>
+<linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f0f0ff"/><stop offset="1" stop-color="#d1ccf3"/></linearGradient>
+<radialGradient id="bubble"><stop stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#f0f0ff" stop-opacity="0"/></radialGradient>
+<filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="16" stdDeviation="9" flood-color="#7c7ba9" flood-opacity=".23"/></filter>
+</defs>
+<ellipse cx="240" cy="466" rx="150" ry="25" fill="#7c7ba9" opacity=".16"/>
+<circle cx="240" cy="253" r="192" fill="url(#bubble)" />
+<path d="M77 99.8 l6.5 11.700000000000001 13.0 5.2 -13.0 5.2 -6.5 13.0 -6.5 -13.0 -13.0 -5.2 13.0 -5.2z" fill="#ffd96d" stroke="#d9a64b" stroke-width="2"/><path d="M391 132.4 l4.5 8.1 9.0 3.6 -9.0 3.6 -4.5 9.0 -4.5 -9.0 -9.0 -3.6 9.0 -3.6z" fill="#ffd96d" stroke="#d9a64b" stroke-width="2"/><path d="M378 385 l5 9 10 4 -10 4 -5 10 -5 -10 -10 -4 10 -4z" fill="#ffd96d" stroke="#d9a64b" stroke-width="2"/><path d="M105 367.5 l3.75 6.75 7.5 3.0 -7.5 3.0 -3.75 7.5 -3.75 -7.5 -7.5 -3.0 7.5 -3.0z" fill="#ffd96d" stroke="#d9a64b" stroke-width="2"/><g filter="url(#shadow)">
+<path d="M99 264 Q100 151 239 141 Q384 145 384 272 L384 433 L342 406 L305 433 L267 405 L229 436 L192 406 L152 436 L98 414Z" fill="url(#body)" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round"/>
+<path d="M130 226 Q153 164 223 167" stroke="#ffffff" stroke-width="15" stroke-linecap="round" fill="none" opacity=".75"/>
+<ellipse cx="190" cy="264" rx="12" ry="17" fill="#433449"/><circle cx="186" cy="258" r="4.5" fill="#fff"/><ellipse cx="294" cy="264" rx="12" ry="17" fill="#433449"/><circle cx="290" cy="258" r="4.5" fill="#fff"/><ellipse cx="146" cy="308" rx="24" ry="11" fill="#ffa6a6" opacity=".8"/><ellipse cx="340" cy="308" rx="24" ry="11" fill="#ffa6a6" opacity=".8"/>
+<path d="M219 329 q22 -13 42 0" stroke="#85809c" stroke-width="8" fill="none" stroke-linecap="round"/>
+<path d="M118 352 q-53 -4 -60 30 q15 37 72 28" fill="#e9e7ff" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round"/>
+<path d="M365 352 q53 -4 60 30 q-15 37 -72 28" fill="#e9e7ff" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round"/>
+</g><g transform="translate(324 375) rotate(-12)"><rect width="87" height="74" rx="12" fill="#fff8db" stroke="#8e849e" stroke-width="7"/><path d="M15 26 h55 M15 43 h39" stroke="#bbb1a2" stroke-width="6" stroke-linecap="round"/></g></svg>

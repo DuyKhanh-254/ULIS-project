@@ -18,7 +18,7 @@ export const personas = [
  {id:'star',title:'TRƯỞNG NHÓM TÀI NĂNG',desc:'Bạn có xu hướng lập kế hoạch, chia việc và giữ nhịp cho đội.',tip:'Đừng quên lắng nghe các ý kiến khác.'},
  {id:'sloth',title:'THÀNH VIÊN TRÌ HOÃN',desc:'Bạn thích không khí thoải mái nhưng đôi khi bắt đầu hơi muộn.',tip:'Chia công việc thành những mốc nhỏ và báo tiến độ.'},
  {id:'eagle',title:'NGƯỜI KIỂM SOÁT CẦU TOÀN',desc:'Bạn để ý chi tiết và muốn kết quả tốt nhất.',tip:'Góp ý cụ thể vào sản phẩm, tránh nhận xét về con người.'},
- {id:'owl',title:'NHÀ HÒA GIẢI',desc:'Bạn thường nhìn được nhiều góc độ trong một câu chuyện.',tip:'Giữ sự công bằng và đừng ngại nói điều cần nói.'},
+ {id:'owl',title:'NHÀ HÒA GIẢI MÂU THUẪN',desc:'Bạn thường nhìn được nhiều góc độ trong một câu chuyện.',tip:'Giữ sự công bằng và đừng ngại nói điều cần nói.'},
  {id:'bee',title:'THÀNH VIÊN GƯƠNG MẪU',desc:'Bạn ổn định, thường thực hiện đúng những gì đã hứa.',tip:'Chủ động chia sẻ ý tưởng để tạo thêm giá trị.'},
  {id:'ghost',title:'THÀNH VIÊN TÀNG HÌNH',desc:'Bạn có thể ngại phát biểu trước những người chưa quen.',tip:'Bắt đầu bằng một câu xác nhận việc và thời hạn.'},
 ];
