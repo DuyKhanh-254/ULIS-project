@@ -1,0 +1,431 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TEAM CRAFT — demo</title><style>:root{
+  font-family:"Trebuchet MS","Arial Rounded MT Bold","Segoe UI",Arial,sans-serif;
+  color:#353747;background:#badde8;font-synthesis:none;
+  --ink:#353747;--navy:#344b64;--muted:#69788c;--blue:#53b9ea;--cream:#fff9eb;
+}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(circle at 30% -5%,#ebf8fa,transparent 38%),radial-gradient(circle at 100% 100%,#f7e0cf,transparent 35%),#b9dce8}
+button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+button:focus-visible{outline:3px solid #2674dd;outline-offset:3px}
+#app{display:flex;justify-content:center;min-height:100vh}
+.device{width:min(100%,430px);min-height:100dvh;background:var(--cream);position:relative;box-shadow:0 0 0 7px #ffffff55,0 22px 65px #526a7940;overflow:hidden}
+.page{position:relative;min-height:100dvh;overflow:hidden}
+.icon{width:26px;height:26px;object-fit:contain;display:inline-block;vertical-align:middle;pointer-events:none}
+.character{object-fit:contain;display:block;filter:drop-shadow(0 6px 0 #304b6133);pointer-events:none}
+.brand{font-size:66px;line-height:.79;letter-spacing:-4px;font-weight:1000;display:inline-flex;flex-direction:column;transform:rotate(-4deg);color:#ffdb65;filter:drop-shadow(3px 6px 0 #29334b);text-align:center}
+.brand span{display:block;-webkit-text-stroke:3.7px #29334b;text-shadow:2px 3px 0 #dd8f3d,0 -2px 0 #ffefa1}
+.brand span:last-child{color:#f67d52;text-shadow:2px 3px 0 #c64c41,0 -2px 0 #ffab7b}
+.brand-sm{font-size:33px;letter-spacing:-2px;filter:drop-shadow(1px 3px 0 #29334b)}
+.brand-sm span{-webkit-text-stroke:2.4px #29334b;text-shadow:1px 2px 0 #dd8f3d}
+.home-page{background:linear-gradient(180deg,#95dcf5 0%,#d6f0ef 43%,#eaf5d6 100%)}
+.home-page:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 12% 25%,#fff9 0 7%,transparent 8%),radial-gradient(circle at 90% 16%,#fff7 0 8%,transparent 9%),radial-gradient(circle at 12% 74%,#96d17f66 0 17%,transparent 18%)}
+.home-head{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:center;padding:16px 18px 4px}
+.logo-mark{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:1000;color:#315875;letter-spacing:.4px}
+.logo-mark .icon{width:22px;height:22px}
+.head-action{background:#fffaf2;border:2px solid #fff;box-shadow:0 4px 0 #4d7b8a33;border-radius:18px;padding:7px 10px;font-weight:900;font-size:11px;color:#496576;display:flex;align-items:center;gap:3px}
+.head-action .icon{width:22px;height:22px}
+.home-hero{position:relative;text-align:center;padding:12px 17px 0;z-index:1}
+.home-ribbon{display:inline-block;background:#fff6d9;border:2px solid #e8ca8b;border-radius:99px;color:#92703b;padding:8px 12px;font-size:10.5px;letter-spacing:.45px;font-weight:1000;box-shadow:0 4px 0 #d4ab7633;margin:5px auto 18px}
+.hero-tagline{margin:17px 0 6px;font-weight:1000;color:#48687c;font-size:15px}
+.character-group{height:246px;width:100%;position:relative;display:flex;align-items:flex-end;justify-content:center;margin:6px 0 0}
+.character-group:before{content:"";position:absolute;width:320px;height:107px;border-radius:50%;bottom:2px;background:linear-gradient(#9ed67b,#77ba67);border:4px solid #7dbb62;box-shadow:0 10px 0 #6ca75c66}
+.podium{position:absolute;width:140px;height:38px;background:#e6c5a5;bottom:24px;border-radius:50%;opacity:.7}
+.podium-left{left:7%}.podium-right{right:7%}
+.home-person{position:absolute;bottom:9px;z-index:2}
+.home-person.left{width:130px;left:12%;bottom:8px;transform:rotate(-7deg)}
+.home-person.lead{width:174px;left:50%;transform:translateX(-50%);z-index:3;bottom:10px}
+.home-person.right{width:130px;right:12%;bottom:9px;transform:rotate(7deg)}
+.talk-label{display:inline-block;position:relative;top:-11px;background:#fffef9;border:2px solid #cde4c7;color:#59705e;padding:9px 14px;border-radius:14px;box-shadow:0 4px 0 #a9c799;font-size:12px;font-weight:900}
+.home-cta{position:relative;z-index:2;margin:7px 25px 0;display:grid;gap:12px}
+.game-btn{appearance:none;min-height:48px;padding:10px 12px;border-radius:15px;border:3px solid transparent;display:inline-flex;gap:7px;align-items:center;justify-content:center;font-size:13px;font-weight:1000;line-height:1.2;transition:transform .13s,filter .13s;box-shadow:inset 0 3px 0 #ffffff80,0 5px 0 #3a41485b}
+.game-btn:hover{filter:brightness(1.04)}
+.game-btn:active{transform:translateY(3px);box-shadow:inset 0 2px 0 #ffffff80,0 2px 0 #3a41485b}
+.game-btn.green{background:linear-gradient(#83e767,#44b93b);border-color:#287d38;color:white;text-shadow:0 2px 0 #267238}
+.game-btn.sky{background:linear-gradient(#91dcfa,#4aa8e8);border-color:#3985ba;color:white;text-shadow:0 2px 0 #3978a5}
+.game-btn.pale{background:linear-gradient(#fff8e9,#ffe1aa);border-color:#e7b16a;color:#825b31;text-shadow:0 1px 0 #fff}
+.game-btn.full{width:100%}.game-btn.large{height:56px;font-size:16px}
+.game-btn .icon{width:28px;height:28px}
+.home-feature-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:25px 20px 7px;position:relative;z-index:2}
+.home-feature-strip>div{padding:8px 6px;border-radius:14px;background:#fffaf7cb;display:flex;flex-direction:column;align-items:center;gap:4px;border:2px solid #fff;box-shadow:0 3px 0 #bdd5c8;font-size:10px;font-weight:1000;color:#64736c}
+.home-feature-strip .icon{width:33px;height:33px}
+.footer-note{text-align:center;color:#73948e;font-size:10px;margin:12px 20px 20px;font-weight:800}
+/* Map: one new illustration, individual NPC sprites, deliberately NO old map raster overdraw */
+.map-page{height:100dvh;min-height:650px;background:#9ad875}
+.map-scene{position:absolute;inset:0;width:100%;height:100%;object-fit:fill}
+.map-page:after{content:"";position:absolute;pointer-events:none;left:0;right:0;bottom:0;height:125px;background:linear-gradient(transparent,#3d607c26);z-index:1}
+.map-hud{position:absolute;top:12px;left:15px;right:15px;display:flex;justify-content:space-between;align-items:flex-start;z-index:5;gap:12px}
+.map-logo{border:0;background:none;padding:5px 0 0}
+.resources{display:flex;align-items:center;gap:5px;background:#344e61dd;border:2px solid #ffffff9a;padding:3px 7px;border-radius:999px;box-shadow:0 4px 0 #3e526d3d;color:#fff;font-size:12px;font-weight:1000;white-space:nowrap}
+.resources span{display:flex;align-items:center;gap:1px}.resources span+span{margin-left:5px}
+.resources .icon{width:28px;height:28px}
+.map-npc{position:absolute;z-index:2;transform:translate(-50%,-50%);width:69px;filter:drop-shadow(0 4px 2px #35594d44)}
+.map-npc.kid-a{width:62px}.map-npc.kid-b{width:68px}.map-npc.kid-c{width:71px}.map-npc.kid-d{width:68px}.map-npc.kid-e{width:71px}
+.level-spot{position:absolute;transform:translate(-50%,-50%);z-index:4;background:none;border:0;padding:0;display:flex;flex-direction:column;align-items:center;width:154px;min-height:104px}
+.level-orb{width:62px;height:59px;flex-shrink:0;border-radius:50%;display:grid;place-items:center;border:5px solid #fff5e6;box-shadow:0 0 0 3px #3b49569f,0 5px 0 #41455666, inset 0 7px 10px #fff7;background:linear-gradient(#b4ef7c,#3cc33a)}
+.level-orb .icon{width:40px;height:40px;filter:drop-shadow(0 2px 0 #27354c44)}
+.level-spot.blue .level-orb{background:linear-gradient(#b3ecff,#279ed9)}
+.level-spot.orange .level-orb{background:linear-gradient(#ffe3a0,#f2a02a)}
+.level-spot.danger .level-orb{background:linear-gradient(#ffb0aa,#ec5f65)}
+.level-spot.boss .level-orb{background:linear-gradient(#ebecf1,#777d8f)}
+.level-copy{display:flex;flex-direction:column;align-items:center;margin-top:7px;text-align:center;min-height:38px;text-shadow:-1px -1px #2c405a,1px -1px #2c405a,-1px 1px #2c405a,1px 1px #2c405a,0 2px #2c405a}
+.level-copy b{font-size:12px;line-height:1.18;color:#fff;max-width:144px}
+.level-copy small{display:block;font-size:9px;letter-spacing:.4px;font-weight:1000;color:#fff6da;margin-top:2px}
+.map-dock{position:absolute;left:15px;right:15px;bottom:calc(15px + env(safe-area-inset-bottom));z-index:7;display:grid;grid-template-columns:82px 1fr 82px;gap:8px;align-items:end}
+.map-dock button{border:3px solid #fff8df;border-radius:16px;box-shadow:0 4px 0 #36536e,0 7px 8px #395e7845;color:#fff;font-weight:1000}
+.map-dock .dock-small{display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(#89d7f8,#419fd2);min-height:61px;font-size:11px;text-shadow:0 1px 0 #3d718c}
+.map-dock .dock-small .icon{height:26px;width:26px}
+.map-dock .dock-play{min-height:67px;background:linear-gradient(#8aee69,#30bc35);border-color:#fff8d2;display:flex;align-items:center;justify-content:center;gap:2px;font-size:16px;text-shadow:0 2px 0 #2a7a3a}
+.map-dock .dock-play .icon{height:31px;width:31px}
+/* Interior */
+.interior-page{background:radial-gradient(circle at 95% 4%,#e2f6d2 0 14%,transparent 15%),linear-gradient(180deg,#c5eaf7,#f7f6de 49%,#fff8ec)}
+.page-top{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:16px 16px 6px}
+.page-top h1{font-size:20px;text-align:center;line-height:1.2;margin:0;color:#344b64;font-weight:1000}
+.page-top-spacer{width:41px;height:41px}
+.circle-action{width:41px;height:41px;padding:3px;border:2px solid #73abc3;background:#eaf9ff;border-radius:50%;box-shadow:0 4px 0 #6c8c9d5a}
+.circle-action .icon{width:33px;height:33px}
+.page-body{padding:13px 19px 28px;display:grid;gap:14px;position:relative}
+.page-intro{background:#fffdf4;border:2px solid #e8dabd;border-radius:15px;padding:12px 14px;font-size:13px;font-weight:800;color:#6c6a69;text-align:center}
+.role-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:9px}
+.role-tile{grid-column:span 2;position:relative;min-height:162px;border-radius:16px;border:3px solid #fff;background:linear-gradient(#dff4ff,#fffef4);box-shadow:0 4px 0 #adc6cf;display:flex;flex-direction:column;align-items:center;padding:4px 5px 8px;color:#36455b}
+.role-tile:nth-child(2){background:linear-gradient(#ffe1ec,#fffef4)}.role-tile:nth-child(3){background:linear-gradient(#dbfbef,#fffef4)}.role-tile:nth-child(4){grid-column:2/span 2;background:linear-gradient(#f2e8ff,#fffef4)}.role-tile:nth-child(5){grid-column:4/span 2;background:linear-gradient(#fff1cf,#fffef4)}
+.role-tile.active{outline:3px solid #4cca74;transform:translateY(-3px);box-shadow:0 7px 0 #75b69a}
+.role-figure{height:106px;display:flex;align-items:flex-end;justify-content:center}.role-char{width:91px;height:112px;object-fit:contain}
+.role-tile b{font-size:11px;line-height:1.15;text-align:center}.role-tile small{font-size:9px;color:#798797;font-weight:900;margin-top:3px}
+.checkmark{position:absolute;right:-6px;top:-8px}.checkmark .icon{width:27px;height:27px}
+.role-summary{border:2px solid #e0dabf;border-radius:17px;background:#fffdf1;display:grid;grid-template-columns:75px 1fr;gap:12px;align-items:center;padding:8px 12px}
+.role-portrait{height:81px}.portrait-char{width:74px;height:84px}.role-summary strong{color:#385b74;font-size:16px}.role-summary p{color:#6b7282;font-size:12px;line-height:1.45;margin:6px 0 0}
+.button-pair{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.button-pair .game-btn{font-size:12px}
+.preview-stage{height:288px;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;background:radial-gradient(ellipse at 50% 80%,#a5d3b8 0 36%,transparent 37%),linear-gradient(#bceeff,#eafae5);border-radius:22px;border:3px solid #fff;box-shadow:0 5px 0 #a4bbad}
+.preview-stage.small{height:200px}
+.preview-ring{position:absolute;width:165px;height:47px;bottom:34px;border-radius:50%;background:#8abd79;box-shadow:inset 0 -7px 0 #73a367}
+.preview-character{width:191px;max-height:244px;position:relative;z-index:2}
+.preview-stage.small .preview-character{width:150px}
+.preview-name{position:absolute;z-index:3;bottom:10px;background:#fff;border:2px solid #d6dabf;padding:5px 11px;border-radius:99px;font-size:12px;font-weight:900}
+.subheading{font-size:17px;margin:3px 0 0}
+.outfit-row{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.outfit-item{min-width:0;border:2px solid #e4d6c4;border-radius:13px;background:#fff;padding:7px 3px;display:flex;flex-direction:column;align-items:center;gap:4px;box-shadow:0 3px 0 #c5c5b5}
+.outfit-item.active{outline:2px solid #49c66a}.outfit-item img{width:52px;height:70px}.outfit-item span{font-size:9px;line-height:1.2;font-weight:900;color:#576779}
+.stage-banner{display:grid;grid-template-columns:1fr 115px;gap:5px;align-items:center;border:3px solid #fff;border-radius:22px;padding:14px;background:linear-gradient(100deg,#bee6f9,#e8f8e4);box-shadow:0 5px 0 #b5d7db}
+.stage-banner span{font-size:11px;color:#5c8ca3;font-weight:1000}.stage-banner h2{font-size:22px;margin:6px 0}.stage-banner p{font-size:12px;color:#68798a;line-height:1.5;margin:0}.banner-char{width:111px}
+.level-info{font-size:11px;color:#75848c;font-weight:800}
+.stage-list{display:grid;gap:11px}
+.stage-item{background:#fffcf5;border:2px solid #e4d8c9;border-radius:18px;box-shadow:0 4px 0 #dbd0c2;display:grid;grid-template-columns:88px 1fr 23px;gap:8px;align-items:center;text-align:left;padding:10px;color:#374b5f}
+.stage-item.is-locked{background:#f4f2ef}
+.stage-image{width:86px;height:91px;border-radius:13px;background:linear-gradient(#d5eeff,#ebf5e7);display:grid;place-items:center;overflow:hidden}
+.is-locked .stage-image{filter:saturate(.55)}
+.stage-char{width:75px;height:94px}.stage-text b{font-size:12px;line-height:1.25;display:block}.stage-text small{font-size:11px;color:#7d8090;line-height:1.35;display:block;margin:5px 0}.stage-text em{font-size:9px;letter-spacing:.3px;font-weight:1000;color:#3caa75;font-style:normal}.is-locked .stage-text em{color:#a0948e}.stage-icon .icon{width:22px}
+.centered{text-align:center}
+.lesson-card{background:#fffcf3;border-radius:20px;border:2px solid #eadabd;padding:15px;box-shadow:0 4px 0 #d6cbb8}
+.lesson-card h2{margin:10px 0;font-size:19px}.lesson-card p{font-size:13px;line-height:1.6;color:#677182;margin:9px 0 0}
+.lesson-card .muted{font-size:11px}
+/* Quiz */
+.quiz-page{background:linear-gradient(#ffe6f0,#fff5eb 75%,#f6f9e5)}
+.progress-header{display:flex;justify-content:space-between;align-items:center;color:#a76f92;font-size:12px}
+.progress-track{height:11px;background:#fff;border:2px solid #efc4d8;border-radius:12px;overflow:hidden}.progress-track span{display:block;height:100%;background:#f38fb5;transition:width .2s}
+.quiz-panel{background:#fff9fa;border-radius:22px;padding:16px 15px;border:3px solid #f1d0df;box-shadow:0 6px 0 #e7bccd}
+.quiz-figure{height:145px;display:flex;align-items:center;justify-content:center}.quiz-char{width:128px}
+.quiz-panel h2{font-size:20px;line-height:1.3;margin:12px 0 16px}
+.quiz-options{display:grid;gap:10px}
+.answer,.decision-choice{border:2px solid #e4d5c6;border-radius:12px;text-align:left;padding:11px 12px;background:#fff;display:flex;align-items:center;gap:10px;color:#3d495c;font-weight:800;font-size:12px;line-height:1.45;box-shadow:0 3px 0 #d1c6b6}
+.answer:hover,.decision-choice:hover{background:#f4faeb;border-color:#9acfa1}
+.answer span,.decision-choice span{background:#eaf1f8;border-radius:8px;padding:6px 9px;font-weight:1000;color:#5278a0}
+.small-note{font-size:10px;line-height:1.5;color:#8c9296;text-align:center;margin:3px 0}
+.persona-card{border:3px solid #e899bc;border-radius:22px;background-color:#ffe6f0;background-image:linear-gradient(#f5c9d9aa 1px,transparent 1px),linear-gradient(90deg,#f5c9d9aa 1px,transparent 1px);background-size:25px 25px;padding:15px;box-shadow:0 7px 0 #c886aa}
+.persona-heading{font-size:11px;letter-spacing:1px;font-weight:1000;color:#aa5e84}
+.persona-inner{display:grid;grid-template-columns:115px 1fr;align-items:center;gap:12px}.persona-char{width:112px}.persona-inner h2{font-size:18px;color:#874766}.persona-inner p{font-size:12px;color:#7f5e71;line-height:1.5}.persona-footer{font-size:9px;font-weight:1000;color:#b47b9e;border-top:2px dashed #e3aec2;padding-top:10px;text-align:center}
+/* Chat */
+.chat-page{height:100dvh;min-height:690px;display:flex;flex-direction:column;background:#eff8f1}
+.chat-head{height:75px;display:flex;align-items:center;gap:8px;padding:9px 12px;background:#fffef7;border-bottom:2px solid #dcecd9;flex-shrink:0}
+.chat-head .circle-action{width:36px;height:36px;flex-shrink:0}.chat-head .circle-action .icon{width:28px;height:28px}
+.chat-head-face{width:44px;height:44px;background:#d8efec;border-radius:13px;display:grid;place-items:center;overflow:hidden;flex-shrink:0}.chat-head-face .character{width:47px;height:55px}
+.chat-head-text{flex:1;min-width:0}.chat-head-text strong{font-size:13px;line-height:1.2;display:block}.chat-head-text small{font-size:11px;color:#738b85}
+.timer{background:#ffecbd;color:#a07834;border-radius:11px;font-size:12px;font-weight:1000;padding:8px}
+.message-zone{flex:1;overflow-y:auto;scroll-behavior:smooth;padding:15px 14px 20px;display:flex;flex-direction:column;gap:12px;background:radial-gradient(circle at 90% 9%,#d2eddd 0 18%,transparent 19%),#eef8f1}
+.privacy-note{font-size:10px;margin:0 auto 8px;color:#91a99b;font-weight:900;background:#ffffffb7;border-radius:99px;padding:6px 12px}
+.bubble-row{display:flex;gap:8px;align-items:flex-start}.bubble-row.self{flex-direction:row-reverse}
+.bubble-avatar{width:37px;height:38px;flex-shrink:0;background:#fff;border:1px solid #d8e6dc;border-radius:11px;overflow:hidden;display:flex;align-items:flex-end;justify-content:center}.bubble-character{width:40px;height:49px}
+.bubble-content{max-width:78%;display:flex;flex-direction:column;gap:4px}.bubble-content small{font-size:10px;color:#779083;font-weight:1000}.bubble-content p{margin:0;padding:10px 12px;border-radius:5px 14px 14px 14px;background:#fff;border:1px solid #d2e1d4;font-size:12px;font-weight:750;line-height:1.55;box-shadow:0 3px 0 #d5e6d8}.self .bubble-content p{background:#d6f3d7;border-radius:14px 5px 14px 14px}
+.decision-box{flex-shrink:0;background:#fffef9;border-top:2px solid #d7e9d5;padding:14px 14px calc(17px + env(safe-area-inset-bottom));border-radius:20px 20px 0 0;box-shadow:0 -6px 25px #356a4842}
+.decision-head{display:flex;justify-content:space-between;gap:6px;align-items:flex-end}.decision-head b{font-size:14px;line-height:1.3}.decision-head small{font-size:9px;white-space:nowrap;color:#8a988f;font-weight:1000}
+.time-track{height:6px;background:#e8e9dd;border-radius:99px;overflow:hidden;margin:11px 0}.time-track span{height:100%;display:block;background:linear-gradient(90deg,#5bbfe4,#8ed768)}
+.decision-choice{width:100%;margin-top:7px;padding:9px 10px}
+/* Endings */
+.ending-page{background:linear-gradient(#a9e1f4,#eef8df 60%,#fff8ea)}
+.ending-medal{width:145px;height:148px;display:grid;place-items:center;margin:0 auto 4px;background:linear-gradient(#fdf5c1,#f8ce69);border:6px solid white;box-shadow:0 7px 0 #d3a658;border-radius:50%}
+.ending-medal.bad{background:linear-gradient(#ffe8db,#f7adab)}.ending-medal.mid{background:linear-gradient(#f1e9ff,#d0c1ee)}
+.medal-character{width:105px}.ending-title{text-align:center;font-size:24px;line-height:1.2;margin:3px}.ending-desc{font-size:13px;line-height:1.55;text-align:center;color:#6e7080;margin:0 0 6px}
+.lesson-caption{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:1000;color:#9b7b4a}.lesson-caption .icon{width:26px}
+.template-card strong{font-size:12px;color:#69916b}
+.small-button{border:2px solid #a9d7b2;border-radius:11px;background:#eff9ed;color:#4c8860;display:inline-flex;align-items:center;gap:7px;padding:9px 13px;font-size:12px;font-weight:900;margin-top:9px}.small-button .icon{width:22px;height:22px}
+.action-stack{display:grid;gap:10px}
+.empty-wallet{text-align:center;padding:20px;background:#fffcf4;border:2px dashed #decfb5;border-radius:20px}.empty-char{width:110px;margin:0 auto}.empty-wallet h2{font-size:17px}.empty-wallet p{font-size:12px;color:#6f7c86}
+.wallet-item strong{color:#5d8a72}
+.toast{position:fixed;left:50%;bottom:17px;transform:translate(-50%,160%);background:#3c4250;color:white;padding:11px 16px;border-radius:15px;font-weight:900;font-size:13px;z-index:40;box-shadow:0 6px 15px #24364944;transition:transform .18s;max-width:90vw;text-align:center}
+.toast.on{transform:translate(-50%,0)}
+@media(min-width:700px){#app{padding:20px 0}.device{border:5px solid #fff7;border-radius:29px;min-height:770px}.map-page{height:min(850px,calc(100dvh - 40px))}}
+@media(max-width:360px){.home-ribbon{font-size:9px}.brand{font-size:57px}.home-person.left,.home-person.right{width:113px}.home-person.lead{width:157px}.character-group{height:213px}.home-feature-strip{margin-top:18px}.level-copy b{font-size:11px}.map-dock{grid-template-columns:65px 1fr 65px;gap:5px;left:8px;right:8px}.map-dock .dock-play{font-size:13px}.role-tile{min-height:145px}.role-figure{height:94px}.role-char{width:81px;height:96px}.stage-item{grid-template-columns:74px 1fr 20px}.stage-image{width:74px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important}}
+</style></head><body><div id="app"></div><div id="toast" class="toast"></div><script>const roles = [
+  {id:'leader',name:'Trưởng nhóm',en:'LEADER',tag:'Giữ nhịp cả team',skill:'Phân công công bằng, giữ tiến độ và đặt ranh giới.',sprite:'leader'},
+  {id:'doer',name:'Người triển khai',en:'DOER',tag:'Biến ý tưởng thành bài',skill:'Chủ động thực hiện, báo tiến độ và xin hỗ trợ đúng lúc.',sprite:'doer'},
+  {id:'qc',name:'Kiểm soát chất lượng',en:'QC',tag:'Chất lượng là ưu tiên',skill:'Tìm lỗi và góp ý xây dựng bằng mô hình SBI.',sprite:'qc'},
+  {id:'mediator',name:'Người hòa giải',en:'MEDIATOR',tag:'Giữ team hòa thuận',skill:'Lắng nghe, hạ nhiệt và kết nối các thành viên.',sprite:'mediator'},
+  {id:'follower',name:'Mắt xích tích cực',en:'ACTIVE FOLLOWER',tag:'Không gánh, không làm tạ',skill:'Hỏi rõ yêu cầu, chủ động phản hồi và đúng hẹn.',sprite:'follower'},
+];
+
+const wardrobes = [
+  {id:'student_blue',name:'Áo xanh ULIS'},
+  {id:'student_pink',name:'Áo hồng'},
+  {id:'student_green',name:'Áo xanh lá'},
+  {id:'student_yellow',name:'Áo vàng'},
+];
+
+const personas = [
+ {id:'turtle',title:'TRƯỞNG NHÓM ÔM VIỆC',desc:'Bạn quan tâm đến cả nhóm, đôi khi nhận quá nhiều việc vì ngại từ chối.',tip:'Thử giao nhiệm vụ rõ ràng và hỏi đồng đội cần hỗ trợ gì.'},
+ {id:'star',title:'TRƯỞNG NHÓM TÀI NĂNG',desc:'Bạn có xu hướng lập kế hoạch, chia việc và giữ nhịp cho đội.',tip:'Đừng quên lắng nghe các ý kiến khác.'},
+ {id:'sloth',title:'THÀNH VIÊN TRÌ HOÃN',desc:'Bạn thích không khí thoải mái nhưng đôi khi bắt đầu hơi muộn.',tip:'Chia công việc thành những mốc nhỏ và báo tiến độ.'},
+ {id:'eagle',title:'NGƯỜI KIỂM SOÁT CẦU TOÀN',desc:'Bạn để ý chi tiết và muốn kết quả tốt nhất.',tip:'Góp ý cụ thể vào sản phẩm, tránh nhận xét về con người.'},
+ {id:'owl',title:'NHÀ HÒA GIẢI',desc:'Bạn thường nhìn được nhiều góc độ trong một câu chuyện.',tip:'Giữ sự công bằng và đừng ngại nói điều cần nói.'},
+ {id:'bee',title:'THÀNH VIÊN GƯƠNG MẪU',desc:'Bạn ổn định, thường thực hiện đúng những gì đã hứa.',tip:'Chủ động chia sẻ ý tưởng để tạo thêm giá trị.'},
+ {id:'ghost',title:'THÀNH VIÊN TÀNG HÌNH',desc:'Bạn có thể ngại phát biểu trước những người chưa quen.',tip:'Bắt đầu bằng một câu xác nhận việc và thời hạn.'},
+];
+
+const quizQuestions = [
+ {question:'Nhóm sắp đến hạn mà chưa ai chia việc, bạn thường…',answers:[['Tạo bảng giao việc ngay', 'star'],['Âm thầm làm hết cho chắc', 'turtle'],['Đợi mọi người lên tiếng', 'ghost'],['Rủ cả nhóm họp 10 phút', 'owl']]},
+ {question:'Bạn nhận phần khó hơn dự kiến. Bạn sẽ…',answers:[['Hỏi lại và đề xuất chia nhỏ việc', 'bee'],['Nhận hết vì sợ mất lòng', 'turtle'],['Để sát deadline mới làm', 'sloth'],['Kiểm tra yêu cầu từng chi tiết', 'eagle']]},
+ {question:'Bạn phát hiện slide của bạn thân có lỗi, bạn…',answers:[['Nêu lỗi cụ thể và gợi ý sửa', 'eagle'],['Nhắn riêng thật khéo', 'owl'],['Tự sửa hết mà không nói', 'turtle'],['Để người khác góp ý', 'ghost']]},
+ {question:'Nhóm chat im lặng sau khi Leader nhắn, bạn…',answers:[['Xác nhận phần việc của mình', 'bee'],['Chủ động hỏi cả nhóm', 'star'],['Đọc rồi để đó', 'ghost'],['Gửi lời phá băng trước', 'sloth']]},
+ {question:'Nếu cả nhóm tranh cãi gay gắt, bạn sẽ…',answers:[['Tóm tắt quan điểm mỗi bên', 'owl'],['Đề xuất một lịch làm việc mới', 'star'],['Rà soát ai làm sai ở đâu', 'eagle'],['Tránh chat vì sợ căng thẳng', 'ghost']]},
+];
+
+const levels=[
+ {id:1,name:'Nhóm Bạn Thân',sub:'Dễ',color:'#54d935',roles:['leader','doer','mediator'],description:'Giữ tình bạn nhưng không quên trách nhiệm.',stages:[
+  ['Mải chém gió quên làm bài','Nhóm chat toàn chuyện vui, chưa ai mở outline.'],['Nể bạn không dám phân công','Leader ôm việc vì sợ bạn giận.'],['Tự ái khi bị góp ý','Bạn thân khó chịu khi được nhắc sửa slide.'],['Xin được “gánh” hộ','Thành viên nhờ làm nốt vì mải đi chơi.'],['Quá hiểu nhau thành hiểu lầm','Ai cũng tưởng người khác đã làm phần việc.']]},
+ {id:2,name:'Người Lạ Ơi',sub:'Trung bình',color:'#38bcf9',roles:['leader','doer','follower'],description:'Phá băng nhóm mới, làm rõ vai trò và lịch làm.',stages:[
+  ['Nhóm chat băng giá','Cả nhóm đã xem nhưng không ai phản hồi.'],['Thành viên tàng hình','Hỏi tiến độ chỉ nhận câu trả lời qua loa.'],['Ai làm trưởng nhóm đây?','Mọi người đùn đẩy vai trò Leader.'],['Bất đồng lịch họp','Một bạn muốn họp ngay, bạn khác muốn đợi.'],['Không tin tưởng nhau','Tự ý sửa hết bài người khác.'],['Lời nhắn quá gắt','Không khí chat ngày càng khó chịu.']]},
+ {id:3,name:'Nước Đến Chân Mới Nhảy',sub:'Tăng áp lực',color:'#ffa62b',roles:['leader','doer','qc'],description:'Sửa lỗi, ưu tiên công việc và giữ bình tĩnh khi sát hạn.',stages:[
+  ['Slide cẩu thả 22h30','Sai font và sai kiến thức sát giờ nộp.'],['Cãi bướng sát deadline','Doer không muốn chỉnh lỗi QC chỉ ra.'],['File bị lỗi','Không thể mở bài khi còn 15 phút.'],['Mất liên lạc lúc 23h','Người ghép bài bất ngờ “sập nguồn”.'],['Trùng lặp nội dung','Hai phần làm bị trùng 70%.']]},
+ {id:4,name:'Trùm Free-rider',sub:'Căng thẳng',color:'#ed655e',roles:['leader','doer','qc','mediator','follower'],description:'Thu thập bằng chứng và xử lý tranh chấp minh bạch.',stages:[
+ ['Dọa bóc phốt','Thành viên không làm bài đe dọa đăng phốt.'],['Đóng góp 1%, đòi 100%','Một đường link tài liệu được xem là công sức lớn.'],['Nộp bài đạo văn','Nguy cơ cả nhóm bị điểm 0.'],['Leader độc đoán','Xóa tên thành viên vì bất đồng quan điểm.'],['Đổ lỗi sau điểm kém','Nhóm công kích nhau công khai.'],['Lý do bất tận','Liên tục bùng deadline và viện lý do.']]},
+ {id:5,name:'Boss Cuối',sub:'Đỉnh cao',color:'#8b8a98',roles:['leader','doer','qc','mediator','follower'],description:'Kết hợp toàn bộ kỹ năng phối hợp và giải quyết xung đột.',stages:[
+  ['Xung đột ba chiều','Leader, QC, Doer tranh cãi liên tục.'],['Chia bè kết phái','Nhóm 5 người tách thành 2 nhóm chat.'],['Đổi đề tài giữa chừng','50% dự án có nguy cơ phải làm lại.'],['Tranh nhau việc dễ','Không ai muốn nhận phần khó.'],['Giảng viên đổi yêu cầu','Ba ngày trước hạn, đề bài thay đổi.']]}];
+
+const leaderTree={
+ start:{messages:[['Minh','Ê tối mai đi trà sữa không?'],['Lan','Đi chứ, quán mới đang giảm giá.'],['Huy','Bài thuyết trình Chủ nhật nộp đúng không? Có ai làm outline chưa?']],prompt:'Là Leader, bạn sẽ nhắn gì?',options:[
+  {text:'Thôi mai làm, giờ đi chơi đã.',to:'A',scores:{communication:0,initiative:-2,teamwork:0,conflict:0}},
+  {text:'Cả nhóm có định làm bài không?',to:'B',scores:{communication:-2,initiative:1,teamwork:-2,conflict:-1}},
+  {text:'Mình chia việc 15 phút trước nhé, xong hẵng đi.',to:'C',scores:{communication:2,initiative:2,teamwork:2,conflict:1}}
+ ]},
+ A:{messages:[['Minh','Đúng là leader của lòng tôi.'],['Huy','Nhưng mà mình còn chưa có outline ấy…']],prompt:'Huy đang lo lắng. Bạn làm gì?',options:[
+  {text:'Đừng lo, mai bắt đầu cũng chưa muộn.',to:'E1',scores:{initiative:-2,teamwork:-1}},
+  {text:'Khoan, đổi ý. Chia việc 10 phút trước đi.',to:'E2',scores:{communication:1,initiative:2,teamwork:1}}
+ ]},
+ B:{messages:[['Lan','Đang nói chuyện thôi mà, sao gắt vậy?'],['Minh','Chưa ai giao việc cho tôi cả.']],prompt:'Lan khó chịu. Bạn xử lý thế nào?',options:[
+  {text:'Mình là trưởng nhóm, cứ làm theo đi.',to:'E3',scores:{communication:-2,teamwork:-2,conflict:-2}},
+  {text:'Mình hơi nóng, xin lỗi. Mình chia việc nhé?',to:'E4',scores:{communication:2,teamwork:1,conflict:2}}
+ ]},
+ C:{messages:[['Minh','Ok, nhưng mình chưa biết bắt đầu từ đâu.'],['Lan','Mình làm slide được, nhưng cần nội dung trước.'],['Huy','Tối nay mình bận, mai trưa làm được không?']],prompt:'Mọi người đồng ý. Bước tiếp theo là gì?',options:[
+  {text:'Hỏi từng người, chia nhiệm vụ và chốt mốc kiểm tra.',to:'E5',scores:{communication:2,initiative:2,teamwork:2,conflict:1}},
+  {text:'Giao đại cho nhanh, phần khó mình tự làm.',to:'E6',scores:{initiative:0,teamwork:-1}}
+ ]}
+};
+
+const leaderEndings={
+ E1:{name:'Trì hoãn dây chuyền',tone:'bad',message:'Cả nhóm tiếp tục vui vẻ, nhưng đến hôm sau vẫn chưa có outline. Mọi người phải chạy gấp trong 24 giờ cuối.',lesson:'Giữ hòa khí không đồng nghĩa với né trách nhiệm.',template:'Cả nhóm ơi, mình chốt nhanh đầu việc và thời hạn nhé. Mình gửi outline trước 21h để mọi người cùng xem.'},
+ E2:{name:'Cứu tiến độ kịp lúc',tone:'good',message:'Bạn nhận ra nguy cơ và đề nghị chia việc ngay. Nhóm hơi bất ngờ nhưng đồng ý vì yêu cầu ngắn gọn.',lesson:'Sửa quyết định kịp thời cũng là một kỹ năng lãnh đạo.',template:'Mình xin đổi kế hoạch một chút: chia việc 10 phút nhé, rồi mình chốt lịch đi chơi sau.'},
+ E3:{name:'Nhóm rạn nứt',tone:'bad',message:'Mọi người làm việc miễn cưỡng và ngại báo tiến độ. Không khí trở nên căng thẳng.',lesson:'Mệnh lệnh và trách móc không tự động tạo nên sự hợp tác.',template:'Mình thấy nhóm đang chậm tiến độ và điều đó khiến mình lo. Mình cùng thống nhất phần việc và mốc kiểm tra nhé.'},
+ E4:{name:'Hàn gắn và tiến lên',tone:'good',message:'Bạn xin lỗi về cách nói rồi đề nghị giải pháp. Lan bớt khó chịu, Minh đồng ý nhận việc.',lesson:'Nhận trách nhiệm về cách giao tiếp giúp khôi phục niềm tin.',template:'Xin lỗi vì mình vừa nói hơi gắt. Mình đang lo deadline, không có ý trách ai. Cả nhóm chia việc cụ thể nhé?'},
+ E5:{name:'Cả nhóm vào guồng',tone:'good',message:'Minh tìm nguồn, Huy lập nội dung, Lan làm slide, bạn ghép bài và kiểm tra theo mốc sớm hơn deadline.',lesson:'Phân công rõ, phù hợp năng lực và có mốc kiểm tra là chìa khóa.',template:'Mình đề xuất Minh tìm tài liệu, Huy soạn nội dung, Lan làm slide và mình kiểm tra tổng thể. Mọi người xác nhận giúp mình trước 20h nhé.'},
+ E6:{name:'Leader ôm việc',tone:'mid',message:'Nhóm tưởng đã xong việc, nhưng bạn phải tự xử lý phần khó và sửa lỗi vào phút cuối.',lesson:'Một kế hoạch chỉ hiệu quả khi công việc được chia rõ và khả thi.',template:'Mình đang ôm hơi nhiều việc. Mỗi người giúp mình nhận rõ một đầu việc kèm mốc hoàn thành nhé.'}
+};
+
+const quickScenarios={
+  '1:doer':{title:'Là Minh, bạn làm gì?',messages:[['Lan','Tối mai đi trà sữa nhé.'],['Huy','Nhưng bài Chủ nhật ai làm outline?']],choices:[
+   {text:'Hỏi rõ phần việc để bắt đầu ngay.',type:'good',answer:'Bạn chủ động nhận nhiệm vụ và hỏi rõ yêu cầu. Nhóm bắt đầu có tiến độ.',lesson:'Không đợi bị nhắc mới là một Doer đáng tin.',template:'Mình nhận phần tìm nguồn nhé. Mình sẽ gửi bản nháp trước 20h mai.'},
+   {text:'Đọc rồi để đấy.',type:'bad',answer:'Không ai biết bạn nhận phần gì, nhóm vẫn chưa bắt đầu.',lesson:'Đã xem không phải là xác nhận nhiệm vụ.',template:'Mình đã đọc rồi. Mình có thể đảm nhận phần tài liệu, mọi người thấy ổn không?'}]},
+  '1:mediator':{title:'Bạn giúp nhóm bạn thân ra sao?',messages:[['An','Chưa ai làm bài mà toàn rủ đi chơi.'],['Lan','Đừng làm quá lên chứ.']],choices:[
+   {text:'Thừa nhận cả hai phía và đề nghị 10 phút chia việc.',type:'good',answer:'Cả nhóm cảm thấy được lắng nghe và đồng ý chia nhiệm vụ.',lesson:'Hòa giải không phải né vấn đề, mà là giúp các bên hợp tác.',template:'Mình hiểu An lo deadline và Lan muốn thoải mái. Mình chia việc nhanh 10 phút rồi đi chơi nhé?'},
+   {text:'Bảo mọi người thôi không tranh luận nữa.',type:'mid',answer:'Nhóm im lặng nhưng công việc vẫn chưa được giải quyết.',lesson:'Dập tắt cuộc cãi không đồng nghĩa giải quyết vấn đề.',template:'Mình thống nhất lại điều nhóm đang cần làm nhé.'}]},
+  '2:leader':{title:'Nhóm chat vừa thành lập, không ai nói gì',messages:[['An','Mình tạo nhóm rồi, mọi người chọn phần trong file nhé.'],['Hệ thống','Đã xem: 4 thành viên'],['Minh','Mình thấy rồi.']],choices:[
+   {text:'Mời từng bạn giới thiệu thế mạnh và chốt lịch 10 phút.',type:'good',answer:'Từng người chủ động giới thiệu và chọn phần phù hợp.',lesson:'Phá băng hiệu quả bằng lời mời cụ thể, không phải lời thúc giục chung chung.',template:'Mọi người cho mình biết thế mạnh và khung giờ rảnh nhé. Mình chốt buổi trao đổi 10 phút tối nay.'},
+   {text:'Chờ đến mai xem ai nhắn trước.',type:'bad',answer:'Nhóm tiếp tục im lặng, bỏ lỡ thời gian cần phân công.',lesson:'Sự im lặng ban đầu cần một người mở lời rõ ràng.',template:'Mọi người xác nhận giúp mình đã đọc file nhé?'}]},
+  '2:doer':{title:'Bạn mới vào nhóm lạ, Leader gửi file',messages:[['An','Mọi người xem file và chọn việc nhé.'],['Hệ thống','4 người đã xem nhưng chưa phản hồi.']],choices:[
+   {text:'Giới thiệu năng lực và đề nghị nhận việc cụ thể.',type:'good',answer:'Leader có đủ thông tin để phân công; người khác cũng bắt đầu trả lời.',lesson:'Một lời xác nhận chủ động có thể thay đổi cả không khí nhóm.',template:'Chào cả nhóm, mình mạnh phần tìm tài liệu và có thể nhận phần này. Mình sẽ gửi trước tối mai nhé.'},
+   {text:'Cứ im lặng vì chưa ai quen mình.',type:'bad',answer:'Leader không biết bạn có tham gia hay không.',lesson:'Chủ động một câu ngắn tốt hơn im lặng kéo dài.',template:'Mình đã đọc file. Cho mình hỏi phần nào cần ưu tiên trước ạ?'}]},
+  '2:follower':{title:'Là mắt xích tích cực trong nhóm mới',messages:[['An','Mọi người mở file nhé, nhớ làm đúng hạn.'],['Minh','Để xem đã…']],choices:[
+   {text:'Xác nhận việc, hỏi đầu ra và mốc bàn giao.',type:'good',answer:'Yêu cầu được làm rõ. Nhóm có một mốc thời gian chung để theo dõi.',lesson:'Xác nhận đúng yêu cầu giúp giảm hiểu nhầm và làm lại.',template:'Mình xác nhận nhận phần slide. Mình cần bao nhiêu trang và gửi bản nháp lúc nào nhé?'},
+   {text:'Trả lời “Ok” rồi tự đoán yêu cầu.',type:'mid',answer:'Bạn làm rất chăm nhưng bản nộp sai định dạng nhóm cần.',lesson:'Chủ động hỏi rõ khác với làm việc thụ động.',template:'Mình làm phần này nhé. Bạn gửi giúp tiêu chí và deadline cụ thể được không?'}]}
+};
+
+const reversal = {
+ title:'Đảo vai: trở thành Minh',
+ messages:[['Minh (suy nghĩ)','Mình chưa biết tìm tài liệu gì. Mọi người nói chuyện vui quá, tự nhiên không dám hỏi...'],['An','Minh ơi, sao chưa thấy phần của cậu?']],
+ choices:[
+ {text:'Mình đang bí phần này, cậu hướng dẫn thêm được không?',type:'good',answer:'An biết rõ vấn đề, hai người chia lại công việc và cùng lên kế hoạch.',lesson:'Chủ động chia sẻ khó khăn là trách nhiệm, không phải yếu kém.'},
+ {text:'Mình vẫn đang làm, cứ để đấy đi.',type:'bad',answer:'An không biết tiến độ thực sự; mâu thuẫn có thể tăng.',lesson:'Giấu khó khăn chỉ khiến đồng đội khó phối hợp hơn.'}
+ ]
+};
+
+const mapNPCs = [
+  {sprite:'student_yellow', left:17, top:13, pose:'idle', scale:0.78},
+  {sprite:'student_pink', left:23, top:13.6, pose:'walk1', scale:0.78},
+  {sprite:'student_blue', left:82, top:35.2, pose:'idle', scale:0.78},
+  {sprite:'student_green', left:75, top:52.4, pose:'walk1', scale:0.8},
+  {sprite:'student_blue', left:81.5, top:56.8, pose:'idle', scale:0.78},
+  {sprite:'student_yellow', left:85.8, top:60.6, pose:'walk2', scale:0.78},
+  {sprite:'student_pink', left:67, top:67.7, pose:'idle', scale:0.8},
+  {sprite:'student_blue', left:29.6, top:73, pose:'walk1', scale:0.8},
+  {sprite:'student_green', left:37.8, top:73.7, pose:'idle', scale:0.78},
+  {sprite:'student_yellow', left:62.5, top:82.1, pose:'walk2', scale:0.8},
+  {sprite:'leader', left:14, top:88, pose:'talk', scale:1.5},
+];
+
+
+
+const ROOT=document.getElementById('app');
+const TOAST=document.getElementById('toast');
+const STORE='teamcraft-redesign-v3';
+let saved={}; try{saved=JSON.parse(localStorage.getItem(STORE)||'{}')}catch{}
+const state={screen:'home',level:1,stage:0,role:saved.role||'leader',outfit:saved.outfit||'blue',persona:saved.persona||null,quizAnswers:[],quizIndex:0,quizTime:60,gameTime:20,game:null,done:saved.done||[],wallet:saved.wallet||[]};
+let clock=null;
+const allOutfits=[{id:'blue',name:'Xanh ULIS'},{id:'rose',name:'Hồng pastel'},{id:'leaf',name:'Xanh lá'},{id:'violet',name:'Tím nhạt'},{id:'gold',name:'Vàng mật ong'}];
+const safe=s=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
+const role=id=>roles.find(r=>r.id===id)||roles[0];
+const level=id=>levels.find(l=>l.id===Number(id))||levels[0];
+function save(){try{localStorage.setItem(STORE,JSON.stringify({role:state.role,outfit:state.outfit,persona:state.persona,done:state.done,wallet:state.wallet}))}catch{}}
+const icon=(name,cls='')=>`<img class="icon ${cls}" src="assets/ui/${name}.svg" alt="">`;
+const sprite=(id,pose='idle')=>`assets/characters/${id}_${pose}.svg`;
+const avatar=(id,cl='',pose='idle')=>`<img class="character ${cl}" src="${sprite(id,pose)}" alt="">`;
+const player=(pose='idle',cl='')=>avatar(state.role,cl,pose);
+const outfitted=(cl='')=>`<img class="character ${cl}" src="assets/characters/${state.role}_outfit_${state.outfit}.svg" alt="">`;
+const logo=(sm=false)=>`<div class="brand ${sm?'brand-sm':''}"><span>TEAM</span><span>CRAFT</span></div>`;
+const shell=(cls,html)=>`<main class="device"><section class="page ${cls}">${html}</section></main>`;
+const btn=(label,action='map',variant='green',extras='')=>`<button class="game-btn ${variant}" data-go="${action}" ${extras}>${label}</button>`;
+const topbar=(title,go='map')=>`<header class="page-top"><button class="circle-action" data-go="${go}" aria-label="Quay lại">${icon('back')}</button><h1>${safe(title)}</h1><div class="page-top-spacer"></div></header>`;
+function toast(text){TOAST.textContent=text;TOAST.classList.add('on');clearTimeout(TOAST._t);TOAST._t=setTimeout(()=>TOAST.classList.remove('on'),2400)}
+function stopClock(){if(clock!==null)clearInterval(clock);clock=null}
+function route(screen){stopClock();state.screen=screen;render();window.scrollTo(0,0)}
+
+function home(){return shell('home-page',`
+<header class="home-head"><div class="logo-mark">${icon('spark')} TEAM-CRAFT</div><button class="head-action" data-go="wallet">${icon('book')} Ví (${state.wallet.length})</button></header>
+<section class="home-hero">
+  <div class="sparkle one"></div><div class="sparkle two"></div>
+  <div class="home-ribbon">WEBGAME MÔ PHỎNG KỸ NĂNG LÀM VIỆC NHÓM</div>
+  ${logo()}
+  <p class="hero-tagline">Mọi mắt xích đều tạo nên chiến thắng!</p>
+  <div class="character-group"><div class="podium podium-left"></div><div class="podium podium-right"></div>
+    ${avatar('mediator','home-person left','walk_a')}${outfitted('home-person lead')}${avatar('doer','home-person right','talk')}
+  </div>
+  <div class="talk-label">Chọn cách ứng xử. Xem điều gì sẽ xảy ra!</div>
+</section>
+<section class="home-cta"><button class="game-btn green large" data-go="map">${icon('play')} BẮT ĐẦU CHƠI</button>
+<button class="game-btn pale large" data-action="start-quiz">${icon('star')} LÀM QUIZ 60 GIÂY</button></section>
+<div class="home-feature-strip"><div>${icon('team')}<span>5 VAI TRÒ</span></div><div>${icon('rotate')}<span>ĐẢO VAI</span></div><div>${icon('book')}<span>BÀI HỌC</span></div></div>
+<p class="footer-note">Phiên bản trải nghiệm • 2 ải đầu có gameplay mẫu</p>
+`)}
+
+const mapNPCs=[
+ ['student-a',11.2,28.5,'idle','kid-a'],['student-c',85,39.5,'talk','kid-b'],
+ ['student-b',11.4,56.0,'idle','kid-c'],['student-a',87,66.8,'walk_a','kid-d'],
+ ['student-c',22.5,83,'idle','kid-e']
+];
+function map(){const nodes=[
+ {n:5,x:52,y:21.1,cap:'BOSS CUỐI',name:'Dự Án Công Sở',theme:'boss'},
+ {n:4,x:52,y:35.5,cap:'CĂNG THẲNG',name:'Trùm Free-rider',theme:'danger'},
+ {n:3,x:47,y:47.8,cap:'TĂNG ÁP LỰC',name:'Nước Đến Chân Mới Nhảy',theme:'orange'},
+ {n:2,x:47,y:63.4,cap:'TRUNG BÌNH',name:'Người Lạ Ơi',theme:'blue'},
+ {n:1,x:49,y:79,cap:'DỄ',name:'Nhóm Bạn Thân',theme:'green'}];
+return shell('map-page',`
+<img class="map-scene" src="assets/campus-map.svg" alt="Khuôn viên trường học phong cách hoạt hình, con đường đi qua năm ải">
+<div class="map-hud"><button class="map-logo" data-go="home" aria-label="Trang chủ">${logo(true)}</button>
+  <div class="resources"><span>${icon('heart')} <b>120</b></span><span>${icon('coin')} <b>500</b></span></div></div>
+${mapNPCs.map(([name,x,y,pose,id])=>`<img class="map-npc ${id}" src="${sprite(name,pose)}" style="left:${x}%;top:${y}%" alt="" loading="lazy">`).join('')}
+${nodes.map(n=>`<button class="level-spot ${n.theme}" style="left:${n.x}%;top:${n.y}%" data-level="${n.n}" aria-label="Ải ${n.n}: ${n.name}">
+ <span class="level-orb">${n.n===5?icon('shield'):n.n===4?icon('star'):n.n===3?icon('clock'):n.n===2?icon('chat'):icon('check')}</span>
+ <span class="level-copy"><b>ẢI ${n.n}: ${n.name}</b><small>${n.cap}</small></span></button>`).join('')}
+<nav class="map-dock"><button data-go="roles" class="dock-small">${icon('team')}<span>Vai trò</span></button>
+<button class="dock-play" data-level="1">${icon('play')}<strong>CHƠI NGAY</strong></button>
+<button data-go="wallet" class="dock-small">${icon('book')}<span>Nhiệm vụ</span></button></nav>
+`)}
+
+function rolesView(){const r=role(state.role);return shell('interior-page',`${topbar('Chọn vai trò','map')}
+<div class="page-body"><div class="page-intro">Mỗi vai trò có cách nhìn và nhiệm vụ khác nhau.</div>
+<div class="role-grid">${roles.map(item=>`<button class="role-tile ${state.role===item.id?'active':''}" data-role="${item.id}">
+<div class="role-figure">${avatar(item.id,'role-char',state.role===item.id?'talk':'idle')}</div><b>${safe(item.name)}</b><small>${item.en}</small>${state.role===item.id?`<span class="checkmark">${icon('check')}</span>`:''}</button>`).join('')}</div>
+<div class="role-summary"><div class="role-portrait">${avatar(state.role,'portrait-char')}</div><div><strong>${safe(r.name)}</strong><p>${safe(r.skill)}</p></div></div>
+<div class="button-pair">${btn(`${icon('edit')} Tùy chỉnh`,'custom','sky')}${btn('Xác nhận','map','green')}</div>
+</div>`)}
+
+function customView(){return shell('interior-page',`${topbar('Tùy chỉnh nhân vật','roles')}
+<div class="page-body"><div class="preview-stage"><div class="preview-ring"></div>${outfitted('preview-character')}<div class="preview-name">${safe(role(state.role).name)}</div></div>
+<h2 class="subheading">Bộ trang phục</h2><div class="outfit-row">${allOutfits.map(x=>`<button class="outfit-item ${x.id===state.outfit?'active':''}" data-outfit="${x.id}"><img src="assets/characters/${state.role}_outfit_${x.id}.svg" alt=""><span>${x.name}</span></button>`).join('')}</div>
+${btn(`${icon('check')} Hoàn tất`,'roles','green full')}</div>`)}
+
+function stagesView(){const l=level(state.level);return shell('interior-page',`${topbar('Ải '+l.id+': '+l.name,'map')}
+<div class="page-body"><div class="stage-banner"><div><span>CHƯƠNG ${l.id}</span><h2>${safe(l.name)}</h2><p>${safe(l.description)}</p></div>${avatar(l.roles[0],'banner-char','talk')}</div>
+<div class="level-info">Vai trò ở ải này: ${l.roles.map(id=>role(id).name).join(' • ')}</div>
+<div class="stage-list">${l.stages.map((s,i)=>`<button class="stage-item ${i===0&&l.id<=2?'is-ready':'is-locked'}" data-stage="${i}"><span class="stage-image">${avatar(l.roles[i%l.roles.length],'stage-char',i===0?'talk':'idle')}</span><span class="stage-text"><b>MÀN ${i+1} · ${safe(s[0])}</b><small>${safe(s[1])}</small><em>${i===0&&l.id<=2?'CHƠI MÀN NÀY':'CHƯA CÓ HỘI THOẠI'}</em></span><span class="stage-icon">${icon(i===0&&l.id<=2?'play':'lock')}</span></button>`).join('')}</div>
+</div>`)}
+function stagePreview(){const l=level(state.level);const s=l.stages[state.stage];return shell('interior-page',`${topbar('Thông tin màn','stages')}<div class="page-body centered"><div class="preview-stage small">${avatar(l.roles[0],'preview-character')}</div><div class="lesson-card"><b>ẢI ${l.id} / MÀN ${state.stage+1}</b><h2>${safe(s[0])}</h2><p>${safe(s[1])}</p><p class="muted">Màn này đã có tên và mô tả trong đề xuất nhưng chưa có cây thoại hoàn chỉnh để chơi.</p></div>${btn('Các màn khác','stages','sky full')}</div>`)}
+
+function quizView(){const q=quizQuestions[state.quizIndex];return shell('quiz-page',`${topbar('Quiz phong cách','home')}
+<div class="page-body"><div class="progress-header"><strong>CÂU ${state.quizIndex+1} / 5</strong><span id="quiz-count">${state.quizTime}s</span></div><div class="progress-track"><span style="width:${(state.quizIndex+1)*20}%"></span></div>
+<div class="quiz-panel"><div class="quiz-figure">${avatar(state.quizIndex%2?'mediator':'follower','quiz-char')}</div><h2>${safe(q.question)}</h2><div class="quiz-options">${q.answers.map((ans,i)=>`<button class="answer" data-quiz="${i}"><span>${String.fromCharCode(65+i)}</span>${safe(ans[0])}</button>`).join('')}</div></div>
+<p class="small-note">Quiz chỉ mang tính khám phá phong cách làm việc, không phải kiểm tra EQ.</p></div>`)}
+function quizResult(){const p=personas.find(x=>x.id===state.persona)||personas[0];return shell('quiz-page',`${topbar('Thẻ phong cách','home')}
+<div class="page-body"><div class="persona-card"><span class="persona-heading">TEAM CRAFT / CHARACTER CARD</span><div class="persona-inner">${player('talk','persona-char')}<div><h2>${safe(p.title)}</h2><p>${safe(p.desc)}</p></div></div><div class="persona-footer">THẺ KHÁM PHÁ PHONG CÁCH LÀM VIỆC NHÓM</div></div>
+<div class="lesson-card"><strong>Gợi ý của TEAM-CRAFT</strong><p>${safe(p.tip)}</p></div>${btn(`${icon('play')} Vào game mô phỏng`,'map','green full')}</div>`)}
+
+const talkSprites={'Minh':'doer','Lan':'mediator','Huy':'follower','An':'leader','Bạn':null,'Hệ thống':'follower','Minh (suy nghĩ)':'doer'};
+function bubble(name,msg){const mine=name==='Bạn';const id=talkSprites[name]||state.role;return `<div class="bubble-row ${mine?'self':''}"><span class="bubble-avatar">${avatar(id,'bubble-character',name==='Hệ thống'?'idle':'talk')}</span><div class="bubble-content"><small>${safe(name)}</small><p>${safe(msg)}</p></div></div>`}
+function currentNode(){const g=state.game;if(g.mode==='reversal'){if(g.level===2)return {messages:[['Minh (suy nghĩ)','Mới vào nhóm lạ, mình không biết nhận phần nào, nhưng rất ngại hỏi...'],['An','Có ai muốn nhận phần mở đầu không?']],prompt:'Ở góc nhìn người mới, bạn làm gì?',options:[{text:'Giới thiệu thế mạnh, hỏi rõ đầu việc và deadline.',type:'good',answer:'Cả nhóm bắt đầu mở lời và chủ động phân công.',lesson:'Phá băng bắt đầu từ một lời xác nhận cụ thể.'},{text:'Tiếp tục im lặng để tránh bị chú ý.',type:'bad',answer:'Leader không biết bạn có thể làm gì, việc bị chậm.',lesson:'Im lặng có thể bị hiểu nhầm là thiếu hợp tác.'}]};return {messages:reversal.messages,prompt:'Là Minh, bạn sẽ phản hồi thế nào?',options:reversal.choices}}
+if(g.level===1 && g.role==='leader')return leaderTree[g.node];return quickScenarios[`${g.level}:${g.role}`]}
+function chatView(){const g=state.game;const current=currentNode();const lines=[...g.history,...current.messages.map(([name,text])=>({name,text}))];return shell('chat-page',`
+<header class="chat-head"><button class="circle-action" data-go="stages" aria-label="Quay lại">${icon('back')}</button><span class="chat-head-face">${player('idle')}</span><div class="chat-head-text"><strong>${g.mode==='reversal'?'ĐẢO VAI / GÓC NHÌN KHÁC':'Nhóm Bài Tập · Ải '+g.level}</strong><small>Bạn đang là ${safe(role(g.role).name)}</small></div><span class="timer" id="game-count">${state.gameTime}s</span></header>
+<div class="message-zone" id="message-zone"><div class="privacy-note">MÔ PHỎNG CHAT • KHÔNG GỬI TIN THẬT</div>${lines.map(x=>bubble(x.name,x.text)).join('')}</div>
+<div class="decision-box"><div class="decision-head"><b>${safe(current.prompt||current.title||'Bạn sẽ phản hồi thế nào?')}</b><small>20 GIÂY / LƯỢT</small></div><div class="time-track"><span id="time-fill" style="width:${state.gameTime*5}%"></span></div>
+${current.options.map((o,i)=>`<button class="decision-choice" data-choice="${i}"><span>${String.fromCharCode(65+i)}</span>${safe(o.text)}</button>`).join('')}</div>`)}
+function getEnding(){const g=state.game;if(g.mode==='reversal')return g.reversalOutcome;if(g.level===1&&g.role==='leader')return leaderEndings[g.ending]||leaderEndings.E1;return g.quickOutcome}
+function endingView(){const g=state.game;const o=getEnding();const tone=o.tone||o.type||'mid';return shell('interior-page ending-page',`${topbar(g.mode==='reversal'?'Đảo vai hoàn tất':'Lesson Unlocked','stages')}
+<div class="page-body"><div class="ending-medal ${tone}">${avatar(tone==='good'?'follower':tone==='bad'?'qc':'mediator','medal-character',tone==='good'?'walk_a':'idle')}</div>
+<h2 class="ending-title">${safe(o.name||(tone==='good'?'Giải quyết hiệu quả':tone==='bad'?'Nhóm gặp khó khăn':'Cần điều chỉnh'))}</h2><p class="ending-desc">${safe(o.message||o.answer)}</p>
+<div class="lesson-card"><div class="lesson-caption">${icon('book')} LESSON UNLOCKED</div><p>${safe(o.lesson)}</p></div>
+${o.template?`<div class="lesson-card template-card"><strong>VÍ KỊCH BẢN • MẪU TIN NHẮN</strong><p>${safe(o.template)}</p><button class="small-button" data-action="save-template">${icon('check')} Lưu mẫu tin nhắn</button></div>`:''}
+<div class="action-stack">${g.mode==='reversal'?'':`<button class="game-btn pale full" data-action="reversal">${icon('rotate')} THỬ ĐẢO VAI</button>`}<div class="button-pair">${btn('Chơi lại','replay','sky')}${btn('Bản đồ','map','green')}</div></div><p class="small-note">Kết quả chỉ là tình huống mô phỏng, không dự đoán chắc chắn phản ứng ngoài đời.</p></div>`)}
+function walletView(){return shell('interior-page',`${topbar('Ví kịch bản','map')}<div class="page-body"><div class="page-intro">Lưu và sao chép các mẫu tin nhắn từ màn chơi đã hoàn thành.</div>${state.wallet.length?state.wallet.map((w,i)=>`<article class="lesson-card wallet-item"><strong>Mẫu tin nhắn ${i+1}</strong><p>${safe(w.text)}</p><button class="small-button" data-copy="${i}">${icon('chat')} Sao chép</button></article>`).join(''):`<div class="empty-wallet">${avatar('follower','empty-char')}<h2>Ví của bạn đang trống</h2><p>Hoàn thành một màn chơi để lưu tin nhắn thực chiến.</p></div>`}${btn('Quay lại bản đồ','map','green full')}</div>`)}
+
+function render(){const mapRender={home,map,roles:rolesView,custom:customView,stages:stagesView,stagePreview,quiz:quizView,quizResult,chat:chatView,ending:endingView,wallet:walletView,replay:()=>{startGame();return ''}};
+ROOT.innerHTML=(mapRender[state.screen]||home)();if(state.screen==='chat'){document.getElementById('message-zone')?.scrollTo(0,9999)}if(state.screen==='quiz')runQuizClock();if(state.screen==='chat')runGameClock();}
+function runQuizClock(){stopClock();clock=setInterval(()=>{if(state.screen!=='quiz'){stopClock();return;}state.quizTime=Math.max(0,state.quizTime-1);const el=document.getElementById('quiz-count');if(el)el.textContent=state.quizTime+'s';if(state.quizTime===0)finishQuiz()},1000)}
+function runGameClock(){stopClock();clock=setInterval(()=>{if(state.screen!=='chat'){stopClock();return;}state.gameTime=Math.max(0,state.gameTime-1);const el=document.getElementById('game-count');const bar=document.getElementById('time-fill');if(el)el.textContent=state.gameTime+'s';if(bar)bar.style.width=(state.gameTime*5)+'%';if(state.gameTime===0)autoGameEnd()},1000)}
+function startQuiz(){state.quizIndex=0;state.quizAnswers=[];state.quizTime=60;route('quiz')}
+function chooseQuiz(index){const ans=quizQuestions[state.quizIndex].answers[index];if(!ans)return;state.quizAnswers.push(ans[1]);if(state.quizIndex===4)finishQuiz();else {state.quizIndex++;render()}}
+function finishQuiz(){const tally={};state.quizAnswers.forEach(x=>tally[x]=(tally[x]||0)+1);state.persona=Object.entries(tally).sort((a,b)=>b[1]-a[1])[0]?.[0]||'bee';save();route('quizResult')}
+function openLevel(id){state.level=Number(id);route('stages')}
+function openStage(index){state.stage=Number(index);const l=level(state.level);if(state.stage!==0||l.id>2)return route('stagePreview');if(!l.roles.includes(state.role)){state.role=l.roles[0];save();toast('Đã chọn vai phù hợp cho ải này')}startGame()}
+function startGame(){state.game={level:state.level,role:state.role,mode:'main',node:'start',history:[],ending:null,quickOutcome:null,reversalOutcome:null};state.gameTime=20;route('chat')}
+function finishMain(){const key=`${state.game.level}:${state.stage}:${state.role}`;if(!state.done.includes(key))state.done.push(key);save();route('ending')}
+function answerGame(index){const g=state.game;const node=currentNode();const o=node.options[index];if(!o)return;g.history.push(...node.messages.map(([name,text])=>({name,text})),{name:'Bạn',text:o.text});
+ if(g.mode==='reversal'){g.reversalOutcome={name:'Đảo vai hoàn tất',type:o.type,answer:o.answer,lesson:o.lesson};route('ending');return}
+ if(g.level===1&&g.role==='leader'){if(o.to.startsWith('E')){g.ending=o.to;finishMain()}else{g.node=o.to;state.gameTime=20;render()}}else{g.quickOutcome={name:o.type==='good'?'Cả nhóm đã tiến lên!':o.type==='bad'?'Nhóm vẫn bế tắc':'Có điều cần cải thiện',type:o.type,answer:o.answer,lesson:o.lesson,template:o.template};finishMain()}}
+function autoGameEnd(){const g=state.game;if(!g)return;if(g.mode==='reversal'){g.reversalOutcome={name:'Bỏ lỡ lượt phản hồi',type:'mid',answer:'Cả nhóm không biết bạn đang nghĩ gì.',lesson:'Im lặng cũng ảnh hưởng đến việc phối hợp.'};route('ending');return}if(g.level===1&&g.role==='leader')g.ending='E1';else g.quickOutcome={name:'Bỏ lỡ lượt phản hồi',type:'mid',answer:'Không có phản hồi kịp thời.',lesson:'Chủ động lên tiếng giúp nhóm hoạt động hiệu quả.'};finishMain()}
+function startReversal(){state.game={...state.game,mode:'reversal',history:[]};state.gameTime=20;route('chat')}
+function saveTemplate(){const o=getEnding();if(!o?.template)return;state.wallet.unshift({level:state.game.level,text:o.template});state.wallet=state.wallet.slice(0,30);save();toast('Đã lưu mẫu tin nhắn vào ví')}
+async function copyWallet(index){const w=state.wallet[index];if(!w)return;try{await navigator.clipboard.writeText(w.text);toast('Đã sao chép')}catch{toast('Trình duyệt không cho phép sao chép tự động')}}
+ROOT.addEventListener('click',e=>{
+ let x=e.target.closest('[data-go]');if(x){if(x.dataset.go==='replay')return startGame();return route(x.dataset.go)}
+ x=e.target.closest('[data-level]');if(x)return openLevel(x.dataset.level);
+ x=e.target.closest('[data-role]');if(x){state.role=x.dataset.role;save();return render()}
+ x=e.target.closest('[data-outfit]');if(x){state.outfit=x.dataset.outfit;save();return render()}
+ x=e.target.closest('[data-stage]');if(x)return openStage(x.dataset.stage);
+ x=e.target.closest('[data-quiz]');if(x)return chooseQuiz(Number(x.dataset.quiz));
+ x=e.target.closest('[data-choice]');if(x)return answerGame(Number(x.dataset.choice));
+ x=e.target.closest('[data-copy]');if(x)return copyWallet(Number(x.dataset.copy));
+ x=e.target.closest('[data-action]');if(!x)return;
+ if(x.dataset.action==='start-quiz')startQuiz();
+ if(x.dataset.action==='save-template')saveTemplate();
+ if(x.dataset.action==='reversal')startReversal();
+});
+route('home');
+</script></body></html>
