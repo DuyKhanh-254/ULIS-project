@@ -1,16 +1,59 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="480" height="520" viewBox="0 0 480 520"><defs>
-<linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d8c7fa"/><stop offset="1" stop-color="#a28bd8"/></linearGradient>
-<radialGradient id="bubble"><stop stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#d8c7fa" stop-opacity="0"/></radialGradient>
-<filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="16" stdDeviation="9" flood-color="#7967a6" flood-opacity=".23"/></filter>
-</defs>
-<ellipse cx="240" cy="466" rx="150" ry="25" fill="#7967a6" opacity=".16"/>
-<circle cx="240" cy="253" r="192" fill="url(#bubble)" />
-<path d="M77 99.8 l6.5 11.700000000000001 13.0 5.2 -13.0 5.2 -6.5 13.0 -6.5 -13.0 -13.0 -5.2 13.0 -5.2z" fill="#ffd96d" stroke="#d9a64b" stroke-width="2"/><path d="M391 132.4 l4.5 8.1 9.0 3.6 -9.0 3.6 -4.5 9.0 -4.5 -9.0 -9.0 -3.6 9.0 -3.6z" fill="#ffd96d" stroke="#d9a64b" stroke-width="2"/><path d="M378 385 l5 9 10 4 -10 4 -5 10 -5 -10 -10 -4 10 -4z" fill="#ffd96d" stroke="#d9a64b" stroke-width="2"/><path d="M105 367.5 l3.75 6.75 7.5 3.0 -7.5 3.0 -3.75 7.5 -3.75 -7.5 -7.5 -3.0 7.5 -3.0z" fill="#ffd96d" stroke="#d9a64b" stroke-width="2"/><g filter="url(#shadow)">
-<ellipse cx="239" cy="325" rx="147" ry="133" fill="#866eb5" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round"/>
-<path d="M111 222 L99 119 L176 179 Q245 144 313 182 L386 119 L374 225 Q391 370 256 418 Q106 405 111 222Z" fill="url(#body)" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round"/>
-<path d="M149 270 Q141 223 189 214 Q244 202 248 269 Q249 324 195 331 Q145 330 149 270Z" fill="#fff9e8"/>
-<path d="M235 269 Q234 207 293 214 Q347 215 343 270 Q340 328 284 331 Q234 328 235 269Z" fill="#fff9e8"/>
-<ellipse cx="192" cy="270" rx="12" ry="17" fill="#433449"/><circle cx="188" cy="264" r="4.5" fill="#fff"/><ellipse cx="295" cy="270" rx="12" ry="17" fill="#433449"/><circle cx="291" cy="264" r="4.5" fill="#fff"/><ellipse cx="156" cy="333" rx="24" ry="11" fill="#ffa6a6" opacity=".8"/><ellipse cx="333" cy="333" rx="24" ry="11" fill="#ffa6a6" opacity=".8"/>
-<path d="M242 294 l21 12 -21 19 -21 -19z" fill="#ffb35f" stroke="#79516d" stroke-width="6" stroke-linejoin="round"/>
-<path d="M131 384 q-46 -12 -67 25 q35 27 80 0" fill="#8e7bbf" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round"/><path d="M357 384 q43 -16 66 23 q-40 24 -77 1" fill="#8e7bbf" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round"/>
-</g><path d="M165 248 c4 -28 46 -28 54 0 a30 30 0 0 1 -54 0z M265 248 c4 -28 46 -28 54 0 a30 30 0 0 1 -54 0z" fill="none" stroke="#6b597a" stroke-width="7"/><path d="M219 253 H265" stroke="#6b597a" stroke-width="6"/><path d="M382 372 q30 -27 46 2 q-10 19 -46 40 q-36 -26 -45 -45 q22 -27 45 3z" fill="#f68da7" stroke="#a95370" stroke-width="6"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <!-- Nhà hoà giải mâu thuẫn (Zen Capybara with an orange on its head) -->
+  <defs>
+    <filter id="shadow-c" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="4" flood-color="#55a57f" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+  <!-- Background circular tint -->
+  <circle cx="200" cy="200" r="175" fill="#e7f9ee"/>
+
+  <g filter="url(#shadow-c)">
+    <!-- Water tub / Onsen ripples (Zen vibes) -->
+    <ellipse cx="200" cy="330" rx="140" ry="30" fill="#a8e6cf" stroke="#2d1c24" stroke-width="6"/>
+    <path d="M120 325 Q160 335 200 325 Q240 315 280 325" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+
+    <!-- Capybara Body -->
+    <path d="M120 320 C110 250 130 190 170 180 C230 170 270 210 280 320 Z" fill="#b08968" stroke="#2d1c24" stroke-width="7" stroke-linejoin="round"/>
+
+    <!-- Capybara Head (Square-ish, characteristic Capy profile) -->
+    <rect x="135" y="130" width="130" height="110" rx="42" fill="#b08968" stroke="#2d1c24" stroke-width="7"/>
+
+    <!-- Cute Small Ears -->
+    <ellipse cx="140" cy="140" rx="14" ry="10" fill="#8d6748" stroke="#2d1c24" stroke-width="5" transform="rotate(-20 140 140)"/>
+    <ellipse cx="260" cy="140" rx="14" ry="10" fill="#8d6748" stroke="#2d1c24" stroke-width="5" transform="rotate(20 260 140)"/>
+
+    <!-- Orange (Yuzu) on flat head -->
+    <ellipse cx="200" cy="115" rx="22" ry="19" fill="#ff9f43" stroke="#2d1c24" stroke-width="5"/>
+    <!-- Orange Leaf -->
+    <path d="M200 96 Q215 85 220 95 Q210 105 200 96 Z" fill="#2ed573" stroke="#2d1c24" stroke-width="3"/>
+    <circle cx="195" cy="110" r="2.5" fill="#ffffff" opacity="0.8"/>
+
+    <!-- Calm Snout (Lower muzzle) -->
+    <ellipse cx="200" cy="205" rx="42" ry="26" fill="#8d6748"/>
+    <!-- Nostrils (2 cute vertical dashes) -->
+    <ellipse cx="190" cy="195" rx="3.5" ry="5.5" fill="#2d1c24"/>
+    <ellipse cx="210" cy="195" rx="3.5" ry="5.5" fill="#2d1c24"/>
+    <!-- Calm tiny mouth -->
+    <path d="M200 201 L200 210 M192 210 Q200 217 208 210" fill="none" stroke="#2d1c24" stroke-width="4" stroke-linecap="round"/>
+
+    <!-- Super Chill Closed Eyes (-_-) -->
+    <line x1="148" y1="175" x2="172" y2="175" stroke="#2d1c24" stroke-width="6" stroke-linecap="round"/>
+    <line x1="228" y1="175" x2="252" y2="175" stroke="#2d1c24" stroke-width="6" stroke-linecap="round"/>
+
+    <!-- Cute Rosy Blushes -->
+    <ellipse cx="145" cy="195" rx="14" ry="8" fill="#ff7675" opacity="0.6"/>
+    <ellipse cx="255" cy="195" rx="14" ry="8" fill="#ff7675" opacity="0.6"/>
+
+    <!-- Cute tiny paws resting in front holding cup of tea -->
+    <ellipse cx="180" cy="285" rx="14" ry="12" fill="#8d6748" stroke="#2d1c24" stroke-width="5"/>
+    <ellipse cx="220" cy="285" rx="14" ry="12" fill="#8d6748" stroke="#2d1c24" stroke-width="5"/>
+    <!-- Bubble Tea cup -->
+    <rect x="190" y="270" width="20" height="26" rx="4" fill="#ffffff" stroke="#2d1c24" stroke-width="4"/>
+    <line x1="200" y1="262" x2="200" y2="280" stroke="#ff4757" stroke-width="3" stroke-linecap="round"/>
+    
+    <!-- Zen flower / Lotus floating -->
+    <path d="M95 320 Q105 305 115 320 Q105 328 95 320 Z" fill="#ff9ff3" stroke="#2d1c24" stroke-width="3"/>
+    <path d="M295 322 Q305 307 315 322 Q305 330 295 322 Z" fill="#ff9ff3" stroke="#2d1c24" stroke-width="3"/>
+  </g>
+</svg>

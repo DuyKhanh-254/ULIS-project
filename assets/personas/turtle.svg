@@ -1,24 +1,69 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="480" height="520" viewBox="0 0 480 520"><defs>
-<linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c9f9b2"/><stop offset="1" stop-color="#7ec771"/></linearGradient>
-<radialGradient id="bubble"><stop stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#c9f9b2" stop-opacity="0"/></radialGradient>
-<filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="16" stdDeviation="9" flood-color="#477e59" flood-opacity=".23"/></filter>
-</defs>
-<ellipse cx="240" cy="466" rx="150" ry="25" fill="#477e59" opacity=".16"/>
-<circle cx="240" cy="253" r="192" fill="url(#bubble)" />
-<path d="M77 99.8 l6.5 11.700000000000001 13.0 5.2 -13.0 5.2 -6.5 13.0 -6.5 -13.0 -13.0 -5.2 13.0 -5.2z" fill="#ffd96d" stroke="#d9a64b" stroke-width="2"/><path d="M391 132.4 l4.5 8.1 9.0 3.6 -9.0 3.6 -4.5 9.0 -4.5 -9.0 -9.0 -3.6 9.0 -3.6z" fill="#ffd96d" stroke="#d9a64b" stroke-width="2"/><path d="M378 385 l5 9 10 4 -10 4 -5 10 -5 -10 -10 -4 10 -4z" fill="#ffd96d" stroke="#d9a64b" stroke-width="2"/><path d="M105 367.5 l3.75 6.75 7.5 3.0 -7.5 3.0 -3.75 7.5 -3.75 -7.5 -7.5 -3.0 7.5 -3.0z" fill="#ffd96d" stroke="#d9a64b" stroke-width="2"/><g filter="url(#shadow)">
-  <path d="M126 246 Q72 283 105 361 Q145 410 196 399" fill="#86b878" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round"/>
-  <ellipse cx="252" cy="334" rx="157" ry="130" fill="#5d9d77" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round"/>
-  <ellipse cx="252" cy="331" rx="126" ry="103" fill="#8fcf8b" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round"/>
-  <path d="M190 277 l60 -25 71 34 2 83 -73 43 -67 -36z" fill="#b7e6a6" stroke="#579d73" stroke-width="7"/>
-  <path d="M252 252 v158 M187 291 l133 78 M191 375 l129-86" stroke="#579d73" stroke-width="6" fill="none"/>
-  <path d="M138 256 Q102 264 95 305 Q103 334 143 337 L190 325" fill="#a6db90" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round"/>
-  <path d="M323 306 Q391 277 400 327 Q407 366 360 363 L323 349" fill="#a6db90" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round"/>
-  <path d="M147 358 Q102 391 130 423 L178 416" fill="#9ed28e" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round"/>
-  <path d="M338 369 Q392 394 358 430 L313 417" fill="#9ed28e" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round"/>
-  <rect x="108" y="190" width="200" height="154" rx="71" fill="url(#body)" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round"/>
-  <path d="M151 193 Q214 158 270 189" stroke="#fff" stroke-width="13" opacity=".37" fill="none"/>
-  <ellipse cx="167" cy="264" rx="12" ry="17" fill="#433449"/><circle cx="163" cy="258" r="4.5" fill="#fff"/><ellipse cx="249" cy="264" rx="12" ry="17" fill="#433449"/><circle cx="245" cy="258" r="4.5" fill="#fff"/><ellipse cx="139" cy="300" rx="24" ry="11" fill="#ffa6a6" opacity=".8"/><ellipse cx="270" cy="300" rx="24" ry="11" fill="#ffa6a6" opacity=".8"/>
-  <path d="M181 307 Q212 334 239 306" stroke="#5e6254" stroke-width="8" fill="none" stroke-linecap="round"/>
-  <path d="M141 181 l52 -48 45 51" fill="#df91ad" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round" />
-  <path d="M199 128 l-8 -46 47 48" fill="#f7b6c5" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round"/>
-</g><path d="M360 247 l37 -20 31 48 -37 19z" fill="#f4d17c" stroke="#705a64" stroke-width="7"/><text x="382" y="276" text-anchor="middle" fill="#675264" font-size="35" font-weight="bold">!</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <!-- Bạch tuộc ôm việc (Overworking Octopus) -->
+  <defs>
+    <filter id="shadow-t" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="4" flood-color="#a63d60" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+  <!-- Background circular tint -->
+  <circle cx="200" cy="200" r="175" fill="#ffeaf1"/>
+  
+  <g filter="url(#shadow-t)">
+    <!-- Back Tentacles holding items -->
+    <!-- Tentacle top-left holding coffee -->
+    <path d="M120 180 Q60 140 70 95 Q85 80 100 110 Q110 135 135 170" fill="#ff7f9d" stroke="#2d1c24" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Coffee cup -->
+    <rect x="55" y="65" width="32" height="38" rx="5" fill="#ffffff" stroke="#2d1c24" stroke-width="5"/>
+    <path d="M87 75 Q102 75 102 85 Q102 95 87 95" fill="none" stroke="#2d1c24" stroke-width="5"/>
+    <path d="M63 60 Q68 50 64 42 M73 60 Q78 50 74 42" stroke="#d48a60" stroke-width="3" stroke-linecap="round"/>
+    
+    <!-- Tentacle top-right holding clock -->
+    <path d="M280 180 Q340 140 330 95 Q315 80 300 110 Q290 135 265 170" fill="#ff7f9d" stroke="#2d1c24" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Clock 23:59 -->
+    <circle cx="335" cy="85" r="24" fill="#ffffff" stroke="#2d1c24" stroke-width="5"/>
+    <path d="M335 85 L335 70 M335 85 L346 85" stroke="#e84118" stroke-width="4" stroke-linecap="round"/>
+    
+    <!-- Tentacle middle-left holding document stack -->
+    <path d="M110 220 Q40 210 45 260 Q55 285 90 260 Q110 245 130 235" fill="#ff7f9d" stroke="#2d1c24" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Folder/Papers -->
+    <rect x="30" y="240" width="48" height="34" rx="4" fill="#fbc531" stroke="#2d1c24" stroke-width="5" transform="rotate(-12 54 257)"/>
+    <rect x="34" y="246" width="40" height="24" rx="2" fill="#ffffff" stroke="#2d1c24" stroke-width="3" transform="rotate(-12 54 257)"/>
+    
+    <!-- Tentacle middle-right holding laptop -->
+    <path d="M290 220 Q360 210 355 260 Q345 285 310 260 Q290 245 270 235" fill="#ff7f9d" stroke="#2d1c24" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Laptop -->
+    <rect x="325" y="240" width="46" height="30" rx="3" fill="#718093" stroke="#2d1c24" stroke-width="5" transform="rotate(15 348 255)"/>
+    <rect x="330" y="244" width="36" height="20" rx="2" fill="#dcdde1" transform="rotate(15 348 255)"/>
+
+    <!-- Bottom Tentacles -->
+    <path d="M140 280 Q120 350 160 360 Q180 360 175 320 Q170 290 165 280" fill="#ff6b8b" stroke="#2d1c24" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M260 280 Q280 350 240 360 Q220 360 225 320 Q230 290 235 280" fill="#ff6b8b" stroke="#2d1c24" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M190 290 Q200 370 210 290" fill="#ff6b8b" stroke="#2d1c24" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Octopus Head / Body -->
+    <ellipse cx="200" cy="205" rx="88" ry="92" fill="#ff6b8b" stroke="#2d1c24" stroke-width="7"/>
+    <!-- Head highlight / spots -->
+    <circle cx="160" cy="150" r="14" fill="#ff8fa8"/>
+    <circle cx="185" cy="135" r="9" fill="#ff8fa8"/>
+
+    <!-- Sweat Drops 💦 -->
+    <path d="M255 140 C255 130 265 120 265 120 C265 120 275 130 275 140 A10 10 0 1 1 255 140 Z" fill="#00d2d3" stroke="#2d1c24" stroke-width="4"/>
+    <path d="M135 155 C135 148 142 140 142 140 C142 140 149 148 149 155 A7 7 0 1 1 135 155 Z" fill="#00d2d3" stroke="#2d1c24" stroke-width="3"/>
+
+    <!-- Eyes (Stressed / Wide Comic Eyes) -->
+    <ellipse cx="165" cy="205" rx="16" ry="19" fill="#ffffff" stroke="#2d1c24" stroke-width="5"/>
+    <ellipse cx="235" cy="205" rx="16" ry="19" fill="#ffffff" stroke="#2d1c24" stroke-width="5"/>
+    <!-- Pupils - looking crazy/overworked -->
+    <circle cx="167" cy="206" r="8" fill="#2d1c24"/>
+    <circle cx="164" cy="203" r="3" fill="#ffffff"/>
+    <circle cx="233" cy="206" r="8" fill="#2d1c24"/>
+    <circle cx="230" cy="203" r="3" fill="#ffffff"/>
+
+    <!-- Rosy Cheek Blushes -->
+    <ellipse cx="140" cy="225" rx="14" ry="8" fill="#ff3838" opacity="0.6"/>
+    <ellipse cx="260" cy="225" rx="14" ry="8" fill="#ff3838" opacity="0.6"/>
+
+    <!-- Mouth (nervous wavy smile: ~) -->
+    <path d="M185 235 Q192 242 200 236 Q208 230 215 236" fill="none" stroke="#2d1c24" stroke-width="5" stroke-linecap="round"/>
+  </g>
+</svg>

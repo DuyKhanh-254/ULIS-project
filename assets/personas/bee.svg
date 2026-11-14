@@ -1,20 +1,67 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="480" height="520" viewBox="0 0 480 520"><defs>
-<linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe883"/><stop offset="1" stop-color="#ffca5a"/></linearGradient>
-<radialGradient id="bubble"><stop stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#ffe883" stop-opacity="0"/></radialGradient>
-<filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="16" stdDeviation="9" flood-color="#c2953d" flood-opacity=".23"/></filter>
-</defs>
-<ellipse cx="240" cy="466" rx="150" ry="25" fill="#c2953d" opacity=".16"/>
-<circle cx="240" cy="253" r="192" fill="url(#bubble)" />
-<path d="M77 99.8 l6.5 11.700000000000001 13.0 5.2 -13.0 5.2 -6.5 13.0 -6.5 -13.0 -13.0 -5.2 13.0 -5.2z" fill="#ffd96d" stroke="#d9a64b" stroke-width="2"/><path d="M391 132.4 l4.5 8.1 9.0 3.6 -9.0 3.6 -4.5 9.0 -4.5 -9.0 -9.0 -3.6 9.0 -3.6z" fill="#ffd96d" stroke="#d9a64b" stroke-width="2"/><path d="M378 385 l5 9 10 4 -10 4 -5 10 -5 -10 -10 -4 10 -4z" fill="#ffd96d" stroke="#d9a64b" stroke-width="2"/><path d="M105 367.5 l3.75 6.75 7.5 3.0 -7.5 3.0 -3.75 7.5 -3.75 -7.5 -7.5 -3.0 7.5 -3.0z" fill="#ffd96d" stroke="#d9a64b" stroke-width="2"/><g filter="url(#shadow)">
-<ellipse cx="157" cy="220" rx="64" ry="102" transform="rotate(-26 157 220)" fill="#f0faff" opacity=".9" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round"/>
-<ellipse cx="331" cy="220" rx="64" ry="102" transform="rotate(28 331 220)" fill="#f0faff" opacity=".9" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round"/>
-<ellipse cx="242" cy="340" rx="151" ry="116" fill="url(#body)" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round"/>
-<path d="M136 285 Q132 340 148 387" stroke="#6c5260" stroke-width="25" fill="none"/>
-<path d="M214 229 Q202 339 222 445" stroke="#6c5260" stroke-width="26" fill="none"/>
-<path d="M299 240 Q312 339 301 426" stroke="#6c5260" stroke-width="26" fill="none"/>
-<ellipse cx="242" cy="256" rx="134" ry="119" fill="url(#body)" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round"/>
-<ellipse cx="188" cy="252" rx="12" ry="17" fill="#433449"/><circle cx="184" cy="246" r="4.5" fill="#fff"/><ellipse cx="292" cy="252" rx="12" ry="17" fill="#433449"/><circle cx="288" cy="246" r="4.5" fill="#fff"/><ellipse cx="150" cy="315" rx="24" ry="11" fill="#ffa6a6" opacity=".8"/><ellipse cx="327" cy="315" rx="24" ry="11" fill="#ffa6a6" opacity=".8"/>
-<path d="M210 318 Q242 347 275 318" stroke="#806048" stroke-width="9" fill="none" stroke-linecap="round"/>
-<path d="M178 166 Q160 112 137 108 M303 166 Q329 112 351 109" stroke="#6b5960" stroke-width="9" stroke-linecap="round" fill="none"/>
-<circle cx="137" cy="106" r="12" fill="#5d515f"/><circle cx="351" cy="107" r="12" fill="#5d515f"/>
-</g><path d="M110 398 q-42 -3 -49 37 q35 28 66 -7" fill="#ffe1aa" stroke="#79576c" stroke-width="8"/><path d="M365 400 q39 4 48 39 q-33 19 -64 -9" fill="#ffe1aa" stroke="#79576c" stroke-width="8"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <!-- Thành viên gương mẫu (Model Employee Corgi with lanyard badge) -->
+  <defs>
+    <filter id="shadow-b" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="4" flood-color="#c97b24" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+  <!-- Background circular tint -->
+  <circle cx="200" cy="200" r="175" fill="#fff6e5"/>
+
+  <g filter="url(#shadow-b)">
+    <!-- Big Corgi Ears (Pointed, upright, super cute) -->
+    <path d="M110 170 L95 65 Q115 50 150 95 L160 145 Z" fill="#e67e22" stroke="#2d1c24" stroke-width="7" stroke-linejoin="round"/>
+    <path d="M115 145 L108 80 Q120 70 140 105 Z" fill="#ffb8b8"/>
+    
+    <path d="M290 170 L305 65 Q285 50 250 95 L240 145 Z" fill="#e67e22" stroke="#2d1c24" stroke-width="7" stroke-linejoin="round"/>
+    <path d="M285 145 L292 80 Q280 70 260 105 Z" fill="#ffb8b8"/>
+
+    <!-- Head -->
+    <ellipse cx="200" cy="195" rx="88" ry="82" fill="#f39c12" stroke="#2d1c24" stroke-width="7"/>
+
+    <!-- White blaze (forehead stripe down to muzzle) -->
+    <path d="M190 115 Q200 135 180 170 Q160 185 160 215 Q160 245 200 245 Q240 245 240 215 Q240 185 220 170 Q200 135 210 115 Z" fill="#ffffff" stroke="#2d1c24" stroke-width="5" stroke-linejoin="round"/>
+
+    <!-- Eyes (Happy, sparkling dark eyes) -->
+    <ellipse cx="155" cy="180" rx="13" ry="16" fill="#2d1c24"/>
+    <circle cx="152" cy="175" r="5" fill="#ffffff"/>
+    <circle cx="159" cy="184" r="2.5" fill="#ffffff"/>
+
+    <ellipse cx="245" cy="180" rx="13" ry="16" fill="#2d1c24"/>
+    <circle cx="242" cy="175" r="5" fill="#ffffff"/>
+    <circle cx="249" cy="184" r="2.5" fill="#ffffff"/>
+
+    <!-- Cute Black Nose -->
+    <ellipse cx="200" cy="198" rx="13" ry="9" fill="#2d1c24"/>
+    
+    <!-- Big Happy Open Smile with Pink Tongue (^w^) -->
+    <path d="M188 206 Q200 212 212 206" fill="none" stroke="#2d1c24" stroke-width="4" stroke-linecap="round"/>
+    <path d="M190 208 Q200 236 210 208" fill="#e74c3c" stroke="#2d1c24" stroke-width="4"/>
+    <path d="M194 216 Q200 234 206 216" fill="#ff7675"/>
+
+    <!-- Rosy Cheeks -->
+    <ellipse cx="132" cy="205" rx="14" ry="8" fill="#ff7675" opacity="0.6"/>
+    <ellipse cx="268" cy="205" rx="14" ry="8" fill="#ff7675" opacity="0.6"/>
+
+    <!-- Body & White Chest Fluff -->
+    <path d="M135 270 Q130 330 200 335 Q270 330 265 270 Z" fill="#f39c12" stroke="#2d1c24" stroke-width="6"/>
+    <path d="M155 265 Q200 325 245 265 Q225 295 200 295 Q175 295 155 265 Z" fill="#ffffff"/>
+
+    <!-- Blue Employee Lanyard around neck -->
+    <path d="M162 250 Q200 280 238 250" fill="none" stroke="#0984e3" stroke-width="7" stroke-linecap="round"/>
+
+    <!-- Employee ID Card Badge hanging -->
+    <rect x="180" y="280" width="40" height="52" rx="4" fill="#ffffff" stroke="#2d1c24" stroke-width="4"/>
+    <rect x="185" y="285" width="30" height="20" rx="2" fill="#74b9ff"/>
+    <circle cx="200" cy="295" r="6" fill="#ffffff"/>
+    <line x1="186" y1="312" x2="214" y2="312" stroke="#2d1c24" stroke-width="2.5"/>
+    <line x1="186" y1="318" x2="208" y2="318" stroke="#7f8c8d" stroke-width="2"/>
+    <line x1="186" y1="324" x2="212" y2="324" stroke="#7f8c8d" stroke-width="2"/>
+
+    <!-- Little clip attaching badge to lanyard -->
+    <rect x="194" y="274" width="12" height="8" rx="2" fill="#b2bec3" stroke="#2d1c24" stroke-width="2.5"/>
+
+    <!-- Golden Star / Medal badge of honor -->
+    <path d="M120 285 L125 298 L138 299 L128 308 L131 321 L120 314 L109 321 L112 308 L102 299 L115 298 Z" fill="#fdcb6e" stroke="#2d1c24" stroke-width="3"/>
+  </g>
+</svg>

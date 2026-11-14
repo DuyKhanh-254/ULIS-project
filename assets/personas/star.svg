@@ -1,19 +1,69 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="480" height="520" viewBox="0 0 480 520"><defs>
-<linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c4f7b5"/><stop offset="1" stop-color="#5dc796"/></linearGradient>
-<radialGradient id="bubble"><stop stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#c4f7b5" stop-opacity="0"/></radialGradient>
-<filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="16" stdDeviation="9" flood-color="#46876c" flood-opacity=".23"/></filter>
-</defs>
-<ellipse cx="240" cy="466" rx="150" ry="25" fill="#46876c" opacity=".16"/>
-<circle cx="240" cy="253" r="192" fill="url(#bubble)" />
-<path d="M77 99.8 l6.5 11.700000000000001 13.0 5.2 -13.0 5.2 -6.5 13.0 -6.5 -13.0 -13.0 -5.2 13.0 -5.2z" fill="#ffd96d" stroke="#d9a64b" stroke-width="2"/><path d="M391 132.4 l4.5 8.1 9.0 3.6 -9.0 3.6 -4.5 9.0 -4.5 -9.0 -9.0 -3.6 9.0 -3.6z" fill="#ffd96d" stroke="#d9a64b" stroke-width="2"/><path d="M378 385 l5 9 10 4 -10 4 -5 10 -5 -10 -10 -4 10 -4z" fill="#ffd96d" stroke="#d9a64b" stroke-width="2"/><path d="M105 367.5 l3.75 6.75 7.5 3.0 -7.5 3.0 -3.75 7.5 -3.75 -7.5 -7.5 -3.0 7.5 -3.0z" fill="#ffd96d" stroke="#d9a64b" stroke-width="2"/><g filter="url(#shadow)">
-<path d="M110 333 Q122 214 240 213 Q362 210 369 332 Q370 434 244 443 Q102 437 110 333Z" fill="url(#body)" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round"/>
-<ellipse cx="157" cy="216" rx="63" ry="68" fill="#98dc93" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round"/>
-<ellipse cx="326" cy="216" rx="63" ry="68" fill="#98dc93" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round"/>
-<path d="M102 292 Q107 197 239 200 Q375 194 382 303 Q368 400 244 400 Q112 394 102 292Z" fill="url(#body)" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round"/>
-<ellipse cx="190" cy="273" rx="12" ry="17" fill="#433449"/><circle cx="186" cy="267" r="4.5" fill="#fff"/><ellipse cx="293" cy="273" rx="12" ry="17" fill="#433449"/><circle cx="289" cy="267" r="4.5" fill="#fff"/><ellipse cx="140" cy="323" rx="24" ry="11" fill="#ffa6a6" opacity=".8"/><ellipse cx="336" cy="323" rx="24" ry="11" fill="#ffa6a6" opacity=".8"/>
-<path d="M213 328 Q240 353 268 326" stroke="#3f6f5d" stroke-width="9" fill="none" stroke-linecap="round"/>
-<path d="M172 207 L185 139 L239 173 L294 137 L307 205 Z" fill="#ffd36d" stroke="#966c2e" stroke-width="9" stroke-linejoin="round"/>
-<circle cx="240" cy="194" r="12" fill="#fa769b"/><circle cx="190" cy="190" r="8" fill="#fffae4"/><circle cx="291" cy="190" r="8" fill="#fffae4"/>
-<path d="M166 429 q-22 24 -48 -4 l-7 -25 70 -13 19 22" fill="#81ca8b" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round"/>
-<path d="M305 426 q24 25 49 -2 l5 -27 -70 -13 -20 23" fill="#81ca8b" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round"/>
-</g><rect x="298" y="348" width="106" height="102" rx="13" fill="#fff4d3" stroke="#665063" stroke-width="8" transform="rotate(11 350 400)"/><path d="M323 376 l48 7 M319 396 l48 7 M317 417 l30 5" stroke="#77a2bd" stroke-width="6"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <!-- Sư tử tài năng (Confident Lion Leader) -->
+  <defs>
+    <filter id="shadow-s" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="4" flood-color="#b86b24" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+  <!-- Background circular tint -->
+  <circle cx="200" cy="200" r="175" fill="#fff5d9"/>
+
+  <g filter="url(#shadow-s)">
+    <!-- Lion Mane (Fluffy cloud-like shapes around head) -->
+    <path d="M200 80 Q240 60 270 90 Q310 80 325 120 Q360 140 350 180 Q375 220 345 255 Q360 295 320 320 Q300 355 260 345 Q220 365 190 345 Q150 365 120 335 Q85 340 75 300 Q45 270 65 230 Q40 190 65 155 Q60 115 100 100 Q120 65 160 80 Z" fill="#f39c12" stroke="#2d1c24" stroke-width="7" stroke-linejoin="round"/>
+    
+    <!-- Ears -->
+    <circle cx="125" cy="115" r="24" fill="#f39c12" stroke="#2d1c24" stroke-width="6"/>
+    <circle cx="125" cy="115" r="14" fill="#e67e22"/>
+    <circle cx="275" cy="115" r="24" fill="#f39c12" stroke="#2d1c24" stroke-width="6"/>
+    <circle cx="275" cy="115" r="14" fill="#e67e22"/>
+
+    <!-- Head -->
+    <ellipse cx="200" cy="210" rx="90" ry="85" fill="#f1c40f" stroke="#2d1c24" stroke-width="7"/>
+
+    <!-- Crown on head -->
+    <path d="M155 125 L165 80 L185 105 L200 70 L215 105 L235 80 L245 125 Z" fill="#ffd32a" stroke="#2d1c24" stroke-width="6" stroke-linejoin="round"/>
+    <circle cx="165" cy="78" r="4" fill="#eb4d4b"/>
+    <circle cx="200" cy="68" r="5" fill="#eb4d4b"/>
+    <circle cx="235" cy="78" r="4" fill="#eb4d4b"/>
+    <circle cx="200" cy="105" r="6" fill="#38ada9"/>
+
+    <!-- Face details -->
+    <!-- Eyebrows (confident) -->
+    <path d="M150 175 Q165 165 180 175" fill="none" stroke="#2d1c24" stroke-width="5" stroke-linecap="round"/>
+    <path d="M220 175 Q235 165 250 172" fill="none" stroke="#2d1c24" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- Eyes (Left winking ^, Right big sparkling eye) -->
+    <!-- Left eye winking -->
+    <path d="M148 195 Q163 183 178 195" fill="none" stroke="#2d1c24" stroke-width="6" stroke-linecap="round"/>
+    <!-- Right eye sparkling -->
+    <ellipse cx="235" cy="195" rx="14" ry="17" fill="#2d1c24"/>
+    <circle cx="231" cy="190" r="5" fill="#ffffff"/>
+    <circle cx="241" cy="201" r="2.5" fill="#ffffff"/>
+
+    <!-- Cute Snout & Nose -->
+    <ellipse cx="200" cy="225" rx="28" ry="20" fill="#fcedb4"/>
+    <path d="M192 215 L208 215 L200 225 Z" fill="#2d1c24" stroke="#2d1c24" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M200 225 L200 232 M190 232 Q200 240 210 232" fill="none" stroke="#2d1c24" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- Rosy Cheeks -->
+    <ellipse cx="142" cy="222" rx="14" ry="8" fill="#ff7675" opacity="0.6"/>
+    <ellipse cx="258" cy="222" rx="14" ry="8" fill="#ff7675" opacity="0.6"/>
+
+    <!-- Front paws holding a checklist clipboard -->
+    <rect x="160" y="270" width="80" height="75" rx="8" fill="#ecf0f1" stroke="#2d1c24" stroke-width="6"/>
+    <!-- Checklist rows -->
+    <path d="M175 295 L182 300 L192 290" fill="none" stroke="#27ae60" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="198" y1="295" x2="228" y2="295" stroke="#7f8c8d" stroke-width="4" stroke-linecap="round"/>
+    <path d="M175 315 L182 320 L192 310" fill="none" stroke="#27ae60" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="198" y1="315" x2="228" y2="315" stroke="#7f8c8d" stroke-width="4" stroke-linecap="round"/>
+
+    <!-- Paws holding the board -->
+    <ellipse cx="150" cy="295" rx="16" ry="14" fill="#f1c40f" stroke="#2d1c24" stroke-width="5"/>
+    <ellipse cx="250" cy="295" rx="16" ry="14" fill="#f1c40f" stroke="#2d1c24" stroke-width="5"/>
+
+    <!-- Sparkles ✦ around crown -->
+    <path d="M110 80 Q120 80 120 70 Q120 80 130 80 Q120 80 120 90 Q120 80 110 80 Z" fill="#ffd32a"/>
+    <path d="M280 75 Q290 75 290 65 Q290 75 300 75 Q290 75 290 85 Q290 75 280 75 Z" fill="#ffd32a"/>
+  </g>
+</svg>

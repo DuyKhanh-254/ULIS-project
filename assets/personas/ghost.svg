@@ -1,15 +1,69 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="480" height="520" viewBox="0 0 480 520"><defs>
-<linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f0f0ff"/><stop offset="1" stop-color="#d1ccf3"/></linearGradient>
-<radialGradient id="bubble"><stop stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#f0f0ff" stop-opacity="0"/></radialGradient>
-<filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="16" stdDeviation="9" flood-color="#7c7ba9" flood-opacity=".23"/></filter>
-</defs>
-<ellipse cx="240" cy="466" rx="150" ry="25" fill="#7c7ba9" opacity=".16"/>
-<circle cx="240" cy="253" r="192" fill="url(#bubble)" />
-<path d="M77 99.8 l6.5 11.700000000000001 13.0 5.2 -13.0 5.2 -6.5 13.0 -6.5 -13.0 -13.0 -5.2 13.0 -5.2z" fill="#ffd96d" stroke="#d9a64b" stroke-width="2"/><path d="M391 132.4 l4.5 8.1 9.0 3.6 -9.0 3.6 -4.5 9.0 -4.5 -9.0 -9.0 -3.6 9.0 -3.6z" fill="#ffd96d" stroke="#d9a64b" stroke-width="2"/><path d="M378 385 l5 9 10 4 -10 4 -5 10 -5 -10 -10 -4 10 -4z" fill="#ffd96d" stroke="#d9a64b" stroke-width="2"/><path d="M105 367.5 l3.75 6.75 7.5 3.0 -7.5 3.0 -3.75 7.5 -3.75 -7.5 -7.5 -3.0 7.5 -3.0z" fill="#ffd96d" stroke="#d9a64b" stroke-width="2"/><g filter="url(#shadow)">
-<path d="M99 264 Q100 151 239 141 Q384 145 384 272 L384 433 L342 406 L305 433 L267 405 L229 436 L192 406 L152 436 L98 414Z" fill="url(#body)" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round"/>
-<path d="M130 226 Q153 164 223 167" stroke="#ffffff" stroke-width="15" stroke-linecap="round" fill="none" opacity=".75"/>
-<ellipse cx="190" cy="264" rx="12" ry="17" fill="#433449"/><circle cx="186" cy="258" r="4.5" fill="#fff"/><ellipse cx="294" cy="264" rx="12" ry="17" fill="#433449"/><circle cx="290" cy="258" r="4.5" fill="#fff"/><ellipse cx="146" cy="308" rx="24" ry="11" fill="#ffa6a6" opacity=".8"/><ellipse cx="340" cy="308" rx="24" ry="11" fill="#ffa6a6" opacity=".8"/>
-<path d="M219 329 q22 -13 42 0" stroke="#85809c" stroke-width="8" fill="none" stroke-linecap="round"/>
-<path d="M118 352 q-53 -4 -60 30 q15 37 72 28" fill="#e9e7ff" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round"/>
-<path d="M365 352 q53 -4 60 30 q-15 37 -72 28" fill="#e9e7ff" stroke="#4c3a55" stroke-width="9" stroke-linejoin="round"/>
-</g><g transform="translate(324 375) rotate(-12)"><rect width="87" height="74" rx="12" fill="#fff8db" stroke="#8e849e" stroke-width="7"/><path d="M15 26 h55 M15 43 h39" stroke="#bbb1a2" stroke-width="6" stroke-linecap="round"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <!-- Thành viên "tàng hình" (Frog huddled under cozy blanket holding phone) -->
+  <defs>
+    <filter id="shadow-g" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="4" flood-color="#554477" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+  <!-- Background circular tint -->
+  <circle cx="200" cy="200" r="175" fill="#f0ebfa"/>
+
+  <g filter="url(#shadow-g)">
+    <!-- Cozy Blanket / Quilt wrapped around (Pastel Purple with tiny stars/dots) -->
+    <path d="M120 180 C80 200 70 280 85 330 C120 355 280 355 315 330 C330 280 320 200 280 180 C270 220 250 250 200 250 C150 250 130 220 120 180 Z" fill="#dcd6f7" stroke="#2d1c24" stroke-width="7" stroke-linejoin="round"/>
+    
+    <!-- Blanket polka dots / stars pattern -->
+    <circle cx="115" cy="260" r="5" fill="#a6b1e1"/>
+    <circle cx="140" cy="300" r="6" fill="#a6b1e1"/>
+    <circle cx="170" cy="330" r="5" fill="#a6b1e1"/>
+    <circle cx="230" cy="330" r="5" fill="#a6b1e1"/>
+    <circle cx="260" cy="300" r="6" fill="#a6b1e1"/>
+    <circle cx="285" cy="260" r="5" fill="#a6b1e1"/>
+
+    <!-- Frog Head peeking out -->
+    <!-- Two big rounded eye humps on top of head -->
+    <circle cx="155" cy="145" r="32" fill="#78e08f" stroke="#2d1c24" stroke-width="7"/>
+    <circle cx="245" cy="145" r="32" fill="#78e08f" stroke="#2d1c24" stroke-width="7"/>
+
+    <!-- Frog main face oval -->
+    <ellipse cx="200" cy="175" rx="82" ry="60" fill="#78e08f" stroke="#2d1c24" stroke-width="7"/>
+
+    <!-- Frog Eyeballs (Yellow with horizontal slit eyes - just like the Cool Frog License photo!) -->
+    <ellipse cx="155" cy="145" rx="20" ry="17" fill="#ffd32a" stroke="#2d1c24" stroke-width="5"/>
+    <line x1="140" y1="145" x2="170" y2="145" stroke="#2d1c24" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="152" cy="139" r="3" fill="#ffffff"/>
+
+    <ellipse cx="245" cy="145" rx="20" ry="17" fill="#ffd32a" stroke="#2d1c24" stroke-width="5"/>
+    <line x1="230" y1="145" x2="260" y2="145" stroke="#2d1c24" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="242" cy="139" r="3" fill="#ffffff"/>
+
+    <!-- Shy little mouth (tiny line) -->
+    <path d="M190 190 Q200 195 210 190" fill="none" stroke="#2d1c24" stroke-width="4" stroke-linecap="round"/>
+
+    <!-- Rosy Cheek Blushes -->
+    <ellipse cx="135" cy="180" rx="15" ry="9" fill="#ff7675" opacity="0.75"/>
+    <ellipse cx="265" cy="180" rx="15" ry="9" fill="#ff7675" opacity="0.75"/>
+
+    <!-- Sweat drop on head (anxious/invisible) -->
+    <path d="M265 115 C265 107 272 100 272 100 C272 100 279 107 279 115 A7 7 0 1 1 265 115 Z" fill="#74b9ff" stroke="#2d1c24" stroke-width="3"/>
+
+    <!-- Blanket top fold / collar overlapping the chin -->
+    <path d="M125 205 Q200 245 275 205 Q285 240 260 255 Q200 275 140 255 Z" fill="#b8b5ff" stroke="#2d1c24" stroke-width="6" stroke-linejoin="round"/>
+
+    <!-- Tiny frog paws holding a smartphone -->
+    <rect x="175" y="245" width="50" height="70" rx="7" fill="#2d3436" stroke="#2d1c24" stroke-width="5"/>
+    <!-- Phone screen glowing blue -->
+    <rect x="180" y="252" width="40" height="54" rx="4" fill="#dff9fb"/>
+    <!-- Chat bubble on phone with "Đã xem" / Seen -->
+    <rect x="184" y="260" width="32" height="12" rx="3" fill="#00b894"/>
+    <circle cx="193" cy="266" r="1.5" fill="#ffffff"/>
+    <circle cx="200" cy="266" r="1.5" fill="#ffffff"/>
+    <circle cx="207" cy="266" r="1.5" fill="#ffffff"/>
+    <text x="185" y="285" font-family="system-ui, sans-serif" font-size="7" font-weight="900" fill="#636e72">ĐÃ XEM</text>
+    <text x="185" y="295" font-family="system-ui, sans-serif" font-size="6" font-weight="700" fill="#b2bec3">23:59</text>
+
+    <!-- Two cute green webbed fingers peeking holding the phone -->
+    <ellipse cx="170" cy="280" rx="10" ry="8" fill="#78e08f" stroke="#2d1c24" stroke-width="4"/>
+    <ellipse cx="230" cy="280" rx="10" ry="8" fill="#78e08f" stroke="#2d1c24" stroke-width="4"/>
+  </g>
+</svg>

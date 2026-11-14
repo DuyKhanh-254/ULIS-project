@@ -1,21 +1,26 @@
-<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TEAM CRAFT — demo</title><style>:root{
-  font-family:"Trebuchet MS","Arial Rounded MT Bold","Segoe UI",Arial,sans-serif;
+<!doctype html><html lang="vi"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>TEAM CRAFT — demo</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>:root{
+  --font-main:'Lexend',sans-serif;
+  --font-display:'Baloo 2',cursive,sans-serif;
+  font-family:var(--font-main);
   color:#353747;background:#badde8;font-synthesis:none;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
   --ink:#353747;--navy:#344b64;--muted:#69788c;--blue:#53b9ea;--cream:#fff9eb;
 }
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;background:radial-gradient(circle at 30% -5%,#ebf8fa,transparent 38%),radial-gradient(circle at 100% 100%,#f7e0cf,transparent 35%),#b9dce8}
-button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+body{margin:0;min-height:100vh;background:radial-gradient(circle at 30% -5%,#ebf8fa,transparent 38%),radial-gradient(circle at 100% 100%,#f7e0cf,transparent 35%),#b9dce8;font-family:var(--font-main);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;line-height:1.5}
+button,input,textarea,select{font-family:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;-webkit-font-smoothing:antialiased}
 button:focus-visible{outline:3px solid #2674dd;outline-offset:3px}
 #app{display:flex;justify-content:center;min-height:100vh}
 .device{width:min(100%,430px);min-height:100dvh;background:var(--cream);position:relative;box-shadow:0 0 0 7px #ffffff55,0 22px 65px #526a7940;overflow:hidden}
 .page{position:relative;min-height:100dvh;overflow:hidden}
 .icon{width:26px;height:26px;object-fit:contain;display:inline-block;vertical-align:middle;pointer-events:none}
 .character{object-fit:contain;display:block;filter:drop-shadow(0 6px 0 #304b6133);pointer-events:none}
-.brand{font-size:66px;line-height:.79;letter-spacing:-4px;font-weight:1000;display:inline-flex;flex-direction:column;transform:rotate(-4deg);color:#ffdb65;filter:drop-shadow(3px 6px 0 #29334b);text-align:center}
+.brand{font-family:"Trebuchet MS","Arial Rounded MT Bold","Segoe UI",Arial,sans-serif;font-size:66px;line-height:.79;letter-spacing:-4px;font-weight:1000;display:inline-flex;flex-direction:column;transform:rotate(-4deg);color:#ffdb65;filter:drop-shadow(3px 6px 0 #29334b);text-align:center}
 .brand span{display:block;-webkit-text-stroke:3.7px #29334b;text-shadow:2px 3px 0 #dd8f3d,0 -2px 0 #ffefa1}
 .brand span:last-child{color:#f67d52;text-shadow:2px 3px 0 #c64c41,0 -2px 0 #ffab7b}
-.brand-sm{font-size:33px;letter-spacing:-2px;filter:drop-shadow(1px 3px 0 #29334b)}
+.brand-sm{font-family:"Trebuchet MS","Arial Rounded MT Bold","Segoe UI",Arial,sans-serif;font-size:33px;letter-spacing:-2px;filter:drop-shadow(1px 3px 0 #29334b)}
 .brand-sm span{-webkit-text-stroke:2.4px #29334b;text-shadow:1px 2px 0 #dd8f3d}
 .home-page{background:linear-gradient(180deg,#95dcf5 0%,#d6f0ef 43%,#eaf5d6 100%)}
 .home-page:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 12% 25%,#fff9 0 7%,transparent 8%),radial-gradient(circle at 90% 16%,#fff7 0 8%,transparent 9%),radial-gradient(circle at 12% 74%,#96d17f66 0 17%,transparent 18%)}
@@ -25,8 +30,8 @@ button:focus-visible{outline:3px solid #2674dd;outline-offset:3px}
 .head-action{background:#fffaf2;border:2px solid #fff;box-shadow:0 4px 0 #4d7b8a33;border-radius:18px;padding:7px 10px;font-weight:900;font-size:11px;color:#496576;display:flex;align-items:center;gap:3px}
 .head-action .icon{width:22px;height:22px}
 .home-hero{position:relative;text-align:center;padding:12px 17px 0;z-index:1}
-.home-ribbon{display:inline-block;background:#fff6d9;border:2px solid #e8ca8b;border-radius:99px;color:#92703b;padding:8px 12px;font-size:10.5px;letter-spacing:.45px;font-weight:1000;box-shadow:0 4px 0 #d4ab7633;margin:5px auto 18px}
-.hero-tagline{margin:17px 0 6px;font-weight:1000;color:#48687c;font-size:15px}
+.home-ribbon{font-family:var(--font-display);display:inline-block;background:#fff6d9;border:2px solid #e8ca8b;border-radius:99px;color:#92703b;padding:7px 12px;font-size:11px;letter-spacing:.4px;font-weight:800;box-shadow:0 4px 0 #d4ab7633;margin:5px auto 18px}
+.hero-tagline{margin:17px 0 6px;font-weight:800;color:#48687c;font-size:15px}
 .character-group{height:246px;width:100%;position:relative;display:flex;align-items:flex-end;justify-content:center;margin:6px 0 0}
 .character-group:before{content:"";position:absolute;width:320px;height:107px;border-radius:50%;bottom:2px;background:linear-gradient(#9ed67b,#77ba67);border:4px solid #7dbb62;box-shadow:0 10px 0 #6ca75c66}
 .podium{position:absolute;width:140px;height:38px;background:#e6c5a5;bottom:24px;border-radius:50%;opacity:.7}
@@ -35,15 +40,15 @@ button:focus-visible{outline:3px solid #2674dd;outline-offset:3px}
 .home-person.left{width:130px;left:12%;bottom:8px;transform:rotate(-7deg)}
 .home-person.lead{width:174px;left:50%;transform:translateX(-50%);z-index:3;bottom:10px}
 .home-person.right{width:130px;right:12%;bottom:9px;transform:rotate(7deg)}
-.talk-label{display:inline-block;position:relative;top:-11px;background:#fffef9;border:2px solid #cde4c7;color:#59705e;padding:9px 14px;border-radius:14px;box-shadow:0 4px 0 #a9c799;font-size:12px;font-weight:900}
+.talk-label{display:inline-block;position:relative;top:-11px;background:#fffef9;border:2px solid #cde4c7;color:#59705e;padding:9px 14px;border-radius:14px;box-shadow:0 4px 0 #a9c799;font-size:12px;font-weight:700}
 .home-cta{position:relative;z-index:2;margin:7px 25px 0;display:grid;gap:12px}
-.game-btn{appearance:none;min-height:48px;padding:10px 12px;border-radius:15px;border:3px solid transparent;display:inline-flex;gap:7px;align-items:center;justify-content:center;font-size:13px;font-weight:1000;line-height:1.2;transition:transform .13s,filter .13s;box-shadow:inset 0 3px 0 #ffffff80,0 5px 0 #3a41485b}
+.game-btn{font-family:var(--font-display);appearance:none;min-height:48px;padding:9px 12px;border-radius:15px;border:3px solid transparent;display:inline-flex;gap:7px;align-items:center;justify-content:center;font-size:14.5px;font-weight:800;letter-spacing:.3px;line-height:1.2;transition:transform .13s,filter .13s;box-shadow:inset 0 3px 0 #ffffff80,0 5px 0 #3a41485b}
 .game-btn:hover{filter:brightness(1.04)}
 .game-btn:active{transform:translateY(3px);box-shadow:inset 0 2px 0 #ffffff80,0 2px 0 #3a41485b}
 .game-btn.green{background:linear-gradient(#83e767,#44b93b);border-color:#287d38;color:white;text-shadow:0 2px 0 #267238}
 .game-btn.sky{background:linear-gradient(#91dcfa,#4aa8e8);border-color:#3985ba;color:white;text-shadow:0 2px 0 #3978a5}
 .game-btn.pale{background:linear-gradient(#fff8e9,#ffe1aa);border-color:#e7b16a;color:#825b31;text-shadow:0 1px 0 #fff}
-.game-btn.full{width:100%}.game-btn.large{height:56px;font-size:16px}
+.game-btn.full{width:100%}.game-btn.large{height:56px;font-size:17px}
 .game-btn .icon{width:28px;height:28px}
 .home-feature-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:25px 20px 7px;position:relative;z-index:2}
 .home-feature-strip>div{padding:8px 6px;border-radius:14px;background:#fffaf7cb;display:flex;flex-direction:column;align-items:center;gap:4px;border:2px solid #fff;box-shadow:0 3px 0 #bdd5c8;font-size:10px;font-weight:1000;color:#64736c}
@@ -54,7 +59,12 @@ button:focus-visible{outline:3px solid #2674dd;outline-offset:3px}
 .map-scene{position:absolute;inset:0;width:100%;height:100%;object-fit:fill}
 .map-page:after{content:"";position:absolute;pointer-events:none;left:0;right:0;bottom:0;height:125px;background:linear-gradient(transparent,#3d607c26);z-index:1}
 .map-hud{position:absolute;top:12px;left:15px;right:15px;display:flex;justify-content:space-between;align-items:flex-start;z-index:5;gap:12px}
+.map-hud-left{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
 .map-logo{border:0;background:none;padding:5px 0 0}
+.map-home-btn{background:#fffaf2;border:2px solid #fff;box-shadow:0 3px 0 #3e526d33;border-radius:999px;padding:4px 10px;font-weight:900;font-size:11px;color:#35536b;display:inline-flex;align-items:center;gap:4px;cursor:pointer;transition:transform .12s,filter .12s;line-height:1}
+.map-home-btn:hover{filter:brightness(1.05)}
+.map-home-btn:active{transform:translateY(2px);box-shadow:0 1px 0 #3e526d33}
+.map-home-btn .icon{width:16px;height:16px}
 .resources{display:flex;align-items:center;gap:5px;background:#344e61dd;border:2px solid #ffffff9a;padding:3px 7px;border-radius:999px;box-shadow:0 4px 0 #3e526d3d;color:#fff;font-size:12px;font-weight:1000;white-space:nowrap}
 .resources span{display:flex;align-items:center;gap:1px}.resources span+span{margin-left:5px}
 .resources .icon{width:28px;height:28px}
@@ -67,23 +77,51 @@ button:focus-visible{outline:3px solid #2674dd;outline-offset:3px}
 .level-spot.orange .level-orb{background:linear-gradient(#ffe3a0,#f2a02a)}
 .level-spot.danger .level-orb{background:linear-gradient(#ffb0aa,#ec5f65)}
 .level-spot.boss .level-orb{background:linear-gradient(#ebecf1,#777d8f)}
+.level-spot.locked .level-orb,
+.level-spot.is-coming-soon .level-orb{
+  background:linear-gradient(#5a6675,#334155)!important;
+  border-color:#94a3b8!important;
+  box-shadow:0 0 0 3px #1e293b,0 5px 0 #0f172a88,inset 0 4px 6px #ffffff22!important;
+  filter:brightness(0.72)!important;
+}
+.level-spot.locked:hover .level-orb,
+.level-spot.is-coming-soon:hover .level-orb{
+  filter:brightness(0.85)!important;
+}
+.level-spot.is-coming-soon .level-orb .icon,
+.level-spot.locked .level-orb .icon{
+  width:32px;height:32px;
+  filter:drop-shadow(0 2px 2px #0f172a);
+}
+.level-spot.is-coming-soon .level-copy b,
+.level-spot.locked .level-copy b{
+  color:#94a3b8!important;
+  text-shadow:-1px -1px #0f172a,1px -1px #0f172a,-1px 1px #0f172a,1px 1px #0f172a,0 2px #0f172a!important;
+}
+@keyframes lockShake{
+  0%,100%{transform:translate(-50%,-50%)}
+  20%,60%{transform:translate(calc(-50% - 6px),-50%)}
+  40%,80%{transform:translate(calc(-50% + 6px),-50%)}
+}
+.level-spot.lock-shake{animation:lockShake .35s ease-in-out}
 .level-copy{display:flex;flex-direction:column;align-items:center;margin-top:7px;text-align:center;min-height:38px;text-shadow:-1px -1px #2c405a,1px -1px #2c405a,-1px 1px #2c405a,1px 1px #2c405a,0 2px #2c405a}
-.level-copy b{font-size:12px;line-height:1.18;color:#fff;max-width:144px}
-.level-copy small{display:block;font-size:9px;letter-spacing:.4px;font-weight:1000;color:#fff6da;margin-top:2px}
+.level-copy b{font-family:var(--font-display);font-size:13px;line-height:1.2;color:#fff;max-width:144px;font-weight:700;letter-spacing:.2px}
+.level-copy small{font-family:var(--font-display);display:block;font-size:9.5px;letter-spacing:.4px;font-weight:800;color:#fff6da;margin-top:2px}
 .map-dock{position:absolute;left:15px;right:15px;bottom:calc(15px + env(safe-area-inset-bottom));z-index:7;display:grid;grid-template-columns:82px 1fr 82px;gap:8px;align-items:end}
-.map-dock button{border:3px solid #fff8df;border-radius:16px;box-shadow:0 4px 0 #36536e,0 7px 8px #395e7845;color:#fff;font-weight:1000}
+.map-dock button{border:3px solid #fff8df;border-radius:16px;box-shadow:0 4px 0 #36536e,0 7px 8px #395e7845;color:#fff;font-weight:800}
 .map-dock .dock-small{display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(#89d7f8,#419fd2);min-height:61px;font-size:11px;text-shadow:0 1px 0 #3d718c}
+.map-dock .dock-small span{font-family:var(--font-display);font-weight:700}
 .map-dock .dock-small .icon{height:26px;width:26px}
-.map-dock .dock-play{min-height:67px;background:linear-gradient(#8aee69,#30bc35);border-color:#fff8d2;display:flex;align-items:center;justify-content:center;gap:2px;font-size:16px;text-shadow:0 2px 0 #2a7a3a}
-.map-dock .dock-play .icon{height:31px;width:31px}
+.map-dock .dock-play{font-family:var(--font-display);min-height:67px;background:linear-gradient(#8aee69,#30bc35);border-color:#fff8d2;display:flex;align-items:center;justify-content:center;gap:7px;font-size:17px;font-weight:800;letter-spacing:.3px;text-shadow:0 2px 0 #2a7a3a}
+.map-dock .dock-play .icon{height:32px;width:32px;filter:drop-shadow(0 2px 3px #1b5e2844)}
 /* Interior */
 .interior-page{background:radial-gradient(circle at 95% 4%,#e2f6d2 0 14%,transparent 15%),linear-gradient(180deg,#c5eaf7,#f7f6de 49%,#fff8ec)}
 .page-top{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:16px 16px 6px}
-.page-top h1{font-size:20px;text-align:center;line-height:1.2;margin:0;color:#344b64;font-weight:1000}
+.page-top h1{font-family:var(--font-display);font-size:21px;text-align:center;line-height:1.2;margin:0;color:#344b64;font-weight:800}
 .page-top-spacer{width:41px;height:41px}
 .circle-action{width:41px;height:41px;padding:3px;border:2px solid #73abc3;background:#eaf9ff;border-radius:50%;box-shadow:0 4px 0 #6c8c9d5a}
 .circle-action .icon{width:33px;height:33px}
-.page-body{padding:13px 19px 28px;display:grid;gap:14px;position:relative}
+.page-body{padding:14px 18px 28px;display:grid;grid-template-columns:minmax(0,1fr);gap:14px;position:relative;width:100%;max-width:100%;box-sizing:border-box}
 .page-intro{background:#fffdf4;border:2px solid #e8dabd;border-radius:15px;padding:12px 14px;font-size:13px;font-weight:800;color:#6c6a69;text-align:center}
 .role-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:9px}
 .role-tile{grid-column:span 2;position:relative;min-height:162px;border-radius:16px;border:3px solid #fff;background:linear-gradient(#dff4ff,#fffef4);box-shadow:0 4px 0 #adc6cf;display:flex;flex-direction:column;align-items:center;padding:4px 5px 8px;color:#36455b}
@@ -107,54 +145,54 @@ button:focus-visible{outline:3px solid #2674dd;outline-offset:3px}
 .outfit-item{min-width:0;border:2px solid #e4d6c4;border-radius:13px;background:#fff;padding:7px 3px;display:flex;flex-direction:column;align-items:center;gap:4px;box-shadow:0 3px 0 #c5c5b5}
 .outfit-item.active{outline:2px solid #49c66a}.outfit-item img{width:52px;height:70px}.outfit-item span{font-size:9px;line-height:1.2;font-weight:900;color:#576779}
 .stage-banner{display:grid;grid-template-columns:1fr 115px;gap:5px;align-items:center;border:3px solid #fff;border-radius:22px;padding:14px;background:linear-gradient(100deg,#bee6f9,#e8f8e4);box-shadow:0 5px 0 #b5d7db}
-.stage-banner span{font-size:11px;color:#5c8ca3;font-weight:1000}.stage-banner h2{font-size:22px;margin:6px 0}.stage-banner p{font-size:12px;color:#68798a;line-height:1.5;margin:0}.banner-char{width:111px}
-.level-info{font-size:11px;color:#75848c;font-weight:800}
+.stage-banner span{font-size:11px;color:#5c8ca3;font-weight:700}.stage-banner h2{font-family:var(--font-display);font-size:22px;margin:6px 0;line-height:1.2;color:#2b485d}.stage-banner p{font-size:12px;color:#68798a;line-height:1.5;margin:0}.banner-char{width:111px}
+.level-info{font-size:11px;color:#75848c;font-weight:700}
 .stage-list{display:grid;gap:11px}
 .stage-item{background:#fffcf5;border:2px solid #e4d8c9;border-radius:18px;box-shadow:0 4px 0 #dbd0c2;display:grid;grid-template-columns:88px 1fr 23px;gap:8px;align-items:center;text-align:left;padding:10px;color:#374b5f}
 .stage-item.is-locked{background:#f4f2ef}
 .stage-image{width:86px;height:91px;border-radius:13px;background:linear-gradient(#d5eeff,#ebf5e7);display:grid;place-items:center;overflow:hidden}
 .is-locked .stage-image{filter:saturate(.55)}
-.stage-char{width:75px;height:94px}.stage-text b{font-size:12px;line-height:1.25;display:block}.stage-text small{font-size:11px;color:#7d8090;line-height:1.35;display:block;margin:5px 0}.stage-text em{font-size:9px;letter-spacing:.3px;font-weight:1000;color:#3caa75;font-style:normal}.is-locked .stage-text em{color:#a0948e}.stage-icon .icon{width:22px}
+.stage-char{width:75px;height:94px}.stage-text b{font-family:var(--font-display);font-size:13.5px;line-height:1.25;display:block;letter-spacing:.2px}.stage-text small{font-size:11.5px;color:#7d8090;line-height:1.45;display:block;margin:4px 0}.stage-text em{font-family:var(--font-display);font-size:10px;letter-spacing:.3px;font-weight:800;color:#3caa75;font-style:normal}.is-locked .stage-text em{color:#a0948e}.stage-icon .icon{width:22px}
 .centered{text-align:center}
 .lesson-card{background:#fffcf3;border-radius:20px;border:2px solid #eadabd;padding:15px;box-shadow:0 4px 0 #d6cbb8}
-.lesson-card h2{margin:10px 0;font-size:19px}.lesson-card p{font-size:13px;line-height:1.6;color:#677182;margin:9px 0 0}
+.lesson-card h2{font-family:var(--font-display);margin:10px 0;font-size:21px;line-height:1.25;color:#35495b}.lesson-card p{font-size:13px;line-height:1.6;color:#677182;margin:9px 0 0}
 .lesson-card .muted{font-size:11px}
 /* Quiz */
 .quiz-page{background:linear-gradient(#ffe6f0,#fff5eb 75%,#f6f9e5)}
-.progress-header{display:flex;justify-content:space-between;align-items:center;color:#a76f92;font-size:12px}
+.progress-header{display:flex;justify-content:space-between;align-items:center;color:#a76f92;font-size:12px;font-weight:700}
 .progress-track{height:11px;background:#fff;border:2px solid #efc4d8;border-radius:12px;overflow:hidden}.progress-track span{display:block;height:100%;background:#f38fb5;transition:width .2s}
 .quiz-panel{background:#fff9fa;border-radius:22px;padding:16px 15px;border:3px solid #f1d0df;box-shadow:0 6px 0 #e7bccd}
 .quiz-figure{height:145px;display:flex;align-items:center;justify-content:center}.quiz-char{width:128px}
-.quiz-panel h2{font-size:20px;line-height:1.3;margin:12px 0 16px}
+.quiz-panel h2{font-family:var(--font-display);font-size:21px;line-height:1.3;margin:12px 0 16px;color:#492c3d}
 .quiz-options{display:grid;gap:10px}
-.answer,.decision-choice{border:2px solid #e4d5c6;border-radius:12px;text-align:left;padding:11px 12px;background:#fff;display:flex;align-items:center;gap:10px;color:#3d495c;font-weight:800;font-size:12px;line-height:1.45;box-shadow:0 3px 0 #d1c6b6}
+.answer,.decision-choice{border:2px solid #e4d5c6;border-radius:12px;text-align:left;padding:11px 12px;background:#fff;display:flex;align-items:center;gap:10px;color:#3d495c;font-weight:600;font-size:13px;line-height:1.45;box-shadow:0 3px 0 #d1c6b6}
 .answer:hover,.decision-choice:hover{background:#f4faeb;border-color:#9acfa1}
-.answer span,.decision-choice span{background:#eaf1f8;border-radius:8px;padding:6px 9px;font-weight:1000;color:#5278a0}
-.small-note{font-size:10px;line-height:1.5;color:#8c9296;text-align:center;margin:3px 0}
+.answer span,.decision-choice span{background:#eaf1f8;border-radius:8px;padding:6px 9px;font-family:var(--font-display);font-weight:800;color:#5278a0;font-size:13px}
+.small-note{font-size:10.5px;line-height:1.5;color:#8c9296;text-align:center;margin:3px 0}
 .persona-card{border:3px solid #e899bc;border-radius:22px;background-color:#ffe6f0;background-image:linear-gradient(#f5c9d9aa 1px,transparent 1px),linear-gradient(90deg,#f5c9d9aa 1px,transparent 1px);background-size:25px 25px;padding:15px;box-shadow:0 7px 0 #c886aa}
-.persona-heading{font-size:11px;letter-spacing:1px;font-weight:1000;color:#aa5e84}
-.persona-inner{display:grid;grid-template-columns:115px 1fr;align-items:center;gap:12px}.persona-char{width:112px}.persona-inner h2{font-size:18px;color:#874766}.persona-inner p{font-size:12px;color:#7f5e71;line-height:1.5}.persona-footer{font-size:9px;font-weight:1000;color:#b47b9e;border-top:2px dashed #e3aec2;padding-top:10px;text-align:center}
+.persona-heading{font-family:var(--font-display);font-size:12px;letter-spacing:1px;font-weight:800;color:#aa5e84}
+.persona-inner{display:grid;grid-template-columns:115px 1fr;align-items:center;gap:12px}.persona-char{width:112px}.persona-inner h2{font-family:var(--font-display);font-size:19px;color:#874766}.persona-inner p{font-size:12.5px;color:#7f5e71;line-height:1.5}.persona-footer{font-family:var(--font-display);font-size:10px;font-weight:800;color:#b47b9e;border-top:2px dashed #e3aec2;padding-top:10px;text-align:center}
 /* Chat */
 .chat-page{height:100dvh;min-height:690px;display:flex;flex-direction:column;background:#eff8f1}
 .chat-head{height:75px;display:flex;align-items:center;gap:8px;padding:9px 12px;background:#fffef7;border-bottom:2px solid #dcecd9;flex-shrink:0}
 .chat-head .circle-action{width:36px;height:36px;flex-shrink:0}.chat-head .circle-action .icon{width:28px;height:28px}
 .chat-head-face{width:44px;height:44px;background:#d8efec;border-radius:13px;display:grid;place-items:center;overflow:hidden;flex-shrink:0}.chat-head-face .character{width:47px;height:55px}
-.chat-head-text{flex:1;min-width:0}.chat-head-text strong{font-size:13px;line-height:1.2;display:block}.chat-head-text small{font-size:11px;color:#738b85}
-.timer{background:#ffecbd;color:#a07834;border-radius:11px;font-size:12px;font-weight:1000;padding:8px}
+.chat-head-text{flex:1;min-width:0}.chat-head-text strong{font-family:var(--font-display);font-size:14px;line-height:1.2;display:block;color:#2a443a}.chat-head-text small{font-size:11px;color:#738b85}
+.timer{font-family:var(--font-display);background:#ffecbd;color:#a07834;border-radius:11px;font-size:13px;font-weight:800;padding:6px 9px}
 .message-zone{flex:1;overflow-y:auto;scroll-behavior:smooth;padding:15px 14px 20px;display:flex;flex-direction:column;gap:12px;background:radial-gradient(circle at 90% 9%,#d2eddd 0 18%,transparent 19%),#eef8f1}
-.privacy-note{font-size:10px;margin:0 auto 8px;color:#91a99b;font-weight:900;background:#ffffffb7;border-radius:99px;padding:6px 12px}
+.privacy-note{font-size:10px;margin:0 auto 8px;color:#91a99b;font-weight:700;background:#ffffffb7;border-radius:99px;padding:6px 12px;letter-spacing:.3px}
 .bubble-row{display:flex;gap:8px;align-items:flex-start}.bubble-row.self{flex-direction:row-reverse}
 .bubble-avatar{width:37px;height:38px;flex-shrink:0;background:#fff;border:1px solid #d8e6dc;border-radius:11px;overflow:hidden;display:flex;align-items:flex-end;justify-content:center}.bubble-character{width:40px;height:49px}
-.bubble-content{max-width:78%;display:flex;flex-direction:column;gap:4px}.bubble-content small{font-size:10px;color:#779083;font-weight:1000}.bubble-content p{margin:0;padding:10px 12px;border-radius:5px 14px 14px 14px;background:#fff;border:1px solid #d2e1d4;font-size:12px;font-weight:750;line-height:1.55;box-shadow:0 3px 0 #d5e6d8}.self .bubble-content p{background:#d6f3d7;border-radius:14px 5px 14px 14px}
+.bubble-content{max-width:78%;display:flex;flex-direction:column;gap:4px}.bubble-content small{font-size:10.5px;color:#779083;font-weight:700}.bubble-content p{margin:0;padding:10px 12px;border-radius:5px 14px 14px 14px;background:#fff;border:1px solid #d2e1d4;font-size:12.5px;font-weight:500;line-height:1.55;box-shadow:0 3px 0 #d5e6d8}.self .bubble-content p{background:#d6f3d7;border-radius:14px 5px 14px 14px}
 .decision-box{flex-shrink:0;background:#fffef9;border-top:2px solid #d7e9d5;padding:14px 14px calc(17px + env(safe-area-inset-bottom));border-radius:20px 20px 0 0;box-shadow:0 -6px 25px #356a4842}
-.decision-head{display:flex;justify-content:space-between;gap:6px;align-items:flex-end}.decision-head b{font-size:14px;line-height:1.3}.decision-head small{font-size:9px;white-space:nowrap;color:#8a988f;font-weight:1000}
+.decision-head{display:flex;justify-content:space-between;gap:6px;align-items:flex-end}.decision-head b{font-size:14px;line-height:1.35;color:#233a30}.decision-head small{font-size:9.5px;white-space:nowrap;color:#8a988f;font-weight:700}
 .time-track{height:6px;background:#e8e9dd;border-radius:99px;overflow:hidden;margin:11px 0}.time-track span{height:100%;display:block;background:linear-gradient(90deg,#5bbfe4,#8ed768)}
 .decision-choice{width:100%;margin-top:7px;padding:9px 10px}
 /* Endings */
 .ending-page{background:linear-gradient(#a9e1f4,#eef8df 60%,#fff8ea)}
 .ending-medal{width:145px;height:148px;display:grid;place-items:center;margin:0 auto 4px;background:linear-gradient(#fdf5c1,#f8ce69);border:6px solid white;box-shadow:0 7px 0 #d3a658;border-radius:50%}
 .ending-medal.bad{background:linear-gradient(#ffe8db,#f7adab)}.ending-medal.mid{background:linear-gradient(#f1e9ff,#d0c1ee)}
-.medal-character{width:105px}.ending-title{text-align:center;font-size:24px;line-height:1.2;margin:3px}.ending-desc{font-size:13px;line-height:1.55;text-align:center;color:#6e7080;margin:0 0 6px}
+.medal-character{width:105px}.ending-title{font-family:var(--font-display);text-align:center;font-size:25px;line-height:1.2;margin:3px;color:#2b4256;font-weight:800}.ending-desc{font-size:13px;line-height:1.55;text-align:center;color:#6e7080;margin:0 0 6px}
 .lesson-caption{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:1000;color:#9b7b4a}.lesson-caption .icon{width:26px}
 .template-card strong{font-size:12px;color:#69916b}
 .small-button{border:2px solid #a9d7b2;border-radius:11px;background:#eff9ed;color:#4c8860;display:inline-flex;align-items:center;gap:7px;padding:9px 13px;font-size:12px;font-weight:900;margin-top:9px}.small-button .icon{width:22px;height:22px}
@@ -166,7 +204,86 @@ button:focus-visible{outline:3px solid #2674dd;outline-offset:3px}
 @media(min-width:700px){#app{padding:20px 0}.device{border:5px solid #fff7;border-radius:29px;min-height:770px}.map-page{height:min(850px,calc(100dvh - 40px))}}
 @media(max-width:360px){.home-ribbon{font-size:9px}.brand{font-size:57px}.home-person.left,.home-person.right{width:113px}.home-person.lead{width:157px}.character-group{height:213px}.home-feature-strip{margin-top:18px}.level-copy b{font-size:11px}.map-dock{grid-template-columns:65px 1fr 65px;gap:5px;left:8px;right:8px}.map-dock .dock-play{font-size:13px}.role-tile{min-height:145px}.role-figure{height:94px}.role-char{width:81px;height:96px}.stage-item{grid-template-columns:74px 1fr 20px}.stage-image{width:74px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important}}
-</style></head><body><div id="app"></div><div id="toast" class="toast"></div><script>const roles = [
+/* ----- V4: playful cards from Pthu design tab ----- */
+.peek-card-cta{font-weight:1000;color:#aa547f;background:#fff8fd;border:2px dashed #eeb3cf;border-radius:15px;padding:10px 14px;font-size:11px;display:flex;align-items:center;justify-content:center;gap:7px;min-height:39px;box-shadow:0 3px 0 #deacc3}
+.peek-card-cta span{font-size:22px;line-height:1;color:#c65c8d}
+.persona-result-page{min-height:100dvh;background:radial-gradient(circle at 12% 7%,#fff5cc 0 10%,transparent 11%),linear-gradient(155deg,#ffe3ef,#fff4ec 60%,#ffe9f4)}
+.persona-result-body{gap:12px!important}
+.card-context{display:flex;align-items:center;gap:10px;background:#fffafa;border:2px solid #f0cade;border-radius:14px;padding:9px 12px}
+.card-context-spark{color:#f2b54c;font-size:30px}
+.card-context strong{color:#8c496c;font-size:14px}
+.card-context p{margin:3px 0 0;font-size:11px;line-height:1.35;color:#9a7890}
+.persona-canvas-wrap{width:100%;background:#fff;box-shadow:0 9px 0 #c986aa,0 16px 20px #98637e35;border-radius:18px;overflow:hidden;border:3px solid #fff;position:relative}
+#persona-render{width:100%;height:auto;display:block;aspect-ratio:900 / 1190}
+.nickname-label{font-weight:1000;color:#91486c;font-size:11px;letter-spacing:.5px;margin-top:4px}
+.nickname-label small{font-weight:650;letter-spacing:normal;color:#a08092}
+.nick-wrap{border:2px solid #e7b4cf;border-radius:13px;background:#fff;display:flex;align-items:center;box-shadow:0 3px 0 #e4c7d5;transition:border-color .15s,box-shadow .15s;cursor:text}
+.nick-wrap:focus-within{border-color:#ba6595;box-shadow:0 3px 0 #ba659566}
+.nick-wrap input{border:none;background:transparent;outline:none;width:100%;padding:13px 14px;font-size:15px;font-weight:900;color:#77435e}
+.nick-wrap input::placeholder{color:#cba6b8;font-weight:700;opacity:.85}
+.nick-wrap .nick-pencil, .nick-wrap span{background:none;border:none;color:#bd6a94;font-size:19px;padding:8px 14px 8px 6px;cursor:pointer;display:grid;place-items:center;line-height:1}
+.nick-wrap .nick-pencil:hover{color:#8f4671}
+.card-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.card-action{font-family:var(--font-display);border-radius:15px;padding:12px 9px;border:3px solid #c681a5;background:#fff5fb;color:#8f4671;font-weight:800;font-size:13px;letter-spacing:.3px;box-shadow:0 4px 0 #d9a7c1}
+.card-action.download{background:linear-gradient(#ffeaf5,#ffbadb)}
+.card-action.share{background:linear-gradient(#e2f4ff,#a8d9fa);border-color:#7db4dc;color:#396b99;box-shadow:0 4px 0 #89b9d7}
+.card-cta-box{background:#fff;border:2px dashed #e8b3cf;border-radius:18px;padding:14px 16px;text-align:center;box-shadow:0 4px 0 #edd0de;margin-top:4px}
+.cta-question{font-size:13.5px;font-weight:700;color:#7a3e61;margin:0 0 10px;line-height:1.45}
+.persona-enter{min-height:54px;font-size:15px!important}
+.persona-secondary{display:flex;gap:10px;justify-content:space-between}
+.persona-secondary button{font-family:var(--font-main);border:0;background:transparent;text-decoration:underline;color:#a5537b;font-size:12px;font-weight:700;padding:6px 1px}
+.card-privacy{font-size:10.5px;color:#9c8c96;line-height:1.55;text-align:center;margin:0 0 9px}
+.gallery-intro{background:#fff9fd;border:2px solid #edc6dc;border-radius:18px;padding:18px;box-shadow:0 4px 0 #e6bed5;text-align:center}
+.gallery-intro span{font-family:var(--font-display);color:#ba6595;font-size:12px;font-weight:800;letter-spacing:2px}
+.gallery-intro h2{font-family:var(--font-display);font-size:26px;color:#854a6d;margin:9px 0;line-height:1.2;font-weight:800}
+.gallery-intro p{margin:0;color:#906f84;font-size:12.5px;line-height:1.6}
+.persona-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}
+.persona-mini-card{background:linear-gradient(#fff,var(--persona-color));border:2px solid #fff;outline:2px solid #eccbd9;border-radius:19px;box-shadow:0 6px 0 #d8b7c8;padding:8px 9px 12px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;min-height:202px}
+.persona-mini-card img{height:133px;width:100%;object-fit:contain}
+.persona-mini-card strong{font-family:var(--font-display);font-weight:800;text-align:center;color:#835270;font-size:12px;line-height:1.25;min-height:29px;word-break:break-word;overflow-wrap:break-word;max-width:100%}
+.persona-mini-card small{font-size:10px;color:#bb6590;font-weight:700}
+/* Role selector improvements from Linh and Pthu */
+.role-grid>.role-tile{padding:0;overflow:visible;min-height:167px}
+.role-grid .role-select{border:0;background:transparent;display:flex;flex-direction:column;align-items:center;width:100%;height:100%;padding:4px 5px 7px;flex:1;color:inherit}
+.role-grid .role-select em{font-family:var(--font-display);margin-top:5px;font-size:9.5px;font-style:normal;background:#62b7ed;color:#fff;border-radius:12px;padding:3px 9px;font-weight:800;box-shadow:0 2px 0 #438fbd;letter-spacing:.3px}
+.role-grid .role-quick-edit{position:absolute;right:5px;top:5px;background:#fff9e5;border:2px solid #e9d6b7;box-shadow:0 2px 0 #d5be9e;border-radius:11px;z-index:4;width:26px;height:26px;padding:3px;display:grid;place-items:center}
+.role-grid .role-quick-edit .icon{width:18px;height:18px}
+.role-grid .checkmark{left:6px!important;right:auto!important;top:4px!important}
+/* Stage polaroids / alternate chat-in-person modes */
+.stage-image{background:#fff!important;border:5px solid #fff!important;border-bottom-width:13px!important;transform:rotate(-3deg);box-shadow:0 3px 5px #70687b26}
+.stage-item:nth-child(2n) .stage-image{transform:rotate(3deg)}
+.stage-item:not(.is-ready) .stage-image{filter:grayscale(.9)!important;opacity:.65}
+.stage-mode{font-family:var(--font-display);display:inline-block;font-size:9.5px;font-weight:800;padding:4px 8px;border-radius:9px;background:#f0f7ff;color:#6986ae;margin:4px 0 1px;letter-spacing:.3px}
+.stage-intro-art{height:270px;display:flex;align-items:center;justify-content:center;position:relative;background:linear-gradient(#a7e1f0 0 49%,#a9d48d 49%);border:7px solid #fff;border-bottom-width:35px;border-radius:6px;box-shadow:0 5px 0 #c3b9b5;transform:rotate(-1deg);width:calc(100% - 12px);max-width:calc(100% - 12px);margin:6px auto;box-sizing:border-box}
+.stage-intro-art .character{width:130px;max-width:38%;height:auto;object-fit:contain;position:relative;z-index:1;flex-shrink:1}
+.stage-intro-art .character:nth-child(2){width:118px;max-width:35%;transform:translateY(18px);margin-left:-20px;z-index:2}
+.stage-intro-art .character:nth-child(3){width:118px;max-width:35%;transform:translateY(10px);margin-left:-20px;z-index:3}
+.stage-intro-art::after{content:'TEAM-CRAFT / SNAPSHOT';position:absolute;bottom:-27px;color:#7e7d82;font-size:10px;font-weight:800;letter-spacing:1px;font-family:var(--font-display)}
+.stage-intro-meta{display:flex;gap:8px;flex-wrap:wrap;width:100%;max-width:100%;box-sizing:border-box}
+.stage-intro-meta span{background:#fff6d7;color:#876331;border:1px solid #e3cf97;padding:6px 10px;border-radius:999px;font-size:11px;font-weight:700}
+.stage-intro-title{font-family:var(--font-display);font-size:23px;line-height:1.25;margin:0;color:#3b5469;width:100%;max-width:100%;box-sizing:border-box;word-break:break-word;font-weight:800}
+.stage-intro-desc{line-height:1.6;font-size:13px;color:#62778a;margin:0;width:100%;max-width:100%;box-sizing:border-box;word-break:break-word}
+.stage-intro-tip{padding:12px 14px;border:2px dashed #d9bfe0;border-radius:13px;background:#fffaff;font-size:12.5px;line-height:1.55;color:#806282;width:100%;max-width:100%;box-sizing:border-box;word-break:break-word}
+/* Coming Soon Screen & Status */
+.level-copy small.coming-badge{color:#cbd5e1!important;background:#1e293bcc!important;border:1px solid #475569aa!important;padding:2px 8px!important;border-radius:999px!important;font-size:9px!important;letter-spacing:.6px!important;text-shadow:0 1px 2px #000!important;margin-top:3px!important}
+.coming-soon-card{text-align:center;padding:22px 18px;margin-top:10px;background:#fffdf8;border:2px solid #ecdac6;border-radius:20px;box-shadow:0 5px 0 #dec6ae}
+.coming-badge-tag{font-family:var(--font-display);display:inline-flex;align-items:center;gap:6px;background:#fff3cc;color:#b45309;font-size:12px;font-weight:800;padding:5px 14px;border-radius:999px;border:1.5px solid #fcd34d;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+.coming-badge-tag .icon{width:16px;height:16px}
+.coming-title{font-family:var(--font-display);font-size:22px;color:#2b394a;margin:6px 0 12px;text-align:center;font-weight:800;line-height:1.25}
+.coming-highlight-icon{width:54px;height:54px;margin:0 auto 12px;border-radius:50%;background:linear-gradient(135deg,#fef3c7,#fde68a);display:grid;place-items:center;box-shadow:0 4px 0 #f59e0b44}
+.coming-highlight-icon .icon{width:30px;height:30px}
+.coming-message{font-size:14.5px;line-height:1.5;color:#92400e;margin-bottom:10px;font-weight:600}
+.coming-subtext{font-size:12.5px;line-height:1.55;color:#64748b;margin-bottom:14px;font-weight:400}
+.coming-info-box{background:#f8fafc;border:1.5px dashed #cbd5e1;border-radius:12px;padding:11px 14px;font-size:12px;line-height:1.6;color:#475569;text-align:left}
+.coming-info-box div+div{margin-top:5px}
+/* Sparkle Click Effect */
+.click-sparkle{position:fixed;pointer-events:none;user-select:none;-webkit-user-select:none;z-index:99999;will-change:transform,opacity;display:flex;align-items:center;justify-content:center;animation:sparkleBurst var(--duration,600ms) cubic-bezier(0.12,0.8,0.32,1) forwards}
+.click-sparkle-star svg{display:block;width:100%;height:100%;filter:drop-shadow(0 1px 3px rgba(0,0,0,0.22))}
+.click-sparkle-dot{border-radius:50%;box-shadow:0 1px 3px rgba(0,0,0,0.22)}
+@keyframes sparkleBurst{0%{opacity:1;transform:translate(-50%,-50%) translate(0,0) scale(0.6) rotate(0deg)}20%{opacity:1;transform:translate(-50%,-50%) translate(calc(var(--dx)*0.25),calc(var(--dy)*0.25)) scale(1.15) rotate(calc(var(--rot)*0.25))}100%{opacity:0;transform:translate(-50%,-50%) translate(var(--dx),var(--dy)) scale(0) rotate(var(--rot))}}
+@media(max-width:360px){.persona-canvas-wrap{border-width:2px}.persona-mini-card{min-height:180px}.persona-mini-card img{height:115px}}
+</style></head><body><div id="app"></div><div id="toast" role="status" class="toast"></div><script type="module">
+const roles = [
   {id:'leader',name:'Trưởng nhóm',en:'LEADER',tag:'Giữ nhịp cả team',skill:'Phân công công bằng, giữ tiến độ và đặt ranh giới.',sprite:'leader'},
   {id:'doer',name:'Người triển khai',en:'DOER',tag:'Biến ý tưởng thành bài',skill:'Chủ động thực hiện, báo tiến độ và xin hỗ trợ đúng lúc.',sprite:'doer'},
   {id:'qc',name:'Kiểm soát chất lượng',en:'QC',tag:'Chất lượng là ưu tiên',skill:'Tìm lỗi và góp ý xây dựng bằng mô hình SBI.',sprite:'qc'},
@@ -186,7 +303,7 @@ const personas = [
  {id:'star',title:'TRƯỞNG NHÓM TÀI NĂNG',desc:'Bạn có xu hướng lập kế hoạch, chia việc và giữ nhịp cho đội.',tip:'Đừng quên lắng nghe các ý kiến khác.'},
  {id:'sloth',title:'THÀNH VIÊN TRÌ HOÃN',desc:'Bạn thích không khí thoải mái nhưng đôi khi bắt đầu hơi muộn.',tip:'Chia công việc thành những mốc nhỏ và báo tiến độ.'},
  {id:'eagle',title:'NGƯỜI KIỂM SOÁT CẦU TOÀN',desc:'Bạn để ý chi tiết và muốn kết quả tốt nhất.',tip:'Góp ý cụ thể vào sản phẩm, tránh nhận xét về con người.'},
- {id:'owl',title:'NHÀ HÒA GIẢI',desc:'Bạn thường nhìn được nhiều góc độ trong một câu chuyện.',tip:'Giữ sự công bằng và đừng ngại nói điều cần nói.'},
+ {id:'owl',title:'NHÀ HÒA GIẢI MÂU THUẪN',desc:'Bạn thường nhìn được nhiều góc độ trong một câu chuyện.',tip:'Giữ sự công bằng và đừng ngại nói điều cần nói.'},
  {id:'bee',title:'THÀNH VIÊN GƯƠNG MẪU',desc:'Bạn ổn định, thường thực hiện đúng những gì đã hứa.',tip:'Chủ động chia sẻ ý tưởng để tạo thêm giá trị.'},
  {id:'ghost',title:'THÀNH VIÊN TÀNG HÌNH',desc:'Bạn có thể ngại phát biểu trước những người chưa quen.',tip:'Bắt đầu bằng một câu xác nhận việc và thời hạn.'},
 ];
@@ -199,71 +316,738 @@ const quizQuestions = [
  {question:'Nếu cả nhóm tranh cãi gay gắt, bạn sẽ…',answers:[['Tóm tắt quan điểm mỗi bên', 'owl'],['Đề xuất một lịch làm việc mới', 'star'],['Rà soát ai làm sai ở đâu', 'eagle'],['Tránh chat vì sợ căng thẳng', 'ghost']]},
 ];
 
-const levels=[
- {id:1,name:'Nhóm Bạn Thân',sub:'Dễ',color:'#54d935',roles:['leader','doer','mediator'],description:'Giữ tình bạn nhưng không quên trách nhiệm.',stages:[
-  ['Mải chém gió quên làm bài','Nhóm chat toàn chuyện vui, chưa ai mở outline.'],['Nể bạn không dám phân công','Leader ôm việc vì sợ bạn giận.'],['Tự ái khi bị góp ý','Bạn thân khó chịu khi được nhắc sửa slide.'],['Xin được “gánh” hộ','Thành viên nhờ làm nốt vì mải đi chơi.'],['Quá hiểu nhau thành hiểu lầm','Ai cũng tưởng người khác đã làm phần việc.']]},
- {id:2,name:'Người Lạ Ơi',sub:'Trung bình',color:'#38bcf9',roles:['leader','doer','follower'],description:'Phá băng nhóm mới, làm rõ vai trò và lịch làm.',stages:[
-  ['Nhóm chat băng giá','Cả nhóm đã xem nhưng không ai phản hồi.'],['Thành viên tàng hình','Hỏi tiến độ chỉ nhận câu trả lời qua loa.'],['Ai làm trưởng nhóm đây?','Mọi người đùn đẩy vai trò Leader.'],['Bất đồng lịch họp','Một bạn muốn họp ngay, bạn khác muốn đợi.'],['Không tin tưởng nhau','Tự ý sửa hết bài người khác.'],['Lời nhắn quá gắt','Không khí chat ngày càng khó chịu.']]},
- {id:3,name:'Nước Đến Chân Mới Nhảy',sub:'Tăng áp lực',color:'#ffa62b',roles:['leader','doer','qc'],description:'Sửa lỗi, ưu tiên công việc và giữ bình tĩnh khi sát hạn.',stages:[
-  ['Slide cẩu thả 22h30','Sai font và sai kiến thức sát giờ nộp.'],['Cãi bướng sát deadline','Doer không muốn chỉnh lỗi QC chỉ ra.'],['File bị lỗi','Không thể mở bài khi còn 15 phút.'],['Mất liên lạc lúc 23h','Người ghép bài bất ngờ “sập nguồn”.'],['Trùng lặp nội dung','Hai phần làm bị trùng 70%.']]},
- {id:4,name:'Trùm Free-rider',sub:'Căng thẳng',color:'#ed655e',roles:['leader','doer','qc','mediator','follower'],description:'Thu thập bằng chứng và xử lý tranh chấp minh bạch.',stages:[
- ['Dọa bóc phốt','Thành viên không làm bài đe dọa đăng phốt.'],['Đóng góp 1%, đòi 100%','Một đường link tài liệu được xem là công sức lớn.'],['Nộp bài đạo văn','Nguy cơ cả nhóm bị điểm 0.'],['Leader độc đoán','Xóa tên thành viên vì bất đồng quan điểm.'],['Đổ lỗi sau điểm kém','Nhóm công kích nhau công khai.'],['Lý do bất tận','Liên tục bùng deadline và viện lý do.']]},
- {id:5,name:'Boss Cuối',sub:'Đỉnh cao',color:'#8b8a98',roles:['leader','doer','qc','mediator','follower'],description:'Kết hợp toàn bộ kỹ năng phối hợp và giải quyết xung đột.',stages:[
-  ['Xung đột ba chiều','Leader, QC, Doer tranh cãi liên tục.'],['Chia bè kết phái','Nhóm 5 người tách thành 2 nhóm chat.'],['Đổi đề tài giữa chừng','50% dự án có nguy cơ phải làm lại.'],['Tranh nhau việc dễ','Không ai muốn nhận phần khó.'],['Giảng viên đổi yêu cầu','Ba ngày trước hạn, đề bài thay đổi.']]}];
+const levels = [
+  {
+    id: 1,
+    name: 'Nhóm Bạn Thân',
+    sub: 'Dễ',
+    color: '#54d935',
+    status: 'ready',
+    statusText: 'Đã hoàn thiện',
+    roles: ['doer', 'leader', 'qc', 'mediator'],
+    description: 'Giữ tình bạn nhưng không quên trách nhiệm.',
+    stages: [
+      ['Mải nói chuyện quên làm bài', 'Nhóm chat toàn chuyện vui, chưa ai mở outline.'],
+      ['Khi tình bạn ảnh hưởng đến việc phân công', 'Nể bạn không dám phân công phần việc khó.'],
+      ['Tình bạn khiến ta ngại góp ý', 'Bạn thân khó chịu khi được nhắc sửa slide.'],
+      ['Khi bạn được nhờ làm giúp', 'Bạn thân nhờ làm nốt bài vì bận đi xem concert.'],
+      ['Khi cả nhóm đều nghĩ người khác sẽ làm', 'Ai cũng tưởng người khác đã làm phần tổng hợp.']
+    ]
+  },
+  {
+    id: 2,
+    name: 'Người Lạ Ơi',
+    sub: 'Trung bình',
+    color: '#38bcf9',
+    status: 'ready',
+    statusText: 'Đã hoàn thiện',
+    roles: ['leader', 'qc', 'follower', 'mediator', 'doer'],
+    description: 'Phá băng nhóm mới, làm rõ vai trò và lịch làm.',
+    stages: [
+      ['Nhóm chat "băng giá"', 'Cả nhóm đã xem nhưng không ai phản hồi.'],
+      ['Thành viên "Tàng hình"', 'Đến sát deadline một bạn tắt máy, một bạn nộp bài copy.'],
+      ['Đùn đẩy không ai chịu làm Trưởng nhóm', 'Mọi người sợ trách nhiệm, đùn đẩy vai trò Leader.'],
+      ['Bất đồng về cách làm việc (Tiến độ)', 'Một bạn muốn họp ngay, bạn khác muốn lùi vì ôn thi.'],
+      ['Nghi ngờ năng lực và tự ý xóa bài', 'Tự ý xóa sạch bài người khác trên file Doc chung.'],
+      ['Thành viên gây đóng băng không khí', 'Dùng lời lẽ cay nghiệt chỉ trích slide của đồng đội.']
+    ]
+  },
+  {
+    id: 3,
+    name: 'Nước Đến Chân Mới Nhảy',
+    sub: 'Tăng áp lực',
+    color: '#64748b',
+    status: 'coming_soon',
+    statusText: 'Sắp ra mắt',
+    roles: ['leader', 'doer', 'qc'],
+    description: 'Sửa lỗi, ưu tiên công việc và giữ bình tĩnh khi sát hạn.',
+    stages: [
+      ['Slide cẩu thả 22h30', 'Sai font và sai kiến thức sát giờ nộp.'],
+      ['Cãi bướng sát deadline', 'Doer không muốn chỉnh lỗi QC chỉ ra.'],
+      ['File bị lỗi', 'Không thể mở bài khi còn 15 phút.'],
+      ['Mất liên lạc lúc 23h', 'Người ghép bài bất ngờ “sập nguồn”.'],
+      ['Trùng lặp nội dung', 'Hai phần làm bị trùng 70%.']
+    ]
+  },
+  {
+    id: 4,
+    name: 'Trùm Free-rider',
+    sub: 'Căng thẳng',
+    color: '#64748b',
+    status: 'coming_soon',
+    statusText: 'Sắp ra mắt',
+    roles: ['leader', 'doer', 'qc', 'mediator', 'follower'],
+    description: 'Thu thập bằng chứng và xử lý tranh chấp minh bạch.',
+    stages: [
+      ['Dọa bóc phốt', 'Thành viên không làm bài đe dọa đăng phốt.'],
+      ['Đóng góp 1%, đòi 100%', 'Một đường link tài liệu được xem là công sức lớn.'],
+      ['Nộp bài đạo văn', 'Nguy cơ cả nhóm bị điểm 0.'],
+      ['Leader độc đoán', 'Xóa tên thành viên vì bất đồng quan điểm.'],
+      ['Đổ lỗi sau điểm kém', 'Nhóm công kích nhau công khai.'],
+      ['Lý do bất tận', 'Liên tục bùng deadline và viện lý do.']
+    ]
+  },
+  {
+    id: 5,
+    name: 'Boss Cuối',
+    sub: 'Đỉnh cao',
+    color: '#64748b',
+    status: 'coming_soon',
+    statusText: 'Sắp ra mắt',
+    roles: ['leader', 'doer', 'qc', 'mediator', 'follower'],
+    description: 'Kết hợp toàn bộ kỹ năng phối hợp và giải quyết xung đột.',
+    stages: [
+      ['Xung đột ba chiều', 'Leader, QC, Doer tranh cãi liên tục.'],
+      ['Chia bè kết phái', 'Nhóm 5 người tách thành 2 nhóm chat.'],
+      ['Đổi đề tài giữa chừng', '50% dự án có nguy cơ phải làm lại.'],
+      ['Tranh nhau việc dễ', 'Không ai muốn nhận phần khó.'],
+      ['Giảng viên đổi yêu cầu', 'Ba ngày trước hạn, đề bài thay đổi.']
+    ]
+  }
+];
 
-const leaderTree={
- start:{messages:[['Minh','Ê tối mai đi trà sữa không?'],['Lan','Đi chứ, quán mới đang giảm giá.'],['Huy','Bài thuyết trình Chủ nhật nộp đúng không? Có ai làm outline chưa?']],prompt:'Là Leader, bạn sẽ nhắn gì?',options:[
-  {text:'Thôi mai làm, giờ đi chơi đã.',to:'A',scores:{communication:0,initiative:-2,teamwork:0,conflict:0}},
-  {text:'Cả nhóm có định làm bài không?',to:'B',scores:{communication:-2,initiative:1,teamwork:-2,conflict:-1}},
-  {text:'Mình chia việc 15 phút trước nhé, xong hẵng đi.',to:'C',scores:{communication:2,initiative:2,teamwork:2,conflict:1}}
+const stageRoleMap = {
+  '1:0': 'doer',
+  '1:1': 'leader',
+  '1:2': 'qc',
+  '1:3': 'doer',
+  '1:4': 'mediator',
+  '2:0': 'leader',
+  '2:1': 'qc',
+  '2:2': 'follower',
+  '2:3': 'mediator',
+  '2:4': 'doer',
+  '2:5': 'leader'
+};
+
+const stageScenarios = {
+  // ẢI 1 - MÀN 1 (Tình huống 1)
+  '1:0': {
+    title: 'Mải nói chuyện quên làm bài',
+    prompt: 'Bạn nhận ra nếu cứ tiếp tục thế này, nhóm có thể không kịp hoàn thành bài. Tuy nhiên, nếu nhắc nhở quá gay gắt, bạn có thể khiến những người bạn thân cảm thấy mình đang làm quá vấn đề. Bạn sẽ phản hồi thế nào?',
+    role: 'doer',
+    messages: [
+      ['Leader', 'Mọi người ơi, chỉ còn 2 ngày nữa là đến hạn nộp bài rồi. Nhóm mình đã có ai bắt đầu lên nội dung chưa?'],
+      ['Doer', 'Tớ đang định bắt đầu đây, nhưng hôm nay có hơi nhiều việc. Chắc tối nay tớ sẽ cố gắng làm một chút.'],
+      ['QC', 'Tớ vẫn chưa nhận được nội dung nào để kiểm tra cả. Hay mọi người cố gắng gửi bản nháp trước tối mai nhé?'],
+      ['Mediator', 'Tuần này ai cũng có khá nhiều việc nhỉ. Hay tối nay cả nhóm dành chút thời gian nghỉ ngơi, sau đó mình cùng trao đổi để tìm ý tưởng?'],
+      ['Doer', 'Tớ đồng ý! Nhưng mà cũng phải bắt tay vào làm sớm thôi, chứ để sát hạn thì hơi căng đấy.'],
+      ['Leader', 'Đúng rồi, nhưng hiện tại mình vẫn chưa có outline cụ thể. Nếu không thống nhất sớm thì sẽ khó phân chia công việc.']
+    ],
+    choices: [
+      {
+        text: 'A. Chủ động làm trước để tạo động lực cho cả nhóm',
+        name: 'Có tiến độ nhưng dễ tạo sự phụ thuộc',
+        type: 'mid',
+        template: 'Để tớ lên outline trước nhé. Mọi người xem rồi góp ý, sau đó mình chia việc luôn, chứ chờ nhau thế này chắc không kịp mất!',
+        development: 'Bạn hoàn thành outline sơ bộ, một vài thành viên bắt đầu đóng góp. Tuy nhiên, mọi người dần có tâm lý chờ bạn chủ động xử lý công việc.',
+        result: 'Có tiến độ nhưng dễ tạo sự phụ thuộc.',
+        positive: 'Chủ động phá vỡ sự trì trệ, giúp nhóm có điểm bắt đầu.',
+        negative: 'Dễ khiến các thành viên phụ thuộc vào bạn, vô tình làm thay một phần trách nhiệm của Leader.',
+        answer: 'Diễn biến: Bạn hoàn thành outline sơ bộ, một vài thành viên bắt đầu đóng góp. Tuy nhiên, mọi người dần có tâm lý chờ bạn chủ động xử lý công việc.\n\nKết quả: Có tiến độ nhưng dễ tạo sự phụ thuộc.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Chủ động phá vỡ sự trì trệ, giúp nhóm có điểm bắt đầu.\n• Hạn chế: Dễ khiến các thành viên phụ thuộc vào bạn, vô tình làm thay một phần trách nhiệm của Leader.\n\n📌 Bài học rút ra: Chủ động là tốt nhưng cần đi kèm kêu gọi đồng đội cùng làm để tránh biến mình thành người gánh việc và khiến nhóm ỷ lại.'
+      },
+      {
+        text: 'B. Thẳng thắn nhắc nhở và yêu cầu mọi người nghiêm túc',
+        name: 'Tiến độ nhanh hơn nhưng không khí nhóm căng thẳng',
+        type: 'bad',
+        template: 'Mọi người định để đến bao giờ nữa? Chỉ còn 2 ngày mà vẫn chưa có outline. Giờ mỗi người chốt phần việc ngay đi, đừng để sát deadline rồi lại cuống lên!',
+        development: 'Các thành viên bắt đầu nhận nhiệm vụ, nhưng Doer cảm thấy bị thúc ép vì đang có nhiều deadline. Không khí nhóm cũng trở nên kém thoải mái hơn.',
+        result: 'Công việc tiến triển nhanh hơn nhưng không khí nhóm căng thẳng.',
+        positive: 'Thể hiện tinh thần trách nhiệm, giúp nhóm nhận thức được sự cấp bách của deadline.',
+        negative: 'Cách nhắc nhở dễ gây áp lực vì chưa tìm hiểu khó khăn của từng thành viên.',
+        answer: 'Diễn biến: Các thành viên bắt đầu nhận nhiệm vụ, nhưng Doer cảm thấy bị thúc ép vì đang có nhiều deadline. Không khí nhóm cũng trở nên kém thoải mái hơn.\n\nKết quả: Công việc tiến triển nhanh hơn nhưng không khí nhóm căng thẳng.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Thể hiện tinh thần trách nhiệm, giúp nhóm nhận thức được sự cấp bách của deadline.\n• Hạn chế: Cách nhắc nhở dễ gây áp lực vì chưa tìm hiểu khó khăn của từng thành viên.\n\n📌 Bài học rút ra: Trách móc và thúc ép vội vàng có thể đẩy nhanh việc trước mắt nhưng làm rạn nứt hòa khí và tạo tâm lý đối phó trong nhóm bạn thân.'
+      },
+      {
+        text: 'C. Khởi động một cuộc trao đổi ngắn để cả nhóm cùng thống nhất công việc',
+        name: 'Tiến độ được cải thiện, nhóm duy trì được sự phối hợp',
+        type: 'good',
+        template: 'Tớ thấy nhóm mình đang hơi mất phương hướng rồi. Hay tối nay mình call 15 phút để thống nhất outline, chia việc và deadline nhé!',
+        development: 'Cả nhóm thống nhất tham gia cuộc gọi, chia sẻ khả năng và khối lượng công việc. Leader phân công nhiệm vụ, các thành viên nhận phần việc phù hợp và chốt thời hạn hoàn thành.',
+        result: 'Tiến độ được cải thiện, nhóm duy trì được sự phối hợp.',
+        positive: 'Khuyến khích mọi người cùng giải quyết vấn đề, đảm bảo trách nhiệm rõ ràng và phân công phù hợp.',
+        negative: 'Cần sự hợp tác của các thành viên và kiểm soát thời gian để tránh cuộc họp lan man.',
+        answer: 'Diễn biến: Cả nhóm thống nhất tham gia cuộc gọi, chia sẻ khả năng và khối lượng công việc. Leader phân công nhiệm vụ, các thành viên nhận phần việc phù hợp và chốt thời hạn hoàn thành.\n\nKết quả: Tiến độ được cải thiện, nhóm duy trì được sự phối hợp.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Khuyến khích mọi người cùng giải quyết vấn đề, đảm bảo trách nhiệm rõ ràng và phân công phù hợp.\n• Hạn chế: Cần sự hợp tác của các thành viên và kiểm soát thời gian để tránh cuộc họp lan man.\n\n📌 Bài học rút ra: Một buổi trao đổi ngắn, có mục tiêu rõ ràng và thấu hiểu hoàn cảnh của nhau là cách tốt nhất để kéo nhóm bạn thân vào guồng làm việc.'
+      }
+    ]
+  },
+
+  // ẢI 1 - MÀN 2 (Tình huống 2)
+  '1:1': {
+    title: 'Khi tình bạn ảnh hưởng đến việc phân công',
+    prompt: 'Bạn nhận ra mình đang khó đưa ra quyết định. Nếu phân công theo năng lực, người bạn thân có thể không hài lòng; nhưng nếu né tránh, công việc có thể không được phân chia hợp lý. Là Leader, bạn xử lý thế nào?',
+    role: 'leader',
+    messages: [
+      ['Leader', 'Mọi người nghĩ ai sẽ phù hợp với phần phân tích nội dung nhỉ? Phần này khá quan trọng nên cần đầu tư nhiều thời gian.'],
+      ['Doer', 'Tớ nghĩ phần đó cần người có khả năng tổng hợp tốt. Nhưng tuần này tớ cũng đang có hai bài tập phải hoàn thành.'],
+      ['QC', 'Phần này mà làm chưa kỹ thì sẽ ảnh hưởng đến chất lượng chung của bài thuyết trình đấy.'],
+      ['Mediator', 'Hay mình xem xét năng lực và thời gian của từng người trước rồi phân công nhé?'],
+      ['Leader', 'Tớ vẫn chưa biết nên phân công phần này thế nào cho hợp lý. Phần này khá khó, mà tuần này ai cũng có nhiều việc cần hoàn thành.']
+    ],
+    choices: [
+      {
+        text: 'A. Nhận phần khó về mình để tránh gây áp lực cho bạn',
+        name: 'Công việc phân chia nhanh nhưng Leader dễ bị quá tải',
+        type: 'bad',
+        template: 'Thôi, phần phân tích cứ để tớ làm. Các cậu chia nhau những phần còn lại đi, tớ không muốn mọi người phải thêm áp lực đâu!',
+        development: 'Bạn nhận phần phân tích và phải dành thêm nhiều thời gian để hoàn thành. Các thành viên khác vẫn làm phần việc của mình.',
+        result: 'Công việc được phân chia nhanh nhưng Leader dễ bị quá tải.',
+        positive: 'Thể hiện sự quan tâm và tinh thần trách nhiệm với nhóm.',
+        negative: 'Để cảm xúc cá nhân ảnh hưởng đến việc phân công, khiến khối lượng công việc không đồng đều.',
+        answer: 'Diễn biến: Bạn nhận phần phân tích và phải dành thêm nhiều thời gian để hoàn thành. Các thành viên khác vẫn làm phần việc của mình.\n\nKết quả: Công việc được phân chia nhanh nhưng Leader dễ bị quá tải.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Thể hiện sự quan tâm và tinh thần trách nhiệm với nhóm.\n• Hạn chế: Để cảm xúc cá nhân ảnh hưởng đến việc phân công, khiến khối lượng công việc không đồng đều.\n\n📌 Bài học rút ra: Trưởng nhóm ôm đồm vì ngại bạn thân sẽ tự vắt kiệt sức mình, đồng thời tước đi cơ hội đóng góp xứng đáng của các thành viên khác.'
+      },
+      {
+        text: 'B. Phân công theo năng lực và trao đổi trước',
+        name: 'Công việc phân chia hợp lý, phối hợp tốt hơn',
+        type: 'good',
+        template: 'Tớ nghĩ cậu phù hợp nhất với phần phân tích này. Nhưng tớ biết tuần này cậu khá bận, hay mình trao đổi xem có thể chia nhỏ phần việc và nhờ thêm người hỗ trợ không nhé!',
+        development: 'Người bạn thân đồng ý đảm nhận phần chính, Doer hỗ trợ tìm tài liệu, còn Leader theo dõi tiến độ và hỗ trợ khi cần.',
+        result: 'Công việc được phân chia hợp lý, các thành viên phối hợp tốt hơn.',
+        positive: 'Phân công dựa trên năng lực, đồng thời cân nhắc khối lượng công việc của từng người.',
+        negative: 'Cần theo dõi và phối hợp thường xuyên để đảm bảo nhiệm vụ được hoàn thành đúng hạn.',
+        answer: 'Diễn biến: Người bạn thân đồng ý đảm nhận phần chính, Doer hỗ trợ tìm tài liệu, còn Leader theo dõi tiến độ và hỗ trợ khi cần.\n\nKết quả: Công việc được phân chia hợp lý, các thành viên phối hợp tốt hơn.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Phân công dựa trên năng lực, đồng thời cân nhắc khối lượng công việc của từng người.\n• Hạn chế: Cần theo dõi và phối hợp thường xuyên để đảm bảo nhiệm vụ được hoàn thành đúng hạn.\n\n📌 Bài học rút ra: Phân công chuẩn xác theo năng lực kết hợp lắng nghe khó khăn và bố trí người hỗ trợ là nghệ thuật lãnh đạo dung hòa tình bạn và hiệu quả.'
+      },
+      {
+        text: 'C. Chia nhỏ phần khó cho tất cả thành viên',
+        name: 'Khối lượng công việc san sẻ nhưng bài làm thiếu liên kết',
+        type: 'mid',
+        template: 'Hay mình chia phần phân tích thành nhiều phần nhỏ nhé. Mỗi người nhận một phần, sau đó tớ sẽ tổng hợp lại để tiết kiệm thời gian.',
+        development: 'Các thành viên đều nhận một phần nhiệm vụ, nhưng cách triển khai và nội dung giữa các phần chưa thực sự thống nhất.',
+        result: 'Khối lượng công việc được san sẻ nhưng bài làm dễ thiếu tính liên kết.',
+        positive: 'Giảm áp lực cho từng thành viên, tạo cơ hội để mọi người cùng tham gia.',
+        negative: 'Nếu thiếu người định hướng nội dung, các phần dễ bị trùng lặp hoặc rời rạc.',
+        answer: 'Diễn biến: Các thành viên đều nhận một phần nhiệm vụ, nhưng cách triển khai và nội dung giữa các phần chưa thực sự thống nhất.\n\nKết quả: Khối lượng công việc được san sẻ nhưng bài làm dễ thiếu tính liên kết.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Giảm áp lực cho từng thành viên, tạo cơ hội để mọi người cùng tham gia.\n• Hạn chế: Nếu thiếu người định hướng nội dung, các phần dễ bị trùng lặp hoặc rời rạc.\n\n📌 Bài học rút ra: Chia nhỏ việc khó giúp giảm tải trước mắt, nhưng nếu thiếu người chủ trì định hướng khung sườn thì sản phẩm cuối rất dễ chắp vá và rời rạc.'
+      }
+    ]
+  },
+
+  // ẢI 1 - MÀN 3 (Tình huống 3)
+  '1:2': {
+    title: 'Tình bạn khiến ta ngại góp ý',
+    prompt: 'Bạn nhận ra người bạn đang không hài lòng với những góp ý của mình. Nếu tiếp tục nhắc nhở, mối quan hệ có thể trở nên căng thẳng; nhưng nếu bỏ qua, chất lượng bài làm sẽ bị ảnh hưởng. Là QC, bạn xử lý thế nào?',
+    role: 'qc',
+    messages: [
+      ['QC', 'Tớ vừa xem lại slide rồi. Có một số lỗi chính tả và phần số liệu này hình như chưa chính xác.'],
+      ['Doer', 'Ơ, phần đó tớ đã dành khá nhiều thời gian để làm rồi mà. Chắc không nghiêm trọng đến mức phải sửa hết đâu nhỉ?'],
+      ['Leader', 'Mình sắp phải nộp bài rồi, nếu có lỗi thì nên xử lý sớm nhé.'],
+      ['QC', 'Tớ chỉ muốn bài làm hoàn thiện hơn thôi. Nếu để nguyên thì có thể ảnh hưởng đến điểm của cả nhóm.'],
+      ['Doer', 'Cậu cứ soi kỹ như vậy làm tớ thấy áp lực thật đấy. Bạn bè với nhau mà cũng phải khắt khe thế sao?']
+    ],
+    choices: [
+      {
+        text: 'A. Bỏ qua lỗi để giữ hòa khí',
+        name: 'Hòa khí nhất thời nhưng chất lượng bài làm chưa đảm bảo',
+        type: 'bad',
+        template: 'Thôi được rồi, nếu cậu thấy ổn thì mình cứ giữ nguyên nhé. Tớ không muốn vì chuyện này mà hai đứa lại mất vui.',
+        development: 'Bạn dừng góp ý, Doer tiếp tục hoàn thiện slide theo ý mình. Một số lỗi vẫn còn nguyên khi nhóm nộp bài.',
+        result: 'Không khí giữa hai người dễ chịu hơn nhưng chất lượng bài làm chưa được đảm bảo.',
+        positive: 'Tránh tranh cãi và giữ được sự thoải mái trong mối quan hệ.',
+        negative: 'Đặt tình cảm cá nhân lên trên trách nhiệm kiểm tra, khiến lỗi chưa được khắc phục.',
+        answer: 'Diễn biến: Bạn dừng góp ý, Doer tiếp tục hoàn thiện slide theo ý mình. Một số lỗi vẫn còn nguyên khi nhóm nộp bài.\n\nKết quả: Không khí giữa hai người dễ chịu hơn nhưng chất lượng bài làm chưa được đảm bảo.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Tránh tranh cãi và giữ được sự thoải mái trong mối quan hệ.\n• Hạn chế: Đặt tình cảm cá nhân lên trên trách nhiệm kiểm tra, khiến lỗi chưa được khắc phục.\n\n📌 Bài học rút ra: Dĩ hòa vi quý sai cách sẽ làm tổn hại đến chất lượng chung của cả nhóm và không giúp bạn mình tiến bộ.'
+      },
+      {
+        text: 'B. Yêu cầu sửa lỗi theo đúng tiêu chuẩn kiểm tra',
+        name: 'Bài làm được chỉnh sửa kỹ nhưng sự phối hợp bị ảnh hưởng',
+        type: 'mid',
+        template: 'Tớ hiểu cậu đã mất công làm slide, nhưng phần nào chưa đạt thì vẫn phải sửa. Nếu ai cũng bỏ qua lỗi vì ngại góp ý thì bài chung sẽ bị ảnh hưởng đấy!',
+        development: 'Doer miễn cưỡng chỉnh sửa toàn bộ slide. Tuy nhiên, bạn ấy ít trao đổi với QC hơn và không khí làm việc trở nên căng thẳng.',
+        result: 'Bài làm được chỉnh sửa kỹ nhưng sự phối hợp giữa hai người bị ảnh hưởng.',
+        positive: 'Đảm bảo các tiêu chuẩn chất lượng và trách nhiệm của QC.',
+        negative: 'Quá tập trung vào tiêu chuẩn mà chưa chú ý đến cách tiếp nhận góp ý của người khác.',
+        answer: 'Diễn biến: Doer miễn cưỡng chỉnh sửa toàn bộ slide. Tuy nhiên, bạn ấy ít trao đổi với QC hơn và không khí làm việc trở nên căng thẳng.\n\nKết quả: Bài làm được chỉnh sửa kỹ nhưng sự phối hợp giữa hai người bị ảnh hưởng.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Đảm bảo các tiêu chuẩn chất lượng và trách nhiệm của QC.\n• Hạn chế: Quá tập trung vào tiêu chuẩn mà chưa chú ý đến cách tiếp nhận góp ý của người khác.\n\n📌 Bài học rút ra: Góp ý chỉ nhìn vào lỗi mà thiếu sự đồng cảm sẽ biến phản hồi thành sự chỉ trích, gây rạn nứt quan hệ.'
+      },
+      {
+        text: 'C. Trao đổi riêng và cùng thống nhất cách sửa',
+        name: 'Chất lượng bài làm cải thiện, nhóm duy trì phối hợp tốt',
+        type: 'good',
+        template: 'Tớ biết cậu đã dành nhiều thời gian cho phần này rồi. Nhưng mình thử kiểm tra lại những lỗi quan trọng trước nhé, tớ có thể hỗ trợ cậu sửa nếu cần!',
+        development: 'Doer cảm thấy được tôn trọng và đồng ý kiểm tra lại slide. Hai người cùng ưu tiên sửa lỗi số liệu, chính tả và định dạng.',
+        result: 'Chất lượng bài làm được cải thiện, nhóm vẫn duy trì được sự phối hợp.',
+        positive: 'Vừa đảm bảo trách nhiệm của QC, vừa ghi nhận công sức và tôn trọng cảm xúc của bạn.',
+        negative: 'Cần thêm thời gian hỗ trợ và kiểm tra lại nội dung sau khi chỉnh sửa.',
+        answer: 'Diễn biến: Doer cảm thấy được tôn trọng và đồng ý kiểm tra lại slide. Hai người cùng ưu tiên sửa lỗi số liệu, chính tả và định dạng.\n\nKết quả: Chất lượng bài làm được cải thiện, nhóm vẫn duy trì được sự phối hợp.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Vừa đảm bảo trách nhiệm của QC, vừa ghi nhận công sức và tôn trọng cảm xúc của bạn.\n• Hạn chế: Cần thêm thời gian hỗ trợ và kiểm tra lại nội dung sau khi chỉnh sửa.\n\n📌 Bài học rút ra: Khen ngợi nỗ lực trước, chỉ ra giải pháp sau và sẵn sàng đồng hành là cách QC xây dựng niềm tin tốt nhất.'
+      }
+    ]
+  },
+
+  // ẢI 1 - MÀN 4 (Tình huống 4)
+  '1:3': {
+    title: 'Khi bạn được nhờ làm giúp phần việc của 1 thành viên khác',
+    prompt: 'Bạn hiểu mong muốn của bạn mình, nhưng cũng nhận ra việc nhờ người khác làm thay không phải cách giải quyết hợp lý. Là Doer, bạn xử lý thế nào?',
+    role: 'doer',
+    messages: [
+      ['Leader', 'Mọi người nhớ hoàn thành phần việc trong hôm nay nhé. Ngày mai nhóm mình cần tổng hợp và kiểm tra lần cuối.'],
+      ['Doer', 'Phần của tớ gần xong rồi, tối nay tớ sẽ kiểm tra lại một lượt.'],
+      ['QC', 'Tớ sẽ chờ nội dung của mọi người để bắt đầu rà soát nhé.'],
+      ['Bạn thân', 'Cậu ơi, tối nay cậu làm giúp tớ phần của tớ được không? Tớ có lịch đi xem biểu diễn rồi, không muốn bỏ lỡ lần này.'],
+      ['Bạn thân', 'Cậu làm nhanh hơn tớ mà. Bạn bè giúp nhau một chút thôi, chắc không mất nhiều thời gian đâu!']
+    ],
+    choices: [
+      {
+        text: 'A. Nhận làm giúp nhưng yêu cầu bạn bù lại công việc sau',
+        name: 'Đảm bảo tiến độ nhưng dễ hình thành thói quen nhờ vả',
+        type: 'mid',
+        template: 'Được, lần này tớ làm giúp cậu. Nhưng cậu phải nhận lại một phần việc của tớ trong lần tới nhé, chứ tớ cũng không thể gánh mãi được.',
+        development: 'Bạn thân đồng ý, phần việc được hoàn thành đúng hạn. Tuy nhiên, bạn phải dành thêm thời gian và việc trao đổi công việc giữa hai người trở nên mang tính trao đổi lợi ích.',
+        result: 'Đảm bảo tiến độ nhưng dễ hình thành thói quen nhờ vả.',
+        positive: 'Có sự thỏa thuận và chia sẻ trách nhiệm giữa hai người.',
+        negative: 'Không giải quyết được vấn đề bạn thân chưa tự chịu trách nhiệm với nhiệm vụ của mình.',
+        answer: 'Diễn biến: Bạn thân đồng ý, phần việc được hoàn thành đúng hạn. Tuy nhiên, bạn phải dành thêm thời gian và việc trao đổi công việc giữa hai người trở nên mang tính trao đổi lợi ích.\n\nKết quả: Đảm bảo tiến độ nhưng dễ hình thành thói quen nhờ vả.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Có sự thỏa thuận và chia sẻ trách nhiệm giữa hai người.\n• Hạn chế: Không giải quyết được vấn đề bạn thân chưa tự chịu trách nhiệm với nhiệm vụ của mình.\n\n📌 Bài học rút ra: Gánh hộ công việc dù có điều kiện vẫn vô tình dung túng cho sự thiếu kỷ luật của đồng đội.'
+      },
+      {
+        text: 'B. Báo với Leader để điều chỉnh phân công',
+        name: 'Công việc được phân bổ lại nhưng mối quan hệ có phần xa cách',
+        type: 'bad',
+        template: 'Tớ nghĩ mình nên báo với Leader để tìm cách sắp xếp lại công việc. Tớ không thể nhận thêm toàn bộ phần này khi phần của mình vẫn chưa hoàn thành.',
+        development: 'Leader biết tình hình và phân chia lại một phần công việc cho các thành viên khác. Bạn thân cảm thấy không thoải mái vì chuyện riêng bị đưa ra trước cả nhóm.',
+        result: 'Công việc được phân bổ lại nhưng mối quan hệ có phần xa cách.',
+        positive: 'Đảm bảo tính minh bạch và giúp Leader kiểm soát tiến độ chung.',
+        negative: 'Có thể khiến bạn thân cảm thấy bị thiếu tin tưởng nếu chưa được trao đổi riêng trước đó.',
+        answer: 'Diễn biến: Leader biết tình hình và phân chia lại một phần công việc cho các thành viên khác. Bạn thân cảm thấy không thoải mái vì chuyện riêng bị đưa ra trước cả nhóm.\n\nKết quả: Công việc được phân bổ lại nhưng mối quan hệ có phần xa cách.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Đảm bảo tính minh bạch và giúp Leader kiểm soát tiến độ chung.\n• Hạn chế: Có thể khiến bạn thân cảm thấy bị thiếu tin tưởng nếu chưa được trao đổi riêng trước đó.\n\n📌 Bài học rút ra: Đưa việc riêng lên nhóm chung mà chưa trao đổi trực tiếp dễ gây mất lòng và cảm giác bị phản bội.'
+      },
+      {
+        text: 'C. Từ chối làm hộ nhưng đề xuất hỗ trợ',
+        name: 'Cả hai hoàn thành nhiệm vụ, trách nhiệm cá nhân được đảm bảo',
+        type: 'good',
+        template: 'Tớ không thể làm thay toàn bộ phần của cậu được vì tớ cũng còn việc phải hoàn thành. Nhưng cậu cứ làm trước đi, tớ có thể xem qua và góp ý giúp cậu nhé!',
+        development: 'Bạn thân đồng ý tự hoàn thành phần việc. Sau đó, bạn dành một chút thời gian xem lại và góp ý để bạn ấy kịp chỉnh sửa.',
+        result: 'Cả hai hoàn thành nhiệm vụ, trách nhiệm cá nhân vẫn được đảm bảo.',
+        positive: 'Vừa giữ được giới hạn cá nhân, vừa thể hiện sự sẵn lòng hỗ trợ bạn bè.',
+        negative: 'Bạn vẫn cần dành thêm thời gian để góp ý, vì vậy phải cân đối với công việc của mình.',
+        answer: 'Diễn biến: Bạn thân đồng ý tự hoàn thành phần việc. Sau đó, bạn dành một chút thời gian xem lại và góp ý để bạn ấy kịp chỉnh sửa.\n\nKết quả: Cả hai hoàn thành nhiệm vụ, trách nhiệm cá nhân vẫn được đảm bảo.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Vừa giữ được giới hạn cá nhân, vừa thể hiện sự sẵn lòng hỗ trợ bạn bè.\n• Hạn chế: Bạn vẫn cần dành thêm thời gian để góp ý, vì vậy phải cân đối với công việc của mình.\n\n📌 Bài học rút ra: Biết nói lời từ chối khéo léo và thiết lập ranh giới giúp bạn bè trưởng thành trong trách nhiệm.'
+      }
+    ]
+  },
+
+  // ẢI 1 - MÀN 5 (Tình huống 5)
+  '1:4': {
+    title: 'Khi cả nhóm đều nghĩ người khác sẽ làm',
+    prompt: 'Bạn nhận ra các thành viên đều có lý do riêng, nhưng nếu tiếp tục tranh luận và đổ lỗi, nhóm sẽ không còn đủ thời gian hoàn thành bài. Là Mediator, bạn xử lý thế nào?',
+    role: 'mediator',
+    messages: [
+      ['Leader', 'Mọi người ơi, tớ vừa kiểm tra lại thì phần tổng hợp nội dung vẫn chưa xong. Có ai đang phụ trách phần này không?'],
+      ['Doer', 'Ơ, tớ tưởng đã có người nhận rồi chứ? Tớ đã hoàn thành phần nội dung của mình mà.'],
+      ['QC', 'Tớ vẫn chưa nhận được bản hoàn chỉnh để kiểm tra. Nếu để đến sát giờ thì sẽ rất khó sửa lỗi.'],
+      ['Leader', 'Tớ cứ nghĩ mọi người đã thống nhất với nhau rồi. Giờ còn nhiều phần chưa xong thế này thì nguy hiểm thật.'],
+      ['Doer', 'Nhưng lúc đầu mình đâu có nói rõ ai phụ trách phần tổng hợp đâu?'],
+      ['Mediator', 'Có lẽ nhóm mình đang thiếu sự thống nhất trong phân công. Giờ cần bình tĩnh xem lại những phần còn thiếu thôi.']
+    ],
+    choices: [
+      {
+        text: 'A. Chủ động kết nối và nhận một phần việc còn thiếu',
+        name: 'Công việc được đẩy nhanh nhưng trách nhiệm chưa rõ ràng',
+        type: 'mid',
+        template: 'Hay để tớ nhận phần tổng hợp trước nhé. Những phần còn lại mọi người tự kiểm tra xem ai có thể hỗ trợ, chứ giờ mình không thể để trống thêm được.',
+        development: 'Bạn bắt đầu tổng hợp nội dung, các thành viên khác cũng chủ động hỗ trợ. Tuy nhiên, một số người vẫn chưa thực sự thống nhất ai chịu trách nhiệm cuối cùng cho từng phần.',
+        result: 'Công việc được đẩy nhanh nhưng trách nhiệm chưa được phân chia rõ ràng.',
+        positive: 'Chủ động tháo gỡ khó khăn, tạo động lực để mọi người cùng tham gia.',
+        negative: 'Việc nhận thêm nhiệm vụ có thể khiến bạn quá tải và chưa giải quyết triệt để tình trạng thiếu phân công.',
+        answer: 'Diễn biến: Bạn bắt đầu tổng hợp nội dung, các thành viên khác cũng chủ động hỗ trợ. Tuy nhiên, một số người vẫn chưa thực sự thống nhất ai chịu trách nhiệm cuối cùng cho từng phần.\n\nKết quả: Công việc được đẩy nhanh nhưng trách nhiệm chưa được phân chia rõ ràng.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Chủ động tháo gỡ khó khăn, tạo động lực để mọi người cùng tham gia.\n• Hạn chế: Việc nhận thêm nhiệm vụ có thể khiến bạn quá tải và chưa giải quyết triệt để tình trạng thiếu phân công.\n\n📌 Bài học rút ra: Đứng ra gánh việc giải quyết được tình thế cấp bách nhưng không thay thế được sự phân công rõ ràng.'
+      },
+      {
+        text: 'B. Để Leader quyết định và phân công lại',
+        name: 'Công việc có người phụ trách nhưng sự đồng thuận chưa cao',
+        type: 'bad',
+        template: 'Tớ nghĩ Leader nên chốt lại nhiệm vụ một lần nữa. Mỗi người cứ nhận đúng phần được giao, nếu không thì nhóm mình sẽ tiếp tục mất thời gian tranh luận.',
+        development: 'Leader nhanh chóng phân công lại công việc. Nhóm bắt đầu triển khai nhưng một số thành viên cảm thấy chưa được lắng nghe vì nhiệm vụ được giao khá gấp.',
+        result: 'Công việc có người phụ trách rõ ràng nhưng sự đồng thuận chưa cao.',
+        positive: 'Tận dụng vai trò điều phối của Leader, giúp nhóm nhanh chóng xác định trách nhiệm.',
+        negative: 'Chưa tạo điều kiện để các thành viên chia sẻ khó khăn hoặc đề xuất phương án phù hợp hơn.',
+        answer: 'Diễn biến: Leader nhanh chóng phân công lại công việc. Nhóm bắt đầu triển khai nhưng một số thành viên cảm thấy chưa được lắng nghe vì nhiệm vụ được giao khá gấp.\n\nKết quả: Công việc có người phụ trách rõ ràng nhưng sự đồng thuận chưa cao.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Tận dụng vai trò điều phối của Leader, giúp nhóm nhanh chóng xác định trách nhiệm.\n• Hạn chế: Chưa tạo điều kiện để các thành viên chia sẻ khó khăn hoặc đề xuất phương án phù hợp hơn.\n\n📌 Bài học rút ra: Áp đặt phân công trong lúc hoang mang dễ làm giảm tinh thần tự nguyện và sự gắn kết.'
+      },
+      {
+        text: 'C. Đề nghị mọi người tự chọn phần việc còn thiếu',
+        name: 'Thành viên chủ động hơn, công việc được giải quyết thỏa đáng',
+        type: 'good',
+        template: 'Hay mọi người xem phần nào mình có thể hỗ trợ rồi chủ động nhận nhé. Tớ sẽ ghi lại để nhóm thống nhất người phụ trách và thời hạn hoàn thành.',
+        development: 'Các thành viên lần lượt nhận nhiệm vụ dựa trên khả năng của mình. Tuy nhiên, có những phần khó chưa ai muốn đảm nhận, khiến Mediator phải tiếp tục điều phối.',
+        result: 'Các thành viên có quyền chủ động hơn nhưng một số nhiệm vụ vẫn chưa được giải quyết ngay.',
+        positive: 'Khuyến khích tinh thần tự giác, tạo cơ hội để mọi người cùng chịu trách nhiệm.',
+        negative: 'Nếu không có sự điều phối phù hợp, những phần việc khó vẫn có thể bị bỏ ngỏ.',
+        answer: 'Diễn biến: Các thành viên lần lượt nhận nhiệm vụ dựa trên khả năng của mình. Mediator ghi lại danh sách phân công, chốt người phụ trách và thời hạn hoàn thành.\n\nKết quả: Các thành viên có quyền chủ động hơn, trách nhiệm rõ ràng và bài hoàn thành đúng hạn.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Khuyến khích tinh thần tự giác, tạo cơ hội để mọi người cùng chịu trách nhiệm.\n• Hạn chế: Cần sự điều phối khéo léo để những phần khó không bị bỏ ngỏ.\n\n📌 Bài học rút ra: Trao quyền chủ động nhận việc kèm theo ghi chép công khai mốc bàn giao là cách hòa giải văn minh, chuyển thế đổ lỗi thành cùng nhau giải quyết.'
+      }
+    ]
+  },
+
+  // ẢI 2 - MÀN 1 (Tình huống 1)
+  '2:0': {
+    title: 'Nhóm chat "băng giá"',
+    prompt: 'Nhóm mới lập, file đã gửi nhưng cả nhóm chỉ seen và thả icon. Bạn muốn nhanh chóng phá vỡ bầu không khí ngượng ngùng để đẩy tiến độ mà không gắt gỏng. Là Leader, bạn làm gì?',
+    role: 'leader',
+    messages: [
+      ['Leader', 'Chào mọi người, tớ tạo nhóm rồi nhé. Tớ gửi file chia việc kèm outline, mọi người check qua rồi cho ý kiến nha! (File_BTL_TDSTKN.docx)'],
+      ['QC', '❤️ (Thả tim)'],
+      ['Doer', '👍 (Đã thả ưng)'],
+      ['Hệ thống', '(Cả nhóm chìm vào im lặng hoàn toàn, không một ai nhắn thêm dòng nào)']
+    ],
+    choices: [
+      {
+        text: 'A. Trách móc thái độ im lặng của các thành viên',
+        name: 'Không khí nhóm đóng băng, phân công rơi vào bế tắc',
+        type: 'bad',
+        template: 'Sao mọi người seen không nói gì thế? Không ai có ý kiến gì à hay định để nước đến chân mới nhảy rồi mới nhốn nháo lên?',
+        development: 'Nhóm chat càng trở nên lạnh lẽo và căng thẳng hơn. Các thành viên cảm thấy bị tấn công cá nhân, bắt đầu có tâm lý phòng thủ và phớt lờ tin nhắn của bạn luôn.',
+        result: 'Không khí nhóm bị đóng băng, việc phân công công việc chính thức rơi vào bế tắc.',
+        positive: 'Thể hiện sự sốt sắng và lo lắng cho tiến độ chung của bài tập.',
+        negative: 'Dùng ngôn từ mang tính phán xét, đổ lỗi ngay từ đầu khiến đối phương cảm thấy bất an và thu mình lại thay vì hợp tác.',
+        answer: 'Diễn biến: Nhóm chat càng trở nên lạnh lẽo và căng thẳng hơn. Các thành viên cảm thấy bị tấn công cá nhân, bắt đầu có tâm lý phòng thủ và phớt lờ tin nhắn của bạn luôn.\n\nKết quả: Không khí nhóm bị đóng băng, việc phân công công việc chính thức rơi vào bế tắc.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Thể hiện sự sốt sắng và lo lắng cho tiến độ chung của bài tập.\n• Hạn chế: Dùng ngôn từ mang tính phán xét, đổ lỗi ngay từ đầu khiến đối phương cảm thấy bất an và thu mình lại thay vì hợp tác.\n\n📌 Bài học rút ra: Trách móc người lạ ngay từ lần gặp đầu sẽ kích hoạt cơ chế phòng vệ và đẩy cả nhóm vào sự im lặng thù địch.'
+      },
+      {
+        text: 'B. Kìm nén và mặc định coi như mọi người đã đồng ý',
+        name: 'Bài tập nhóm đổ bể phút chót vì thiếu phân công',
+        type: 'bad',
+        template: 'Thôi kệ đi, chắc mọi người xem rồi và ngầm đồng ý rồi đấy. Ai làm phần nào thì tự giác đi nhé.',
+        development: 'Bạn không thúc đẩy tương tác mà phó mặc mọi thứ cho sự im lặng. Đến hạn nộp bài, không ai nộp vì mỗi người tưởng người khác làm phần khác, bài tập lệch tông hoàn toàn.',
+        result: 'Bài tập nhóm đổ bể phút chót do không có sự thống nhất và phân công rõ ràng.',
+        positive: 'Tránh được những tranh cãi nảy lửa hoặc xung đột lời nói trước mắt.',
+        negative: 'Thiếu kỹ năng quản trị sự bất định, phó mặc tiến độ cho sự im lặng rủi ro của tập thể.',
+        answer: 'Diễn biến: Bạn không thúc đẩy tương tác mà phó mặc mọi thứ cho sự im lặng. Đến hạn nộp bài, không ai nộp vì mỗi người tưởng người khác làm phần khác, bài tập lệch tông hoàn toàn.\n\nKết quả: Bài tập nhóm đổ bể phút chót do không có sự thống nhất và phân công rõ ràng.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Tránh được những tranh cãi nảy lửa hoặc xung đột lời nói trước mắt.\n• Hạn chế: Thiếu kỹ năng quản trị sự bất định, phó mặc tiến độ cho sự im lặng rủi ro của tập thể.\n\n📌 Bài học rút ra: Im lặng không đồng nghĩa với đồng ý; phó mặc cho sự tự giác mơ hồ trong nhóm mới là công thức chắc chắn dẫn đến vỡ trận.'
+      },
+      {
+        text: 'C. Chủ động phá băng bằng câu hỏi khảo sát nhẹ nhàng',
+        name: 'Sự băng giá được phá vỡ, các thành viên nhận việc thoải mái',
+        type: 'good',
+        template: 'Hơi im ắng ta cơ mà tớ đói bụng quá, không biết mọi người thích làm phần nội dung hay phần làm slide thiết kế hơn để tớ điều chỉnh cho hợp gu nhé?',
+        development: 'Không khí dần dịu lại, một vài thành viên bắt đầu thả lỏng, Doer nhận phần nội dung và QC nhận phần làm slide vì đúng sở trường. Nhóm bắt đầu có tiếng cười và tương tác.',
+        result: 'Sự băng giá được phá vỡ, các thành viên bắt đầu nhận việc một cách thoải mái.',
+        positive: 'Kỹ thuật phá băng khéo léo, chuyển từ việc "ép buộc" sang "lựa chọn sở thích cá nhân", kích thích sự cởi mở.',
+        negative: 'Cần thêm thời gian để chờ đợi mọi người phản hồi thay vì có kết quả ngay lập tức.',
+        answer: 'Diễn biến: Không khí dần dịu lại, một vài thành viên bắt đầu thả lỏng, Doer nhận phần nội dung và QC nhận phần làm slide vì đúng sở trường. Nhóm bắt đầu có tiếng cười và tương tác.\n\nKết quả: Sự băng giá được phá vỡ, các thành viên bắt đầu nhận việc một cách thoải mái.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Kỹ thuật phá băng khéo léo, chuyển từ việc "ép buộc" sang "lựa chọn sở thích cá nhân", kích thích sự cởi mở.\n• Hạn chế: Cần thêm thời gian để chờ đợi mọi người phản hồi thay vì có kết quả ngay lập tức.\n\n📌 Bài học rút ra: Phá băng nhóm người lạ bằng sự gần gũi, hóm hỉnh và trao quyền chọn theo sở trường giúp mọi người cởi bỏ sự rụt rè và chủ động nhận việc.'
+      }
+    ]
+  },
+
+  // ẢI 2 - MÀN 2 (Tình huống 2)
+  '2:1': {
+    title: 'Thành viên "Tàng hình"',
+    prompt: 'A tắt máy biến mất, B nộp bài sơ sài copy nguyên văn từ trên mạng sát giờ nộp. Bạn muốn đảm bảo bài không đạo văn nhưng e ngại cãi nhau nửa đêm làm vỡ trận. Là QC, bạn xử lý thế nào?',
+    role: 'qc',
+    messages: [
+      ['QC', '@A @B ơi, phần tổng hợp lý thuyết của hai cậu đến đâu rồi? Cho tớ xem qua nội dung để ghép chung vào bản final với nhé!'],
+      ['A', 'Vẫn đang làm nhé bạn êi, yên tâm đi.'],
+      ['B', 'Tớ đang kẹt tý việc cá nhân, tối nay tớ gửi nha.'],
+      ['Hệ thống', '(Đến sát giờ nộp bài, A im lặng tắt máy, B gửi một mẩu nội dung sơ sài copy nguyên văn trên mạng).']
+    ],
+    choices: [
+      {
+        text: 'A. Bêu rếu công khai sự vô trách nhiệm lên nhóm chung',
+        name: 'Nội bộ lục đục trầm trọng, bài tập nhóm vỡ trận',
+        type: 'bad',
+        template: 'Làm ăn kiểu gì thế này hả A, B? Hứa hẹn tối gửi xong giờ đứa mất tích đứa nộp bài copy vớ vẩn, coi nhóm ra cái gì không hả?',
+        development: 'A nổi giận vì cảm thấy bị bêu rếu trước mặt tập thể, đôi bên lao vào cãi vã lớn tiếng và từ chối hợp tác.',
+        result: 'Nội bộ lục đục trầm trọng, bài tập nhóm chính thức vỡ trận vì không ai chịu nhìn mặt ai.',
+        positive: 'Dám nói thẳng nói thật, bảo vệ quyền lợi chung của nhóm trước sự tắc trách.',
+        negative: 'Công khai chỉ trích kích hoạt bản năng tự vệ cực đoan của người khác thay vì giải quyết vấn đề công việc.',
+        answer: 'Diễn biến: A nổi giận vì cảm thấy bị bêu rếu trước mặt tập thể, đôi bên lao vào cãi vã lớn tiếng và từ chối hợp tác.\n\nKết quả: Nội bộ lục đục trầm trọng, bài tập nhóm chính thức vỡ trận vì không ai chịu nhìn mặt ai.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Dám nói thẳng nói thật, bảo vệ quyền lợi chung của nhóm trước sự tắc trách.\n• Hạn chế: Công khai chỉ trích kích hoạt bản năng tự vệ cực đoan của người khác thay vì giải quyết vấn đề công việc.\n\n📌 Bài học rút ra: Công kích công khai trước tập thể dễ biến tranh chấp công việc thành tự ái cá nhân, phá nát hoàn toàn cơ hội cứu vãn bài tập.'
+      },
+      {
+        text: 'B. Âm thầm ôm việc tự sửa và tự làm thay',
+        name: 'Bài kịp nộp đúng hạn nhưng kiệt sức và bất công',
+        type: 'mid',
+        template: '(Không nhắn gì trên nhóm) Thôi chết gần đến giờ nộp rồi, mình tự ngồi sửa bài hộ B với tự viết nốt phần của A cho kịp giờ vậy.',
+        development: 'Bạn cắn răng gánh trọn đống việc thay cho hai thành viên tàng hình, thức xuyên đêm hoàn thành bài trong sự ấm ức và kiệt sức.',
+        result: 'Bài kịp nộp đúng hạn nhưng bạn kiệt sức, đồng thời tạo tiền lệ cực xấu cho các lần sau.',
+        positive: 'Đảm bảo được điểm số và sự an toàn cho hạn chót nộp bài của cả nhóm.',
+        negative: 'Dung túng cho hành vi vô kỷ luật, thiếu ranh giới rõ ràng khiến thành viên tàng hình tiếp tục lười biếng.',
+        answer: 'Diễn biến: Bạn cắn răng gánh trọn đống việc thay cho hai thành viên tàng hình, thức xuyên đêm hoàn thành bài trong sự ấm ức và kiệt sức.\n\nKết quả: Bài kịp nộp đúng hạn nhưng bạn kiệt sức, đồng thời tạo tiền lệ cực xấu cho các lần sau.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Đảm bảo được điểm số và sự an toàn cho hạn chót nộp bài của cả nhóm.\n• Hạn chế: Dung túng cho hành vi vô kỷ luật, thiếu ranh giới rõ ràng khiến thành viên tàng hình tiếp tục lười biếng.\n\n📌 Bài học rút ra: Âm thầm gánh nợ trong uất ức chỉ nuôi dưỡng thói quen ỷ lại và tước đi ranh giới tự tôn của người làm việc nghiêm túc.'
+      },
+      {
+        text: 'C. Chủ động nhắn tin riêng (1-on-1) để nắm bắt và hỗ trợ',
+        name: 'Vấn đề giải quyết êm đẹp, thành viên được kéo lại quỹ đạo',
+        type: 'good',
+        template: 'A ơi, tớ thấy phần của cậu chưa thấy up lên drive. Cậu đang gặp khó ở mục nào để tớ hoặc các bạn hỗ trợ cùng đẩy nhanh trước 21h nhé?',
+        development: 'A sượng sùng nhận ra lỗi vì mải chơi và gửi bài bù ngay sau đó 30 phút; B thừa nhận bị ngợp kiến thức và nhờ trợ giúp. Bài hoàn thành đúng hạn.',
+        result: 'Vấn đề được giải quyết êm đẹp, thành viên tàng hình được kéo trở lại quỹ đạo nhóm.',
+        positive: 'Tôn trọng cá nhân qua kênh riêng tư, dùng sự hỗ trợ thay vì phán xét giúp gỡ bỏ tâm lý phòng thủ.',
+        negative: 'Tốn thêm thời gian và tâm sức cá nhân của bạn để đi "nhắc việc" từng người.',
+        answer: 'Diễn biến: A sượng sùng nhận ra lỗi vì mải chơi và gửi bài bù ngay sau đó 30 phút; B thừa nhận bị ngợp kiến thức và nhờ trợ giúp. Bài hoàn thành đúng hạn.\n\nKết quả: Vấn đề được giải quyết êm đẹp, thành viên tàng hình được kéo trở lại quỹ đạo nhóm.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Tôn trọng cá nhân qua kênh riêng tư, dùng sự hỗ trợ thay vì phán xét giúp gỡ bỏ tâm lý phòng thủ.\n• Hạn chế: Tốn thêm thời gian và tâm sức cá nhân của bạn để đi "nhắc việc" từng người.\n\n📌 Bài học rút ra: Đối thoại 1-1 tinh tế, dùng câu hỏi tháo gỡ khó khăn thay vì kết tội giúp người phạm lỗi giữ được thể diện và tích cực sửa sai.'
+      }
+    ]
+  },
+
+  // ẢI 2 - MÀN 3 (Tình huống 3)
+  '2:2': {
+    title: 'Đùn đẩy không ai chịu làm Trưởng nhóm',
+    prompt: 'Nhóm vừa lập, ai cũng sợ trách nhiệm và từ chối làm Leader. Bạn muốn nhóm sớm có người điều phối nhưng không muốn tự biến mình thành người gánh toàn bộ. Là Active Follower, bạn làm gì?',
+    role: 'follower',
+    messages: [
+      ['Active Follower', 'Chào mọi người, cô bắt buộc mỗi nhóm phải có 1 Leader để triển khai dự án đấy ạ. Ai nhận làm Leader không ạ?'],
+      ['A', 'Tớ yếu khoản này lắm bạn ơii, với lại bận lắm không theo được đâu, giao cho người khác đi.'],
+      ['B', 'Tớ làm gì cũng được trừ làm leader nha ><, sợ không gánh nổi điểm nhóm á.'],
+      ['Hệ thống', '(Toàn bộ nhóm chìm vào im lặng, không ai lên tiếng nữa)']
+    ],
+    choices: [
+      {
+        text: 'A. Công kích sự ích kỷ cá nhân trên nhóm',
+        name: 'Nhóm đứng trước bờ vực giải thể, không triển khai được dự án',
+        type: 'bad',
+        template: 'Ủa các bạn ơi, ai cũng sợ chịu trách nhiệm thì ai làm? Sao các bạn ích kỷ thế. Cứ đùn đẩy nhau thế này thì giải tán nhóm luôn đi!',
+        development: 'Cả nhóm lập tức phản ứng ngược, nhảy vào bênh vực nhau và chửi qua chửi lại, nhóm chat biến thành bãi chiến trường.',
+        result: 'Nhóm đứng trước bờ vực giải thể và không triển khai dự án được.',
+        positive: 'Thẳng thắn vạch trần thói quen ỷ lại, đùn đẩy trách nhiệm của các thành viên.',
+        negative: 'Dùng từ ngữ mang tính công kích cá nhân nặng nề, làm tình hình ngày càng trầm trọng và phá nát tinh thần đoàn kết.',
+        answer: 'Diễn biến: Cả nhóm lập tức phản ứng ngược, nhảy vào bênh vực nhau và chửi qua chửi lại, nhóm chat biến thành bãi chiến trường.\n\nKết quả: Nhóm đứng trước bờ vực giải thể và không triển khai dự án được.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Thẳng thắn vạch trần thói quen ỷ lại, đùn đẩy trách nhiệm của các thành viên.\n• Hạn chế: Dùng từ ngữ mang tính công kích cá nhân nặng nề, làm tình hình ngày càng trầm trọng và phá nát tinh thần đoàn kết.\n\n📌 Bài học rút ra: Chỉ trích sự e ngại của người khác bằng lời lẽ gay gắt không giải quyết được vấn đề mà chỉ làm tan rã niềm tin vừa chớm nở.'
+      },
+      {
+        text: 'B. Bấm bụng tự nhận làm Leader bất đắc dĩ',
+        name: 'Bạn ôm trọn áp lực, thành viên còn lại hoàn toàn ngoài lề',
+        type: 'mid',
+        template: 'Thôi được rồi, không ai nhận thì để tớ tự đứng tên nhận Leader vậy, mệt mỏi với mấy cậu quá.',
+        development: 'Bạn trở thành Leader bất đắc dĩ trong sự ấm ức. Các thành viên khác thấy bạn gánh thì mặc nhiên phó mặc, không thèm hỗ trợ hay đóng góp ý kiến gì thêm.',
+        result: 'Bạn ôm trọn áp lực một mình, các thành viên còn lại trở nên hoàn toàn ngoài lề.',
+        positive: 'Giải quyết yêu cầu có Leader, nhóm vẫn có người dẫn dắt.',
+        negative: 'Ôm đồm sai cách, tạo khoảng cách lớn giữa Leader và các thành viên, dễ dẫn đến kiệt sức sớm.',
+        answer: 'Diễn biến: Bạn trở thành Leader bất đắc dĩ trong sự ấm ức. Các thành viên khác thấy bạn gánh thì mặc nhiên phó mặc, không thèm hỗ trợ hay đóng góp ý kiến gì thêm.\n\nKết quả: Bạn ôm trọn áp lực một mình, các thành viên còn lại trở nên hoàn toàn ngoài lề.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Giải quyết yêu cầu có Leader, nhóm vẫn có người dẫn dắt.\n• Hạn chế: Ôm đồm sai cách, tạo khoảng cách lớn giữa Leader và các thành viên, dễ dẫn đến kiệt sức sớm.\n\n📌 Bài học rút ra: Nhận lãnh đạo trong trạng thái ấm ức là tự cô lập mình, vô tình tạo ra sự thụ động và ỷ lại cho toàn bộ thành viên còn lại.'
+      },
+      {
+        text: 'C. Đề xuất cơ chế "Leader luân phiên" và chia nhỏ trách nhiệm',
+        name: 'Giải quyết triệt để nỗi sợ trách nhiệm, phân quyền rõ ràng',
+        type: 'good',
+        template: 'Thôi thế này nhé, ai cũng sợ ôm đồm thì tụi mình chia nhỏ ra: A chịu trách nhiệm nộp bài, B làm outline, còn tớ đứng tên đại diện nhận đề tài vòng này, vòng sau mình đổi vai nhé!',
+        development: 'Mọi người đồng ý ngay vì trách nhiệm được chia đều, không ai cảm thấy bị ép buộc gánh nặng một mình. Nhóm bắt đầu bàn bạc đề tài rất sôi nổi.',
+        result: 'Giải quyết triệt để nỗi sợ trách nhiệm của tập thể, phân quyền rõ ràng và nhóm đi vào hoạt động trơn tru.',
+        positive: 'Chia nhỏ rủi ro và trách nhiệm, tạo sự an tâm tâm lý cho các thành viên e dè.',
+        negative: 'Đòi hỏi cơ chế phối hợp chặt chẽ hơn để không bị chồng chéo nhiệm vụ giữa các vòng.',
+        answer: 'Diễn biến: Mọi người đồng ý ngay vì trách nhiệm được chia đều, không ai cảm thấy bị ép buộc gánh nặng một mình. Nhóm bắt đầu bàn bạc đề tài rất sôi nổi.\n\nKết quả: Giải quyết triệt để nỗi sợ trách nhiệm của tập thể, phân quyền rõ ràng và nhóm đi vào hoạt động trơn tru.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Chia nhỏ rủi ro và trách nhiệm, tạo sự an tâm tâm lý cho các thành viên e dè.\n• Hạn chế: Đòi hỏi cơ chế phối hợp chặt chẽ hơn để không bị chồng chéo nhiệm vụ giữa các vòng.\n\n📌 Bài học rút ra: Active Follower thông minh biết hóa giải nỗi sợ gánh vác bằng cách module hóa trách nhiệm, biến áp lực cá nhân thành cam kết tập thể.'
+      }
+    ]
+  },
+
+  // ẢI 2 - MÀN 4 (Tình huống 4)
+  '2:3': {
+    title: 'Bất đồng về cách làm việc (Tiến độ)',
+    prompt: 'Một bạn muốn họp online gấp tối mai, một bạn kẹt lịch ôn thi giữa kỳ gay gắt. Icon phẫn nộ xuất hiện, nhóm chat đóng băng. Là Mediator, bạn can thiệp thế nào?',
+    role: 'mediator',
+    messages: [
+      ['A', 'Tớ đề nghị mai 20h họp team qua Meet chốt ngay cái outline đi nhé, để chậm là cuống cuồng đấy mọi người.'],
+      ['B', 'Trời ơi sớm thế làm gì, tuần sau thi giữa kỳ bận chết đi được, từ từ thong thả chứ, ép nhau thế làm sao thở nổi.'],
+      ['Hệ thống', '(A thả icon "Phẫn nộ" 😡 rồi im bặt. B cũng seen và không nói gì thêm. Không khí nhóm đóng băng).']
+    ],
+    choices: [
+      {
+        text: 'A. Bênh vực cảm tính một phía để làm dịu tình hình',
+        name: 'Xung đột không được giải quyết, chia rẽ nội bộ sâu sắc',
+        type: 'bad',
+        template: 'Ông A cứ từ từ làm gì mà căng thế, người ta còn bận thi giữa kỳ cơ mà, đừng có áp đặt thời gian lên người khác chứ.',
+        development: 'A cảm thấy bị cô lập, bất công và tức tối rời khỏi nhóm chat. Nhóm bị chia thành hai phe phái đối địch rõ rệt.',
+        result: 'Xung đột không được giải quyết mà còn khoét sâu thêm sự chia rẽ nội bộ.',
+        positive: 'Thấu hiểu và bảo vệ quyền lợi trước mắt cho thành viên đang bận lịch thi cử.',
+        negative: 'Giải quyết mang tính cảm tính một chiều, làm tổn thương và gây ức chế cho người đề cao tính kỷ luật tiến độ.',
+        answer: 'Diễn biến: A cảm thấy bị cô lập, bất công và tức tối rời khỏi nhóm chat. Nhóm bị chia thành hai phe phái đối địch rõ rệt.\n\nKết quả: Xung đột không được giải quyết mà còn khoét sâu thêm sự chia rẽ nội bộ.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Thấu hiểu và bảo vệ quyền lợi trước mắt cho thành viên đang bận lịch thi cử.\n• Hạn chế: Giải quyết mang tính cảm tính một chiều, làm tổn thương và gây ức chế cho người đề cao tính kỷ luật tiến độ.\n\n📌 Bài học rút ra: Người hòa giải tuyệt đối không đứng về một bên; thiên vị cảm tính sẽ biến mâu thuẫn công việc thành bất mãn cá nhân.'
+      },
+      {
+        text: 'B. Đưa ra lời khuyên chung chung, né tránh xung đột',
+        name: 'Xung đột chìm xuống nhưng âm ỉ phá hoại khả năng phối hợp',
+        type: 'mid',
+        template: 'Thôi mỗi người nhường nhau một bước đi nhé, cãi nhau làm gì cho mệt mỏi ra, từ từ rồi tính tiếp.',
+        development: 'Câu nói hòa giải hời hợt không chạm đến gốc rễ vấn đề. Hai bên tiếp tục giữ thái độ bất mãn ngầm, không ai chịu nhường ai và tiến độ nhóm giậm chân tại chỗ.',
+        result: 'Xung đột chìm xuống bề mặt nhưng âm ỉ phá hoại khả năng phối hợp của nhóm.',
+        positive: 'Tránh được một trận cãi vã nảy lửa ngay lập tức trong nhóm chat chung.',
+        negative: 'Né tránh giải quyết vấn đề cốt lõi, khiến điểm nghẽn vẫn y nguyên không có lối thoát.',
+        answer: 'Diễn biến: Câu nói hòa giải hời hợt không chạm đến gốc rễ vấn đề. Hai bên tiếp tục giữ thái độ bất mãn ngầm, không ai chịu nhường ai và tiến độ nhóm giậm chân tại chỗ.\n\nKết quả: Xung đột chìm xuống bề mặt nhưng âm ỉ phá hoại khả năng phối hợp của nhóm.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Tránh được một trận cãi vã nảy lửa ngay lập tức trong nhóm chat chung.\n• Hạn chế: Né tránh giải quyết vấn đề cốt lõi, khiến điểm nghẽn vẫn y nguyên không có lối thoát.\n\n📌 Bài học rút ra: Khuyên nhủ chung chung không phải hòa giải; né tránh vấn đề chỉ làm xung đột âm ỉ kéo dài.'
+      },
+      {
+        text: 'C. Đóng vai trò điều phối tìm điểm giao thoa lợi ích (Win-Win)',
+        name: 'Xung đột tháo gỡ hoàn hảo, tiến độ đảm bảo không quá sức',
+        type: 'good',
+        template: 'Hiểu ý hai cậu nè! A lo xa sợ sát deadline cuống, còn B thì đang vướng lịch ôn thi giữa kỳ đúng không? Hay thế này, tụi mình chốt nhanh 15 phút đầu tuần này để duyệt khung sườn ý chính, còn phần viết chi tiết thì lùi lại sau lịch thi của B nhé. Cả nhà thấy sao?',
+        development: 'Cả A và B đều cảm thấy nhu cầu cá nhân được lắng nghe. Thỏa hiệp được thiết lập vui vẻ: chốt nhanh khung sườn gọn nhẹ và giãn thời gian viết chi tiết.',
+        result: 'Xung đột được tháo gỡ hoàn hảo, tiến độ được đảm bảo mà không ép buộc ai quá sức.',
+        positive: 'Áp dụng kỹ thuật công nhận cảm xúc và tìm điểm giao thoa lợi ích cực kỳ khéo léo.',
+        negative: 'Mediator cần có sự quan sát tinh tế và khả năng tổng hợp vấn đề nhanh chóng.',
+        answer: 'Diễn biến: Cả A và B đều cảm thấy nhu cầu cá nhân được lắng nghe. Thỏa hiệp được thiết lập vui vẻ: chốt nhanh khung sườn gọn nhẹ và giãn thời gian viết chi tiết.\n\nKết quả: Xung đột được tháo gỡ hoàn hảo, tiến độ được đảm bảo mà không ép buộc ai quá sức.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Áp dụng kỹ thuật công nhận cảm xúc và tìm điểm giao thoa lợi ích cực kỳ khéo léo.\n• Hạn chế: Mediator cần có sự quan sát tinh tế và khả năng tổng hợp vấn đề nhanh chóng.\n\n📌 Bài học rút ra: Lắng nghe mối lo của cả hai phía và đề xuất giải pháp win-win là chìa khóa vàng tháo gỡ mọi bất đồng.'
+      }
+    ]
+  },
+
+  // ẢI 2 - MÀN 5 (Tình huống 5)
+  '2:4': {
+    title: 'Nghi ngờ năng lực và tự ý xóa bài',
+    prompt: 'Công sức cả buổi chiều viết phân tích thị trường bị A tự ý xóa trắng không báo trước kèm lời chê bai lủng củng. Bạn muốn bảo vệ công sức mà không gây cãi vã vỡ trận. Là Doer, bạn phản ứng ra sao?',
+    role: 'doer',
+    messages: [
+      ['Doer', 'Tớ vừa hoàn thành xong phần phân tích thị trường rồi nhé, mọi người vào đọc thử xem ổn chưa nha. (Link_Google_Doc)'],
+      ['A', 'Ơ cái phần này bạn viết lủng củng quá, tớ đọc thấy kỳ quá nên tớ vừa xóa sạch để viết lại đoạn mới rồi đấy nhé. Lần sau bạn viết cẩn thận hơn đi.'],
+      ['Hệ thống', '(Bạn sững sờ vì công sức cả buổi chiều bị xóa trắng không một lời tôn trọng).']
+    ],
+    choices: [
+      {
+        text: 'A. Nổi giận ăn miếng trả miếng, phá hoại ngược lại',
+        name: 'Chiến tranh bùng nổ công khai, cả nhóm rơi vào hỗn loạn',
+        type: 'bad',
+        template: 'Thích thì tự làm một mình đi xem giỏi đến đâu mà dám xóa bài người khác! Tao vào xóa luôn phần của mày cho vừa lòng nhé!',
+        development: 'Bạn tức giận lao vào Google Doc xóa bài của A, đồng thời đôi bên chửi bới lẫn nhau thậm tệ trên nhóm chat chung khiến các thành viên phải chú ý.',
+        result: 'Chiến tranh bùng nổ công khai, cả nhóm rơi vào trạng thái hỗn loạn.',
+        positive: 'Phản xạ tự nhiên để bảo vệ lòng tự trọng và công sức cá nhân ngay lúc đó.',
+        negative: 'Phản ứng bốc đồng, ăn miếng trả miếng làm gia tăng sự phá hoại lẫn nhau thay vì giải quyết chuyên nghiệp.',
+        answer: 'Diễn biến: Bạn tức giận lao vào Google Doc xóa bài của A, đồng thời đôi bên chửi bới lẫn nhau thậm tệ trên nhóm chat chung khiến các thành viên phải chú ý.\n\nKết quả: Chiến tranh bùng nổ công khai, cả nhóm rơi vào trạng thái hỗn loạn.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Phản xạ tự nhiên để bảo vệ lòng tự trọng và công sức cá nhân ngay lúc đó.\n• Hạn chế: Phản ứng bốc đồng, ăn miếng trả miếng làm gia tăng sự phá hoại lẫn nhau thay vì giải quyết chuyên nghiệp.\n\n📌 Bài học rút ra: Ăn miếng trả miếng bằng sự phá hoại chỉ biến bạn từ người bị hại thành người có lỗi và chôn vùi toàn bộ thành quả của cả nhóm.'
+      },
+      {
+        text: 'B. Ngậm đắng nuốt cay chịu đựng, tự ti thu mình',
+        name: 'Bạn trở thành bóng mờ trong nhóm, tâm lý tổn thương',
+        type: 'bad',
+        template: 'Thôi chắc văn mình kém thật nên bạn ấy mới xóa... Thôi kệ cho bạn ấy tự làm hết vậy, mình không dám ý kiến gì nữa.',
+        development: 'Bạn thu mình lại, nuôi mối hờn ghen và sự tự ti ngầm, mất hoàn toàn động lực cống hiến cho các phần việc tiếp theo của đồ án.',
+        result: 'Bạn trở thành bóng mờ trong nhóm, tâm lý tổn thương nặng nề suốt kỳ học.',
+        positive: 'Tránh được một cuộc tranh chấp trực diện gây mất đoàn kết trước mắt.',
+        negative: 'Đánh mất ranh giới tôn trọng cá nhân, nuôi dưỡng sự tự ti và độc hại ngầm trong nhóm.',
+        answer: 'Diễn biến: Bạn thu mình lại, nuôi mối hờn ghen và sự tự ti ngầm, mất hoàn toàn động lực cống hiến cho các phần việc tiếp theo của đồ án.\n\nKết quả: Bạn trở thành bóng mờ trong nhóm, tâm lý tổn thương nặng nề suốt kỳ học.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Tránh được một cuộc tranh chấp trực diện gây mất đoàn kết trước mắt.\n• Hạn chế: Đánh mất ranh giới tôn trọng cá nhân, nuôi dưỡng sự tự ti và độc hại ngầm trong nhóm.\n\n📌 Bài học rút ra: Cam chịu sự bất công không phải là nhẫn nhịn, mà là tự đánh mất tiếng nói và lòng tự trọng làm việc.'
+      },
+      {
+        text: 'C. Đặt ranh giới lịch sự nhưng kiên quyết dựa trên nguyên tắc chuyên nghiệp',
+        name: 'Thiết lập lại sự tôn trọng, biến mâu thuẫn thành phối hợp',
+        type: 'good',
+        template: 'A ơi, nếu phần nào chưa chuẩn ý cậu thì cậu có thể note lại để tụi mình cùng thảo luận sửa chung, chứ cậu xóa trắng phần tớ làm mà không báo trước như vậy là phủ nhận hoàn toàn công sức của tớ đấy. Mình cùng mở lịch sử chỉnh sửa xem lại đóng góp nhé!',
+        development: 'A sượng sùng nhận ra hành vi thiếu lịch sự của mình, nhắn tin xin lỗi riêng và khôi phục lại bản thảo cũ để cả hai cùng ngồi biên tập lại chỉn chu hơn.',
+        result: 'Thiết lập lại được sự tôn trọng lẫn nhau, biến mâu thuẫn thành cơ chế phối hợp tốt hơn.',
+        positive: 'Đặt ranh giới chuyên nghiệp rõ ràng, bảo vệ công sức cá nhân nhưng vẫn giữ văn hóa trao đổi mang tính xây dựng.',
+        negative: 'Đòi hỏi sự bình tĩnh và lý trí cao từ người bị hại trong tình huống bức xúc.',
+        answer: 'Diễn biến: A sượng sùng nhận ra hành vi thiếu lịch sự của mình, nhắn tin xin lỗi riêng và khôi phục lại bản thảo cũ để cả hai cùng ngồi biên tập lại chỉn chu hơn.\n\nKết quả: Thiết lập lại được sự tôn trọng lẫn nhau, biến mâu thuẫn thành cơ chế phối hợp tốt hơn.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Đặt ranh giới chuyên nghiệp rõ ràng, bảo vệ công sức cá nhân nhưng vẫn giữ văn hóa trao đổi mang tính xây dựng.\n• Hạn chế: Đòi hỏi sự bình tĩnh và lý trí cao từ người bị hại trong tình huống bức xúc.\n\n📌 Bài học rút ra: Bảo vệ công sức bằng sự bình tĩnh, dựa trên quy trình chuyên nghiệp và dữ liệu minh bạch là cách ứng xử đẳng cấp nhất.'
+      }
+    ]
+  },
+
+  // ẢI 2 - MÀN 6 (Tình huống 6)
+  '2:5': {
+    title: 'Thành viên gây đóng băng không khí bằng bạo lực ngôn từ',
+    prompt: 'A dùng lời lẽ cay nghiệt chỉ trích slide đồng đội là "mắt có vấn đề", cả nhóm chìm vào sợ hãi và im lặng chết chóc. Bạn muốn bảo vệ an toàn tâm lý cho nhóm mà không kích động A bỏ ngang. Là Leader, bạn can thiệp thế nào?',
+    role: 'leader',
+    messages: [
+      ['A', 'Slide kiểu gì mà chữ rít rít với nhau thế này? Đứa nào làm cái slide này mắt có vấn đề à? Sửa lại ngay đi cho tao, chán chẳng buồn nói!'],
+      ['Hệ thống', '(Cả nhóm chìm vào im lặng chết chóc, không ai dám bấm vào nhận xét hay thả icon vì sợ bị chửi tiếp vào mặt).']
+    ],
+    choices: [
+      {
+        text: 'A. Hùa theo để thể hiện quyền lực ép đàn em',
+        name: 'Nhóm bị chia rẽ sâu sắc, chất lượng bài làm lao dốc',
+        type: 'bad',
+        template: 'Đúng rồi đấy, làm ăn cẩu thả vừa thôi chứ, sửa nhanh lên không tao gạch tên khỏi danh sách bây giờ đấy nhé!',
+        development: 'Môi trường nhóm trở nên độc hại tột cùng, các thành viên còn lại bị ức chế tâm lý nặng nề, âm thầm bất mãn và quyết định đình công ngầm.',
+        result: 'Nhóm bị chia rẽ sâu sắc, chất lượng bài làm lao dốc do không ai còn tâm trạng làm việc.',
+        positive: 'Tỏ ra nghiêm khắc để siết chặt kỷ luật và tiến độ chung của bài tập.',
+        negative: 'Dung túng và cổ súy cho hành vi bạo lực ngôn từ, phá hủy hoàn toàn sự an toàn tâm lý của tập thể.',
+        answer: 'Diễn biến: Môi trường nhóm trở nên độc hại tột cùng, các thành viên còn lại bị ức chế tâm lý nặng nề, âm thầm bất mãn và quyết định đình công ngầm.\n\nKết quả: Nhóm bị chia rẽ sâu sắc, chất lượng bài làm lao dốc do không ai còn tâm trạng làm việc.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Tỏ ra nghiêm khắc để siết chặt kỷ luật và tiến độ chung của bài tập.\n• Hạn chế: Dung túng và cổ súy cho hành vi bạo lực ngôn từ, phá hủy hoàn toàn sự an toàn tâm lý của tập thể.\n\n📌 Bài học rút ra: Lãnh đạo bằng sự đe dọa và độc hại sẽ giết chết động lực cống hiến và sự trung thành của đồng đội.'
+      },
+      {
+        text: 'B. Sợ hãi né tránh, âm thầm tự đi sửa hộ để yên thân',
+        name: 'A trở thành "bố thiên hạ", bạn kiệt sức vì ôm việc hộ',
+        type: 'bad',
+        template: 'Thôi mọi người đừng cãi nhau nữa... Để tớ tự vào sửa lại slide hộ bạn ấy cho xong chuyện, đỡ nghe mắng.',
+        development: 'Bạn chọn cách nhún nhường né tránh xung đột độc hại. A thấy vậy càng được đà lấn tới, tiếp tục có những lời lẽ trịch thượng ở các lần họp sau.',
+        result: 'A trở thành "bố thiên hạ" trong nhóm, bạn thì kiệt sức vì phải ôm việc hộ người khác.',
+        positive: 'Xoa dịu tạm thời cơn thịnh nộ trước mắt của thành viên tính nóng.',
+        negative: 'Né tránh xung đột độc hại, làm suy yếu vai trò lãnh đạo và dung túng cái tôi quá trớn.',
+        answer: 'Diễn biến: Bạn chọn cách nhún nhường né tránh xung đột độc hại. A thấy vậy càng được đà lấn tới, tiếp tục có những lời lẽ trịch thượng ở các lần họp sau.\n\nKết quả: A trở thành "bố thiên hạ" trong nhóm, bạn thì kiệt sức vì phải ôm việc hộ người khác.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Xoa dịu tạm thời cơn thịnh nộ trước mắt của thành viên tính nóng.\n• Hạn chế: Né tránh xung đột độc hại, làm suy yếu vai trò lãnh đạo và dung túng cái tôi quá trớn.\n\n📌 Bài học rút ra: Im lặng trước hành vi bạo lực ngôn từ là gián tiếp tiếp tay cho môi trường làm việc độc hại phát triển.'
+      },
+      {
+        text: 'C. Thiết lập ranh giới bảo vệ an toàn tâm lý nhóm',
+        name: 'Lấy lại an toàn tâm lý, biến áp lực thành góp ý xây dựng',
+        type: 'good',
+        template: 'A ơi, bình tĩnh nào cậu ơi! Mọi người đều đang cố gắng hết sức đấy. Phần slide đúng là chưa thoáng mắt thật, nhưng thay vì cáu gắt thì cậu góp ý cụ thể giúp phần nào để bạn làm slide dễ sửa nhé. Tụi mình giữ tinh thần vui vẻ hoàn thiện bài nha!',
+        development: 'Không khí ngột ngạt được giải tỏa ngay lập tức. A hạ cái tôi xuống và gửi lời xin lỗi vì nóng tính, các thành viên khác lấy lại tinh thần cùng nhau trau chuốt lại slide.',
+        result: 'Lấy lại được sự an toàn tâm lý cho nhóm, biến áp lực độc hại thành sự góp ý xây dựng mang tính chuyên nghiệp.',
+        positive: 'Thiết lập ranh giới giao tiếp văn minh, bảo vệ an toàn tâm lý cho nhóm nhưng vẫn giữ được mục tiêu công việc.',
+        negative: 'Leader phải đủ bản lĩnh và sự khéo léo để vừa dập tắt nóng giận vừa không làm tình hình căng thêm.',
+        answer: 'Diễn biến: Không khí ngột ngạt được giải tỏa ngay lập tức. A hạ cái tôi xuống và gửi lời xin lỗi vì nóng tính, các thành viên khác lấy lại tinh thần cùng nhau trau chuốt lại slide.\n\nKết quả: Lấy lại được sự an toàn tâm lý cho nhóm, biến áp lực độc hại thành sự góp ý xây dựng mang tính chuyên nghiệp.',
+        lesson: '💡 Phân tích nguyên nhân:\n• Tích cực: Thiết lập ranh giới giao tiếp văn minh, bảo vệ an toàn tâm lý cho nhóm nhưng vẫn giữ được mục tiêu công việc.\n• Hạn chế: Leader phải đủ bản lĩnh và sự khéo léo để vừa dập tắt nóng giận vừa không làm tình hình căng thêm.\n\n📌 Bài học rút ra: Lãnh đạo xuất sắc là người kiên quyết ngăn chặn văn hóa giao tiếp độc hại, bảo vệ sự an toàn tâm lý của tập thể và chuyển hướng cơn giận thành giải pháp cụ thể.'
+      }
+    ]
+  }
+};
+
+const quickScenarios = {
+  ...stageScenarios,
+  // Ánh xạ tương thích ngược theo cặp Level:Role
+  '1:doer': stageScenarios['1:0'],
+  '1:leader': stageScenarios['1:1'],
+  '1:qc': stageScenarios['1:2'],
+  '1:mediator': stageScenarios['1:4'],
+  '2:leader': stageScenarios['2:0'],
+  '2:qc': stageScenarios['2:1'],
+  '2:follower': stageScenarios['2:2'],
+  '2:mediator': stageScenarios['2:3'],
+  '2:doer': stageScenarios['2:4']
+};
+
+const leaderTree = {
+ start:{messages:[['Leader','Mọi người ơi, chỉ còn 2 ngày nữa là đến hạn nộp bài rồi. Nhóm mình đã có ai bắt đầu lên nội dung chưa?'],['Doer','Tớ đang định bắt đầu đây, nhưng hôm nay có hơi nhiều việc. Chắc tối nay tớ sẽ cố gắng làm một chút.'],['QC','Tớ vẫn chưa nhận được nội dung nào để kiểm tra cả. Hay mọi người cố gắng gửi bản nháp trước tối mai nhé?'],['Mediator','Tuần này ai cũng có khá nhiều việc nhỉ. Hay tối nay cả nhóm dành chút thời gian nghỉ ngơi, sau đó mình cùng trao đổi để tìm ý tưởng?']],prompt:'Là Leader, bạn sẽ điều phối thế nào để nhóm kịp tiến độ?',options:[
+  {text:'Thôi mai làm, giờ cứ nghỉ ngơi đã.',to:'A',scores:{communication:0,initiative:-2,teamwork:0,conflict:0}},
+  {text:'Cả nhóm có định làm bài không hay để trượt?',to:'B',scores:{communication:-2,initiative:1,teamwork:-2,conflict:-1}},
+  {text:'Tối nay call 15 phút thống nhất outline và chốt việc nhé.',to:'C',scores:{communication:2,initiative:2,teamwork:2,conflict:1}}
  ]},
- A:{messages:[['Minh','Đúng là leader của lòng tôi.'],['Huy','Nhưng mà mình còn chưa có outline ấy…']],prompt:'Huy đang lo lắng. Bạn làm gì?',options:[
+ A:{messages:[['Doer','Đúng là leader tâm lý nhất năm!'],['QC','Nhưng chỉ còn đúng 2 ngày nữa thôi đấy…']],prompt:'QC đang rất lo lắng về chất lượng bài. Bạn làm gì?',options:[
   {text:'Đừng lo, mai bắt đầu cũng chưa muộn.',to:'E1',scores:{initiative:-2,teamwork:-1}},
-  {text:'Khoan, đổi ý. Chia việc 10 phút trước đi.',to:'E2',scores:{communication:1,initiative:2,teamwork:1}}
+  {text:'Khoan, đổi ý rồi. Mình dành 10 phút chia việc trước đã.',to:'E2',scores:{communication:1,initiative:2,teamwork:1}}
  ]},
- B:{messages:[['Lan','Đang nói chuyện thôi mà, sao gắt vậy?'],['Minh','Chưa ai giao việc cho tôi cả.']],prompt:'Lan khó chịu. Bạn xử lý thế nào?',options:[
-  {text:'Mình là trưởng nhóm, cứ làm theo đi.',to:'E3',scores:{communication:-2,teamwork:-2,conflict:-2}},
-  {text:'Mình hơi nóng, xin lỗi. Mình chia việc nhé?',to:'E4',scores:{communication:2,teamwork:1,conflict:2}}
+ B:{messages:[['Mediator','Đang trao đổi thôi mà, sao cậu gắt thế?'],['Doer','Tớ bận thật chứ có phải lười đâu.']],prompt:'Không khí nhóm bắt đầu căng thẳng. Bạn xử lý thế nào?',options:[
+  {text:'Mình là trưởng nhóm, mọi người cứ làm theo đi.',to:'E3',scores:{communication:-2,teamwork:-2,conflict:-2}},
+  {text:'Xin lỗi cả nhóm, tớ hơi sốt ruột. Mình cùng bàn cách chia việc nhé?',to:'E4',scores:{communication:2,teamwork:1,conflict:2}}
  ]},
- C:{messages:[['Minh','Ok, nhưng mình chưa biết bắt đầu từ đâu.'],['Lan','Mình làm slide được, nhưng cần nội dung trước.'],['Huy','Tối nay mình bận, mai trưa làm được không?']],prompt:'Mọi người đồng ý. Bước tiếp theo là gì?',options:[
-  {text:'Hỏi từng người, chia nhiệm vụ và chốt mốc kiểm tra.',to:'E5',scores:{communication:2,initiative:2,teamwork:2,conflict:1}},
-  {text:'Giao đại cho nhanh, phần khó mình tự làm.',to:'E6',scores:{initiative:0,teamwork:-1}}
+ C:{messages:[['Doer','Ok, tớ có thể tham gia 15 phút trước 21h.'],['QC','Tớ chuẩn bị sẵn tiêu chí kiểm tra rồi.'],['Mediator','Tuyệt vời, thế là vừa vặn không bị quá tải.']],prompt:'Mọi người đã sẵn sàng tham gia. Bước chốt lại là gì?',options:[
+  {text:'Lắng nghe thời gian từng bạn, chia theo thế mạnh và chốt mốc nộp bản nháp.',to:'E5',scores:{communication:2,initiative:2,teamwork:2,conflict:1}},
+  {text:'Giao đại cho xong, phần nào khó tớ tự ôm hết.',to:'E6',scores:{initiative:0,teamwork:-1}}
  ]}
 };
 
-const leaderEndings={
- E1:{name:'Trì hoãn dây chuyền',tone:'bad',message:'Cả nhóm tiếp tục vui vẻ, nhưng đến hôm sau vẫn chưa có outline. Mọi người phải chạy gấp trong 24 giờ cuối.',lesson:'Giữ hòa khí không đồng nghĩa với né trách nhiệm.',template:'Cả nhóm ơi, mình chốt nhanh đầu việc và thời hạn nhé. Mình gửi outline trước 21h để mọi người cùng xem.'},
- E2:{name:'Cứu tiến độ kịp lúc',tone:'good',message:'Bạn nhận ra nguy cơ và đề nghị chia việc ngay. Nhóm hơi bất ngờ nhưng đồng ý vì yêu cầu ngắn gọn.',lesson:'Sửa quyết định kịp thời cũng là một kỹ năng lãnh đạo.',template:'Mình xin đổi kế hoạch một chút: chia việc 10 phút nhé, rồi mình chốt lịch đi chơi sau.'},
- E3:{name:'Nhóm rạn nứt',tone:'bad',message:'Mọi người làm việc miễn cưỡng và ngại báo tiến độ. Không khí trở nên căng thẳng.',lesson:'Mệnh lệnh và trách móc không tự động tạo nên sự hợp tác.',template:'Mình thấy nhóm đang chậm tiến độ và điều đó khiến mình lo. Mình cùng thống nhất phần việc và mốc kiểm tra nhé.'},
- E4:{name:'Hàn gắn và tiến lên',tone:'good',message:'Bạn xin lỗi về cách nói rồi đề nghị giải pháp. Lan bớt khó chịu, Minh đồng ý nhận việc.',lesson:'Nhận trách nhiệm về cách giao tiếp giúp khôi phục niềm tin.',template:'Xin lỗi vì mình vừa nói hơi gắt. Mình đang lo deadline, không có ý trách ai. Cả nhóm chia việc cụ thể nhé?'},
- E5:{name:'Cả nhóm vào guồng',tone:'good',message:'Minh tìm nguồn, Huy lập nội dung, Lan làm slide, bạn ghép bài và kiểm tra theo mốc sớm hơn deadline.',lesson:'Phân công rõ, phù hợp năng lực và có mốc kiểm tra là chìa khóa.',template:'Mình đề xuất Minh tìm tài liệu, Huy soạn nội dung, Lan làm slide và mình kiểm tra tổng thể. Mọi người xác nhận giúp mình trước 20h nhé.'},
- E6:{name:'Leader ôm việc',tone:'mid',message:'Nhóm tưởng đã xong việc, nhưng bạn phải tự xử lý phần khó và sửa lỗi vào phút cuối.',lesson:'Một kế hoạch chỉ hiệu quả khi công việc được chia rõ và khả thi.',template:'Mình đang ôm hơi nhiều việc. Mỗi người giúp mình nhận rõ một đầu việc kèm mốc hoàn thành nhé.'}
-};
-
-const quickScenarios={
-  '1:doer':{title:'Là Minh, bạn làm gì?',messages:[['Lan','Tối mai đi trà sữa nhé.'],['Huy','Nhưng bài Chủ nhật ai làm outline?']],choices:[
-   {text:'Hỏi rõ phần việc để bắt đầu ngay.',type:'good',answer:'Bạn chủ động nhận nhiệm vụ và hỏi rõ yêu cầu. Nhóm bắt đầu có tiến độ.',lesson:'Không đợi bị nhắc mới là một Doer đáng tin.',template:'Mình nhận phần tìm nguồn nhé. Mình sẽ gửi bản nháp trước 20h mai.'},
-   {text:'Đọc rồi để đấy.',type:'bad',answer:'Không ai biết bạn nhận phần gì, nhóm vẫn chưa bắt đầu.',lesson:'Đã xem không phải là xác nhận nhiệm vụ.',template:'Mình đã đọc rồi. Mình có thể đảm nhận phần tài liệu, mọi người thấy ổn không?'}]},
-  '1:mediator':{title:'Bạn giúp nhóm bạn thân ra sao?',messages:[['An','Chưa ai làm bài mà toàn rủ đi chơi.'],['Lan','Đừng làm quá lên chứ.']],choices:[
-   {text:'Thừa nhận cả hai phía và đề nghị 10 phút chia việc.',type:'good',answer:'Cả nhóm cảm thấy được lắng nghe và đồng ý chia nhiệm vụ.',lesson:'Hòa giải không phải né vấn đề, mà là giúp các bên hợp tác.',template:'Mình hiểu An lo deadline và Lan muốn thoải mái. Mình chia việc nhanh 10 phút rồi đi chơi nhé?'},
-   {text:'Bảo mọi người thôi không tranh luận nữa.',type:'mid',answer:'Nhóm im lặng nhưng công việc vẫn chưa được giải quyết.',lesson:'Dập tắt cuộc cãi không đồng nghĩa giải quyết vấn đề.',template:'Mình thống nhất lại điều nhóm đang cần làm nhé.'}]},
-  '2:leader':{title:'Nhóm chat vừa thành lập, không ai nói gì',messages:[['An','Mình tạo nhóm rồi, mọi người chọn phần trong file nhé.'],['Hệ thống','Đã xem: 4 thành viên'],['Minh','Mình thấy rồi.']],choices:[
-   {text:'Mời từng bạn giới thiệu thế mạnh và chốt lịch 10 phút.',type:'good',answer:'Từng người chủ động giới thiệu và chọn phần phù hợp.',lesson:'Phá băng hiệu quả bằng lời mời cụ thể, không phải lời thúc giục chung chung.',template:'Mọi người cho mình biết thế mạnh và khung giờ rảnh nhé. Mình chốt buổi trao đổi 10 phút tối nay.'},
-   {text:'Chờ đến mai xem ai nhắn trước.',type:'bad',answer:'Nhóm tiếp tục im lặng, bỏ lỡ thời gian cần phân công.',lesson:'Sự im lặng ban đầu cần một người mở lời rõ ràng.',template:'Mọi người xác nhận giúp mình đã đọc file nhé?'}]},
-  '2:doer':{title:'Bạn mới vào nhóm lạ, Leader gửi file',messages:[['An','Mọi người xem file và chọn việc nhé.'],['Hệ thống','4 người đã xem nhưng chưa phản hồi.']],choices:[
-   {text:'Giới thiệu năng lực và đề nghị nhận việc cụ thể.',type:'good',answer:'Leader có đủ thông tin để phân công; người khác cũng bắt đầu trả lời.',lesson:'Một lời xác nhận chủ động có thể thay đổi cả không khí nhóm.',template:'Chào cả nhóm, mình mạnh phần tìm tài liệu và có thể nhận phần này. Mình sẽ gửi trước tối mai nhé.'},
-   {text:'Cứ im lặng vì chưa ai quen mình.',type:'bad',answer:'Leader không biết bạn có tham gia hay không.',lesson:'Chủ động một câu ngắn tốt hơn im lặng kéo dài.',template:'Mình đã đọc file. Cho mình hỏi phần nào cần ưu tiên trước ạ?'}]},
-  '2:follower':{title:'Là mắt xích tích cực trong nhóm mới',messages:[['An','Mọi người mở file nhé, nhớ làm đúng hạn.'],['Minh','Để xem đã…']],choices:[
-   {text:'Xác nhận việc, hỏi đầu ra và mốc bàn giao.',type:'good',answer:'Yêu cầu được làm rõ. Nhóm có một mốc thời gian chung để theo dõi.',lesson:'Xác nhận đúng yêu cầu giúp giảm hiểu nhầm và làm lại.',template:'Mình xác nhận nhận phần slide. Mình cần bao nhiêu trang và gửi bản nháp lúc nào nhé?'},
-   {text:'Trả lời “Ok” rồi tự đoán yêu cầu.',type:'mid',answer:'Bạn làm rất chăm nhưng bản nộp sai định dạng nhóm cần.',lesson:'Chủ động hỏi rõ khác với làm việc thụ động.',template:'Mình làm phần này nhé. Bạn gửi giúp tiêu chí và deadline cụ thể được không?'}]}
+const leaderEndings = {
+ E1:{name:'Trì hoãn dây chuyền',tone:'bad',message:'Cả nhóm tiếp tục trì hoãn. Đến 24 giờ cuối, mọi người phải thức trắng đêm làm vội vàng khiến bài làm sai sót nhiều.',lesson:'Giữ hòa khí không đồng nghĩa với né tránh trách nhiệm.',template:'Cả nhóm ơi, mình chốt nhanh đầu việc và thời hạn nhé. Mình gửi outline trước 21h để mọi người cùng xem.'},
+ E2:{name:'Cứu tiến độ kịp lúc',tone:'good',message:'Bạn nhận ra nguy cơ và kịp thời điều chỉnh kế hoạch. Nhóm đồng ý chia việc nhanh và bắt đầu có tiến độ.',lesson:'Sửa quyết định kịp thời cũng là một kỹ năng lãnh đạo bản lĩnh.',template:'Mình xin đổi kế hoạch một chút: chia việc 10 phút nhé, rồi mình chốt lịch nghỉ ngơi sau.'},
+ E3:{name:'Nhóm rạn nứt vì áp đặt',tone:'bad',message:'Mọi người làm việc trong sự miễn cưỡng, thiếu kết nối và không khí nhóm trở nên ngột ngạt.',lesson:'Mệnh lệnh áp đặt và trách móc không tạo nên sự hợp tác bền vững.',template:'Mình thấy nhóm đang chậm tiến độ và điều đó khiến mình lo. Mình cùng thống nhất phần việc và mốc kiểm tra nhé.'},
+ E4:{name:'Hàn gắn và đồng lòng',tone:'good',message:'Bạn nhận lỗi về cách nói chuyện gay gắt, giúp giải tỏa tự ái cho đồng đội và kéo mọi người quay lại hợp tác.',lesson:'Biết nhận lỗi và hướng về giải pháp giúp khôi phục niềm tin nhanh chóng.',template:'Xin lỗi vì mình vừa nói hơi gắt. Mình đang lo deadline, không có ý trách ai. Cả nhóm chia việc cụ thể nhé?'},
+ E5:{name:'Cả nhóm vào guồng xuất sắc',tone:'good',message:'Các thành viên nhận việc đúng sở trường, có mốc thời gian rõ ràng và tinh thần làm việc thoải mái.',lesson:'Phân công rõ ràng, tôn trọng năng lực và có mốc kiểm tra là chìa khóa thành công.',template:'Mình đề xuất Doer soạn nội dung, QC kiểm tra, Mediator hỗ trợ slide và mình tổng hợp. Mọi người xác nhận trước 21h nhé!'},
+ E6:{name:'Leader kiệt sức vì ôm việc',tone:'mid',message:'Nhóm tưởng đã xong việc, nhưng Leader phải thức đêm tự xử lý phần khó, dẫn đến quá tải.',lesson:'Lãnh đạo hiệu quả là trao quyền và phân công, không phải làm thay tất cả.',template:'Phần này khá nặng, mình cần một bạn hỗ trợ cùng làm để đảm bảo chất lượng bài tốt nhất.'}
 };
 
 const reversal = {
- title:'Đảo vai: trở thành Minh',
- messages:[['Minh (suy nghĩ)','Mình chưa biết tìm tài liệu gì. Mọi người nói chuyện vui quá, tự nhiên không dám hỏi...'],['An','Minh ơi, sao chưa thấy phần của cậu?']],
+ title:'Đảo vai: Trở thành Doer trong nhóm bạn thân',
+ messages:[
+   ['Doer (suy nghĩ)','Tuần này mình dồn 3 bài tập lớn, deadline sát nút. Nhóm bạn thân cứ rủ đi chơi, mình muốn mở lời xin chia việc sớm mà ngại bị bảo là làm quá...'],
+   ['Leader','Mọi người ơi, có ai làm outline chưa?']
+ ],
  choices:[
- {text:'Mình đang bí phần này, cậu hướng dẫn thêm được không?',type:'good',answer:'An biết rõ vấn đề, hai người chia lại công việc và cùng lên kế hoạch.',lesson:'Chủ động chia sẻ khó khăn là trách nhiệm, không phải yếu kém.'},
- {text:'Mình vẫn đang làm, cứ để đấy đi.',type:'bad',answer:'An không biết tiến độ thực sự; mâu thuẫn có thể tăng.',lesson:'Giấu khó khăn chỉ khiến đồng đội khó phối hợp hơn.'}
+   {
+     text:'Chủ động chia sẻ tình trạng bận rộn và đề xuất họp 15 phút chia việc rõ ràng.',
+     type:'good',
+     answer:'Leader hiểu rõ hoàn cảnh, nhóm chốt nhanh đầu việc giúp bạn vừa giữ được hòa khí vừa hoàn thành bài đúng hạn.',
+     lesson:'Chủ động chia sẻ khó khăn và đề xuất giải pháp là biểu hiện của tinh thần trách nhiệm, không phải yếu kém.'
+   },
+   {
+     text:'Âm thầm chịu đựng, bấm bụng đi chơi cùng nhóm rồi tính sau.',
+     type:'bad',
+     answer:'Công việc bị dồn ứ đến sát deadline, bạn phải thức trắng đêm làm trong bức bối và mệt mỏi.',
+     lesson:'Cả nể và giấu giếm áp lực chỉ làm tăng nguy cơ vỡ trận cho cả bạn lẫn cả nhóm.'
+   }
  ]
 };
 
@@ -282,27 +1066,597 @@ const mapNPCs = [
 ];
 
 
+/**
+ * TEAM-CRAFT · Cute Pet License ID Card Generator (Cool Frog License Style)
+ * Full Story format (900x1190) with pastel gingham backdrop, tilted ID card,
+ * hand-drawn chibi mascot portrait, 4 behavioral indicators, barcode and doodles.
+ */
+
+const personaStyles = {
+  turtle: {
+    name: 'Bạch Tuộc Ôm Việc',
+    english: 'Octopus Overworker',
+    caption: 'Hệ ôm đồm, vã mồ hôi gánh team',
+    code: 'TC-2026-881',
+    bg: '#ffd6de',
+    ginghamDark: '#fbaebd',
+    ginghamLight: '#fde5eb',
+    headerBg: '#ff6b8b',
+    headerText: '#ffffff',
+    photoBg: '#fff0f3',
+    accent: '#ff477e',
+    ink: '#2b1c24',
+    stats: [
+      { label: 'GIAO TIẾP', val: '75%' },
+      { label: 'CHỦ ĐỘNG', val: '100%' },
+      { label: 'HỢP TÁC', val: '85%' },
+      { label: 'MÂU THUẪN', val: 'Né 99%' }
+    ],
+    flower: '#ff758f',
+    trait: '“Thôi để mình làm nốt cho…”'
+  },
+  star: {
+    name: 'Sư Tử Bá Đạo',
+    english: 'King Lion Leader',
+    caption: 'Hệ lãnh đạo, chia việc thần tốc',
+    code: 'TC-2026-882',
+    bg: '#ffedb8',
+    ginghamDark: '#ffd269',
+    ginghamLight: '#fff6d6',
+    headerBg: '#f39c12',
+    headerText: '#ffffff',
+    photoBg: '#fffbf0',
+    accent: '#e67e22',
+    ink: '#2b1c24',
+    stats: [
+      { label: 'GIAO TIẾP', val: '95%' },
+      { label: 'CHỦ ĐỘNG', val: '98%' },
+      { label: 'HỢP TÁC', val: '92%' },
+      { label: 'MÂU THUẪN', val: 'Xử 90%' }
+    ],
+    flower: '#ffa801',
+    trait: '“Mỗi người một việc, đúng hạn nhé!”'
+  },
+  sloth: {
+    name: 'Lười Trì Hoãn',
+    english: 'Sleepy Sloth',
+    caption: 'Hệ dồn deadline, bật mode 23h59',
+    code: 'TC-2026-883',
+    bg: '#fed8c3',
+    ginghamDark: '#f7b48a',
+    ginghamLight: '#fdeee5',
+    headerBg: '#e58e57',
+    headerText: '#ffffff',
+    photoBg: '#fdf6f0',
+    accent: '#d35400',
+    ink: '#2b1c24',
+    stats: [
+      { label: 'GIAO TIẾP', val: '60%' },
+      { label: 'CHỦ ĐỘNG', val: 'Chờ 99%' },
+      { label: 'HỢP TÁC', val: '70%' },
+      { label: 'MÂU THUẪN', val: 'Chill 0%' }
+    ],
+    flower: '#fa8231',
+    trait: '“Mai mình làm thật, hứa luôn!”'
+  },
+  eagle: {
+    name: 'Cú Soi Lỗi',
+    english: 'Detective Owl',
+    caption: 'Hệ soi typo, kính lúp 24/7',
+    code: 'TC-2026-884',
+    bg: '#d8eaff',
+    ginghamDark: '#a3cdff',
+    ginghamLight: '#ecf4ff',
+    headerBg: '#4a69bd',
+    headerText: '#ffffff',
+    photoBg: '#f1f7ff',
+    accent: '#1e3799',
+    ink: '#2b1c24',
+    stats: [
+      { label: 'GIAO TIẾP', val: '82%' },
+      { label: 'CHỦ ĐỘNG', val: '88%' },
+      { label: 'HỢP TÁC', val: '85%' },
+      { label: 'MÂU THUẪN', val: 'Soi 99%' }
+    ],
+    flower: '#3867d6',
+    trait: '“Khoan, slide 5 còn lệch 1px!”'
+  },
+  owl: {
+    name: 'Capybara Hòa Giải',
+    english: 'Zen Capybara',
+    caption: 'Hệ tâm tịnh, dập lửa drama',
+    code: 'TC-2026-885',
+    bg: '#d2f6df',
+    ginghamDark: '#99e8b3',
+    ginghamLight: '#ebfcf1',
+    headerBg: '#20bf6b',
+    headerText: '#ffffff',
+    photoBg: '#f2fbf6',
+    accent: '#26de81',
+    ink: '#2b1c24',
+    stats: [
+      { label: 'GIAO TIẾP', val: '90%' },
+      { label: 'CHỦ ĐỘNG', val: '80%' },
+      { label: 'HỢP TÁC', val: '98%' },
+      { label: 'MÂU THUẪN', val: 'Hạ 100%' }
+    ],
+    flower: '#ff7f50',
+    trait: '“Bình tĩnh nào, uống trà sữa đã!”'
+  },
+  bee: {
+    name: 'Corgi Chăm Chỉ',
+    english: 'Model Corgi',
+    caption: 'Hệ uy tín, việc giao là xong',
+    code: 'TC-2026-886',
+    bg: '#ffe8c2',
+    ginghamDark: '#f7cb7e',
+    ginghamLight: '#fff5e0',
+    headerBg: '#e67e22',
+    headerText: '#ffffff',
+    photoBg: '#fffaf2',
+    accent: '#d35400',
+    ink: '#2b1c24',
+    stats: [
+      { label: 'GIAO TIẾP', val: '88%' },
+      { label: 'CHỦ ĐỘNG', val: '92%' },
+      { label: 'HỢP TÁC', val: '95%' },
+      { label: 'MÂU THUẪN', val: 'Hòa 85%' }
+    ],
+    flower: '#eb4d4b',
+    trait: '“Mình đã nộp đúng hạn vào Drive ạ!”'
+  },
+  ghost: {
+    name: 'Ếch Trùm Chăn',
+    english: 'Blanket Frog',
+    caption: 'Hệ âm thầm, seen không dám rep',
+    code: 'TC-2026-887',
+    bg: '#e4dcfa',
+    ginghamDark: '#c3b1f5',
+    ginghamLight: '#f3effe',
+    headerBg: '#8854d0',
+    headerText: '#ffffff',
+    photoBg: '#f8f6ff',
+    accent: '#6c5ce7',
+    ink: '#2b1c24',
+    stats: [
+      { label: 'GIAO TIẾP', val: '45%' },
+      { label: 'CHỦ ĐỘNG', val: 'Ẩn 95%' },
+      { label: 'HỢP TÁC', val: '72%' },
+      { label: 'MÂU THUẪN', val: 'Né 100%' }
+    ],
+    flower: '#a55eea',
+    trait: '“Đọc rồi… nhưng ngại nhắn quá…”'
+  }
+};
+
+const frameCache = new Map();
+async function mascotImage(id) {
+  if (frameCache.has(id)) return frameCache.get(id);
+  const img = new Image();
+  const path = `assets/personas/${id}.svg`;
+  const src = window.__assetMap?.[path] || new URL(path, import.meta.url).href;
+  const p = new Promise((resolve, reject) => {
+    img.onload = () => resolve(img);
+    img.onerror = () => reject(new Error('Không tải được linh vật ' + id));
+  });
+  img.src = src;
+  frameCache.set(id, p);
+  return p;
+}
+
+function roundRect(ctx, x, y, w, h, r, fill, stroke, strokeWidth = 1) {
+  ctx.beginPath();
+  ctx.roundRect(x, y, w, h, r);
+  if (fill) {
+    ctx.fillStyle = fill;
+    ctx.fill();
+  }
+  if (stroke) {
+    ctx.strokeStyle = stroke;
+    ctx.lineWidth = strokeWidth;
+    ctx.stroke();
+  }
+}
+
+function drawGingham(ctx, w, h, lightColor, darkColor, step = 56) {
+  ctx.fillStyle = lightColor;
+  ctx.fillRect(0, 0, w, h);
+
+  ctx.fillStyle = darkColor;
+  ctx.globalAlpha = 0.42;
+
+  // Vertical bands
+  for (let x = 0; x < w; x += step * 2) {
+    ctx.fillRect(x, 0, step, h);
+  }
+  // Horizontal bands
+  for (let y = 0; y < h; y += step * 2) {
+    ctx.fillRect(0, y, w, step);
+  }
+
+  ctx.globalAlpha = 1.0;
+}
+
+function drawSparkle(ctx, x, y, size, color = '#ffffff') {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  for (let i = 0; i < 4; i++) {
+    const angle = (i * Math.PI) / 2;
+    ctx.lineTo(Math.cos(angle) * size, Math.sin(angle) * size);
+    ctx.lineTo(Math.cos(angle + Math.PI / 4) * (size * 0.22), Math.sin(angle + Math.PI / 4) * (size * 0.22));
+  }
+  ctx.closePath();
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawFlower(ctx, x, y, r, petalColor, strokeColor = '#2b1c24') {
+  ctx.save();
+  ctx.translate(x, y);
+  for (let i = 0; i < 5; i++) {
+    const angle = (i * 2 * Math.PI) / 5 - Math.PI / 2;
+    const px = Math.cos(angle) * r;
+    const py = Math.sin(angle) * r;
+    ctx.beginPath();
+    ctx.arc(px, py, r * 0.85, 0, Math.PI * 2);
+    ctx.fillStyle = petalColor;
+    ctx.fill();
+    ctx.strokeStyle = strokeColor;
+    ctx.lineWidth = 3.5;
+    ctx.stroke();
+  }
+  // Center pistil
+  ctx.beginPath();
+  ctx.arc(0, 0, r * 0.55, 0, Math.PI * 2);
+  ctx.fillStyle = '#ffffff';
+  ctx.fill();
+  ctx.strokeStyle = strokeColor;
+  ctx.lineWidth = 3;
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawBarcode(ctx, x, y, w, h, color = '#2b1c24') {
+  ctx.save();
+  ctx.strokeStyle = color;
+  ctx.fillStyle = color;
+  ctx.lineCap = 'round';
+
+  const pattern = [2, 1, 4, 1, 1, 3, 2, 1, 5, 2, 1, 3, 1, 4, 2, 1, 1, 3, 2, 4, 1, 2, 5, 1, 3, 2, 1, 4];
+  let curX = x;
+  const barW = w / 48;
+
+  for (let i = 0; i < pattern.length && curX < x + w; i++) {
+    const sw = Math.min(pattern[i] * 1.5, 6.5);
+    const varH = (i % 5 === 0) ? h * 0.78 : (i % 3 === 0) ? h * 0.9 : h;
+    const offsetY = h - varH;
+
+    ctx.lineWidth = sw;
+    ctx.beginPath();
+    ctx.moveTo(curX, y + offsetY);
+    ctx.lineTo(curX, y + h);
+    ctx.stroke();
+
+    curX += sw + barW;
+  }
+  ctx.restore();
+}
+
+function drawWavyLine(ctx, x, y, w, color = '#2b1c24', amp = 2.5, freq = 12) {
+  ctx.save();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2.2;
+  ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+  for (let cx = x; cx <= x + w; cx += 2) {
+    const cy = y + Math.sin(((cx - x) / freq) * Math.PI) * amp;
+    ctx.lineTo(cx, cy);
+  }
+  ctx.stroke();
+  ctx.restore();
+}
+
+async function drawPersonaCard(canvas, p, nickname = 'CUT3FROG247', date = new Date()) {
+  if (document.fonts?.ready) {
+    try { await document.fonts.ready; } catch {}
+  }
+
+  const ctx = canvas.getContext('2d');
+  const W = 900;
+  const H = 1190;
+  canvas.width = W;
+  canvas.height = H;
+
+  const v = personaStyles[p.id] || personaStyles.bee;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // 1. STORY BACKDROP (Gingham Caro Pattern)
+  drawGingham(ctx, W, H, v.ginghamLight, v.ginghamDark, 54);
+
+  // Sparkles & Star Doodles on backdrop
+  const sparkles = [
+    [110, 110, 24], [780, 140, 22], [90, 480, 18], [810, 520, 26],
+    [130, 890, 22], [790, 930, 28], [450, 75, 20], [450, 1115, 22],
+    [240, 1135, 14], [670, 1130, 16]
+  ];
+  for (const [sx, sy, sr] of sparkles) {
+    drawSparkle(ctx, sx, sy, sr, '#ffffff');
+    drawSparkle(ctx, sx, sy, sr * 0.45, v.headerBg);
+  }
+
+  // Crosses (+) & Dots around the backdrop
+  ctx.fillStyle = '#ffffff';
+  ctx.font = '900 24px sans-serif';
+  ctx.fillText('+', 190, 80);
+  ctx.fillText('+', 710, 95);
+  ctx.fillText('+', 820, 740);
+  ctx.fillText('+', 70, 720);
+
+  // Hand-drawn white curved doodle arcs at corners
+  ctx.save();
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+  ctx.lineWidth = 7;
+  ctx.lineCap = 'round';
+  // Top-left doodle arc
+  ctx.beginPath();
+  ctx.arc(85, 250, 45, Math.PI * 0.7, Math.PI * 1.35);
+  ctx.stroke();
+  // Bottom-left doodle arc
+  ctx.beginPath();
+  ctx.arc(80, 960, 55, Math.PI * 0.6, Math.PI * 1.2);
+  ctx.stroke();
+  // Top-right doodle arc
+  ctx.beginPath();
+  ctx.arc(815, 260, 50, -Math.PI * 0.3, Math.PI * 0.35);
+  ctx.stroke();
+  // Bottom-right doodle arc
+  ctx.beginPath();
+  ctx.arc(815, 980, 50, -Math.PI * 0.25, Math.PI * 0.4);
+  ctx.stroke();
+  ctx.restore();
+
+  // 2. TILTED CENTRAL ID CARD (rotate ~ -2.4deg)
+  const cardW = 790;
+  const cardH = 500;
+  const cardCenterX = W / 2;
+  const cardCenterY = H / 2 - 15;
+
+  ctx.save();
+  ctx.translate(cardCenterX, cardCenterY);
+  ctx.rotate((-2.4 * Math.PI) / 180);
+
+  const cardLeft = -cardW / 2;
+  const cardTop = -cardH / 2;
+
+  // Drop Shadow
+  ctx.save();
+  ctx.shadowColor = 'rgba(45, 28, 36, 0.22)';
+  ctx.shadowBlur = 24;
+  ctx.shadowOffsetX = 6;
+  ctx.shadowOffsetY = 16;
+  roundRect(ctx, cardLeft, cardTop, cardW, cardH, 32, '#fffdf8', null);
+  ctx.restore();
+
+  // Card Body (Warm cream white)
+  roundRect(ctx, cardLeft, cardTop, cardW, cardH, 32, '#fffdf8', v.ink, 6.5);
+
+  // Card Header Banner (Cute rounded banner across top)
+  const bannerMargin = 16;
+  const bannerW = cardW - bannerMargin * 2;
+  const bannerH = 78;
+  const bannerX = cardLeft + bannerMargin;
+  const bannerY = cardTop + bannerMargin;
+
+  roundRect(ctx, bannerX, bannerY, bannerW, bannerH, 18, v.headerBg, v.ink, 5.5);
+
+  // Header Title
+  ctx.fillStyle = v.headerText;
+  ctx.font = '800 38px "Baloo 2", "Arial Rounded MT Bold", cursive, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.letterSpacing = '1px';
+  ctx.fillText('★  TEAM-CRAFT LICENSE  ★', 0, bannerY + bannerH / 2 + 1);
+
+  // 3. LEFT COLUMN: Photo Frame & Mascot
+  const photoW = 245;
+  const photoH = 265;
+  const photoX = cardLeft + 32;
+  const photoY = bannerY + bannerH + 20;
+
+  // Photo box frame
+  roundRect(ctx, photoX, photoY, photoW, photoH, 16, v.photoBg, v.ink, 5);
+
+  // Mascot Image
+  try {
+    const mascot = await mascotImage(p.id);
+    const pad = 12;
+    ctx.drawImage(mascot, photoX + pad, photoY + pad, photoW - pad * 2, photoH - pad * 2);
+  } catch (err) {
+    console.error('Cannot load mascot:', err);
+  }
+
+  // Handwritten Mascot Signature / Name underneath photo
+  ctx.font = '800 23px "Baloo 2", "Comic Sans MS", cursive, sans-serif';
+  const nameW = ctx.measureText(v.name).width;
+  const photoCenterX = photoX + photoW / 2;
+
+  // Tiny cute flower placed with ample breathing room to the left of the signature (no overlap)
+  const flowerX = Math.min(photoX + 13, photoCenterX - nameW / 2 - 16);
+  drawFlower(ctx, flowerX, photoY + photoH + 24, 6.5, v.flower, v.ink);
+
+  ctx.fillStyle = v.accent;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
+  ctx.fillText(v.name, photoCenterX, photoY + photoH + 12);
+
+  // 4. RIGHT COLUMN: Information & 4 Behavioral Indicators
+  const infoX = cardLeft + 305;
+  const infoY = bannerY + bannerH + 18;
+
+  // Player ID / Nickname row (up to 22 chars with auto-scale & dynamic wavy signature)
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'top';
+  ctx.fillStyle = v.ink;
+  const rawId = (nickname && nickname.trim()) ? nickname.trim() : 'CUT3FROG247';
+  const displayId = rawId.toUpperCase().slice(0, 22);
+
+  const maxNickW = 380;
+  let nickFontSize = 28;
+  ctx.font = `800 ${nickFontSize}px "Baloo 2", "Lexend", monospace`;
+  while (ctx.measureText(displayId).width > maxNickW && nickFontSize > 18) {
+    nickFontSize -= 1;
+    ctx.font = `800 ${nickFontSize}px "Baloo 2", "Lexend", monospace`;
+  }
+  ctx.fillText(displayId, infoX, infoY + 2, maxNickW);
+
+  // Two hand-drawn wavy signature scribble lines dynamically scaling with the ID length
+  const nickW = Math.max(ctx.measureText(displayId).width, 180);
+  drawWavyLine(ctx, infoX, infoY + 38, Math.min(nickW + 24, 370), v.ink, 2.2, 11);
+  drawWavyLine(ctx, infoX, infoY + 45, Math.min(nickW * 0.78, 280), v.ink, 1.8, 9);
+
+  // Title: Persona Title (Large Bold Title with dynamic auto-scaling to avoid overflow)
+  const maxTitleW = cardW - 305 - 48; // ~437px safe width inside card
+  let titleFontSize = 31;
+  ctx.font = `800 ${titleFontSize}px "Baloo 2", "Lexend", cursive, sans-serif`;
+  while (ctx.measureText(p.title).width > maxTitleW && titleFontSize > 20) {
+    titleFontSize -= 1;
+    ctx.font = `800 ${titleFontSize}px "Baloo 2", "Lexend", cursive, sans-serif`;
+  }
+  ctx.fillStyle = v.ink;
+  ctx.fillText(p.title, infoX, infoY + 64, maxTitleW);
+
+  // Subtitle / Caption (Personality / Clan)
+  ctx.fillStyle = '#6e5461';
+  ctx.font = '600 20px "Lexend", sans-serif';
+  ctx.fillText(v.caption, infoX, infoY + 107, maxTitleW);
+
+  // 4 Behavioral Indicators (4 columns)
+  const statsY = infoY + 155;
+  const colSpacing = 112;
+
+  v.stats.forEach((st, idx) => {
+    const colX = infoX + idx * colSpacing;
+    // Label
+    ctx.fillStyle = '#8c707d';
+    ctx.font = '600 13px "Lexend", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(st.label, colX + 42, statsY);
+
+    // Value
+    ctx.fillStyle = v.ink;
+    ctx.font = '800 21px "Baloo 2", "Lexend", sans-serif';
+    ctx.fillText(st.val, colX + 42, statsY + 22);
+  });
+
+  // Barcode in Bottom-Right
+  const barcodeX = infoX;
+  const barcodeY = statsY + 66;
+  drawBarcode(ctx, barcodeX, barcodeY, 265, 36, v.ink);
+
+  // Barcode caption
+  ctx.fillStyle = '#9b808e';
+  ctx.font = '500 12px "Lexend", monospace';
+  ctx.textAlign = 'left';
+  ctx.fillText(v.code + ' • OFFICIAL ID', barcodeX, barcodeY + 42);
+
+  // 1-2 Cute Pink Cherry Blossom Flowers in Bottom-Right corner of Card
+  drawFlower(ctx, cardLeft + cardW - 75, cardTop + cardH - 85, 20, v.flower, v.ink);
+  drawFlower(ctx, cardLeft + cardW - 38, cardTop + cardH - 45, 12, v.flower, v.ink);
+
+  ctx.restore(); // Restore rotated card coordinate space
+
+  // 5. BOTTOM STORY FOOTER (Outside Card, on Story Backdrop)
+  ctx.fillStyle = v.ink;
+  ctx.font = '800 24px "Baloo 2", cursive, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('✦ THẺ HÀNH NGHỀ TEAMWORK ✦', W / 2, H - 75);
+
+  ctx.fillStyle = '#7a5a6a';
+  ctx.font = '500 17px "Lexend", sans-serif';
+  ctx.fillText(v.trait + ' · TEAM-CRAFT SIMULATOR', W / 2, H - 42);
+
+  return canvas;
+}
+
+
 
 const ROOT=document.getElementById('app');
 const TOAST=document.getElementById('toast');
-const STORE='teamcraft-redesign-v3';
-let saved={}; try{saved=JSON.parse(localStorage.getItem(STORE)||'{}')}catch{}
-const state={screen:'home',level:1,stage:0,role:saved.role||'leader',outfit:saved.outfit||'blue',persona:saved.persona||null,quizAnswers:[],quizIndex:0,quizTime:60,gameTime:20,game:null,done:saved.done||[],wallet:saved.wallet||[]};
+const STORE='teamcraft-redesign-v4';
+let saved={}; try{saved=JSON.parse(localStorage.getItem(STORE)||localStorage.getItem('teamcraft-redesign-v3')||'{}')}catch{}
+let extraUnlocked=[]; try{extraUnlocked=JSON.parse(localStorage.getItem('unlockedStages')||'[]')}catch{}
+let extraLevels=[]; try{extraLevels=JSON.parse(localStorage.getItem('unlockedLevels')||'[]')}catch{}
+const initialStages=Array.from(new Set(['1:0',...(saved.unlockedStages||[]),...(Array.isArray(extraUnlocked)?extraUnlocked:[])]));
+const initialLevels=Array.from(new Set([1,...(saved.unlockedLevels||[]),...(Array.isArray(extraLevels)?extraLevels:[])]));
+if(initialStages.includes('1:4')||(saved.done&&saved.done.some(k=>k.startsWith('1:4:')))){
+  if(!initialLevels.includes(2))initialLevels.push(2);
+  if(!initialStages.includes('2:0'))initialStages.push('2:0');
+}
+
+const state={
+  screen:'home',
+  level:1,
+  stage:0,
+  role:saved.role||'leader',
+  outfit:saved.outfit||'blue',
+  persona:saved.persona||null,
+  previewPersona:null,
+  nickname:saved.nickname||'CUT3FROG247',
+  quizAnswers:[],
+  quizIndex:0,
+  quizTime:60,
+  gameTime:20,
+  game:null,
+  done:saved.done||[],
+  wallet:saved.wallet||[],
+  unlockedStages:initialStages,
+  unlockedLevels:initialLevels
+};
+
 let clock=null;
 const allOutfits=[{id:'blue',name:'Xanh ULIS'},{id:'rose',name:'Hồng pastel'},{id:'leaf',name:'Xanh lá'},{id:'violet',name:'Tím nhạt'},{id:'gold',name:'Vàng mật ong'}];
 const safe=s=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
 const role=id=>roles.find(r=>r.id===id)||roles[0];
 const level=id=>levels.find(l=>l.id===Number(id))||levels[0];
-function save(){try{localStorage.setItem(STORE,JSON.stringify({role:state.role,outfit:state.outfit,persona:state.persona,done:state.done,wallet:state.wallet}))}catch{}}
-const icon=(name,cls='')=>`<img class="icon ${cls}" src="assets/ui/${name}.svg" alt="">`;
-const sprite=(id,pose='idle')=>`assets/characters/${id}_${pose}.svg`;
+
+function save(){
+  try{
+    localStorage.setItem(STORE,JSON.stringify({
+      role:state.role,
+      outfit:state.outfit,
+      persona:state.persona,
+      nickname:state.nickname,
+      done:state.done,
+      wallet:state.wallet,
+      unlockedStages:state.unlockedStages,
+      unlockedLevels:state.unlockedLevels
+    }));
+    localStorage.setItem('unlockedStages',JSON.stringify(state.unlockedStages));
+    localStorage.setItem('unlockedLevels',JSON.stringify(state.unlockedLevels));
+  }catch{}
+}
+
+const isLevelUnlocked=lvlId=>{const n=Number(lvlId);if(n>2)return false;return n===1||state.unlockedLevels.includes(n)};
+const isStageUnlocked=(lvlId,stgIdx)=>{if(!isLevelUnlocked(lvlId))return false;if(stgIdx===0)return true;return state.unlockedStages.includes(`${lvlId}:${stgIdx}`)};
+function unlockLevel(lvlId){const n=Number(lvlId);if(!state.unlockedLevels.includes(n)){state.unlockedLevels.push(n)}unlockStage(n,0);save()}
+function unlockStage(lvlId,stgIdx){const key=`${lvlId}:${stgIdx}`;if(!state.unlockedStages.includes(key)){state.unlockedStages.push(key);save()}}
+
+const assetPath=path=>window.__assetMap?.[path]||path;
+const icon=(name,cls='')=>`<img class="icon ${cls}" src="${assetPath('assets/ui/'+name+'.svg')}" alt="">`;
+const sprite=(id,pose='idle')=>assetPath(`assets/characters/${id}_${pose}.svg`);
 const avatar=(id,cl='',pose='idle')=>`<img class="character ${cl}" src="${sprite(id,pose)}" alt="">`;
 const player=(pose='idle',cl='')=>avatar(state.role,cl,pose);
-const outfitted=(cl='')=>`<img class="character ${cl}" src="assets/characters/${state.role}_outfit_${state.outfit}.svg" alt="">`;
+const outfitted=(cl='')=>`<img class="character ${cl}" src="${assetPath(`assets/characters/${state.role}_outfit_${state.outfit}.svg`)}" alt="">`;
 const logo=(sm=false)=>`<div class="brand ${sm?'brand-sm':''}"><span>TEAM</span><span>CRAFT</span></div>`;
 const shell=(cls,html)=>`<main class="device"><section class="page ${cls}">${html}</section></main>`;
 const btn=(label,action='map',variant='green',extras='')=>`<button class="game-btn ${variant}" data-go="${action}" ${extras}>${label}</button>`;
-const topbar=(title,go='map')=>`<header class="page-top"><button class="circle-action" data-go="${go}" aria-label="Quay lại">${icon('back')}</button><h1>${safe(title)}</h1><div class="page-top-spacer"></div></header>`;
+const topbar=(title,go='map',showHome=true)=>`<header class="page-top"><button class="circle-action" data-go="${go}" aria-label="Quay lại">${icon('back')}</button><h1>${safe(title)}</h1>${showHome?`<button class="circle-action" data-go="home" aria-label="Trang chủ">${icon('home')}</button>`:`<div class="page-top-spacer"></div>`}</header>`;
+
 function toast(text){TOAST.textContent=text;TOAST.classList.add('on');clearTimeout(TOAST._t);TOAST._t=setTimeout(()=>TOAST.classList.remove('on'),2400)}
 function stopClock(){if(clock!==null)clearInterval(clock);clock=null}
 function route(screen){stopClock();state.screen=screen;render();window.scrollTo(0,0)}
@@ -320,112 +1674,525 @@ function home(){return shell('home-page',`
   <div class="talk-label">Chọn cách ứng xử. Xem điều gì sẽ xảy ra!</div>
 </section>
 <section class="home-cta"><button class="game-btn green large" data-go="map">${icon('play')} BẮT ĐẦU CHƠI</button>
-<button class="game-btn pale large" data-action="start-quiz">${icon('star')} LÀM QUIZ 60 GIÂY</button></section>
+<button class="game-btn pale large" data-action="start-quiz">${icon('star')} LÀM QUIZ 60 GIÂY</button>
+<button class="peek-card-cta" data-go="personaGallery">✦ KHÁM PHÁ 7 THẺ NHÂN VẬT VUI NHỘN <span>›</span></button></section>
 <div class="home-feature-strip"><div>${icon('team')}<span>5 VAI TRÒ</span></div><div>${icon('rotate')}<span>ĐẢO VAI</span></div><div>${icon('book')}<span>BÀI HỌC</span></div></div>
-<p class="footer-note">Phiên bản trải nghiệm • 2 ải đầu có gameplay mẫu</p>
+<p class="footer-note">Phiên bản trải nghiệm • Ải 1 & Ải 2 đầy đủ kịch bản</p>
 `)}
 
-const mapNPCs=[
- ['student-a',11.2,28.5,'idle','kid-a'],['student-c',85,39.5,'talk','kid-b'],
- ['student-b',11.4,56.0,'idle','kid-c'],['student-a',87,66.8,'walk_a','kid-d'],
- ['student-c',22.5,83,'idle','kid-e']
+const mapNPCLayout=[
+ ['student-a',14.5,30.5,'idle','kid-a'],['student-c',82,35.5,'talk','kid-b'],
+ ['student-b',14.2,56.3,'idle','kid-c'],['student-a',86,63.5,'walk_a','kid-d']
 ];
-function map(){const nodes=[
- {n:5,x:52,y:21.1,cap:'BOSS CUỐI',name:'Dự Án Công Sở',theme:'boss'},
- {n:4,x:52,y:35.5,cap:'CĂNG THẲNG',name:'Trùm Free-rider',theme:'danger'},
- {n:3,x:47,y:47.8,cap:'TĂNG ÁP LỰC',name:'Nước Đến Chân Mới Nhảy',theme:'orange'},
- {n:2,x:47,y:63.4,cap:'TRUNG BÌNH',name:'Người Lạ Ơi',theme:'blue'},
- {n:1,x:49,y:79,cap:'DỄ',name:'Nhóm Bạn Thân',theme:'green'}];
-return shell('map-page',`
-<img class="map-scene" src="assets/campus-map.svg" alt="Khuôn viên trường học phong cách hoạt hình, con đường đi qua năm ải">
-<div class="map-hud"><button class="map-logo" data-go="home" aria-label="Trang chủ">${logo(true)}</button>
+function map(){
+  const nodes=[
+    {n:5,x:49,y:24.6,name:'Dự Án Công Sở',theme:'locked'},
+    {n:4,x:65,y:38.2,name:'Trùm Free-rider',theme:'locked'},
+    {n:3,x:43,y:51,name:'Nước Đến Chân Mới Nhảy',theme:'locked'},
+    {n:2,x:52,y:65.4,cap:'TRUNG BÌNH',name:'Người Lạ Ơi',theme:'blue'},
+    {n:1,x:31,y:79.7,cap:'DỄ',name:'Nhóm Bạn Thân',theme:'green'}
+  ];
+  return shell('map-page',`
+<img class="map-scene" src="${assetPath('assets/campus-map.webp')}" alt="Khuôn viên trường học phong cách hoạt hình, con đường đi qua năm ải">
+<div class="map-hud">
+  <div class="map-hud-left">
+    <button class="map-logo" data-go="home" aria-label="Trang chủ">${logo(true)}</button>
+    <button class="map-home-btn" data-go="home" aria-label="Về Trang chủ">${icon('home')} <span>Trang chủ</span></button>
+  </div>
   <div class="resources"><span>${icon('heart')} <b>120</b></span><span>${icon('coin')} <b>500</b></span></div></div>
-${mapNPCs.map(([name,x,y,pose,id])=>`<img class="map-npc ${id}" src="${sprite(name,pose)}" style="left:${x}%;top:${y}%" alt="" loading="lazy">`).join('')}
-${nodes.map(n=>`<button class="level-spot ${n.theme}" style="left:${n.x}%;top:${n.y}%" data-level="${n.n}" aria-label="Ải ${n.n}: ${n.name}">
- <span class="level-orb">${n.n===5?icon('shield'):n.n===4?icon('star'):n.n===3?icon('clock'):n.n===2?icon('chat'):icon('check')}</span>
- <span class="level-copy"><b>ẢI ${n.n}: ${n.name}</b><small>${n.cap}</small></span></button>`).join('')}
+${mapNPCLayout.map(([name,x,y,pose,id])=>`<img class="map-npc ${id}" src="${sprite(name,pose)}" style="left:${x}%;top:${y}%" alt="" loading="lazy">`).join('')}
+${nodes.map(n=>{
+  const isComingSoon=n.n>2;
+  const isLocked=isComingSoon||!isLevelUnlocked(n.n);
+  const badgeText=isComingSoon?'SẮP RA MẮT':n.cap;
+  return `<button class="level-spot ${n.theme} ${isLocked?'is-locked':''} ${isComingSoon?'is-coming-soon':''}" style="left:${n.x}%;top:${n.y}%" data-level="${n.n}" aria-label="Ải ${n.n}: ${n.name}">
+ <span class="level-orb ${isComingSoon?'is-coming-soon':''}">${isLocked?icon('lock'):n.n===2?icon('chat'):icon('check')}</span>
+ <span class="level-copy"><b>ẢI ${n.n}: ${n.name}</b><small class="${isComingSoon?'coming-badge':''}">${badgeText}</small></span></button>`;
+}).join('')}
 <nav class="map-dock"><button data-go="roles" class="dock-small">${icon('team')}<span>Vai trò</span></button>
-<button class="dock-play" data-level="1">${icon('play')}<strong>CHƠI NGAY</strong></button>
+<button class="dock-play" data-action="play-campaign">${icon('play')}<strong>CHƠI NGAY</strong></button>
 <button data-go="wallet" class="dock-small">${icon('book')}<span>Nhiệm vụ</span></button></nav>
 `)}
 
-function rolesView(){const r=role(state.role);return shell('interior-page',`${topbar('Chọn vai trò','map')}
+function rolesView(){const r=role(state.role);return shell('interior-page',`${topbar('Chọn vai trò','map',true)}
 <div class="page-body"><div class="page-intro">Mỗi vai trò có cách nhìn và nhiệm vụ khác nhau.</div>
-<div class="role-grid">${roles.map(item=>`<button class="role-tile ${state.role===item.id?'active':''}" data-role="${item.id}">
-<div class="role-figure">${avatar(item.id,'role-char',state.role===item.id?'talk':'idle')}</div><b>${safe(item.name)}</b><small>${item.en}</small>${state.role===item.id?`<span class="checkmark">${icon('check')}</span>`:''}</button>`).join('')}</div>
+<div class="role-grid">${roles.map(item=>`<div class="role-tile ${state.role===item.id?'active':''}">
+<button class="role-select" data-role="${item.id}" aria-label="Nhập vai ${safe(item.name)}"><div class="role-figure">${avatar(item.id,'role-char',state.role===item.id?'talk':'idle')}</div><b>${safe(item.name)}</b><small>${item.en}</small><em>NHẬP VAI</em></button>
+<button class="role-quick-edit" data-custom-role="${item.id}" aria-label="Tùy chỉnh ${safe(item.name)}">${icon('edit')}</button>
+${state.role===item.id?`<span class="checkmark">${icon('check')}</span>`:''}</div>`).join('')}</div>
 <div class="role-summary"><div class="role-portrait">${avatar(state.role,'portrait-char')}</div><div><strong>${safe(r.name)}</strong><p>${safe(r.skill)}</p></div></div>
 <div class="button-pair">${btn(`${icon('edit')} Tùy chỉnh`,'custom','sky')}${btn('Xác nhận','map','green')}</div>
 </div>`)}
 
-function customView(){return shell('interior-page',`${topbar('Tùy chỉnh nhân vật','roles')}
+function customView(){return shell('interior-page',`${topbar('Tùy chỉnh nhân vật','roles',true)}
 <div class="page-body"><div class="preview-stage"><div class="preview-ring"></div>${outfitted('preview-character')}<div class="preview-name">${safe(role(state.role).name)}</div></div>
-<h2 class="subheading">Bộ trang phục</h2><div class="outfit-row">${allOutfits.map(x=>`<button class="outfit-item ${x.id===state.outfit?'active':''}" data-outfit="${x.id}"><img src="assets/characters/${state.role}_outfit_${x.id}.svg" alt=""><span>${x.name}</span></button>`).join('')}</div>
+<h2 class="subheading">Bộ trang phục</h2><div class="outfit-row">${allOutfits.map(x=>`<button class="outfit-item ${x.id===state.outfit?'active':''}" data-outfit="${x.id}"><img src="${assetPath(`assets/characters/${state.role}_outfit_${x.id}.svg`)}" alt=""><span>${x.name}</span></button>`).join('')}</div>
 ${btn(`${icon('check')} Hoàn tất`,'roles','green full')}</div>`)}
 
-function stagesView(){const l=level(state.level);return shell('interior-page',`${topbar('Ải '+l.id+': '+l.name,'map')}
+function comingSoonView(){const l=level(state.level);const tagText='SẮP RA MẮT';return shell('interior-page',`${topbar('Ải '+l.id+': '+l.name,'map',true)}
+<div class="page-body centered">
+  <div class="preview-stage small" style="margin-bottom:6px">${avatar(l.roles?.[0]||'leader','preview-character','talk')}</div>
+  <div style="text-align:center"><span class="coming-badge-tag">${icon('spark')} ${tagText}</span><h2 class="coming-title">ẢI ${l.id}: ${safe(l.name)}</h2></div>
+  <div class="lesson-card coming-soon-card">
+    <div class="coming-highlight-icon">${icon('lock')}</div>
+    <p class="coming-message"><strong>Nội dung Ải này đang được cập nhật. Vui lòng quay lại sau!</strong></p>
+    <p class="coming-subtext">Hệ thống kịch bản, nhánh đối thoại thực chiến và bài học chuyên sâu của Ải ${l.id} đang trong quá trình xây dựng.</p>
+    <div class="coming-info-box">
+      <div><b>Chủ đề:</b> ${safe(l.description)}</div>
+      <div><b>Vai trò tiêu biểu:</b> ${l.roles.map(id=>role(id).name).join(' • ')}</div>
+      <div><b>Quy mô dự kiến:</b> ${l.stages.length} tình huống mô phỏng</div>
+    </div>
+  </div>
+  <div class="button-pair" style="margin-top:16px">${btn(`${icon('back')} Quay lại Bản đồ`,'map','green')}${btn(`${icon('home')} Về Trang chủ`,'home','sky')}</div>
+</div>`)}
+
+function stagesView(){const l=level(state.level);if(l.id>2)return comingSoonView();return shell('interior-page',`${topbar('Ải '+l.id+': '+l.name,'map',true)}
 <div class="page-body"><div class="stage-banner"><div><span>CHƯƠNG ${l.id}</span><h2>${safe(l.name)}</h2><p>${safe(l.description)}</p></div>${avatar(l.roles[0],'banner-char','talk')}</div>
 <div class="level-info">Vai trò ở ải này: ${l.roles.map(id=>role(id).name).join(' • ')}</div>
-<div class="stage-list">${l.stages.map((s,i)=>`<button class="stage-item ${i===0&&l.id<=2?'is-ready':'is-locked'}" data-stage="${i}"><span class="stage-image">${avatar(l.roles[i%l.roles.length],'stage-char',i===0?'talk':'idle')}</span><span class="stage-text"><b>MÀN ${i+1} · ${safe(s[0])}</b><small>${safe(s[1])}</small><em>${i===0&&l.id<=2?'CHƠI MÀN NÀY':'CHƯA CÓ HỘI THOẠI'}</em></span><span class="stage-icon">${icon(i===0&&l.id<=2?'play':'lock')}</span></button>`).join('')}</div>
+<div class="stage-list">${l.stages.map((s,i)=>{
+  const ready=isStageUnlocked(l.id,i);
+  const stageKey=`${l.id}:${i}`;
+  const hasDialogue=Boolean(stageScenarios[stageKey]||quickScenarios[stageKey]);
+  const isChat=(l.id===1&&[0,3].includes(i))||(l.id===2&&[0,1,5].includes(i));
+  return `<button class="stage-item ${ready?'is-ready':'is-locked'}" data-stage="${i}"><span class="stage-image">${avatar(l.roles[i%l.roles.length],'stage-char',ready?'talk':'idle')}</span><span class="stage-text"><b>MÀN ${i+1} · ${safe(s[0])}</b><span class="stage-mode">${isChat?'CHAT NHÓM':l.id<=2?'LÀM VIỆC TRỰC TIẾP':'CHƯA ĐỊNH DẠNG'}</span><small>${safe(s[1])}</small><em>${hasDialogue?(ready?'CHƠI MÀN NÀY':'CHƯA MỞ KHÓA'):'ĐANG CẬP NHẬT'}</em></span><span class="stage-icon">${icon(ready?'play':'lock')}</span></button>`;
+}).join('')}</div>
 </div>`)}
-function stagePreview(){const l=level(state.level);const s=l.stages[state.stage];return shell('interior-page',`${topbar('Thông tin màn','stages')}<div class="page-body centered"><div class="preview-stage small">${avatar(l.roles[0],'preview-character')}</div><div class="lesson-card"><b>ẢI ${l.id} / MÀN ${state.stage+1}</b><h2>${safe(s[0])}</h2><p>${safe(s[1])}</p><p class="muted">Màn này đã có tên và mô tả trong đề xuất nhưng chưa có cây thoại hoàn chỉnh để chơi.</p></div>${btn('Các màn khác','stages','sky full')}</div>`)}
 
-function quizView(){const q=quizQuestions[state.quizIndex];return shell('quiz-page',`${topbar('Quiz phong cách','home')}
+function stageIntro(){
+  const l=level(state.level);
+  if(l.id>2)return comingSoonView();
+  const s=l.stages[state.stage];
+  if(!s)return stagesView();
+  const isChat=(l.id===1&&[0,3].includes(state.stage))||(l.id===2&&[0,1,5].includes(state.stage));
+  return shell('interior-page',`${topbar('Thẻ bối cảnh','stages',true)}
+<div class="page-body"><div class="stage-intro-meta"><span>ẢI ${l.id} • MÀN ${state.stage+1}</span><span>${isChat?'CHAT NHÓM':'LÀM VIỆC TRỰC TIẾP'}</span>${l.id===1?'<span>CÒN 48 GIỜ</span>':''}</div>
+<div class="stage-intro-art">${avatar('leader','stage-pola','idle')}${avatar('doer','stage-pola','talk')}${avatar(l.id===1?'mediator':'follower','stage-pola','idle')}</div>
+<h2 class="stage-intro-title">${safe(s[0])}</h2><p class="stage-intro-desc">${safe(s[1])}</p>
+<div class="stage-intro-tip"><strong>Bạn là ${safe(role(state.role).name)}.</strong> Phản ứng của đồng đội và kết cục bài thuyết trình phụ thuộc vào lựa chọn của bạn. Có thể chơi lại để thử một cách xử lý khác.</div>
+${btn(`${icon('play')} BẮT ĐẦU MÔ PHỎNG`,'beginStage','green full')}
+</div>`)}
+
+function stagePreview(){const l=level(state.level);if(l.id>2)return comingSoonView();const s=l.stages[state.stage];return shell('interior-page',`${topbar('Thông tin màn','stages',true)}<div class="page-body centered"><div class="preview-stage small">${avatar(l.roles[0],'preview-character')}</div><div class="lesson-card"><b>ẢI ${l.id} / MÀN ${state.stage+1}</b><h2>${safe(s?s[0]:'Đang cập nhật')}</h2><p>${safe(s?s[1]:'')}</p><p class="muted">Màn này đang trong quá trình hoàn thiện kịch bản chi tiết.</p></div>${btn('Các màn khác','stages','sky full')}</div>`)}
+
+function quizView(){const q=quizQuestions[state.quizIndex];return shell('quiz-page',`${topbar('Quiz phong cách','home',true)}
 <div class="page-body"><div class="progress-header"><strong>CÂU ${state.quizIndex+1} / 5</strong><span id="quiz-count">${state.quizTime}s</span></div><div class="progress-track"><span style="width:${(state.quizIndex+1)*20}%"></span></div>
 <div class="quiz-panel"><div class="quiz-figure">${avatar(state.quizIndex%2?'mediator':'follower','quiz-char')}</div><h2>${safe(q.question)}</h2><div class="quiz-options">${q.answers.map((ans,i)=>`<button class="answer" data-quiz="${i}"><span>${String.fromCharCode(65+i)}</span>${safe(ans[0])}</button>`).join('')}</div></div>
 <p class="small-note">Quiz chỉ mang tính khám phá phong cách làm việc, không phải kiểm tra EQ.</p></div>`)}
-function quizResult(){const p=personas.find(x=>x.id===state.persona)||personas[0];return shell('quiz-page',`${topbar('Thẻ phong cách','home')}
-<div class="page-body"><div class="persona-card"><span class="persona-heading">TEAM CRAFT / CHARACTER CARD</span><div class="persona-inner">${player('talk','persona-char')}<div><h2>${safe(p.title)}</h2><p>${safe(p.desc)}</p></div></div><div class="persona-footer">THẺ KHÁM PHÁ PHONG CÁCH LÀM VIỆC NHÓM</div></div>
-<div class="lesson-card"><strong>Gợi ý của TEAM-CRAFT</strong><p>${safe(p.tip)}</p></div>${btn(`${icon('play')} Vào game mô phỏng`,'map','green full')}</div>`)}
 
-const talkSprites={'Minh':'doer','Lan':'mediator','Huy':'follower','An':'leader','Bạn':null,'Hệ thống':'follower','Minh (suy nghĩ)':'doer'};
-function bubble(name,msg){const mine=name==='Bạn';const id=talkSprites[name]||state.role;return `<div class="bubble-row ${mine?'self':''}"><span class="bubble-avatar">${avatar(id,'bubble-character',name==='Hệ thống'?'idle':'talk')}</span><div class="bubble-content"><small>${safe(name)}</small><p>${safe(msg)}</p></div></div>`}
-function currentNode(){const g=state.game;if(g.mode==='reversal'){if(g.level===2)return {messages:[['Minh (suy nghĩ)','Mới vào nhóm lạ, mình không biết nhận phần nào, nhưng rất ngại hỏi...'],['An','Có ai muốn nhận phần mở đầu không?']],prompt:'Ở góc nhìn người mới, bạn làm gì?',options:[{text:'Giới thiệu thế mạnh, hỏi rõ đầu việc và deadline.',type:'good',answer:'Cả nhóm bắt đầu mở lời và chủ động phân công.',lesson:'Phá băng bắt đầu từ một lời xác nhận cụ thể.'},{text:'Tiếp tục im lặng để tránh bị chú ý.',type:'bad',answer:'Leader không biết bạn có thể làm gì, việc bị chậm.',lesson:'Im lặng có thể bị hiểu nhầm là thiếu hợp tác.'}]};return {messages:reversal.messages,prompt:'Là Minh, bạn sẽ phản hồi thế nào?',options:reversal.choices}}
-if(g.level===1 && g.role==='leader')return leaderTree[g.node];return quickScenarios[`${g.level}:${g.role}`]}
-function chatView(){const g=state.game;const current=currentNode();const lines=[...g.history,...current.messages.map(([name,text])=>({name,text}))];return shell('chat-page',`
-<header class="chat-head"><button class="circle-action" data-go="stages" aria-label="Quay lại">${icon('back')}</button><span class="chat-head-face">${player('idle')}</span><div class="chat-head-text"><strong>${g.mode==='reversal'?'ĐẢO VAI / GÓC NHÌN KHÁC':'Nhóm Bài Tập · Ải '+g.level}</strong><small>Bạn đang là ${safe(role(g.role).name)}</small></div><span class="timer" id="game-count">${state.gameTime}s</span></header>
+function quizResult(){
+  const p=personas.find(x=>x.id===(state.previewPersona||state.persona))||personas[0];
+  const isPreview=Boolean(state.previewPersona);
+  return shell('quiz-page persona-result-page',`${topbar(isPreview?'Xem thử thẻ':'Thẻ nhân vật của bạn','home',true)}
+<div class="page-body persona-result-body">
+  <div class="card-context"><span class="card-context-spark">✦</span><div><strong>${isPreview?'Bộ sưu tập phong cách':'Xin chào, đồng đội!'}</strong><p>${isPreview?'Bản xem thử · Hoàn thành Quiz để nhận thẻ của chính bạn':'Thẻ nhân vật đã sẵn sàng để lưu và đăng Story'}</p></div></div>
+  <div class="persona-canvas-wrap"><canvas id="persona-render" width="900" height="1190" role="img" aria-label="Thẻ vui nhộn ${safe(p.title)}"></canvas></div>
+  <label class="nickname-label" for="player-nickname">TÊN HIỂN THỊ TRÊN THẺ <small>(không cần tên thật)</small></label>
+  <div class="nick-wrap"><input id="player-nickname" type="text" maxlength="22" autocomplete="off" placeholder="Nhập biệt danh của bạn..." value="${safe(state.nickname || '')}" aria-label="Tên người chơi trên thẻ"><button type="button" class="nick-pencil" id="btn-focus-nick" aria-label="Chỉnh sửa biệt danh">✎</button></div>
+  <div class="card-actions"><button class="card-action download" data-action="download-card">⬇ TẢI ẢNH PNG</button><button class="card-action share" data-action="share-card">↗ CHIA SẺ</button></div>
+  <div class="card-cta-box">
+    <p class="cta-question">Muốn thử nghiệm cách điều chỉnh phong cách làm việc?</p>
+    <button class="game-btn green full persona-enter" data-go="map">${icon('play')} VÀO GAME MÔ PHỎNG NGAY!</button>
+  </div>
+  <div class="persona-secondary"><button data-action="start-quiz">↻ Làm Quiz lại</button><button data-go="personaGallery">Xem 7 thẻ khác</button></div>
+  <p class="card-privacy">Kết quả để khám phá và giải trí, không phải chẩn đoán hay điểm EQ. Tính năng chia sẻ sử dụng trình chia sẻ của thiết bị khi được hỗ trợ.</p>
+</div>`);
+}
+
+function personaGallery(){return shell('quiz-page persona-gallery-page',`${topbar('7 hình mẫu trong Quiz','home',true)}
+<div class="page-body"><div class="gallery-intro"><span>✦ BỘ SƯU TẬP ✦</span><h2>Bạn thuộc team nào?</h2><p>Nhấn vào một thẻ để xem giao diện. Đây là 7 kiểu phong cách từ đề xuất TEAM-CRAFT; kết quả cá nhân được tạo sau 5 câu Quiz.</p></div>
+<div class="persona-grid">${personas.map(p=>`<button class="persona-mini-card" style="--persona-color:${personaStyles[p.id]?.bg||'#ffdfed'}" data-persona-preview="${p.id}"><img src="${assetPath(`assets/personas/${p.id}.svg`)}" alt=""><strong>${safe(personaStyles[p.id]?.name||p.title)}</strong><small>Xem thẻ ›</small></button>`).join('')}</div>
+<button class="game-btn pale full" data-action="start-quiz">${icon('star')} LÀM QUIZ NHẬN THẺ</button></div>`)}
+
+async function updatePersonaCanvas(){
+ if(state.screen!=='quizResult')return;
+ const canvas=document.getElementById('persona-render');if(!canvas)return;
+ const current=state.previewPersona||state.persona||'bee';
+ const p=personas.find(x=>x.id===current)||personas[0];
+ const nick=(state.nickname&&state.nickname.trim())?state.nickname.trim():'CUT3FROG247';
+ try {await drawPersonaCard(canvas,p,nick)} catch(err){console.error(err); toast('Không tải được hình linh vật. Vui lòng thử mở bằng localhost.');}
+}
+function imageBlob(canvas){return new Promise(resolve=>canvas.toBlob(resolve,'image/png'))}
+async function getCardFile(){
+ const canvas=document.getElementById('persona-render');if(!canvas)return null;
+ await updatePersonaCanvas();
+ const blob=await imageBlob(canvas);if(!blob)return null;
+ const id=(state.previewPersona||state.persona||'bee').replace(/[^a-z0-9_-]/gi,'');
+ return new File([blob],`TEAM-CRAFT-card-${id}.png`,{type:'image/png'});
+}
+function saveFile(file){
+ const a=document.createElement('a');const url=URL.createObjectURL(file);a.href=url;a.download=file.name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)
+}
+async function downloadPersonaCard(){const file=await getCardFile();if(!file)return toast('Chưa tạo được ảnh.');saveFile(file);toast('Đã tạo ảnh PNG để đăng Story!')}
+async function sharePersonaCard(){
+ const file=await getCardFile();if(!file)return toast('Chưa tạo được ảnh.');
+ try {
+  if(navigator.share && navigator.canShare?.({files:[file]})){
+   await navigator.share({files:[file],title:'Thẻ TEAM-CRAFT của mình',text:'Còn bạn thuộc phong cách làm việc nhóm nào?'});
+  } else {saveFile(file);toast('Thiết bị chưa hỗ trợ chia sẻ ảnh trực tiếp. Đã tải PNG để bạn đăng Story.');}
+ } catch(e){ if(e.name!=='AbortError'){saveFile(file);toast('Đã tải ảnh PNG để chia sẻ thủ công.');} }
+}
+
+const talkSprites={
+  'Minh':'doer','Lan':'mediator','Huy':'follower','An':'leader','Bạn':null,'Hệ thống':'follower',
+  'Minh (suy nghĩ)':'doer','Doer (suy nghĩ)':'doer',
+  'Leader':'leader','Doer':'doer','QC':'qc','Mediator':'mediator','Follower':'follower'
+};
+function bubble(name,msg){
+  const mine=name==='Bạn';
+  const normName=name.toLowerCase();
+  const id=talkSprites[name]||(roles.some(r=>r.id===normName)?normName:state.role);
+  return `<div class="bubble-row ${mine?'self':''}"><span class="bubble-avatar">${avatar(id,'bubble-character',name==='Hệ thống'?'idle':'talk')}</span><div class="bubble-content"><small>${safe(name)}</small><p>${safe(msg)}</p></div></div>`
+}
+
+function currentNode(){
+  const g=state.game;
+  if(g.mode==='reversal'){
+    if(g.level===2)return {messages:[['Minh (suy nghĩ)','Mới vào nhóm lạ, mình không biết nhận phần nào, nhưng rất ngại hỏi...'],['An','Có ai muốn nhận phần mở đầu không?']],prompt:'Ở góc nhìn người mới, bạn làm gì?',options:[{text:'Giới thiệu thế mạnh, hỏi rõ đầu việc và deadline.',type:'good',answer:'Cả nhóm bắt đầu mở lời và chủ động phân công.',lesson:'Phá băng bắt đầu từ một lời xác nhận cụ thể.'},{text:'Tiếp tục im lặng để tránh bị chú ý.',type:'bad',answer:'Leader không biết bạn có thể làm gì, việc bị chậm.',lesson:'Im lặng có thể bị hiểu nhầm là thiếu hợp tác.'}]};
+    return {messages:reversal.messages,prompt:'Là Minh, bạn sẽ phản hồi thế nào?',options:reversal.choices};
+  }
+  const stageKey=`${g.level}:${state.stage}`;
+  if(stageScenarios[stageKey]){
+    const sc=stageScenarios[stageKey];
+    return {messages:sc.messages,prompt:sc.prompt||sc.title,options:sc.choices};
+  }
+  if(quickScenarios[stageKey]){
+    const sc=quickScenarios[stageKey];
+    return {messages:sc.messages,prompt:sc.prompt||sc.title,options:sc.choices};
+  }
+  if(g.level===1 && g.role==='leader' && leaderTree[g.node])return leaderTree[g.node];
+  const q=quickScenarios[`${g.level}:${g.role}`]||quickScenarios['1:0'];
+  return {...q,prompt:q.prompt||q.title,options:q.choices};
+}
+
+function chatView(){
+  const g=state.game;
+  const current=currentNode();
+  const lines=[...g.history,...current.messages.map(([name,text])=>({name,text}))];
+  return shell('chat-page',`
+<header class="chat-head"><button class="circle-action" data-go="stages" aria-label="Quay lại">${icon('back')}</button><span class="chat-head-face">${player('idle')}</span><div class="chat-head-text"><strong>${g.mode==='reversal'?'ĐẢO VAI / GÓC NHÌN KHÁC':'Nhóm Bài Tập · Ải '+g.level}</strong><small>Bạn đang là ${safe(role(g.role).name)}</small></div><span class="timer" id="game-count">${state.gameTime}s</span><button class="circle-action" data-go="home" aria-label="Trang chủ">${icon('home')}</button></header>
 <div class="message-zone" id="message-zone"><div class="privacy-note">MÔ PHỎNG CHAT • KHÔNG GỬI TIN THẬT</div>${lines.map(x=>bubble(x.name,x.text)).join('')}</div>
 <div class="decision-box"><div class="decision-head"><b>${safe(current.prompt||current.title||'Bạn sẽ phản hồi thế nào?')}</b><small>20 GIÂY / LƯỢT</small></div><div class="time-track"><span id="time-fill" style="width:${state.gameTime*5}%"></span></div>
 ${current.options.map((o,i)=>`<button class="decision-choice" data-choice="${i}"><span>${String.fromCharCode(65+i)}</span>${safe(o.text)}</button>`).join('')}</div>`)}
-function getEnding(){const g=state.game;if(g.mode==='reversal')return g.reversalOutcome;if(g.level===1&&g.role==='leader')return leaderEndings[g.ending]||leaderEndings.E1;return g.quickOutcome}
-function endingView(){const g=state.game;const o=getEnding();const tone=o.tone||o.type||'mid';return shell('interior-page ending-page',`${topbar(g.mode==='reversal'?'Đảo vai hoàn tất':'Lesson Unlocked','stages')}
+
+function getEnding(){
+  const g=state.game;
+  if(g.mode==='reversal')return g.reversalOutcome;
+  if(g.ending)return leaderEndings[g.ending]||leaderEndings.E1;
+  return g.quickOutcome;
+}
+
+function endingView(){
+  const g=state.game;
+  const o=getEnding();
+  const tone=o.tone||o.type||'mid';
+  const l=level(state.level);
+  const nextStageIndex=state.stage+1;
+  const hasNextStage=nextStageIndex<l.stages.length;
+  const nextLvlId=state.level+1;
+  const nextLvl=levels.find(x=>x.id===nextLvlId);
+  const isFinalCampaignLevel=state.level===2&&!hasNextStage;
+  const hasNextLevel=!hasNextStage&&Boolean(nextLvl)&&!isFinalCampaignLevel;
+  return shell('interior-page ending-page',`${topbar(g.mode==='reversal'?'Đảo vai hoàn tất':'Lesson Unlocked','stages',true)}
 <div class="page-body"><div class="ending-medal ${tone}">${avatar(tone==='good'?'follower':tone==='bad'?'qc':'mediator','medal-character',tone==='good'?'walk_a':'idle')}</div>
 <h2 class="ending-title">${safe(o.name||(tone==='good'?'Giải quyết hiệu quả':tone==='bad'?'Nhóm gặp khó khăn':'Cần điều chỉnh'))}</h2><p class="ending-desc">${safe(o.message||o.answer)}</p>
 <div class="lesson-card"><div class="lesson-caption">${icon('book')} LESSON UNLOCKED</div><p>${safe(o.lesson)}</p></div>
 ${o.template?`<div class="lesson-card template-card"><strong>VÍ KỊCH BẢN • MẪU TIN NHẮN</strong><p>${safe(o.template)}</p><button class="small-button" data-action="save-template">${icon('check')} Lưu mẫu tin nhắn</button></div>`:''}
-<div class="action-stack">${g.mode==='reversal'?'':`<button class="game-btn pale full" data-action="reversal">${icon('rotate')} THỬ ĐẢO VAI</button>`}<div class="button-pair">${btn('Chơi lại','replay','sky')}${btn('Bản đồ','map','green')}</div></div><p class="small-note">Kết quả chỉ là tình huống mô phỏng, không dự đoán chắc chắn phản ứng ngoài đời.</p></div>`)}
-function walletView(){return shell('interior-page',`${topbar('Ví kịch bản','map')}<div class="page-body"><div class="page-intro">Lưu và sao chép các mẫu tin nhắn từ màn chơi đã hoàn thành.</div>${state.wallet.length?state.wallet.map((w,i)=>`<article class="lesson-card wallet-item"><strong>Mẫu tin nhắn ${i+1}</strong><p>${safe(w.text)}</p><button class="small-button" data-copy="${i}">${icon('chat')} Sao chép</button></article>`).join(''):`<div class="empty-wallet">${avatar('follower','empty-char')}<h2>Ví của bạn đang trống</h2><p>Hoàn thành một màn chơi để lưu tin nhắn thực chiến.</p></div>`}${btn('Quay lại bản đồ','map','green full')}</div>`)}
+<div class="action-stack">
+  ${hasNextStage?`<button class="game-btn green full" data-action="next-stage">${icon('play')} Màn tiếp theo</button>`:''}
+  ${hasNextLevel?`<button class="game-btn green full" data-action="next-level">${icon('play')} Sang Ải ${nextLvl.id}: ${safe(nextLvl.name)}</button>`:''}
+  ${isFinalCampaignLevel?`<button class="game-btn green full" data-action="finish-campaign">${icon('spark')} Xem lộ trình tiếp theo</button>`:''}
+  ${g.mode==='reversal'?'':`<button class="game-btn pale full" data-action="reversal">${icon('rotate')} THỬ ĐẢO VAI</button>`}
+  <div class="button-pair">${btn('Chơi lại','replay','sky')}${btn('Bản đồ','map',hasNextStage||hasNextLevel||isFinalCampaignLevel?'pale':'green')}</div>
+</div><p class="small-note">Kết quả chỉ là tình huống mô phỏng, không dự đoán chắc chắn phản ứng ngoài đời.</p></div>`)}
 
-function render(){const mapRender={home,map,roles:rolesView,custom:customView,stages:stagesView,stagePreview,quiz:quizView,quizResult,chat:chatView,ending:endingView,wallet:walletView,replay:()=>{startGame();return ''}};
-ROOT.innerHTML=(mapRender[state.screen]||home)();if(state.screen==='chat'){document.getElementById('message-zone')?.scrollTo(0,9999)}if(state.screen==='quiz')runQuizClock();if(state.screen==='chat')runGameClock();}
+function walletView(){return shell('interior-page',`${topbar('Ví kịch bản','map',true)}<div class="page-body"><div class="page-intro">Lưu và sao chép các mẫu tin nhắn từ màn chơi đã hoàn thành.</div>${state.wallet.length?state.wallet.map((w,i)=>`<article class="lesson-card wallet-item"><strong>Mẫu tin nhắn ${i+1}</strong><p>${safe(w.text)}</p><button class="small-button" data-copy="${i}">${icon('chat')} Sao chép</button></article>`).join(''):`<div class="empty-wallet">${avatar('follower','empty-char')}<h2>Ví của bạn đang trống</h2><p>Hoàn thành một màn chơi để lưu tin nhắn thực chiến.</p></div>`}${btn('Quay lại bản đồ','map','green full')}</div>`)}
+
+function render(){
+  const mapRender={home,map,roles:rolesView,custom:customView,stages:stagesView,stageIntro,stagePreview,comingSoon:comingSoonView,quiz:quizView,quizResult,personaGallery,chat:chatView,ending:endingView,wallet:walletView,replay:()=>{startGame();return ''}};
+  ROOT.innerHTML=(mapRender[state.screen]||home)();
+  if(state.screen==='quizResult')updatePersonaCanvas();
+  if(state.screen==='chat'){document.getElementById('message-zone')?.scrollTo(0,9999)}
+  if(state.screen==='quiz')runQuizClock();
+  if(state.screen==='chat')runGameClock();
+}
+
 function runQuizClock(){stopClock();clock=setInterval(()=>{if(state.screen!=='quiz'){stopClock();return;}state.quizTime=Math.max(0,state.quizTime-1);const el=document.getElementById('quiz-count');if(el)el.textContent=state.quizTime+'s';if(state.quizTime===0)finishQuiz()},1000)}
 function runGameClock(){stopClock();clock=setInterval(()=>{if(state.screen!=='chat'){stopClock();return;}state.gameTime=Math.max(0,state.gameTime-1);const el=document.getElementById('game-count');const bar=document.getElementById('time-fill');if(el)el.textContent=state.gameTime+'s';if(bar)bar.style.width=(state.gameTime*5)+'%';if(state.gameTime===0)autoGameEnd()},1000)}
-function startQuiz(){state.quizIndex=0;state.quizAnswers=[];state.quizTime=60;route('quiz')}
+
+function startQuiz(){state.previewPersona=null;state.quizIndex=0;state.quizAnswers=[];state.quizTime=60;route('quiz')}
 function chooseQuiz(index){const ans=quizQuestions[state.quizIndex].answers[index];if(!ans)return;state.quizAnswers.push(ans[1]);if(state.quizIndex===4)finishQuiz();else {state.quizIndex++;render()}}
-function finishQuiz(){const tally={};state.quizAnswers.forEach(x=>tally[x]=(tally[x]||0)+1);state.persona=Object.entries(tally).sort((a,b)=>b[1]-a[1])[0]?.[0]||'bee';save();route('quizResult')}
-function openLevel(id){state.level=Number(id);route('stages')}
-function openStage(index){state.stage=Number(index);const l=level(state.level);if(state.stage!==0||l.id>2)return route('stagePreview');if(!l.roles.includes(state.role)){state.role=l.roles[0];save();toast('Đã chọn vai phù hợp cho ải này')}startGame()}
-function startGame(){state.game={level:state.level,role:state.role,mode:'main',node:'start',history:[],ending:null,quickOutcome:null,reversalOutcome:null};state.gameTime=20;route('chat')}
-function finishMain(){const key=`${state.game.level}:${state.stage}:${state.role}`;if(!state.done.includes(key))state.done.push(key);save();route('ending')}
-function answerGame(index){const g=state.game;const node=currentNode();const o=node.options[index];if(!o)return;g.history.push(...node.messages.map(([name,text])=>({name,text})),{name:'Bạn',text:o.text});
- if(g.mode==='reversal'){g.reversalOutcome={name:'Đảo vai hoàn tất',type:o.type,answer:o.answer,lesson:o.lesson};route('ending');return}
- if(g.level===1&&g.role==='leader'){if(o.to.startsWith('E')){g.ending=o.to;finishMain()}else{g.node=o.to;state.gameTime=20;render()}}else{g.quickOutcome={name:o.type==='good'?'Cả nhóm đã tiến lên!':o.type==='bad'?'Nhóm vẫn bế tắc':'Có điều cần cải thiện',type:o.type,answer:o.answer,lesson:o.lesson,template:o.template};finishMain()}}
-function autoGameEnd(){const g=state.game;if(!g)return;if(g.mode==='reversal'){g.reversalOutcome={name:'Bỏ lỡ lượt phản hồi',type:'mid',answer:'Cả nhóm không biết bạn đang nghĩ gì.',lesson:'Im lặng cũng ảnh hưởng đến việc phối hợp.'};route('ending');return}if(g.level===1&&g.role==='leader')g.ending='E1';else g.quickOutcome={name:'Bỏ lỡ lượt phản hồi',type:'mid',answer:'Không có phản hồi kịp thời.',lesson:'Chủ động lên tiếng giúp nhóm hoạt động hiệu quả.'};finishMain()}
+function finishQuiz(){state.previewPersona=null;const tally={};state.quizAnswers.forEach(x=>tally[x]=(tally[x]||0)+1);state.persona=Object.entries(tally).sort((a,b)=>b[1]-a[1])[0]?.[0]||'bee';save();route('quizResult')}
+
+function openLevel(id){
+  const lvlId=Number(id);
+  if(lvlId>2){
+    toast('Nội dung Ải này đang được cập nhật. Hãy hoàn thành Ải 1 & Ải 2 trước nhé!');
+    return;
+  }
+  if(!isLevelUnlocked(lvlId)){
+    toast(`Ải ${lvlId} chưa mở khóa! Hãy hoàn thành ải trước.`);
+    return;
+  }
+  state.level=lvlId;
+  route('stages');
+}
+
+function openStage(index){
+  state.stage=Number(index);
+  const l=level(state.level);
+  if(l.id>2)return route('comingSoon');
+  if(!isLevelUnlocked(l.id)){
+    toast(`Ải ${l.id} chưa mở khóa!`);
+    return route('map');
+  }
+  if(!isStageUnlocked(l.id,state.stage)){
+    toast(`Màn ${state.stage+1} chưa mở khóa! Hãy hoàn thành màn trước.`);
+    return route('stages');
+  }
+  const stageKey=`${l.id}:${state.stage}`;
+  if(!stageScenarios[stageKey]&&!quickScenarios[stageKey])return route('stagePreview');
+  const targetRole=stageRoleMap?.[stageKey]||(l.roles.includes(state.role)?state.role:l.roles[0]);
+  if(state.role!==targetRole){
+    state.role=targetRole;
+    save();
+  }
+  route('stageIntro');
+}
+
+function startGame(){
+  state.game={level:state.level,role:state.role,mode:'main',node:'start',history:[],ending:null,quickOutcome:null,reversalOutcome:null};
+  state.gameTime=20;
+  route('chat');
+}
+
+function finishMain(){
+  const key=`${state.game.level}:${state.stage}:${state.role}`;
+  if(!state.done.includes(key))state.done.push(key);
+  const l=level(state.level);
+  if(state.stage<l.stages.length-1){
+    unlockStage(state.level,state.stage+1);
+  }else{
+    const nextLvlId=state.level+1;
+    if(nextLvlId<=levels.length){
+      unlockLevel(nextLvlId);
+      unlockStage(nextLvlId,0);
+    }
+  }
+  save();
+  route('ending');
+}
+
+function nextStage(){
+  const l=level(state.level);
+  const nextIndex=state.stage+1;
+  if(nextIndex<l.stages.length){
+    state.stage=nextIndex;
+    unlockStage(state.level,nextIndex);
+    openStage(nextIndex);
+  }else{
+    if(state.level>=2){
+      finishCampaign();
+    }else{
+      nextLevel();
+    }
+  }
+}
+
+function nextLevel(){
+  const nextLvlId=state.level+1;
+  const nextLvl=levels.find(x=>x.id===nextLvlId);
+  if(!nextLvl||nextLvlId>2)return finishCampaign();
+  state.level=nextLvlId;
+  state.stage=0;
+  unlockLevel(nextLvlId);
+  unlockStage(nextLvlId,0);
+  const stageKey=`${nextLvlId}:0`;
+  const targetRole=stageRoleMap?.[stageKey]||nextLvl.roles[0];
+  state.role=targetRole;
+  save();
+  toast(`Bắt đầu Ải ${nextLvl.id}: ${nextLvl.name}`);
+  openStage(0);
+}
+
+function finishCampaign(){
+  toast('Chúc mừng bạn đã hoàn thành toàn bộ nội dung hiện có (Ải 1 & Ải 2)! Các Ải 3, 4, 5 đang được cập nhật.');
+  route('map');
+}
+
+function playCampaign(){
+  const l1=levels[0];
+  const l2=levels[1];
+  const l1Unfinished=l1.stages.findIndex((_,i)=>!state.done.some(k=>k.startsWith(`1:${i}:`)));
+  if(l1Unfinished!==-1){
+    state.level=1;
+    state.stage=l1Unfinished;
+    if(!isStageUnlocked(1,l1Unfinished))unlockStage(1,l1Unfinished);
+    save();
+    return openStage(l1Unfinished);
+  }
+  if(!isLevelUnlocked(2)){
+    unlockLevel(2);
+    unlockStage(2,0);
+  }
+  const l2Unfinished=l2.stages.findIndex((_,i)=>!state.done.some(k=>k.startsWith(`2:${i}:`)));
+  if(l2Unfinished!==-1){
+    state.level=2;
+    state.stage=l2Unfinished;
+    if(!isStageUnlocked(2,l2Unfinished))unlockStage(2,l2Unfinished);
+    save();
+    return openStage(l2Unfinished);
+  }
+  toast('Bạn đã hoàn thành toàn bộ nội dung hiện có! Đang mở Ải 1 để bạn trải nghiệm lại.');
+  state.level=1;
+  state.stage=0;
+  save();
+  route('stages');
+}
+
+function answerGame(index){
+  const g=state.game;
+  const node=currentNode();
+  const o=node.options[index];
+  if(!o)return;
+  g.history.push(...node.messages.map(([name,text])=>({name,text})),{name:'Bạn',text:o.template||o.text});
+  if(g.mode==='reversal'){
+    g.reversalOutcome={name:'Đảo vai hoàn tất',type:o.type,answer:o.answer,lesson:o.lesson};
+    route('ending');
+    return;
+  }
+  if(o.to){
+    if(o.to.startsWith('E')){
+      g.ending=o.to;
+      finishMain();
+    }else{
+      g.node=o.to;
+      state.gameTime=20;
+      render();
+    }
+  }else{
+    g.quickOutcome={
+      name:o.name||(o.type==='good'?'Cả nhóm đã tiến lên!':o.type==='bad'?'Nhóm vẫn bế tắc':'Có điều cần cải thiện'),
+      type:o.type,
+      answer:o.answer||o.result,
+      lesson:o.lesson,
+      template:o.template
+    };
+    finishMain();
+  }
+}
+
+function autoGameEnd(){
+  const g=state.game;
+  if(!g)return;
+  if(g.mode==='reversal'){
+    g.reversalOutcome={name:'Bỏ lỡ lượt phản hồi',type:'mid',answer:'Cả nhóm không biết bạn đang nghĩ gì.',lesson:'Im lặng cũng ảnh hưởng đến việc phối hợp.'};
+    route('ending');
+    return;
+  }
+  if(g.ending)g.ending='E1';
+  else g.quickOutcome={name:'Bỏ lỡ lượt phản hồi',type:'mid',answer:'Không có phản hồi kịp thời.',lesson:'Chủ động lên tiếng giúp nhóm hoạt động hiệu quả.'};
+  finishMain();
+}
+
 function startReversal(){state.game={...state.game,mode:'reversal',history:[]};state.gameTime=20;route('chat')}
 function saveTemplate(){const o=getEnding();if(!o?.template)return;state.wallet.unshift({level:state.game.level,text:o.template});state.wallet=state.wallet.slice(0,30);save();toast('Đã lưu mẫu tin nhắn vào ví')}
 async function copyWallet(index){const w=state.wallet[index];if(!w)return;try{await navigator.clipboard.writeText(w.text);toast('Đã sao chép')}catch{toast('Trình duyệt không cho phép sao chép tự động')}}
+
 ROOT.addEventListener('click',e=>{
- let x=e.target.closest('[data-go]');if(x){if(x.dataset.go==='replay')return startGame();return route(x.dataset.go)}
- x=e.target.closest('[data-level]');if(x)return openLevel(x.dataset.level);
- x=e.target.closest('[data-role]');if(x){state.role=x.dataset.role;save();return render()}
- x=e.target.closest('[data-outfit]');if(x){state.outfit=x.dataset.outfit;save();return render()}
- x=e.target.closest('[data-stage]');if(x)return openStage(x.dataset.stage);
- x=e.target.closest('[data-quiz]');if(x)return chooseQuiz(Number(x.dataset.quiz));
- x=e.target.closest('[data-choice]');if(x)return answerGame(Number(x.dataset.choice));
- x=e.target.closest('[data-copy]');if(x)return copyWallet(Number(x.dataset.copy));
- x=e.target.closest('[data-action]');if(!x)return;
- if(x.dataset.action==='start-quiz')startQuiz();
- if(x.dataset.action==='save-template')saveTemplate();
- if(x.dataset.action==='reversal')startReversal();
+  if(e.target.closest('#btn-focus-nick')||(e.target.closest('.nick-wrap')&&e.target.id!=='player-nickname')){
+    const inp=document.getElementById('player-nickname');
+    if(inp){inp.focus();inp.select?.();}
+    return;
+  }
+  let x=e.target.closest('[data-go]');
+  if(x){
+    if(x.dataset.go==='replay'||x.dataset.go==='beginStage')return startGame();
+    if(x.dataset.go==='next-stage')return nextStage();
+    if(x.dataset.go==='next-level')return nextLevel();
+    if(x.dataset.go==='finish-campaign')return finishCampaign();
+    return route(x.dataset.go);
+  }
+  x=e.target.closest('[data-level]');
+  if(x){
+    const lvlId=Number(x.dataset.level);
+    if(lvlId>2){
+      x.classList.remove('lock-shake');
+      void x.offsetWidth;
+      x.classList.add('lock-shake');
+      toast('Nội dung Ải này đang được cập nhật. Hãy hoàn thành Ải 1 & Ải 2 trước nhé!');
+      return;
+    }
+    if(!isLevelUnlocked(lvlId)){
+      toast(`Ải ${lvlId} chưa mở khóa! Hãy hoàn thành ải trước.`);
+      return;
+    }
+    return openLevel(lvlId);
+  }
+  x=e.target.closest('[data-role]');if(x){state.role=x.dataset.role;save();return render()}
+  x=e.target.closest('[data-custom-role]');if(x){state.role=x.dataset.customRole;save();return route('custom')}
+  x=e.target.closest('[data-outfit]');if(x){state.outfit=x.dataset.outfit;save();return render()}
+  x=e.target.closest('[data-stage]');if(x)return openStage(x.dataset.stage);
+  x=e.target.closest('[data-quiz]');if(x)return chooseQuiz(Number(x.dataset.quiz));
+  x=e.target.closest('[data-persona-preview]');if(x){state.previewPersona=x.dataset.personaPreview;return route('quizResult')}
+  x=e.target.closest('[data-choice]');if(x)return answerGame(Number(x.dataset.choice));
+  x=e.target.closest('[data-copy]');if(x)return copyWallet(Number(x.dataset.copy));
+  x=e.target.closest('[data-action]');
+  if(!x)return;
+  if(x.dataset.action==='play-campaign')return playCampaign();
+  if(x.dataset.action==='start-quiz')startQuiz();
+  if(x.dataset.action==='save-template')saveTemplate();
+  if(x.dataset.action==='reversal')startReversal();
+  if(x.dataset.action==='next-stage')nextStage();
+  if(x.dataset.action==='next-level')nextLevel();
+  if(x.dataset.action==='finish-campaign')finishCampaign();
+  if(x.dataset.action==='download-card')downloadPersonaCard();
+  if(x.dataset.action==='share-card')sharePersonaCard();
 });
+
+ROOT.addEventListener('input',e=>{if(e.target.id==='player-nickname'){state.nickname=e.target.value.slice(0,22);save();updatePersonaCanvas();}});
+
+// Sparkle Click Effect
+const SPARKLE_COLORS=['#FFD166','#FF8FAB','#72EFDD','#BDB2FF','#FFFFFF'];
+function spawnSparkles(x,y){
+  if(typeof x!=='number'||typeof y!=='number'||isNaN(x)||isNaN(y))return;
+  const count=6+Math.floor(Math.random()*3);
+  const fragment=document.createDocumentFragment();
+  for(let i=0;i<count;i++){
+    const el=document.createElement('span');
+    const color=SPARKLE_COLORS[Math.floor(Math.random()*SPARKLE_COLORS.length)];
+    const isStar=i%3!==0;
+    const angle=(Math.PI*2*i)/count+(Math.random()-0.5)*0.5;
+    const dist=25+Math.random()*30;
+    const dx=Math.round(Math.cos(angle)*dist);
+    const dy=Math.round(Math.sin(angle)*dist);
+    const rot=Math.round((Math.random()-0.5)*180);
+    const duration=Math.round(500+Math.random()*150);
+    el.className=`click-sparkle ${isStar?'click-sparkle-star':'click-sparkle-dot'}`;
+    el.style.left=`${x}px`;
+    el.style.top=`${y}px`;
+    el.style.setProperty('--dx',`${dx}px`);
+    el.style.setProperty('--dy',`${dy}px`);
+    el.style.setProperty('--rot',`${rot}deg`);
+    el.style.setProperty('--duration',`${duration}ms`);
+    if(isStar){
+      const size=Math.round(14+Math.random()*8);
+      el.style.width=`${size}px`;
+      el.style.height=`${size}px`;
+      el.innerHTML=`<svg viewBox="0 0 24 24" width="${size}" height="${size}"><path d="M12 0 Q12 12 24 12 Q12 12 12 24 Q12 12 0 12 Q12 12 12 0 Z" fill="${color}"/></svg>`;
+    }else{
+      const size=Math.round(5+Math.random()*4);
+      el.style.width=`${size}px`;
+      el.style.height=`${size}px`;
+      el.style.background=color;
+    }
+    el.addEventListener('animationend',()=>el.remove(),{once:true});
+    setTimeout(()=>el.remove(),duration+100);
+    fragment.appendChild(el);
+  }
+  document.body.appendChild(fragment);
+}
+window.addEventListener('pointerdown',e=>{if(e.clientX||e.clientY)spawnSparkles(e.clientX,e.clientY)},{passive:true});
+
 route('home');
+
 </script></body></html>
