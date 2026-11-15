@@ -766,48 +766,85 @@ function chatOrRoundtable(){
 // 6. POLAROID CAPTURE & SCRAPBOOK RESULT SCREEN (V5 CORE)
 // -------------------------------------------------------------
 function buildSnapshotSVG(tone='good'){
-  const bgSky = tone==='good' ? '#c8ebff' : tone==='bad' ? '#ffd8d8' : '#e8e2f5';
-  const sunOpacity = tone==='good' ? '0.75' : '0.25';
-  const leaderMouth = tone==='good' ? 'M113 94 Q118 100 123 94' : tone==='bad' ? 'M113 99 Q118 93 123 99' : 'M114 96 L122 96';
-  const sparkles = tone==='good' ? `
-    <polygon points="44,48 46,53 51,55 46,57 44,62 42,57 37,55 42,53" fill="#ffd13b" stroke="#e0a300" stroke-width="0.8"/>
-    <polygon points="234,44 236,49 241,51 236,53 234,58 232,53 227,51 232,49" fill="#ffd13b" stroke="#e0a300" stroke-width="0.8"/>
-  ` : '';
-  const sweat = tone==='bad' ? `
-    <ellipse cx="134" cy="74" rx="3" ry="5" fill="#6ad2ff" stroke="#2381b8" stroke-width="0.8"/>
-  ` : '';
+  const userRole = state?.role || 'leader';
+  const userAvatarType = state?.avatarType || 'girl';
+  const userOutfit = state?.outfit || 'vnu';
+
+  const SEATS = [
+    { role: 'leader', label: 'Leader', style: 'left:32%; bottom:44px; width:56px; height:70px; z-index:6;' },
+    { role: 'qc', label: 'QC', style: 'left:68%; bottom:44px; width:56px; height:70px; z-index:6;' },
+    { role: 'doer', label: 'Doer', style: 'left:12%; bottom:20px; width:56px; height:70px; z-index:12;' },
+    { role: 'mediator', label: 'Mediator', style: 'left:88%; bottom:20px; width:56px; height:70px; z-index:12;' },
+    { role: 'follower', label: 'Bạn thân', style: 'left:62%; bottom:4px; width:54px; height:68px; z-index:15;' }
+  ];
+
+  const bgGradient = tone === 'good'
+    ? 'linear-gradient(180deg, #a7e1fc 0%, #fdf2de 55%, #dfb288 56%, #be8758 100%)'
+    : tone === 'bad'
+    ? 'linear-gradient(180deg, #d3c4db 0%, #f3ded7 55%, #c89c74 56%, #a37248 100%)'
+    : 'linear-gradient(180deg, #bde0ea 0%, #fae6cf 55%, #d4a57b 56%, #b07d4f 100%)';
+
+  const titleBg = tone === 'good' ? '#fff6d6' : tone === 'bad' ? '#fbe4e4' : '#f5eada';
+  const titleColor = tone === 'good' ? '#5a3d24' : tone === 'bad' ? '#6b2b2b' : '#523a27';
+
+  let charsHtml = '';
+  SEATS.forEach(seat => {
+    const isPlayer = seat.role === userRole;
+    const base = isPlayer ? (userAvatarType === 'boy' ? seat.role : userAvatarType) : seat.role;
+    let mood = 'happy';
+    if (tone === 'bad') {
+      mood = seat.role === 'leader' ? 'worried' : seat.role === 'follower' ? 'embarrassed' : (seat.role === 'qc' ? 'angry' : 'sad');
+    } else if (tone === 'neutral' || tone === 'mid') {
+      mood = seat.role === 'leader' ? 'confused' : (seat.role === 'doer' ? 'worried' : 'idle');
+    }
+
+    charsHtml += `
+      <div class="snap-char" style="${seat.style}">
+        <img class="snap-char-img" src="assets/characters/${base}_${mood}.svg" alt="">
+        ${(isPlayer && userOutfit && userOutfit !== 'vnu') ? `
+          <img class="snap-char-outfit" src="assets/characters/${base}_outfit_${userOutfit}.svg" style="position:absolute; top:0; left:0; width:100%; height:100%; clip-path: inset(50% 0 0 0); pointer-events:none;" alt="">
+        ` : ''}
+      </div>
+    `;
+  });
 
   return `
-    <svg width="100%" height="100%" viewBox="0 0 280 210" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <linearGradient id="snapSky" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="${bgSky}" />
-          <stop offset="100%" stop-color="#fdf0dc" />
-        </linearGradient>
-      </defs>
-      <rect x="0" y="0" width="280" height="135" fill="url(#snapSky)" />
-      <circle cx="228" cy="34" r="22" fill="#fff3b0" opacity="${sunOpacity}" />
-      <rect x="84" y="48" width="112" height="20" rx="4" fill="#f7e6d2" stroke="#6e4d3b" stroke-width="1.5" />
-      <text x="140" y="62" text-anchor="middle" font-family="'Baloo 2', Arial, sans-serif" font-weight="800" font-size="9" fill="#5e3d28">ĐẠI HỌC QUỐC GIA HÀ NỘI</text>
-      <rect x="0" y="128" width="280" height="82" fill="#d9ad82" />
-      <ellipse cx="140" cy="168" rx="100" ry="34" fill="#bd895b" stroke="#7c533c" stroke-width="2" />
-      <!-- Leader Center -->
-      <g>
-        <circle cx="118" cy="84" r="16" fill="#ffe4cf" stroke="#4a3228" stroke-width="1.6" />
-        <path d="M102 84 C101 68 135 68 134 84 Z" fill="#4f3223" stroke="#3d2519" stroke-width="1.6" />
-        <circle cx="112" cy="85" r="4.5" fill="none" stroke="#4a3228" stroke-width="1.4" />
-        <circle cx="124" cy="85" r="4.5" fill="none" stroke="#4a3228" stroke-width="1.4" />
-        <line x1="116.5" y1="85" x2="119.5" y2="85" stroke="#4a3228" stroke-width="1.4" />
-        <path d="${leaderMouth}" fill="none" stroke="#4a3228" stroke-width="1.8" stroke-linecap="round" />
-        ${sweat}
-      </g>
-      <!-- Teammates -->
-      <circle cx="64" cy="98" r="14" fill="#ffdfba" stroke="#4a3228" stroke-width="1.5" />
-      <circle cx="176" cy="98" r="14" fill="#f7c9b0" stroke="#4a3228" stroke-width="1.5" />
-      <circle cx="218" cy="116" r="14" fill="#eec09c" stroke="#4a3228" stroke-width="1.5" />
-      <circle cx="26" cy="116" r="14" fill="#ffd8be" stroke="#4a3228" stroke-width="1.5" />
-      ${sparkles}
-    </svg>
+    <div class="snap-scene" style="background:${bgGradient};">
+      <!-- Campus Gate Title Sign -->
+      <div class="snap-gate-sign" style="background:${titleBg}; color:${titleColor};">
+        🏛️ ĐẠI HỌC QUỐC GIA HÀ NỘI
+      </div>
+
+      <!-- Characters -->
+      <div class="snap-chars-wrap">
+        ${charsHtml}
+      </div>
+
+      <!-- 3D Table -->
+      <div class="snap-table">
+        <svg viewBox="0 0 200 68" width="100%" height="100%">
+          <ellipse cx="100" cy="38" rx="94" ry="26" fill="#8c5830" stroke="#4a2c17" stroke-width="2"/>
+          <ellipse cx="100" cy="34" rx="94" ry="25" fill="#d69f69" stroke="#4a2c17" stroke-width="2"/>
+          <ellipse cx="100" cy="34" rx="84" ry="20" fill="none" stroke="#fae5cc" stroke-width="1.2" opacity="0.6"/>
+          <!-- Laptop -->
+          <polygon points="56,22 84,20 90,29 62,31" fill="#d8e1eb" stroke="#473022" stroke-width="1.2"/>
+          <polygon points="54,8 82,6 84,20 56,22" fill="#eef3f8" stroke="#473022" stroke-width="1.2"/>
+          <!-- Cups -->
+          <circle cx="120" cy="28" r="4.5" fill="#f8e7d2" stroke="#68422a" stroke-width="1"/>
+          <circle cx="136" cy="26" r="4" fill="#ffcca8" stroke="#68422a" stroke-width="1"/>
+        </svg>
+      </div>
+
+      <!-- Effects -->
+      ${tone === 'good' ? `
+        <div class="snap-sparkle s1">✨</div>
+        <div class="snap-sparkle s2">⭐</div>
+        <div class="snap-sparkle s3">✨</div>
+      ` : tone === 'bad' ? `
+        <div class="snap-sparkle s1" style="font-size:16px;">💧</div>
+        <div class="snap-sparkle s2" style="font-size:14px;">💦</div>
+      ` : ''}
+    </div>
   `;
 }
 
