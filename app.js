@@ -29,11 +29,12 @@ if(initialStages.includes('2:5')||(saved.done&&saved.done.some(k=>k.startsWith('
 // Danh sách trang phục hợp lệ V5
 const VALID_OUTFITS = ['vnu','ulis','uet','ueb','sis','christmas','halloween'];
 const initialOutfit = (saved.outfit && VALID_OUTFITS.includes(saved.outfit)) ? saved.outfit : 'vnu';
+const initialNick = (saved.nickname && saved.nickname.trim() && saved.nickname.trim() !== 'DUY KHÁNH') ? saved.nickname.trim() : '';
 
 // State trung tâm của game V5
 const state = {
-  screen: (saved.avatarType && saved.nickname) ? 'home' : 'charSelect', // Nếu chưa chọn nhân vật hoặc tên thì vào chọn trước
-  nickname: saved.nickname || 'DUY KHÁNH',
+  screen: (saved.avatarType) ? 'home' : 'charSelect', // Nếu chưa chọn nhân vật thì vào chọn trước
+  nickname: initialNick,
   avatarType: saved.avatarType || 'boy',            // boy | girl | cat | rabbit | bear | frog
   level: 1,
   stage: 0,
@@ -165,7 +166,7 @@ function charSelectView(){
       <div class="char-select-name-box">
         <label for="player-nickname-intro" class="nickname-label">✨ TÊN CỦA BẠN (IN LÊN THẺ TEAM-CRAFT LICENSE):</label>
         <div class="nick-wrap">
-          <input id="player-nickname-intro" type="text" maxlength="22" value="${safe(state.nickname || 'DUY KHÁNH')}" placeholder="Nhập tên của bạn...">
+          <input id="player-nickname-intro" type="text" maxlength="22" value="${safe(state.nickname || '')}" placeholder="YOUR NAME">
           <button id="btn-focus-intro-nick" class="nick-pencil" type="button" title="Đổi tên">✏️</button>
         </div>
       </div>
@@ -207,7 +208,7 @@ function home(){
 
       <div class="home-player-badge" data-go="charSelect" title="Nhấn để đổi tên hoặc diện mạo">
         <span class="home-player-avatar">${player('happy','home-player-mini')}</span>
-        <span class="home-player-name">${safe(state.nickname || 'DUY KHÁNH')}</span>
+        <span class="home-player-name">${safe(state.nickname || 'YOUR NAME')}</span>
         <span class="home-edit-nick-btn" title="Chỉnh sửa tên">✏️</span>
       </div>
 
@@ -1017,7 +1018,7 @@ function levelCompleteView(){
   const l=level(state.completedLevelId||state.level);
   const r=role(state.role);
   const hasNext=state.completedLevelId===1;
-  const currentNick=(state.nickname&&state.nickname.trim())?state.nickname.trim():'DUY KHÁNH';
+  const currentNick=(state.nickname&&state.nickname.trim())?state.nickname.trim():'YOUR NAME';
 
   return shell('interior-page ending-page persona-result-page',`
     ${topbar('Hoàn thành Ải','map',true)}
@@ -1035,7 +1036,7 @@ function levelCompleteView(){
       <div class="nickname-edit-box">
         <label for="player-nickname" class="nickname-label">TÊN HIỂN THỊ TRÊN THẺ (CHẠM ĐỂ SỬA):</label>
         <div class="nick-wrap">
-          <input id="player-nickname" type="text" maxlength="22" autocomplete="off" placeholder="Nhập biệt danh của bạn..." value="${safe(currentNick)}">
+          <input id="player-nickname" type="text" maxlength="22" autocomplete="off" placeholder="YOUR NAME" value="${safe(state.nickname || '')}">
           <button type="button" class="nick-pencil" id="btn-focus-nick" aria-label="Chỉnh sửa biệt danh">✏️</button>
         </div>
       </div>
@@ -1113,7 +1114,7 @@ function quizView(){
 function quizResult(){
   const p=personas.find(x=>x.id===(state.previewPersona||state.persona))||personas[0];
   const isPreview=Boolean(state.previewPersona);
-  const currentNick=(state.nickname&&state.nickname.trim())?state.nickname.trim():'DUY KHÁNH';
+  const currentNick=(state.nickname&&state.nickname.trim())?state.nickname.trim():'YOUR NAME';
 
   return shell('quiz-page persona-result-page',`
     ${topbar(isPreview?'Xem thử thẻ':'Thẻ nhân vật của bạn','home',true)}
@@ -1132,7 +1133,7 @@ function quizResult(){
 
       <label class="nickname-label" for="player-nickname">TÊN HIỂN THỊ TRÊN THẺ <small>(chạm để đổi)</small></label>
       <div class="nick-wrap">
-        <input id="player-nickname" type="text" maxlength="22" autocomplete="off" placeholder="Nhập biệt danh của bạn..." value="${safe(currentNick)}">
+        <input id="player-nickname" type="text" maxlength="22" autocomplete="off" placeholder="YOUR NAME" value="${safe(state.nickname || '')}">
         <button type="button" class="nick-pencil" id="btn-focus-nick" aria-label="Chỉnh sửa biệt danh">✏️</button>
       </div>
 
@@ -1175,7 +1176,7 @@ async function updateLevelCardCanvas(){
   if(!canvas)return;
   const l=level(state.completedLevelId||state.level);
   const r=role(state.role);
-  const nick=(state.nickname&&state.nickname.trim())?state.nickname.trim():'DUY KHÁNH';
+  const nick=(state.nickname&&state.nickname.trim())?state.nickname.trim():'YOUR NAME';
 
   const levelData={
     id: l.id,
@@ -1206,7 +1207,7 @@ async function getLevelCardFile(){
   const blob=await imageBlob(canvas);
   if(!blob)return null;
   const l=level(state.completedLevelId||state.level);
-  const nick=(state.nickname||'player').replace(/[^a-z0-9_-]/gi,'_');
+  const nick=(state.nickname&&state.nickname.trim()?state.nickname.trim():'YOUR_NAME').replace(/[^a-z0-9_-]/gi,'_');
   return new File([blob],`TEAM-CRAFT-license-AI${l.id}-${nick}.png`,{type:'image/png'});
 }
 
@@ -1247,7 +1248,7 @@ async function updatePersonaCanvas(){
   if(!canvas)return;
   const current=state.previewPersona||state.persona||'bee';
   const p=personas.find(x=>x.id===current)||personas[0];
-  const nick=(state.nickname&&state.nickname.trim())?state.nickname.trim():'DUY KHÁNH';
+  const nick=(state.nickname&&state.nickname.trim())?state.nickname.trim():'YOUR NAME';
   try{
     await drawPersonaCard(canvas,p,nick);
   }catch(err){
@@ -1640,8 +1641,8 @@ ROOT.addEventListener('click',e=>{
 
 ROOT.addEventListener('input', e => {
   if (e.target.id === 'player-nickname') {
-    const val = e.target.value.trim().slice(0, 22);
-    state.nickname = val || 'DUY KHÁNH';
+    const val = e.target.value.slice(0, 22);
+    state.nickname = val;
     save();
     clearTimeout(state.rtTypingTimer);
     state.rtTypingTimer = setTimeout(() => {
@@ -1650,8 +1651,8 @@ ROOT.addEventListener('input', e => {
     }, 180);
   }
   if (e.target.id === 'player-nickname-intro') {
-    const val = e.target.value.trim().slice(0, 22);
-    state.nickname = val || 'DUY KHÁNH';
+    const val = e.target.value.slice(0, 22);
+    state.nickname = val;
     save();
   }
 });

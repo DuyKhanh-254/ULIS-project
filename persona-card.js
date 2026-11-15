@@ -294,7 +294,7 @@ function drawWavyLine(ctx, x, y, w, color = '#2b1c24', amp = 2.5, freq = 12) {
   ctx.restore();
 }
 
-export async function drawPersonaCard(canvas, p, nickname = 'CUT3FROG247', date = new Date()) {
+export async function drawPersonaCard(canvas, p, nickname = 'YOUR NAME', date = new Date()) {
   if (document.fonts?.ready) {
     try { await document.fonts.ready; } catch {}
   }
@@ -436,7 +436,7 @@ export async function drawPersonaCard(canvas, p, nickname = 'CUT3FROG247', date 
   ctx.textAlign = 'left';
   ctx.textBaseline = 'top';
   ctx.fillStyle = v.ink;
-  const rawId = (nickname && nickname.trim()) ? nickname.trim() : 'CUT3FROG247';
+  const rawId = (nickname && nickname.trim()) ? nickname.trim() : 'YOUR NAME';
   const displayId = rawId.toUpperCase().slice(0, 22);
 
   const maxNickW = 380;
@@ -518,7 +518,7 @@ export async function drawPersonaCard(canvas, p, nickname = 'CUT3FROG247', date 
   return canvas;
 }
 
-export async function drawLevelCompleteCard(canvas, levelData = { id: 1, name: 'Nhóm Bạn Thân', stagesCount: 5 }, playerData = {}, nickname = 'DUY KHÁNH') {
+export async function drawLevelCompleteCard(canvas, levelData = { id: 1, name: 'Nhóm Bạn Thân', stagesCount: 5 }, playerData = {}, nickname = 'YOUR NAME') {
   if (document.fonts?.ready) {
     try { await document.fonts.ready; } catch {}
   }
@@ -685,7 +685,7 @@ export async function drawLevelCompleteCard(canvas, levelData = { id: 1, name: '
   ctx.textAlign = 'left';
   ctx.textBaseline = 'top';
   ctx.fillStyle = v.ink;
-  const rawId = (nickname && nickname.trim()) ? nickname.trim() : 'DUY KHÁNH';
+  const rawId = (nickname && nickname.trim()) ? nickname.trim() : 'YOUR NAME';
   const displayId = rawId.toUpperCase().slice(0, 22);
 
   const maxNickW = 380;
