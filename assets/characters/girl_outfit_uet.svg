@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 196" width="160" height="196">
+<ellipse cx="79" cy="183" rx="49" ry="8" fill="#395d6e" opacity=".17"/>
+
+<g stroke="#353b4a" stroke-width="3.1" stroke-linejoin="round" stroke-linecap="round">
+<!-- large chibi head block -->
+<path d="M42 34 Q41 17 65 14 L112 19 Q126 21 126 41 L125 75 Q124 94 106 99 L61 98 Q39 96 38 73 Z" fill="#f7c9b0"/>
+<path d="M110 22 Q126 24 126 43 L125 76 Q123 93 105 97 L106 70 Z" fill="#000000" opacity=".12" stroke="none"/>
+
+<path d="M39 39 Q42 14 64 12 L96 11 Q124 10 127 35 Q124 50 113 48 L109 33 Q100 38 89 36 L84 27 Q73 40 58 38 L44 49 Z" fill="#5c3a2e"/>
+<path d="M44 38 Q40 56 43 64 L34 61 Q33 44 39 33 Z" fill="#5c3a2e"/>
+<path d="M117 42 L126 36 L126 62 L119 66 Z" fill="#5c3a2e"/>
+
+
+      <!-- Twin tails / Bow -->
+      <path d="M28 36 Q18 48 24 64 Q32 72 38 60 Q34 46 36 38 Z" fill="#5c3a2e" stroke="#353b4a" stroke-width="3"/>
+      <path d="M124 38 Q126 46 122 60 Q128 72 136 64 Q142 48 132 36 Z" fill="#5c3a2e" stroke="#353b4a" stroke-width="3"/>
+      <!-- Pink hair clips -->
+      <circle cx="38" cy="38" r="5" fill="#ff758f" stroke="#353b4a" stroke-width="1.8"/>
+      <circle cx="122" cy="38" r="5" fill="#ff758f" stroke="#353b4a" stroke-width="1.8"/>
+    
+</g>
+
+        <circle cx="66" cy="53" r="2.6" fill="#292d39"/>
+        <circle cx="95" cy="53" r="2.6" fill="#292d39"/>
+        <path d="M73 64 q4 3 8 0" fill="none" stroke="#a45d62" stroke-width="2.4" stroke-linecap="round"/>
+      
+<circle cx="52" cy="66" r="6" fill="#ed8b8e" opacity=".27"/>
+<circle cx="108" cy="67" r="6" fill="#ed8b8e" opacity=".24"/>
+
+<!-- Bag -->
+<path d="M45 95 Q24 95 28 113 L37 147 L46 151 Z" fill="#e77c66" stroke="#3a4052" stroke-width="3"/>
+<!-- Uniform body (Polo VNU / ULIS style) -->
+<g stroke="#364357" stroke-linejoin="round" stroke-width="3.4">
+<path d="M58 100 L103 101 Q118 107 119 125 L118 153 L46 151 L47 123 Q48 106 58 100Z" fill="#e8f4fc"/>
+<path d="M102 102 Q115 109 118 126 L117 150 L100 150Z" fill="#000" opacity=".12" stroke="none"/>
+<path d="M68 102 L80 118 L92 102" fill="none" stroke="#fff" stroke-width="8"/>
+<path d="M45 114 L34 124 L38 144 L48 146 L56 126Z" fill="#e8f4fc"/>
+<path d="M118 113 L130 127 L124 145 L115 146 L108 127Z" fill="#e8f4fc"/>
+<path d="M36 140 L46 141 L47 153 Q40 160 34 151 Z" fill="#f7c9b0"/>
+<path d="M115 141 L125 141 L126 153 Q116 160 114 151 Z" fill="#f7c9b0"/>
+<path d="M53 151 L82 152 L80 174 L56 173Z" fill="#35547e"/>
+<path d="M83 152 L111 151 L109 174 L84 173Z" fill="#35547e"/>
+<path d="M54 174 L80 174 L80 183 Q64 190 51 183Z" fill="#493c49"/>
+<path d="M83 174 L110 174 L112 183 Q98 190 82 183Z" fill="#493c49"/>
+</g>
+<text x="80" y="134" text-anchor="middle" font-family="'Baloo 2', Arial, sans-serif" font-weight="800" font-size="8.5" fill="#005ea2" stroke="#ffffff" stroke-width="0.8" paint-order="stroke" letter-spacing="0.3">UET</text>
+</svg>

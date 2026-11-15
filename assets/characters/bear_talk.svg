@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 196" width="160" height="196">
+<ellipse cx="79" cy="183" rx="49" ry="8" fill="#395d6e" opacity=".17"/>
+
+      <!-- Bear round ears -->
+      <circle cx="36" cy="22" r="14" fill="#c9966b" stroke="#353b4a" stroke-width="3"/>
+      <circle cx="36" cy="22" r="7" fill="#ffd8be"/>
+      <circle cx="124" cy="22" r="14" fill="#c9966b" stroke="#353b4a" stroke-width="3"/>
+      <circle cx="124" cy="22" r="7" fill="#ffd8be"/>
+    
+<g stroke="#353b4a" stroke-width="3.1" stroke-linejoin="round" stroke-linecap="round">
+<!-- large chibi head block -->
+<path d="M42 34 Q41 17 65 14 L112 19 Q126 21 126 41 L125 75 Q124 94 106 99 L61 98 Q39 96 38 73 Z" fill="#c9966b"/>
+<path d="M110 22 Q126 24 126 43 L125 76 Q123 93 105 97 L106 70 Z" fill="#000000" opacity=".12" stroke="none"/>
+
+
+</g>
+
+        <circle cx="66" cy="53" r="2.6" fill="#292d39"/>
+        <circle cx="95" cy="53" r="2.6" fill="#292d39"/>
+        <path d="M72 62 Q77 71 82 62 Z" fill="#9e3b4a" stroke="#353b4a" stroke-width="1.8"/>
+      
+<circle cx="52" cy="66" r="6" fill="#ed8b8e" opacity=".27"/>
+<circle cx="108" cy="67" r="6" fill="#ed8b8e" opacity=".24"/>
+
+      <!-- Bear muzzle -->
+      <ellipse cx="80" cy="63" rx="14" ry="10" fill="#ffd8be" stroke="#353b4a" stroke-width="2"/>
+      <ellipse cx="80" cy="59" rx="4" ry="3" fill="#4a2810"/>
+    
+<!-- Bag -->
+<path d="M45 95 Q24 95 28 113 L37 147 L46 151 Z" fill="#e77c66" stroke="#3a4052" stroke-width="3"/>
+<!-- Uniform body (Polo VNU / ULIS style) -->
+<g stroke="#364357" stroke-linejoin="round" stroke-width="3.4">
+<path d="M58 100 L103 101 Q118 107 119 125 L118 153 L46 151 L47 123 Q48 106 58 100Z" fill="#1a447a"/>
+<path d="M102 102 Q115 109 118 126 L117 150 L100 150Z" fill="#000" opacity=".12" stroke="none"/>
+<path d="M68 102 L80 118 L92 102" fill="none" stroke="#fff" stroke-width="8"/>
+<path d="M45 114 L34 124 L38 144 L48 146 L56 126Z" fill="#1a447a"/>
+<path d="M118 113 L130 127 L124 145 L115 146 L108 127Z" fill="#1a447a"/>
+<path d="M36 140 L46 141 L47 153 Q40 160 34 151 Z" fill="#c9966b"/>
+<path d="M115 141 L125 141 L126 153 Q116 160 114 151 Z" fill="#c9966b"/>
+<path d="M53 151 L82 152 L80 174 L56 173Z" fill="#35547e"/>
+<path d="M83 152 L111 151 L109 174 L84 173Z" fill="#35547e"/>
+<path d="M54 174 L80 174 L80 183 Q64 190 51 183Z" fill="#493c49"/>
+<path d="M83 174 L110 174 L112 183 Q98 190 82 183Z" fill="#493c49"/>
+</g>
+<text x="80" y="134" text-anchor="middle" font-family="'Baloo 2', Arial, sans-serif" font-weight="800" font-size="8.5" fill="#ffffff" stroke="#0e294d" stroke-width="0.8" paint-order="stroke" letter-spacing="0.3">ULIS</text>
+</svg>
