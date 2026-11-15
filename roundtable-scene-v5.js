@@ -365,15 +365,6 @@ export function renderRoundtableCharacters(state, moods = {}, activeSpeakerKey =
               style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:contain; clip-path: inset(50% 0 0 0); z-index:4; pointer-events:none;"
             >
           ` : ''}
-
-          <!-- Animated Mouth Flap: Perfectly placed over the character mouth -->
-          <div class="rt-mouth-flap" style="position:absolute; left:48%; top:33%; width:14%; height:6.5%; transform:translate(-50%, -50%); z-index:6; pointer-events:none;">
-            <svg viewBox="0 0 28 18" width="100%" height="100%" style="overflow:visible;">
-              <ellipse cx="14" cy="9" rx="12" ry="7.5" fill="#a83244" stroke="#353b4a" stroke-width="1.8"/>
-              <path d="M7 11 Q14 7 21 11 Q17 15 14 15 Q11 15 7 11 Z" fill="#ff7a8a"/>
-              <path d="M6 8 Q14 11 22 8" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </div>
         </div>
 
         <span class="${badgeClass}">${badgeLabel}</span>

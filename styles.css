@@ -328,14 +328,6 @@ a,[role="button"]{touch-action:manipulation}
 .character-seat.is-speaking .character-art{filter:drop-shadow(0 0 14px rgba(255,215,0,0.9));animation:speakerBob .32s ease-in-out infinite alternate !important}
 @keyframes speakerBob{0%{transform:translateY(0)}100%{transform:translateY(-3.5px)}}
 
-.rt-mouth-flap{display:none}
-.character-seat.is-speaking .rt-mouth-flap{display:block !important;animation:mouthTalkCycle .22s ease-in-out infinite alternate}
-@keyframes mouthTalkCycle{
-  0%{transform:translate(-50%, -50%) scaleY(0.2) scaleX(0.85)}
-  50%{transform:translate(-50%, -50%) scaleY(0.75) scaleX(1.0)}
-  100%{transform:translate(-50%, -50%) scaleY(1.3) scaleX(1.15)}
-}
-
 .rt-table-wrap{position:absolute;left:50%;top:56%;transform:translate(-50%, -50%);width:310px;height:145px;z-index:18;pointer-events:none}
 .rt-table-wrap svg{width:100%;height:100%;filter:drop-shadow(0 8px 16px rgba(60,40,25,0.3))}
 
