@@ -1,5 +1,5 @@
 import {roles, personas, quizQuestions, levels, quickScenarios, reversals, stageRoleMap, stageUIMode, charTypes, allOutfits} from './data.js';
-import {ROUNDTABLE_BACKDROP_SVG, ROUNDTABLE_CHARACTERS_HTML, startMouthFlap, stopMouthFlap, focusRoundtableSpeaker, applyRoundtableExpressions} from './roundtable-scene-v5.js';
+import {ROUNDTABLE_BACKDROP_SVG, renderRoundtableCharacters, startMouthFlap, stopMouthFlap, focusRoundtableSpeaker, applyRoundtableExpressions} from './roundtable-scene-v5.js';
 
 const ROOT=document.getElementById('app');
 const TURN_SECONDS=60; // Nâng cấp V5: 60 giây mỗi lượt quyết định tình huống
@@ -617,48 +617,46 @@ function roundtableView(){
   const urgentClass = state.gameTime <= 15 ? 'timer-urgent' : '';
 
   let speakerKey = 'Leader';
-  let tailLeft = '32%';
-  let bubbleTop = '17%';
+  let tailLeft = '28%';
+  let bubbleTop = '15%';
 
   if (activeName) {
     const low = activeName.toLowerCase();
     if (low.includes('doer') || activeName === 'A') {
       speakerKey = 'Doer';
-      tailLeft = '18%';
-      bubbleTop = '22%';
+      tailLeft = '16%';
+      bubbleTop = '18%';
     } else if (low.includes('leader')) {
       speakerKey = 'Leader';
-      tailLeft = '32%';
-      bubbleTop = '17%';
+      tailLeft = '28%';
+      bubbleTop = '15%';
     } else if (low.includes('qc') || activeName === 'B') {
       speakerKey = 'QC';
-      tailLeft = '68%';
-      bubbleTop = '17%';
+      tailLeft = '72%';
+      bubbleTop = '15%';
     } else if (low.includes('mediator')) {
       speakerKey = 'Mediator';
-      tailLeft = '82%';
-      bubbleTop = '22%';
-    } else if (low.includes('bạn thân') || low.includes('follower')) {
+      tailLeft = '84%';
+      bubbleTop = '18%';
+    } else if (low.includes('bạn thân') || low.includes('follower') || low.includes('bạn')) {
       speakerKey = 'BanThan';
-      tailLeft = '70%';
-      bubbleTop = '26%';
+      tailLeft = '68%';
+      bubbleTop = '20%';
     }
   }
 
   const moods = done
-    ? { Leader: 'worried', QC: 'thoughtful', Doer: 'worried', Mediator: 'thoughtful', BanThan: 'worried' }
+    ? { Leader: 'worried', QC: 'worried', Doer: 'worried', Mediator: 'worried', BanThan: 'worried' }
     : getRoundtableMoodsPDF(current, step, activeMsg);
 
   setTimeout(() => {
-    applyRoundtableExpressions(moods);
+    applyRoundtableExpressions(moods, state);
     if (!done && activeName && activeName !== 'Hệ thống') {
       focusRoundtableSpeaker(speakerKey);
-      startMouthFlap(speakerKey);
     } else {
       focusRoundtableSpeaker(null);
-      stopMouthFlap();
     }
-  }, 30);
+  }, 20);
 
   const levelName = g.mode === 'reversal' ? 'Đảo Vai' : (level(g.level)?.name || 'Nhóm Bạn Thân');
 
@@ -680,7 +678,7 @@ function roundtableView(){
       </div>
 
       <div class="rt-chars-wrap">
-        ${ROUNDTABLE_CHARACTERS_HTML}
+        ${renderRoundtableCharacters(state, moods, (!done && activeName && activeName !== 'Hệ thống') ? speakerKey : null)}
       </div>
 
       ${!done ? `

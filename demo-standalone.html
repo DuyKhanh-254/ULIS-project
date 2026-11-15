@@ -323,12 +323,28 @@ a,[role="button"]{touch-action:manipulation}
 #seat-Mediator .character-art{animation-delay:2.1s}
 #seat-BanThan .character-art{animation-delay:2.8s}
 
-.character-seat.is-dimmed{filter:brightness(.91) saturate(.9);transform:scale(.985)}
-.character-seat.is-speaking{filter:brightness(1.04) saturate(1.05);transform:translateY(-4px) scale(1.035)}
-.character-seat.is-speaking .character-art{filter:drop-shadow(0 0 12px rgba(255,224,130,0.85))}
+.character-seat.is-dimmed,
+.character-seat.is-resting{filter:brightness(.92) saturate(.92);opacity:.92;transform:translate(-50%, -50%) scale(.985)}
+.character-seat.is-speaking{filter:brightness(1.06) saturate(1.08);transform:translate(-50%, -50%) translateY(-5px) scale(1.04) !important;z-index:32 !important}
+.character-seat.is-speaking .character-art{filter:drop-shadow(0 0 14px rgba(255,215,0,0.9));animation:speakerBob .32s ease-in-out infinite alternate !important}
+@keyframes speakerBob{0%{transform:translateY(0)}100%{transform:translateY(-3.5px)}}
 
-.char-badge{margin-top:-8px;padding:2px 10px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.01em;background:rgba(255,249,238,0.94);border:2px solid #7c533c;color:#4a3228;box-shadow:0 2px 4px rgba(74,50,40,0.2);white-space:nowrap;transition:all .25s ease}
-.character-seat.is-speaking .char-badge{background:linear-gradient(180deg,#fff3c4 0%,#ffd97d 100%);border-color:#8f5629;color:#472810;transform:scale(1.06)}
+.rt-mouth-flap{display:none}
+.character-seat.is-speaking .rt-mouth-flap{display:block !important;animation:mouthTalkCycle .22s ease-in-out infinite alternate}
+@keyframes mouthTalkCycle{
+  0%{transform:translate(-50%, -50%) scaleY(0.2) scaleX(0.85)}
+  50%{transform:translate(-50%, -50%) scaleY(0.75) scaleX(1.0)}
+  100%{transform:translate(-50%, -50%) scaleY(1.3) scaleX(1.15)}
+}
+
+.rt-table-wrap{position:absolute;left:50%;top:56%;transform:translate(-50%, -50%);width:310px;height:145px;z-index:18;pointer-events:none}
+.rt-table-wrap svg{width:100%;height:100%;filter:drop-shadow(0 8px 16px rgba(60,40,25,0.3))}
+
+.char-badge{margin-top:-8px;padding:2px 10px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.01em;background:rgba(255,249,238,0.94);border:2px solid #7c533c;color:#4a3228;box-shadow:0 2px 4px rgba(74,50,40,0.2);white-space:nowrap;transition:all .25s ease;z-index:7}
+.character-seat.is-speaking .char-badge{background:linear-gradient(180deg,#fff3c4 0%,#ffd97d 100%);border-color:#8f5629;color:#472810;transform:scale(1.06);box-shadow:0 0 8px rgba(255,215,0,0.6),0 2px 4px rgba(74,50,40,0.25)}
+.char-badge.badge-player{background:linear-gradient(180deg,#fff3c4 0%,#ffd97d 100%);border-color:#9c673e;color:#4a280e;font-weight:900;box-shadow:0 0 8px rgba(255,215,0,0.65),0 2px 4px rgba(74,50,40,0.25)}
+.rt-chair-back{filter:drop-shadow(0 4px 6px rgba(60,40,25,0.2))}
+.rt-stool{filter:drop-shadow(0 4px 6px rgba(60,40,25,0.25))}
 
 .eye-group{transform-box:fill-box;transform-origin:center center;animation:animeBlink 4.8s infinite}
 #seat-Doer .eye-group{animation-delay:1.1s}
@@ -1673,125 +1689,436 @@ const reversals = {
 // ROUNDTABLE SCENE V5: 2D VECTOR CAMPUS PATIO, 5 COZY CHARACTERS & MOUTH FLAP
 // ===================================================================
 
-const ROUNDTABLE_BACKDROP_SVG = "    <svg id=\"campus-backdrop\" width=\"100%\" height=\"100%\" viewBox=\"0 0 440 825\" preserveAspectRatio=\"none\"\naria-hidden=\"true\">\n      <defs>\n        <!-- Warm Sunlit Sky -->\n        <linearGradient id=\"skyGradient\" x1=\"0\" y1=\"0\" x2=\"0.2\" y2=\"1\">\n         <stop offset=\"0%\" stop-color=\"#c6e5f7\" />\n         <stop offset=\"48%\" stop-color=\"#f7ebd8\" />\n <stop offset=\"100%\" stop-color=\"#fde0be\" />\n</linearGradient>\n\n<!-- Golden Morning Sunbeams -->\n<linearGradient id=\"sunBeam\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n <stop offset=\"0%\" stop-color=\"#fff9db\" stop-opacity=\"0.48\" />\n <stop offset=\"100%\" stop-color=\"#fff9db\" stop-opacity=\"0\" />\n</linearGradient>\n\n<!-- Foliage Gradients -->\n<radialGradient id=\"foliageLight\" cx=\"35%\" cy=\"30%\" r=\"70%\">\n <stop offset=\"0%\" stop-color=\"#c5e69e\" />\n <stop offset=\"65%\" stop-color=\"#96c474\" />\n <stop offset=\"100%\" stop-color=\"#73a154\" />\n</radialGradient>\n<radialGradient id=\"foliageDeep\" cx=\"40%\" cy=\"30%\" r=\"70%\">\n <stop offset=\"0%\" stop-color=\"#a6d184\" />\n <stop offset=\"75%\" stop-color=\"#7aa85b\" />\n <stop offset=\"100%\" stop-color=\"#5d8743\" />\n</radialGradient>\n\n<!-- Building & Roof Gradients -->\n<linearGradient id=\"roofTerracotta\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n <stop offset=\"0%\" stop-color=\"#eb9c7a\" />\n <stop offset=\"100%\" stop-color=\"#c97252\" />\n</linearGradient>\n<linearGradient id=\"wallCream\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n <stop offset=\"0%\" stop-color=\"#fff3e2\" />\n <stop offset=\"100%\" stop-color=\"#ebd4b7\" />\n</linearGradient>\n\n<!-- Cafe Wooden Deck Gradient -->\n<linearGradient id=\"deckWood\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n <stop offset=\"0%\" stop-color=\"#e3b98f\" />\n <stop offset=\"55%\" stop-color=\"#d2a274\" />\n <stop offset=\"100%\" stop-color=\"#bd895b\" />\n</linearGradient>\n\n<!-- Fairy Light Radial Glow -->\n<radialGradient id=\"bulbGlow\" cx=\"50%\" cy=\"50%\" r=\"50%\">\n <stop offset=\"0%\" stop-color=\"#fff9c4\" stop-opacity=\"0.95\" />\n <stop offset=\"45%\" stop-color=\"#ffe082\" stop-opacity=\"0.45\" />\n <stop offset=\"100%\" stop-color=\"#ffe082\" stop-opacity=\"0\" />\n</radialGradient>\n    </defs>\n\n    <!-- Sky Backdrop -->\n    <rect x=\"0\" y=\"0\" width=\"440\" height=\"440\" fill=\"url(#skyGradient)\" />\n\n    <!-- Soft Hand-Drawn Fluffy Clouds -->\n    <g fill=\"#ffffff\" opacity=\"0.82\">\n     <path d=\"M55 112 Q65 94 86 98 Q100 84 122 94 Q138 94 142 110 Q152 114 146 124\nL50 124 Q44 116 55 112 Z\" />\n     <path d=\"M292 94 Q302 80 318 84 Q330 74 348 83 Q362 84 364 96 Q372 100 366 108\nL288 108 Q284 100 292 94 Z\" />\n    </g>\n\n    <!-- Lush Background Trees Behind Campus -->\n    <g stroke=\"#55783e\" stroke-width=\"1.8\">\n     <circle cx=\"38\" cy=\"192\" r=\"68\" fill=\"url(#foliageDeep)\" />\n     <circle cx=\"96\" cy=\"176\" r=\"54\" fill=\"url(#foliageLight)\" />\n     <circle cx=\"20\" cy=\"252\" r=\"56\" fill=\"url(#foliageLight)\" />\n     <circle cx=\"348\" cy=\"196\" r=\"62\" fill=\"url(#foliageDeep)\" />\n     <circle cx=\"408\" cy=\"188\" r=\"52\" fill=\"url(#foliageLight)\" />\n    </g>\n\n     <!-- Classic Two-Story University Building (Right Mid-Background) -->\n     <g>\n      <!-- Main Facade -->\n      <rect x=\"276\" y=\"196\" width=\"150\" height=\"145\" fill=\"url(#wallCream)\" stroke=\"#6e4d3b\"\nstroke-width=\"2.2\" />\n      <!-- Terracotta Hip Roof -->\n      <polygon points=\"266,198 351,150 436,198\" fill=\"url(#roofTerracotta)\" stroke=\"#6e4332\"\nstroke-width=\"2.2\" stroke-linejoin=\"round\" />\n      <line x1=\"276\" y1=\"201\" x2=\"426\" y2=\"201\" stroke=\"#8f5b42\" stroke-width=\"3\"\nopacity=\"0.45\" />\n      <!-- Decorative Cornice Band -->\n      <rect x=\"276\" y=\"252\" width=\"150\" height=\"6\" fill=\"#dfc19f\" stroke=\"#6e4d3b\"\nstroke-width=\"1.5\" />\n      <!-- Arched Campus Windows -->\n      <g fill=\"#b9d8eb\" stroke=\"#6e4d3b\" stroke-width=\"1.8\">\n        <path d=\"M294 244 L294 220 A11 11 0 0 1 316 220 L316 244 Z\" />\n        <path d=\"M338 244 L338 220 A11 11 0 0 1 360 220 L360 244 Z\" />\n        <path d=\"M382 244 L382 220 A11 11 0 0 1 404 220 L404 244 Z\" />\n        <path d=\"M294 302 L294 278 A11 11 0 0 1 316 278 L316 302 Z\" />\n        <path d=\"M338 302 L338 278 A11 11 0 0 1 360 278 L360 302 Z\" />\n        <path d=\"M382 302 L382 278 A11 11 0 0 1 404 278 L404 302 Z\" />\n      </g>\n     <!-- Window Panes Highlight -->\n     <g stroke=\"#ffffff\" stroke-width=\"1.4\" opacity=\"0.75\">\n      <line x1=\"305\" y1=\"212\" x2=\"305\" y2=\"243\" />\n      <line x1=\"349\" y1=\"212\" x2=\"349\" y2=\"243\" />\n      <line x1=\"393\" y1=\"212\" x2=\"393\" y2=\"243\" />\n     </g>\n    </g>\n\n     <!-- Campus Perimeter Wall & \"ĐẠI HỌC\" Gate Archway -->\n     <g>\n      <!-- Courtyard Path Behind Gate -->\n      <polygon points=\"138,364 152,290 232,290 248,364\" fill=\"#f2e2cd\" />\n      <!-- Cream Stone Wall -->\n      <rect x=\"0\" y=\"302\" width=\"440\" height=\"62\" fill=\"#efe0ce\" stroke=\"#6e4d3b\"\nstroke-width=\"2\" />\n      <rect x=\"0\" y=\"298\" width=\"440\" height=\"7\" fill=\"#dec6aa\" stroke=\"#6e4d3b\"\nstroke-width=\"1.6\" />\n\n      <!-- Gate Stone Pillars -->\n      <rect x=\"112\" y=\"232\" width=\"26\" height=\"132\" rx=\"3\" fill=\"#f6e5d0\" stroke=\"#6e4d3b\"\nstroke-width=\"2.2\" />\n      <rect x=\"108\" y=\"226\" width=\"34\" height=\"9\" rx=\"3\" fill=\"#e6ccb0\" stroke=\"#6e4d3b\"\nstroke-width=\"2\" />\n      <rect x=\"244\" y=\"232\" width=\"26\" height=\"132\" rx=\"3\" fill=\"#f6e5d0\" stroke=\"#6e4d3b\"\nstroke-width=\"2.2\" />\n      <rect x=\"240\" y=\"226\" width=\"34\" height=\"9\" rx=\"3\" fill=\"#e6ccb0\" stroke=\"#6e4d3b\"\nstroke-width=\"2\" />\n\n      <!-- Archway Header Sign \"ĐẠI HỌC\" -->\n      <rect x=\"104\" y=\"198\" width=\"174\" height=\"34\" rx=\"8\" fill=\"#f7e6d2\" stroke=\"#6e4d3b\"\nstroke-width=\"2.2\" />\n      <rect x=\"111\" y=\"204\" width=\"160\" height=\"22\" rx=\"5\" fill=\"#ebd2b0\" stroke=\"#9e7856\"\nstroke-width=\"1.2\" />\n      <text x=\"191\" y=\"220\" text-anchor=\"middle\" font-family=\"Quicksand, sans-serif\"\nfont-weight=\"800\" font-size=\"14\" fill=\"#5e3d28\" letter-spacing=\"1.6\">\n       ĐẠI HỌC\n      </text>\n\n      <!-- Open Wrought-Iron Gate Leaves -->\n      <g stroke=\"#6e4d3b\" stroke-width=\"2\" fill=\"none\">\n       <rect x=\"140\" y=\"254\" width=\"35\" height=\"108\" rx=\"3\" />\n       <line x1=\"152\" y1=\"254\" x2=\"152\" y2=\"362\" />\n       <line x1=\"164\" y1=\"254\" x2=\"164\" y2=\"362\" />\n       <rect x=\"207\" y=\"254\" width=\"35\" height=\"108\" rx=\"3\" />\n      <line x1=\"219\" y1=\"254\" x2=\"219\" y2=\"362\" />\n      <line x1=\"231\" y1=\"254\" x2=\"231\" y2=\"362\" />\n     </g>\n    </g>\n\n    <!-- Warm Golden Sunbeams Filtering Through -->\n    <polygon points=\"0,40 165,40 310,365 75,365\" fill=\"url(#sunBeam)\" />\n    <polygon points=\"180,40 270,40 410,365 265,365\" fill=\"url(#sunBeam)\" />\n\n    <!-- Cafe Wooden Deck Patio Floor -->\n    <rect x=\"0\" y=\"362\" width=\"440\" height=\"463\" fill=\"url(#deckWood)\" />\n    <g stroke=\"#a8764c\" stroke-width=\"1.6\" opacity=\"0.52\">\n     <line x1=\"0\" y1=\"406\" x2=\"440\" y2=\"406\" />\n     <line x1=\"0\" y1=\"458\" x2=\"440\" y2=\"458\" />\n     <line x1=\"0\" y1=\"514\" x2=\"440\" y2=\"514\" />\n     <line x1=\"0\" y1=\"576\" x2=\"440\" y2=\"576\" />\n     <line x1=\"0\" y1=\"644\" x2=\"440\" y2=\"644\" />\n     <line x1=\"0\" y1=\"714\" x2=\"440\" y2=\"714\" />\n     <line x1=\"0\" y1=\"780\" x2=\"440\" y2=\"780\" />\n    </g>\n\n     <!-- \"QUÁN NƯỚC\" Wooden Pergola Pillars & Overhead Awning Beam -->\n     <rect x=\"8\" y=\"54\" width=\"18\" height=\"335\" fill=\"#9c6b47\" stroke=\"#4a3228\"\nstroke-width=\"2.2\" />\n     <rect x=\"414\" y=\"54\" width=\"18\" height=\"335\" fill=\"#9c6b47\" stroke=\"#4a3228\"\nstroke-width=\"2.2\" />\n     <rect x=\"0\" y=\"46\" width=\"440\" height=\"24\" fill=\"#875938\" stroke=\"#4a3228\"\nstroke-width=\"2.2\" />\n     <line x1=\"0\" y1=\"51\" x2=\"440\" y2=\"51\" stroke=\"#b5835c\" stroke-width=\"2\" />\n\n    <!-- Trailing Green Ivy Vines Draped Over Pergola -->\n    <g fill=\"#7fb362\" stroke=\"#466933\" stroke-width=\"1.6\">\n     <path d=\"M18 68 Q34 94 26 128\" fill=\"none\" stroke=\"#4f753a\" stroke-width=\"2.4\" />\n     <ellipse cx=\"22\" cy=\"84\" rx=\"7\" ry=\"4.5\" transform=\"rotate(-25 22 84)\" />\n     <ellipse cx=\"32\" cy=\"100\" rx=\"7\" ry=\"4.5\" transform=\"rotate(25 32 100)\" />\n     <ellipse cx=\"24\" cy=\"118\" rx=\"6.5\" ry=\"4\" transform=\"rotate(-18 24 118)\" />\n\n     <path d=\"M238 68 Q228 102 240 144\" fill=\"none\" stroke=\"#4f753a\" stroke-width=\"2.4\" />\n     <ellipse cx=\"231\" cy=\"86\" rx=\"7\" ry=\"4.5\" transform=\"rotate(-28 231 86)\" />\n     <ellipse cx=\"242\" cy=\"106\" rx=\"7\" ry=\"4.5\" transform=\"rotate(24 242 106)\" />\n     <ellipse cx=\"233\" cy=\"126\" rx=\"6.5\" ry=\"4\" transform=\"rotate(-20 233 126)\" />\n     <ellipse cx=\"242\" cy=\"142\" rx=\"6\" ry=\"3.8\" transform=\"rotate(18 242 142)\" />\n    </g>\n     <!-- Hanging Woven Potted Fern (Upper Left) -->\n     <g transform=\"translate(66, 70)\">\n      <line x1=\"0\" y1=\"0\" x2=\"-14\" y2=\"30\" stroke=\"#6e4d3b\" stroke-width=\"1.8\" />\n      <line x1=\"0\" y1=\"0\" x2=\"14\" y2=\"30\" stroke=\"#6e4d3b\" stroke-width=\"1.8\" />\n      <path d=\"M-18 30 L18 30 L13 48 L-13 48 Z\" fill=\"#d68c65\" stroke=\"#5c3826\"\nstroke-width=\"2\" />\n      <g fill=\"#88bd6a\" stroke=\"#466933\" stroke-width=\"1.6\">\n        <ellipse cx=\"-14\" cy=\"28\" rx=\"11\" ry=\"6\" transform=\"rotate(-22 -14 28)\" />\n        <ellipse cx=\"14\" cy=\"28\" rx=\"11\" ry=\"6\" transform=\"rotate(22 14 28)\" />\n        <ellipse cx=\"0\" cy=\"24\" rx=\"12\" ry=\"7\" />\n        <ellipse cx=\"-18\" cy=\"38\" rx=\"8\" ry=\"4.5\" transform=\"rotate(-48 -18 38)\" />\n        <ellipse cx=\"18\" cy=\"38\" rx=\"8\" ry=\"4.5\" transform=\"rotate(48 18 38)\" />\n      </g>\n     </g>\n\n     <!-- Warm Glowing Fairy String Lights -->\n     <path d=\"M 22 72 Q 130 112 225 74 Q 325 110 418 72\" fill=\"none\" stroke=\"#593e2c\"\nstroke-width=\"2\" />\n     <g>\n      <circle cx=\"74\" cy=\"89\" r=\"14\" fill=\"url(#bulbGlow)\" />\n      <circle cx=\"74\" cy=\"89\" r=\"4.8\" fill=\"#fff7b8\" stroke=\"#c98832\" stroke-width=\"1.6\" />\n\n      <circle cx=\"132\" cy=\"94\" r=\"14\" fill=\"url(#bulbGlow)\" />\n      <circle cx=\"132\" cy=\"94\" r=\"4.8\" fill=\"#fff7b8\" stroke=\"#c98832\" stroke-width=\"1.6\" />\n\n      <circle cx=\"186\" cy=\"85\" r=\"14\" fill=\"url(#bulbGlow)\" />\n      <circle cx=\"186\" cy=\"85\" r=\"4.8\" fill=\"#fff7b8\" stroke=\"#c98832\" stroke-width=\"1.6\" />\n\n      <circle cx=\"274\" cy=\"86\" r=\"14\" fill=\"url(#bulbGlow)\" />\n      <circle cx=\"274\" cy=\"86\" r=\"4.8\" fill=\"#fff7b8\" stroke=\"#c98832\" stroke-width=\"1.6\" />\n\n      <circle cx=\"330\" cy=\"93\" r=\"14\" fill=\"url(#bulbGlow)\" />\n      <circle cx=\"330\" cy=\"93\" r=\"4.8\" fill=\"#fff7b8\" stroke=\"#c98832\" stroke-width=\"1.6\" />\n\n      <circle cx=\"384\" cy=\"83\" r=\"14\" fill=\"url(#bulbGlow)\" />\n      <circle cx=\"384\" cy=\"83\" r=\"4.8\" fill=\"#fff7b8\" stroke=\"#c98832\" stroke-width=\"1.6\" />\n     </g>\n\n     <!-- Cozy Terracotta Potted Plants Flanking Patio -->\n     <g>\n      <!-- Left Terracotta Pot -->\n      <ellipse cx=\"32\" cy=\"346\" rx=\"22\" ry=\"18\" fill=\"url(#foliageLight)\" stroke=\"#466933\"\nstroke-width=\"2\" />\n      <polygon points=\"15,350 49,350 44,382 20,382\" fill=\"#d98662\" stroke=\"#5c3826\"\nstroke-width=\"2\" />\n      <rect x=\"13\" y=\"346\" width=\"38\" height=\"7\" rx=\"3\" fill=\"#e59775\" stroke=\"#5c3826\"\nstroke-width=\"1.8\" />\n\n       <!-- Right Terracotta Pot -->\n       <ellipse cx=\"408\" cy=\"346\" rx=\"22\" ry=\"18\" fill=\"url(#foliageLight)\" stroke=\"#466933\"\nstroke-width=\"2\" />\n       <polygon points=\"391,350 425,350 420,382 396,382\" fill=\"#d98662\" stroke=\"#5c3826\"\nstroke-width=\"2\" />\n       <rect x=\"389\" y=\"346\" width=\"38\" height=\"7\" rx=\"3\" fill=\"#e59775\" stroke=\"#5c3826\"\nstroke-width=\"1.8\" />\n     </g>\n    </svg>\n   </div>\n\n   <!-- ===================================================================\n       2. TOP HUD BAR (STAGE BADGE & DYNAMIC EMPATHY COUNTER)\n       ===================================================================\n-->\n   <header class=\"absolute top-0 left-0 right-0 z-40 px-3.5 pt-3.5 flex items-center\njustify-between gap-2 pointer-events-none\">\n     <!-- Top-Left Stage Pill Badge -->\n     <div class=\"vn-pill px-3.5 py-1.5 flex items-center gap-2 pointer-events-auto\">\n      <span class=\"w-2.5 h-2.5 rounded-full bg-[#e58c5c] border border-[#7c533c]\ninline-block\"></span>\n      <span class=\"text-xs sm:text-[13.5px] font-extrabold text-[#4a3228] whitespace-nowrap\">\n        Ải 1: Nhóm Bạn Thân\n      </span>\n     </div>\n\n   <!-- Top-Right Glossy Pink Heart + Empathy Score Pill -->\n   <div class=\"relative pointer-events-auto\">\n    <div class=\"vn-pill px-3.5 py-1.5 flex items-center gap-1.5\">\n      <!-- Hand-Drawn Glossy Pink Heart SVG -->\n      <svg width=\"19\" height=\"18\" viewBox=\"0 0 24 22\" fill=\"none\" aria-hidden=\"true\">\n        <defs>\n         <linearGradient id=\"glossHeart\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n           <stop offset=\"0%\" stop-color=\"#ff8da6\" />\n           <stop offset=\"100%\" stop-color=\"#e3486b\" />\n         </linearGradient>\n        </defs>\n          <path d=\"M12 20.5 C12 20.5 2 13.8 2 7.2 C2 3.8 4.7 1.5 7.8 1.5 C9.8 1.5 11.3 2.5 12 3.8\nC12.7 2.5 14.2 1.5 16.2 1.5 C19.3 1.5 22 3.8 22 7.2 C22 13.8 12 20.5 12 20.5 Z\"\nfill=\"url(#glossHeart)\" stroke=\"#5e2a38\" stroke-width=\"2\" stroke-linejoin=\"round\" />\n          <ellipse cx=\"7.2\" cy=\"5.8\" rx=\"2.4\" ry=\"1.3\" transform=\"rotate(-28 7.2 5.8)\" fill=\"#ffd6e0\"\n/>\n        </svg>\n        <span class=\"text-xs sm:text-[13.5px] font-extrabold text-[#4a3228] whitespace-nowrap\">\n          Thấu cảm: <span id=\"empathy-score\" class=\"text-[15px] font-black\ntext-[#d94164]\">50</span>\n        </span>\n       </div>\n\n     <!-- Floating \"+XX Thấu cảm\" Delta Indicator -->\n     <div\n      id=\"empathy-delta\"\n      class=\"hidden absolute -bottom-8 right-1 px-2.5 py-0.5 rounded-full bg-[#ffe3ea] border-2\nborder-[#d94164] text-[#b82849] text-xs font-black shadow-md whitespace-nowrap\npointer-events-none\"\n     >\n      +20 Thấu cảm\n     </div>\n    </div>\n  </header>\n\n   <!-- ===================================================================\n       3. ALL 5 HIGH-DETAIL 2D ANIME/CARTOON CHARACTERS & ROUND WOODEN\nTABLE\n       ===================================================================\n-->\n\r";
+const ROUNDTABLE_BACKDROP_SVG = `    <svg id="campus-backdrop" width="100%" height="100%" viewBox="0 0 440 825" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <!-- Warm Sunlit Sky -->
+        <linearGradient id="skyGradient" x1="0" y1="0" x2="0.2" y2="1">
+         <stop offset="0%" stop-color="#c6e5f7" />
+         <stop offset="48%" stop-color="#f7ebd8" />
+         <stop offset="100%" stop-color="#fde0be" />
+        </linearGradient>
 
-const ROUNDTABLE_CHARACTERS_HTML = "  <!-- CHARACTER 2: LEADER (Center-left behind open silver laptop, facing forward-right) -->\n  <div\n   id=\"seat-Leader\"\n   class=\"character-seat\"\n   style=\"left: 16%; top: 37%; width: 118px; z-index: 12;\"\n  >\n   <div class=\"character-art\">\n     <svg width=\"116\" height=\"142\" viewBox=\"0 0 116 142\" fill=\"none\" aria-label=\"Leader\">\n       <defs>\n        <linearGradient id=\"skinLeader\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n         <stop offset=\"0%\" stop-color=\"#ffe7d4\" />\n         <stop offset=\"100%\" stop-color=\"#f7cfb4\" />\n        </linearGradient>\n        <linearGradient id=\"hairLeader\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n        <stop offset=\"0%\" stop-color=\"#5c3b2a\" />\n        <stop offset=\"100%\" stop-color=\"#3d2519\" />\n       </linearGradient>\n       <linearGradient id=\"shirtWhite\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n        <stop offset=\"0%\" stop-color=\"#ffffff\" />\n        <stop offset=\"100%\" stop-color=\"#e8eef5\" />\n       </linearGradient>\n      </defs>\n\n      <!-- Cafe Chair Backrest -->\n      <rect x=\"28\" y=\"68\" width=\"60\" height=\"42\" rx=\"12\" fill=\"#ba8054\" stroke=\"#4a3228\"\nstroke-width=\"2.2\" />\n      <!-- Red Backpack Peek -->\n      <rect x=\"24\" y=\"76\" width=\"68\" height=\"46\" rx=\"14\" fill=\"#db5858\" stroke=\"#4a3228\"\nstroke-width=\"2.2\" />\n\n      <!-- White Collared Shirt Torso with Cel-Shaded Folds -->\n      <path d=\"M31 85 C31 74 85 74 85 85 L89 126 L27 126 Z\" fill=\"url(#shirtWhite)\"\nstroke=\"#4a3228\" stroke-width=\"2.2\" />\n      <path d=\"M42 86 L46 112 M74 86 L70 112\" stroke=\"#cbd6e3\" stroke-width=\"2\"\nstroke-linecap=\"round\" />\n\n      <!-- Red Backpack Straps -->\n      <path d=\"M37 78 C35 92 34 106 34 120\" stroke=\"#db5858\" stroke-width=\"7\"\nstroke-linecap=\"round\" />\n      <path d=\"M37 78 C35 92 34 106 34 120\" stroke=\"#4a3228\" stroke-width=\"2\"\nstroke-linecap=\"round\" fill=\"none\" />\n      <path d=\"M79 78 C81 92 82 106 82 120\" stroke=\"#db5858\" stroke-width=\"7\"\nstroke-linecap=\"round\" />\n      <path d=\"M79 78 C81 92 82 106 82 120\" stroke=\"#4a3228\" stroke-width=\"2\"\nstroke-linecap=\"round\" fill=\"none\" />\n\n      <!-- Shirt Collar -->\n      <polygon points=\"46,77 58,89 51,92 43,82\" fill=\"#ffffff\" stroke=\"#4a3228\"\nstroke-width=\"1.8\" stroke-linejoin=\"round\" />\n      <polygon points=\"70,77 58,89 65,92 73,82\" fill=\"#ffffff\" stroke=\"#4a3228\"\nstroke-width=\"1.8\" stroke-linejoin=\"round\" />\n\n      <!-- Neck -->\n      <rect x=\"51\" y=\"68\" width=\"14\" height=\"12\" rx=\"5\" fill=\"#f5c9ac\" stroke=\"#4a3228\"\nstroke-width=\"2\" />\n\n      <!-- Ears -->\n      <ellipse cx=\"30\" cy=\"52\" rx=\"4.5\" ry=\"6.5\" fill=\"#f7cfb4\" stroke=\"#4a3228\"\nstroke-width=\"2\" />\n      <ellipse cx=\"86\" cy=\"52\" rx=\"4.5\" ry=\"6.5\" fill=\"#f7cfb4\" stroke=\"#4a3228\"\nstroke-width=\"2\" />\n\n        <!-- Anime Head Shape -->\n        <path d=\"M31 44 C31 24 85 24 85 44 C85 62 73 73 58 73 C43 73 31 62 31 44 Z\"\nfill=\"url(#skinLeader)\" stroke=\"#4a3228\" stroke-width=\"2.2\" />\n\n      <!-- Tousled Dark-Brown Hair & Glossy Highlight Arcs -->\n      <path d=\"M28 49 C26 21 42 12 58 13 C74 12 90 21 88 49 C85 38 78 35 71 40 C66 34 59\n38 54 41 C48 35 41 37 36 42 C32 39 30 43 28 49 Z\" fill=\"url(#hairLeader)\" stroke=\"#3d2519\"\nstroke-width=\"2.2\" stroke-linejoin=\"round\" />\n      <path d=\"M52 13 Q58 6 65 14\" fill=\"url(#hairLeader)\" stroke=\"#3d2519\"\nstroke-width=\"2.2\" stroke-linecap=\"round\" />\n      <!-- Hair Specular Highlights -->\n      <path d=\"M40 24 Q49 20 56 24\" stroke=\"#8c6047\" stroke-width=\"2.4\"\nstroke-linecap=\"round\" fill=\"none\" />\n      <path d=\"M63 24 Q71 21 77 25\" stroke=\"#8c6047\" stroke-width=\"2.4\"\nstroke-linecap=\"round\" fill=\"none\" />\n\n      <!-- Soft Blush Cheeks -->\n      <ellipse cx=\"41\" cy=\"57\" rx=\"5.2\" ry=\"2.6\" fill=\"#f5988c\" opacity=\"0.78\" />\n      <ellipse cx=\"75\" cy=\"57\" rx=\"5.2\" ry=\"2.6\" fill=\"#f5988c\" opacity=\"0.78\" />\n\n      <!-- Expressive Eyebrows -->\n      <path class=\"brow-left\" d=\"M41 42 Q46 39.5 51 42\" stroke=\"#3d2519\" stroke-width=\"2.1\"\nstroke-linecap=\"round\" />\n      <path class=\"brow-right\" d=\"M65 42 Q70 39.5 75 42\" stroke=\"#3d2519\"\nstroke-width=\"2.1\" stroke-linecap=\"round\" />\n\n      <!-- Expressive Anime Eyes with Specular Catchlights -->\n      <g class=\"eye-group\">\n       <ellipse cx=\"46.5\" cy=\"50\" rx=\"4.2\" ry=\"4.8\" fill=\"#3b2419\" />\n       <circle cx=\"46.5\" cy=\"50.5\" r=\"2.6\" fill=\"#5e3a28\" />\n       <circle cx=\"45\" cy=\"48.2\" r=\"1.5\" fill=\"#ffffff\" />\n       <circle cx=\"48.2\" cy=\"51.8\" r=\"0.8\" fill=\"#ffffff\" />\n\n       <ellipse cx=\"69.5\" cy=\"50\" rx=\"4.2\" ry=\"4.8\" fill=\"#3b2419\" />\n       <circle cx=\"69.5\" cy=\"50.5\" r=\"2.6\" fill=\"#5e3a28\" />\n       <circle cx=\"68\" cy=\"48.2\" r=\"1.5\" fill=\"#ffffff\" />\n       <circle cx=\"71.2\" cy=\"51.8\" r=\"0.8\" fill=\"#ffffff\" />\n      </g>\n      <!-- Round Glasses with Subtle Lens Glint -->\n      <circle cx=\"46.5\" cy=\"50\" r=\"9.2\" fill=\"rgba(255,255,255,0.14)\" stroke=\"#4a3228\"\nstroke-width=\"2.1\" />\n      <circle cx=\"69.5\" cy=\"50\" r=\"9.2\" fill=\"rgba(255,255,255,0.14)\" stroke=\"#4a3228\"\nstroke-width=\"2.1\" />\n      <line x1=\"55.7\" y1=\"50\" x2=\"60.3\" y2=\"50\" stroke=\"#4a3228\" stroke-width=\"2.1\" />\n\n      <!-- Nose Hint & Dynamic Mouth -->\n      <path d=\"M57.5 55 L56.5 57.5\" stroke=\"#c99377\" stroke-width=\"1.6\"\nstroke-linecap=\"round\" />\n      <path class=\"char-mouth\" d=\"M53 63 Q58 66.5 63 63\" fill=\"none\" stroke=\"#4a3228\"\nstroke-width=\"2.1\" stroke-linecap=\"round\" />\n\n        <!-- Optional Overwhelmed Sweatdrop for Outcome A -->\n        <g class=\"leader-sweatdrop\" opacity=\"0\">\n         <path d=\"M80 33 C80 33 84 39 84 42 A4 4 0 1 1 76 42 C76 39 80 33 80 33 Z\"\nfill=\"#a8e1ff\" stroke=\"#3b6e8c\" stroke-width=\"1.5\" />\n        </g>\n        <!-- Optional Puzzled Question Mark for Outcome C -->\n        <g class=\"char-question\" opacity=\"0\">\n         <text x=\"84\" y=\"34\" font-family=\"Nunito, sans-serif\" font-weight=\"900\" font-size=\"16\"\nfill=\"#7c533c\" stroke=\"#fff9ee\" stroke-width=\"2.5\" paint-order=\"stroke\">?</text>\n        </g>\n       </svg>\n     </div>\n     <span class=\"char-badge\">Leader</span>\n    </div>\n\n  <!-- CHARACTER 3: QC (Center-right, facing forward-left, royal-blue headphones, navy\nhoodie) -->\n  <div\n   id=\"seat-QC\"\n   class=\"character-seat\"\n   style=\"right: 16%; top: 37%; width: 118px; z-index: 12;\"\n  >\n   <div class=\"character-art\">\n     <svg width=\"116\" height=\"142\" viewBox=\"0 0 116 142\" fill=\"none\" aria-label=\"QC\">\n       <defs>\n        <linearGradient id=\"skinQC\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n         <stop offset=\"0%\" stop-color=\"#ffe7d4\" />\n         <stop offset=\"100%\" stop-color=\"#f5ccb0\" />\n        </linearGradient>\n        <linearGradient id=\"hairQC\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n         <stop offset=\"0%\" stop-color=\"#353b4d\" />\n        <stop offset=\"100%\" stop-color=\"#1e222e\" />\n       </linearGradient>\n       <linearGradient id=\"hoodieNavy\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n        <stop offset=\"0%\" stop-color=\"#3d5073\" />\n        <stop offset=\"100%\" stop-color=\"#27354f\" />\n       </linearGradient>\n      </defs>\n\n      <!-- Cafe Chair Backrest -->\n      <rect x=\"28\" y=\"68\" width=\"60\" height=\"42\" rx=\"12\" fill=\"#ba8054\" stroke=\"#4a3228\"\nstroke-width=\"2.2\" />\n\n      <!-- Dark Navy Hoodie Torso -->\n      <path d=\"M29 85 C29 74 87 74 87 85 L91 126 L25 126 Z\" fill=\"url(#hoodieNavy)\"\nstroke=\"#232c3d\" stroke-width=\"2.2\" />\n      <!-- Hoodie Fold Lines & Drawstrings -->\n      <path d=\"M40 88 L43 114 M76 88 L73 114\" stroke=\"#1f293d\" stroke-width=\"2\"\nstroke-linecap=\"round\" />\n      <path d=\"M51 91 L50 107\" stroke=\"#f5f8fc\" stroke-width=\"2.2\" stroke-linecap=\"round\" />\n      <path d=\"M65 91 L66 107\" stroke=\"#f5f8fc\" stroke-width=\"2.2\" stroke-linecap=\"round\" />\n\n      <!-- Royal-Blue Over-Ear Headphones Around Neck -->\n      <path d=\"M36 77 Q58 92 80 77\" fill=\"none\" stroke=\"#3b6ab8\" stroke-width=\"5.5\"\nstroke-linecap=\"round\" />\n      <rect x=\"31\" y=\"73\" width=\"12\" height=\"17\" rx=\"6\" fill=\"#6398eb\" stroke=\"#263f6b\"\nstroke-width=\"2\" />\n      <rect x=\"73\" y=\"73\" width=\"12\" height=\"17\" rx=\"6\" fill=\"#6398eb\" stroke=\"#263f6b\"\nstroke-width=\"2\" />\n      <line x1=\"35\" y1=\"77\" x2=\"35\" y2=\"85\" stroke=\"#b3d1ff\" stroke-width=\"1.6\"\nstroke-linecap=\"round\" />\n      <line x1=\"81\" y1=\"77\" x2=\"81\" y2=\"85\" stroke=\"#b3d1ff\" stroke-width=\"1.6\"\nstroke-linecap=\"round\" />\n\n      <!-- Neck & Ears -->\n      <rect x=\"51\" y=\"68\" width=\"14\" height=\"11\" rx=\"5\" fill=\"#f5ccb0\" stroke=\"#4a3228\"\nstroke-width=\"2\" />\n      <ellipse cx=\"31\" cy=\"52\" rx=\"4.5\" ry=\"6.5\" fill=\"#f5ccb0\" stroke=\"#4a3228\"\nstroke-width=\"2\" />\n      <ellipse cx=\"85\" cy=\"52\" rx=\"4.5\" ry=\"6.5\" fill=\"#f5ccb0\" stroke=\"#4a3228\"\nstroke-width=\"2\" />\n\n        <!-- Anime Head -->\n        <path d=\"M32 44 C32 24 84 24 84 44 C84 62 72 73 58 73 C44 73 32 62 32 44 Z\"\nfill=\"url(#skinQC)\" stroke=\"#4a3228\" stroke-width=\"2.2\" />\n      <!-- Fluffy Charcoal-Black Hair + Cool Highlight -->\n      <path d=\"M29 49 C28 22 43 13 58 13 C73 13 88 22 87 49 C83 39 76 36 69 40 C63 35 56\n39 51 41 C45 36 38 38 33 43 C31 45 30 47 29 49 Z\" fill=\"url(#hairQC)\" stroke=\"#1b1e29\"\nstroke-width=\"2.2\" stroke-linejoin=\"round\" />\n      <path d=\"M41 24 Q50 20 57 24\" stroke=\"#5c6887\" stroke-width=\"2.4\"\nstroke-linecap=\"round\" fill=\"none\" />\n      <path d=\"M62 24 Q70 21 76 25\" stroke=\"#5c6887\" stroke-width=\"2.4\"\nstroke-linecap=\"round\" fill=\"none\" />\n\n      <!-- Soft Blush -->\n      <ellipse cx=\"42\" cy=\"57\" rx=\"4.8\" ry=\"2.4\" fill=\"#f5988c\" opacity=\"0.72\" />\n      <ellipse cx=\"74\" cy=\"57\" rx=\"4.8\" ry=\"2.4\" fill=\"#f5988c\" opacity=\"0.72\" />\n\n      <!-- Eyebrows -->\n      <path class=\"brow-left\" d=\"M41 42 Q46 40 51 42\" stroke=\"#1e222e\" stroke-width=\"2.1\"\nstroke-linecap=\"round\" />\n      <path class=\"brow-right\" d=\"M65 42 Q70 40 75 42\" stroke=\"#1e222e\" stroke-width=\"2.1\"\nstroke-linecap=\"round\" />\n\n      <!-- Expressive Anime Eyes -->\n      <g class=\"eye-group\">\n       <ellipse cx=\"46.5\" cy=\"50\" rx=\"4.1\" ry=\"4.7\" fill=\"#232b3d\" />\n       <circle cx=\"46.5\" cy=\"50.5\" r=\"2.5\" fill=\"#425273\" />\n       <circle cx=\"45\" cy=\"48.2\" r=\"1.5\" fill=\"#ffffff\" />\n       <circle cx=\"48\" cy=\"51.8\" r=\"0.8\" fill=\"#ffffff\" />\n\n       <ellipse cx=\"69.5\" cy=\"50\" rx=\"4.1\" ry=\"4.7\" fill=\"#232b3d\" />\n       <circle cx=\"69.5\" cy=\"50.5\" r=\"2.5\" fill=\"#425273\" />\n       <circle cx=\"68\" cy=\"48.2\" r=\"1.5\" fill=\"#ffffff\" />\n       <circle cx=\"71\" cy=\"51.8\" r=\"0.8\" fill=\"#ffffff\" />\n      </g>\n\n        <!-- Nose Hint & Dynamic Mouth -->\n        <path d=\"M57.5 55 L56.5 57.5\" stroke=\"#c99377\" stroke-width=\"1.6\"\nstroke-linecap=\"round\" />\n        <path class=\"char-mouth\" d=\"M53 63 Q58 65.5 63 63\" fill=\"none\" stroke=\"#4a3228\"\nstroke-width=\"2.1\" stroke-linecap=\"round\" />\n        <!-- Optional Puzzled Question Mark for Outcome C -->\n        <g class=\"char-question\" opacity=\"0\">\n         <text x=\"84\" y=\"34\" font-family=\"Nunito, sans-serif\" font-weight=\"900\" font-size=\"16\"\nfill=\"#7c533c\" stroke=\"#fff9ee\" stroke-width=\"2.5\" paint-order=\"stroke\">?</text>\n        </g>\n       </svg>\n   </div>\n   <span class=\"char-badge\">QC</span>\n  </div>\n\n   <!-- CHARACTER 1: DOER (Far-left seated at table, angled 3/4 right, long brown hair, round\nglasses, beige sweater vest, writing with pen) -->\n   <div\n    id=\"seat-Doer\"\n    class=\"character-seat\"\n    style=\"left: 0.5%; top: 47%; width: 118px; z-index: 16;\"\n   >\n    <div class=\"character-art\">\n      <svg width=\"116\" height=\"156\" viewBox=\"0 0 116 156\" fill=\"none\" aria-label=\"Doer\">\n        <defs>\n         <linearGradient id=\"hairDoer\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n          <stop offset=\"0%\" stop-color=\"#694533\" />\n          <stop offset=\"100%\" stop-color=\"#452b1e\" />\n         </linearGradient>\n         <linearGradient id=\"vestBeige\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n          <stop offset=\"0%\" stop-color=\"#f2dec0\" />\n          <stop offset=\"100%\" stop-color=\"#dec196\" />\n         </linearGradient>\n        </defs>\n\n      <!-- Cafe Chair Side Frame -->\n      <path d=\"M18 76 L24 146 M14 114 L46 114\" stroke=\"#8f5d3b\" stroke-width=\"5\"\nstroke-linecap=\"round\" />\n\n        <!-- Long Silky Dark-Brown Back Hair -->\n        <path d=\"M27 42 C19 72 21 104 29 116 L83 116 C90 104 91 72 84 42 Z\"\nfill=\"url(#hairDoer)\" stroke=\"#3d2519\" stroke-width=\"2.2\" />\n\n      <!-- Navy Pleated Skirt & Legs -->\n      <path d=\"M35 113 L77 113 L88 134 L42 134 Z\" fill=\"#465d80\" stroke=\"#29384f\"\nstroke-width=\"2.2\" />\n      <line x1=\"56\" y1=\"115\" x2=\"60\" y2=\"133\" stroke=\"#29384f\" stroke-width=\"1.6\" />\n      <line x1=\"68\" y1=\"115\" x2=\"74\" y2=\"133\" stroke=\"#29384f\" stroke-width=\"1.6\" />\n      <rect x=\"62\" y=\"132\" width=\"9\" height=\"15\" rx=\"4.5\" fill=\"#f7cfb4\" stroke=\"#4a3228\"\nstroke-width=\"1.8\" />\n      <rect x=\"74\" y=\"132\" width=\"9\" height=\"15\" rx=\"4.5\" fill=\"#f7cfb4\" stroke=\"#4a3228\"\nstroke-width=\"1.8\" />\n      <rect x=\"61\" y=\"143\" width=\"17\" height=\"8\" rx=\"4\" fill=\"#efe8f7\" stroke=\"#4a3228\"\nstroke-width=\"1.8\" />\n      <rect x=\"73\" y=\"143\" width=\"17\" height=\"8\" rx=\"4\" fill=\"#efe8f7\" stroke=\"#4a3228\"\nstroke-width=\"1.8\" />\n\n      <!-- White Collared Blouse + Cream/Beige Knitted V-Neck Vest -->\n      <path d=\"M33 80 C33 71 79 71 79 80 L82 115 L30 115 Z\" fill=\"#ffffff\" stroke=\"#4a3228\"\nstroke-width=\"2.2\" />\n      <path d=\"M39 78 L56 93 L73 78 L76 115 L36 115 Z\" fill=\"url(#vestBeige)\"\nstroke=\"#6e5034\" stroke-width=\"2\" stroke-linejoin=\"round\" />\n\n      <!-- Arm & Hand Holding Pen Toward Open Notebook -->\n      <path d=\"M68 86 L96 94 L93 103 L66 96 Z\" fill=\"#ffffff\" stroke=\"#4a3228\"\nstroke-width=\"2\" stroke-linejoin=\"round\" />\n      <circle cx=\"97\" cy=\"98\" r=\"5.2\" fill=\"#ffe3cc\" stroke=\"#4a3228\" stroke-width=\"1.8\" />\n      <!-- Sleek Pen -->\n      <line x1=\"97\" y1=\"98\" x2=\"110\" y2=\"87\" stroke=\"#4a3228\" stroke-width=\"2.6\"\nstroke-linecap=\"round\" />\n      <line x1=\"106\" y1=\"90.5\" x2=\"110\" y2=\"87\" stroke=\"#e58c5c\" stroke-width=\"2.6\"\nstroke-linecap=\"round\" />\n\n        <!-- Anime Head (Angled 3/4 Right) -->\n        <path d=\"M32 43 C32 23 82 23 82 43 C82 61 71 71 58 71 C43 71 32 61 32 43 Z\"\nfill=\"url(#skinLeader)\" stroke=\"#4a3228\" stroke-width=\"2.2\" />\n\n      <!-- Front Silky Bangs & Glossy Hair Highlights -->\n      <path d=\"M30 48 C28 21 43 13 57 13 C71 13 85 21 83 48 C79 36 72 33 64 36 C56 32 48\n35 40 34 C35 37 32 42 30 48 Z\" fill=\"url(#hairDoer)\" stroke=\"#3d2519\" stroke-width=\"2.2\"\nstroke-linejoin=\"round\" />\n      <path d=\"M41 23 Q50 19 57 23\" stroke=\"#99684d\" stroke-width=\"2.3\"\nstroke-linecap=\"round\" fill=\"none\" />\n      <path d=\"M62 23 Q70 20 75 24\" stroke=\"#99684d\" stroke-width=\"2.3\"\nstroke-linecap=\"round\" fill=\"none\" />\n\n      <!-- Rosy Cheeks -->\n      <ellipse cx=\"43\" cy=\"56\" rx=\"4.6\" ry=\"2.3\" fill=\"#f5988c\" opacity=\"0.82\" />\n      <ellipse cx=\"73\" cy=\"56\" rx=\"4.6\" ry=\"2.3\" fill=\"#f5988c\" opacity=\"0.82\" />\n\n      <!-- Eyebrows -->\n      <path class=\"brow-left\" d=\"M43 41 Q47 39 51 41\" stroke=\"#3d2519\" stroke-width=\"2\"\nstroke-linecap=\"round\" />\n      <path class=\"brow-right\" d=\"M64 41 Q68 39 72 41\" stroke=\"#3d2519\" stroke-width=\"2\"\nstroke-linecap=\"round\" />\n\n      <!-- Expressive Anime Eyes -->\n      <g class=\"eye-group\">\n       <ellipse cx=\"47.5\" cy=\"49\" rx=\"3.9\" ry=\"4.5\" fill=\"#3b2419\" />\n       <circle cx=\"47.5\" cy=\"49.5\" r=\"2.4\" fill=\"#633e2b\" />\n       <circle cx=\"46.2\" cy=\"47.3\" r=\"1.4\" fill=\"#ffffff\" />\n\n       <ellipse cx=\"68.5\" cy=\"49\" rx=\"3.9\" ry=\"4.5\" fill=\"#3b2419\" />\n       <circle cx=\"68.5\" cy=\"49.5\" r=\"2.4\" fill=\"#633e2b\" />\n       <circle cx=\"67.2\" cy=\"47.3\" r=\"1.4\" fill=\"#ffffff\" />\n      </g>\n\n      <!-- Thin Round Glasses -->\n      <circle cx=\"47.5\" cy=\"49\" r=\"8.6\" fill=\"rgba(255,255,255,0.14)\" stroke=\"#5c3d2e\"\nstroke-width=\"1.9\" />\n      <circle cx=\"68.5\" cy=\"49\" r=\"8.6\" fill=\"rgba(255,255,255,0.14)\" stroke=\"#5c3d2e\"\nstroke-width=\"1.9\" />\n      <line x1=\"56.1\" y1=\"49\" x2=\"59.9\" y2=\"49\" stroke=\"#5c3d2e\" stroke-width=\"1.9\" />\n\n        <!-- Dynamic Mouth -->\n        <path class=\"char-mouth\" d=\"M54 61 Q58.5 64 63 61\" fill=\"none\" stroke=\"#4a3228\"\nstroke-width=\"2\" stroke-linecap=\"round\" />\n        <!-- Optional Puzzled Question Mark for Outcome C -->\n        <g class=\"char-question\" opacity=\"0\">\n         <text x=\"20\" y=\"33\" font-family=\"Nunito, sans-serif\" font-weight=\"900\" font-size=\"16\"\nfill=\"#7c533c\" stroke=\"#fff9ee\" stroke-width=\"2.5\" paint-order=\"stroke\">?</text>\n        </g>\n       </svg>\n     </div>\n     <span class=\"char-badge\">Doer</span>\n    </div>\n\n  <!-- CHARACTER 4: MEDIATOR (Right side of table, angled 3/4 left, chestnut high side\nponytail, pastel-pink cardigan, holding boba milk tea) -->\n  <div\n   id=\"seat-Mediator\"\n   class=\"character-seat\"\n   style=\"right: 0.5%; top: 45.5%; width: 118px; z-index: 16;\"\n  >\n   <div class=\"character-art\">\n     <svg width=\"116\" height=\"154\" viewBox=\"0 0 116 154\" fill=\"none\" aria-label=\"Mediator\">\n       <defs>\n        <linearGradient id=\"hairMediator\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n          <stop offset=\"0%\" stop-color=\"#875538\" />\n          <stop offset=\"100%\" stop-color=\"#5c3621\" />\n        </linearGradient>\n        <linearGradient id=\"cardiganPink\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n        <stop offset=\"0%\" stop-color=\"#fab4c5\" />\n        <stop offset=\"100%\" stop-color=\"#eb8fa6\" />\n       </linearGradient>\n      </defs>\n\n      <!-- Bouncy High Side Ponytail -->\n      <path d=\"M79 32 C98 29 105 53 95 72 C89 81 80 74 82 60 Z\" fill=\"url(#hairMediator)\"\nstroke=\"#4a2b1a\" stroke-width=\"2.2\" />\n      <path d=\"M87 38 Q94 49 91 62\" stroke=\"#b37854\" stroke-width=\"2.2\"\nstroke-linecap=\"round\" fill=\"none\" />\n      <!-- Pastel Scrunchie -->\n      <circle cx=\"82\" cy=\"36\" r=\"5.5\" fill=\"#d3b2f2\" stroke=\"#4a3228\" stroke-width=\"1.8\" />\n\n      <!-- Pastel-Pink Open Cardigan Over White Top -->\n      <path d=\"M33 80 C33 71 81 71 81 80 L85 121 L29 121 Z\" fill=\"url(#cardiganPink)\"\nstroke=\"#693845\" stroke-width=\"2.2\" />\n      <polygon points=\"48,75 57,98 66,75\" fill=\"#ffffff\" stroke=\"#693845\" stroke-width=\"1.8\"\nstroke-linejoin=\"round\" />\n\n      <!-- Light Denim Jeans -->\n      <path d=\"M33 121 L81 121 L77 141 L37 141 Z\" fill=\"#6886ad\" stroke=\"#33455e\"\nstroke-width=\"2.2\" />\n\n      <!-- Iced Boba Milk Tea Cup Held in Hands -->\n      <g transform=\"translate(23, 95)\">\n        <polygon points=\"-9,-12 9,-12 7,13 -7,13\" fill=\"#e8c19c\" stroke=\"#4a3228\"\nstroke-width=\"2\" stroke-linejoin=\"round\" />\n        <ellipse cx=\"0\" cy=\"-12\" rx=\"9.5\" ry=\"3.2\" fill=\"#fff8ef\" stroke=\"#4a3228\"\nstroke-width=\"1.7\" />\n        <line x1=\"1\" y1=\"-12\" x2=\"6\" y2=\"-24\" stroke=\"#e05c7a\" stroke-width=\"2.6\"\nstroke-linecap=\"round\" />\n        <!-- Tapioca Pearls -->\n        <circle cx=\"-3\" cy=\"9\" r=\"1.8\" fill=\"#4a3020\" />\n        <circle cx=\"1\" cy=\"10\" r=\"1.8\" fill=\"#4a3020\" />\n        <circle cx=\"4\" cy=\"8\" r=\"1.8\" fill=\"#4a3020\" />\n        <!-- Hands Holding Cup -->\n        <circle cx=\"9\" cy=\"2\" r=\"5.5\" fill=\"#ffe5cf\" stroke=\"#4a3228\" stroke-width=\"1.8\" />\n      </g>\n\n        <!-- Anime Head (Angled 3/4 Left) -->\n        <path d=\"M32 43 C32 23 82 23 82 43 C82 61 70 71 56 71 C43 71 32 61 32 43 Z\"\nfill=\"url(#skinLeader)\" stroke=\"#4a3228\" stroke-width=\"2.2\" />\n\n      <!-- Soft Chestnut Bangs & Highlights -->\n      <path d=\"M30 48 C28 21 43 13 57 13 C71 13 85 21 83 48 C79 36 71 33 63 36 C55 32 47\n35 39 34 C34 37 32 42 30 48 Z\" fill=\"url(#hairMediator)\" stroke=\"#4a2b1a\" stroke-width=\"2.2\"\nstroke-linejoin=\"round\" />\n      <path d=\"M40 23 Q49 19 56 23\" stroke=\"#b37854\" stroke-width=\"2.3\"\nstroke-linecap=\"round\" fill=\"none\" />\n      <path d=\"M61 23 Q69 20 74 24\" stroke=\"#b37854\" stroke-width=\"2.3\"\nstroke-linecap=\"round\" fill=\"none\" />\n\n      <!-- Warm Rosy Cheeks -->\n      <ellipse cx=\"41\" cy=\"56\" rx=\"4.8\" ry=\"2.5\" fill=\"#f58c9e\" opacity=\"0.85\" />\n      <ellipse cx=\"70\" cy=\"56\" rx=\"4.8\" ry=\"2.5\" fill=\"#f58c9e\" opacity=\"0.85\" />\n\n      <!-- Eyebrows -->\n      <path class=\"brow-left\" d=\"M40 41 Q44 39 48 41\" stroke=\"#4a2b1a\" stroke-width=\"2\"\nstroke-linecap=\"round\" />\n      <path class=\"brow-right\" d=\"M62 41 Q66 39 70 41\" stroke=\"#4a2b1a\" stroke-width=\"2\"\nstroke-linecap=\"round\" />\n\n      <!-- Expressive Anime Eyes -->\n      <g class=\"eye-group\">\n       <ellipse cx=\"44.5\" cy=\"49\" rx=\"4\" ry=\"4.6\" fill=\"#4a2b1a\" />\n       <circle cx=\"44.5\" cy=\"49.5\" r=\"2.5\" fill=\"#78482e\" />\n       <circle cx=\"43.2\" cy=\"47.3\" r=\"1.4\" fill=\"#ffffff\" />\n\n       <ellipse cx=\"66\" cy=\"49\" rx=\"4\" ry=\"4.6\" fill=\"#4a2b1a\" />\n       <circle cx=\"66\" cy=\"49.5\" r=\"2.5\" fill=\"#78482e\" />\n       <circle cx=\"64.7\" cy=\"47.3\" r=\"1.4\" fill=\"#ffffff\" />\n      </g>\n\n        <!-- Dynamic Mouth -->\n        <path class=\"char-mouth\" d=\"M51 61 Q55.5 65 60 61\" fill=\"none\" stroke=\"#4a3228\"\nstroke-width=\"2\" stroke-linecap=\"round\" />\n        <!-- Optional Puzzled Question Mark for Outcome C -->\n        <g class=\"char-question\" opacity=\"0\">\n         <text x=\"20\" y=\"33\" font-family=\"Nunito, sans-serif\" font-weight=\"900\" font-size=\"16\"\nfill=\"#7c533c\" stroke=\"#fff9ee\" stroke-width=\"2.5\" paint-order=\"stroke\">?</text>\n        </g>\n       </svg>\n     </div>\n     <span class=\"char-badge\">Mediator</span>\n    </div>\n\n  <!-- ROUND WOODEN CAFE TABLE WITH LAPTOPS, NOTEBOOKS & DRINKS -->\n  <div\n    id=\"round-table\"\n    class=\"absolute left-1/2 -translate-x-1/2 pointer-events-none\"\n    style=\"top: 57%; width: 326px; height: 185px; z-index: 20;\"\n   >\n    <svg width=\"326\" height=\"185\" viewBox=\"0 0 326 185\" fill=\"none\" aria-hidden=\"true\">\n      <defs>\n       <radialGradient id=\"tableTopGrad\" cx=\"45%\" cy=\"35%\" r=\"65%\">\n         <stop offset=\"0%\" stop-color=\"#f5d1a6\" />\n         <stop offset=\"75%\" stop-color=\"#dea973\" />\n         <stop offset=\"100%\" stop-color=\"#c48a54\" />\n       </radialGradient>\n      </defs>\n      <!-- Table Pedestal & Legs -->\n      <ellipse cx=\"163\" cy=\"172\" rx=\"76\" ry=\"11\" fill=\"#6e462b\" opacity=\"0.32\" />\n      <rect x=\"148\" y=\"96\" width=\"30\" height=\"74\" rx=\"8\" fill=\"#8f5c38\" stroke=\"#4a3228\"\nstroke-width=\"2.2\" />\n      <path d=\"M116 168 Q163 156 210 168 L204 176 Q163 166 122 176 Z\" fill=\"#784b2c\"\nstroke=\"#4a3228\" stroke-width=\"2\" />\n\n     <!-- Round Wooden Tabletop Thickness & Surface -->\n     <ellipse cx=\"163\" cy=\"84\" rx=\"146\" ry=\"52\" fill=\"#9c673e\" stroke=\"#4a3228\"\nstroke-width=\"2.4\" />\n     <ellipse cx=\"163\" cy=\"76\" rx=\"146\" ry=\"50\" fill=\"url(#tableTopGrad)\" stroke=\"#4a3228\"\nstroke-width=\"2.4\" />\n     <ellipse cx=\"163\" cy=\"76\" rx=\"134\" ry=\"43\" fill=\"none\" stroke=\"#f7dfc1\" stroke-width=\"1.5\"\nopacity=\"0.65\" />\n\n     <!-- Leader's Silver Laptop (Left-Center) -->\n     <g transform=\"translate(86, 44)\">\n      <polygon points=\"8,24 54,20 66,34 18,38\" fill=\"#d9e1eb\" stroke=\"#4a3228\"\nstroke-width=\"2\" stroke-linejoin=\"round\" />\n      <polygon points=\"4,0 50,-4 54,20 8,24\" fill=\"#eef3f8\" stroke=\"#4a3228\" stroke-width=\"2\"\nstroke-linejoin=\"round\" />\n      <circle cx=\"29\" cy=\"10\" r=\"3\" fill=\"#9eb0c7\" />\n     </g>\n\n     <!-- QC's Tablet & Stacked Study Books (Center-Right) -->\n     <g transform=\"translate(176, 42)\">\n      <rect x=\"2\" y=\"14\" width=\"44\" height=\"10\" rx=\"3\" fill=\"#e88d72\" stroke=\"#4a3228\"\nstroke-width=\"1.8\" />\n      <rect x=\"0\" y=\"6\" width=\"44\" height=\"10\" rx=\"3\" fill=\"#89b882\" stroke=\"#4a3228\"\nstroke-width=\"1.8\" />\n      <polygon points=\"10,-12 46,-10 42,8 6,6\" fill=\"#465775\" stroke=\"#293447\"\nstroke-width=\"1.8\" stroke-linejoin=\"round\" />\n     </g>\n\n     <!-- Doer's Open Notebook (Left) -->\n     <g transform=\"translate(46, 70)\">\n      <polygon points=\"0,8 28,2 54,10 26,18\" fill=\"#fffdf8\" stroke=\"#4a3228\" stroke-width=\"1.8\"\nstroke-linejoin=\"round\" />\n      <line x1=\"27\" y1=\"2\" x2=\"26\" y2=\"18\" stroke=\"#9e7b5c\" stroke-width=\"1.5\" />\n     </g>\n\n     <!-- Iced Drinks on Table -->\n     <g transform=\"translate(136, 78)\">\n       <polygon points=\"-7,-10 7,-10 5,10 -5,10\" fill=\"#e6ba8a\" stroke=\"#4a3228\"\nstroke-width=\"1.8\" />\n       <ellipse cx=\"0\" cy=\"-10\" rx=\"7.5\" ry=\"2.5\" fill=\"#fff9f0\" stroke=\"#4a3228\"\nstroke-width=\"1.5\" />\n       <line x1=\"1\" y1=\"-10\" x2=\"5\" y2=\"-19\" stroke=\"#d95b76\" stroke-width=\"2.2\"\nstroke-linecap=\"round\" />\n     </g>\n     <g transform=\"translate(226, 74)\">\n       <polygon points=\"-7,-10 7,-10 5,10 -5,10\" fill=\"#f2c496\" stroke=\"#4a3228\"\nstroke-width=\"1.8\" />\n       <ellipse cx=\"0\" cy=\"-10\" rx=\"7.5\" ry=\"2.5\" fill=\"#fff9f0\" stroke=\"#4a3228\"\nstroke-width=\"1.5\" />\n       <line x1=\"-1\" y1=\"-10\" x2=\"-4\" y2=\"-19\" stroke=\"#5c9c78\" stroke-width=\"2.2\"\nstroke-linecap=\"round\" />\n     </g>\n    </svg>\n   </div>\n\n  <!-- CHARACTER 5: BẠN THÂN (Front-right seated at table, yellow polo shirt, short brown\nhair) -->\n  <div\n    id=\"seat-BanThan\"\n    class=\"character-seat\"\n    style=\"right: 13%; top: 58%; width: 114px; z-index: 26;\"\n  >\n    <div class=\"character-art\">\n      <svg width=\"112\" height=\"148\" viewBox=\"0 0 112 148\" fill=\"none\" aria-label=\"Bạn thân\">\n        <defs>\n         <linearGradient id=\"hairBanThan\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n          <stop offset=\"0%\" stop-color=\"#784f36\" />\n          <stop offset=\"100%\" stop-color=\"#4f311f\" />\n         </linearGradient>\n         <linearGradient id=\"poloYellow\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n        <stop offset=\"0%\" stop-color=\"#ffe17d\" />\n        <stop offset=\"100%\" stop-color=\"#f2be49\" />\n       </linearGradient>\n      </defs>\n\n      <!-- Wooden Stool / Chair Back -->\n      <rect x=\"28\" y=\"114\" width=\"54\" height=\"12\" rx=\"5\" fill=\"#ba8054\" stroke=\"#4a3228\"\nstroke-width=\"2\" />\n      <line x1=\"36\" y1=\"126\" x2=\"33\" y2=\"145\" stroke=\"#8f5d3b\" stroke-width=\"4.5\"\nstroke-linecap=\"round\" />\n      <line x1=\"74\" y1=\"126\" x2=\"77\" y2=\"145\" stroke=\"#8f5d3b\" stroke-width=\"4.5\"\nstroke-linecap=\"round\" />\n\n      <!-- Denim Shorts / Trousers -->\n      <path d=\"M33 108 L77 108 L74 124 L36 124 Z\" fill=\"#597396\" stroke=\"#2d3d52\"\nstroke-width=\"2.1\" />\n\n      <!-- Yellow Collared Polo Shirt -->\n      <path d=\"M30 76 C30 66 80 66 80 76 L83 111 L27 111 Z\" fill=\"url(#poloYellow)\"\nstroke=\"#5c4119\" stroke-width=\"2.2\" />\n      <polygon points=\"44,69 55,80 48,83 41,74\" fill=\"#fff3bd\" stroke=\"#5c4119\"\nstroke-width=\"1.6\" stroke-linejoin=\"round\" />\n      <polygon points=\"66,69 55,80 62,83 69,74\" fill=\"#fff3bd\" stroke=\"#5c4119\"\nstroke-width=\"1.6\" stroke-linejoin=\"round\" />\n\n      <!-- Neck & Ears -->\n      <rect x=\"48\" y=\"61\" width=\"13\" height=\"10\" rx=\"4.5\" fill=\"#f7cfb4\" stroke=\"#4a3228\"\nstroke-width=\"2\" />\n      <ellipse cx=\"29\" cy=\"46\" rx=\"4.2\" ry=\"6\" fill=\"#f7cfb4\" stroke=\"#4a3228\" stroke-width=\"2\"\n/>\n      <ellipse cx=\"80\" cy=\"46\" rx=\"4.2\" ry=\"6\" fill=\"#f7cfb4\" stroke=\"#4a3228\" stroke-width=\"2\"\n/>\n\n        <!-- Anime Head -->\n        <path d=\"M30 39 C30 20 79 20 79 39 C79 56 68 66 54.5 66 C41 66 30 56 30 39 Z\"\nfill=\"url(#skinLeader)\" stroke=\"#4a3228\" stroke-width=\"2.2\" />\n\n      <!-- Neat Short Brown Hair -->\n      <path d=\"M28 43 C27 18 41 11 55 11 C69 11 82 18 81 43 C77 33 70 31 62 34 C55 29 47\n33 40 32 C34 34 31 38 28 43 Z\" fill=\"url(#hairBanThan)\" stroke=\"#3d2519\" stroke-width=\"2.2\"\nstroke-linejoin=\"round\" />\n      <path d=\"M40 20 Q49 17 55 20\" stroke=\"#a67353\" stroke-width=\"2.2\"\nstroke-linecap=\"round\" fill=\"none\" />\n      <!-- Soft Cheeks -->\n      <ellipse cx=\"40\" cy=\"51\" rx=\"4.4\" ry=\"2.2\" fill=\"#f5988c\" opacity=\"0.75\" />\n      <ellipse cx=\"69\" cy=\"51\" rx=\"4.4\" ry=\"2.2\" fill=\"#f5988c\" opacity=\"0.75\" />\n\n      <!-- Eyebrows -->\n      <path class=\"brow-left\" d=\"M38.5 36 Q43.5 33.5 48.5 36\" stroke=\"#3d2519\"\nstroke-width=\"2\" stroke-linecap=\"round\" />\n      <path class=\"brow-right\" d=\"M60.5 36 Q65.5 33.5 70.5 36\" stroke=\"#3d2519\"\nstroke-width=\"2\" stroke-linecap=\"round\" />\n\n      <!-- Expressive Anime Eyes -->\n      <g class=\"eye-group\">\n       <ellipse cx=\"44\" cy=\"44\" rx=\"3.9\" ry=\"4.5\" fill=\"#3b2419\" />\n       <circle cx=\"44\" cy=\"44.5\" r=\"2.4\" fill=\"#633e2b\" />\n       <circle cx=\"42.6\" cy=\"42.3\" r=\"1.4\" fill=\"#ffffff\" />\n\n       <ellipse cx=\"65\" cy=\"44\" rx=\"3.9\" ry=\"4.5\" fill=\"#3b2419\" />\n       <circle cx=\"65\" cy=\"44.5\" r=\"2.4\" fill=\"#633e2b\" />\n       <circle cx=\"63.6\" cy=\"42.3\" r=\"1.4\" fill=\"#ffffff\" />\n      </g>\n\n        <!-- Dynamic Mouth -->\n        <path class=\"char-mouth\" d=\"M50 56 Q54.5 59.5 59 56\" fill=\"none\" stroke=\"#4a3228\"\nstroke-width=\"2\" stroke-linecap=\"round\" />\n        <!-- Optional Puzzled Question Mark for Outcome C -->\n        <g class=\"char-question\" opacity=\"0\">\n         <text x=\"80\" y=\"30\" font-family=\"Nunito, sans-serif\" font-weight=\"900\" font-size=\"16\"\nfill=\"#7c533c\" stroke=\"#fff9ee\" stroke-width=\"2.5\" paint-order=\"stroke\">?</text>\n        </g>\n       </svg>\n     </div>\n     <span class=\"char-badge\">Bạn thân</span>\n    </div>\n\n   <!-- ===================================================================\n       4. FLOATING OVERHEAD SPEECH BUBBLE (POPS DIRECTLY ABOVE SPEAKER)\n       ===================================================================\n-->\r";
+        <!-- Golden Morning Sunbeams -->
+        <linearGradient id="sunBeam" x1="0" y1="0" x2="1" y2="1">
+         <stop offset="0%" stop-color="#fff9db" stop-opacity="0.48" />
+         <stop offset="100%" stop-color="#fff9db" stop-opacity="0" />
+        </linearGradient>
 
-let mouthTimer = null;
+        <!-- Foliage Gradients -->
+        <radialGradient id="foliageLight" cx="35%" cy="30%" r="70%">
+         <stop offset="0%" stop-color="#c5e69e" />
+         <stop offset="65%" stop-color="#96c474" />
+         <stop offset="100%" stop-color="#73a154" />
+        </radialGradient>
+        <radialGradient id="foliageDeep" cx="40%" cy="30%" r="70%">
+         <stop offset="0%" stop-color="#a6d184" />
+         <stop offset="75%" stop-color="#7aa85b" />
+         <stop offset="100%" stop-color="#5d8743" />
+        </radialGradient>
 
-function startMouthFlap(speakerKey) {
-  stopMouthFlap();
-  const seat = document.getElementById(`seat-${speakerKey}`);
-  if (!seat) return;
-  const mouth = seat.querySelector('.char-mouth');
-  if (!mouth) return;
+        <!-- Building & Roof Gradients -->
+        <linearGradient id="roofTerracotta" x1="0" y1="0" x2="0" y2="1">
+         <stop offset="0%" stop-color="#eb9c7a" />
+         <stop offset="100%" stop-color="#c97252" />
+        </linearGradient>
+        <linearGradient id="wallCream" x1="0" y1="0" x2="0" y2="1">
+         <stop offset="0%" stop-color="#fff3e2" />
+         <stop offset="100%" stop-color="#ebd4b7" />
+        </linearGradient>
 
-  const coords = {
-    Leader: { mx: 58, my: 63 },
-    QC:     { mx: 58, my: 63 },
-    Doer:   { mx: 58, my: 61 },
-    Mediator:{ mx: 55.5, my: 61 },
-    BanThan:{ mx: 54.5, my: 56 }
-  }[speakerKey] || { mx: 58, my: 63 };
+        <!-- Cafe Wooden Deck Gradient -->
+        <linearGradient id="deckWood" x1="0" y1="0" x2="0" y2="1">
+         <stop offset="0%" stop-color="#e3b98f" />
+         <stop offset="55%" stop-color="#d2a274" />
+         <stop offset="100%" stop-color="#bd895b" />
+        </linearGradient>
 
-  let isOpen = false;
-  mouthTimer = setInterval(() => {
-    isOpen = !isOpen;
-    if (isOpen) {
-      mouth.setAttribute(
-        'd',
-        `M${coords.mx - 4.5} ${coords.my} Q${coords.mx} ${coords.my + 6.5} ${coords.mx + 4.5} ${coords.my} Q${coords.mx} ${coords.my + 1.5} ${coords.mx - 4.5} ${coords.my}`
-      );
-      mouth.setAttribute('fill', '#8a2b24');
-    } else {
-      mouth.setAttribute(
-        'd',
-        `M${coords.mx - 4.5} ${coords.my + 1} Q${coords.mx} ${coords.my + 2.5} ${coords.mx + 4.5} ${coords.my + 1}`
-      );
-      mouth.setAttribute('fill', 'none');
+        <!-- Fairy Light Radial Glow -->
+        <radialGradient id="bulbGlow" cx="50%" cy="50%" r="50%">
+         <stop offset="0%" stop-color="#fff9c4" stop-opacity="0.95" />
+         <stop offset="45%" stop-color="#ffe082" stop-opacity="0.45" />
+         <stop offset="100%" stop-color="#ffe082" stop-opacity="0" />
+        </radialGradient>
+      </defs>
+
+      <!-- Sky Backdrop -->
+      <rect x="0" y="0" width="440" height="440" fill="url(#skyGradient)" />
+
+      <!-- Soft Hand-Drawn Fluffy Clouds -->
+      <g fill="#ffffff" opacity="0.82">
+       <path d="M55 112 Q65 94 86 98 Q100 84 122 94 Q138 94 142 110 Q152 114 146 124 L50 124 Q44 116 55 112 Z" />
+       <path d="M292 94 Q302 80 318 84 Q330 74 348 83 Q362 84 364 96 Q372 100 366 108 L288 108 Q284 100 292 94 Z" />
+      </g>
+
+      <!-- Lush Background Trees Behind Campus -->
+      <g stroke="#55783e" stroke-width="1.8">
+       <circle cx="38" cy="192" r="68" fill="url(#foliageDeep)" />
+       <circle cx="96" cy="176" r="54" fill="url(#foliageLight)" />
+       <circle cx="20" cy="252" r="56" fill="url(#foliageLight)" />
+       <circle cx="348" cy="196" r="62" fill="url(#foliageDeep)" />
+       <circle cx="408" cy="188" r="52" fill="url(#foliageLight)" />
+      </g>
+
+      <!-- Classic Two-Story University Building (Right Mid-Background) -->
+      <g>
+        <rect x="276" y="196" width="150" height="145" fill="url(#wallCream)" stroke="#6e4d3b" stroke-width="2.2" />
+        <polygon points="266,198 351,150 436,198" fill="url(#roofTerracotta)" stroke="#6e4332" stroke-width="2.2" stroke-linejoin="round" />
+        <line x1="276" y1="201" x2="426" y2="201" stroke="#8f5b42" stroke-width="3" opacity="0.45" />
+        <rect x="276" y="252" width="150" height="6" fill="#dfc19f" stroke="#6e4d3b" stroke-width="1.5" />
+        <!-- Arched Campus Windows -->
+        <g fill="#b9d8eb" stroke="#6e4d3b" stroke-width="1.8">
+          <path d="M294 244 L294 220 A11 11 0 0 1 316 220 L316 244 Z" />
+          <path d="M338 244 L338 220 A11 11 0 0 1 360 220 L360 244 Z" />
+          <path d="M382 244 L382 220 A11 11 0 0 1 404 220 L404 244 Z" />
+          <path d="M294 302 L294 278 A11 11 0 0 1 316 278 L316 302 Z" />
+          <path d="M338 302 L338 278 A11 11 0 0 1 360 278 L360 302 Z" />
+          <path d="M382 302 L382 278 A11 11 0 0 1 404 278 L404 302 Z" />
+        </g>
+      </g>
+
+      <!-- Center University Gate Structure ("ĐẠI HỌC") -->
+      <g stroke="#6e4d3b" stroke-width="2.2" stroke-linejoin="round">
+        <rect x="100" y="222" width="22" height="116" fill="url(#wallCream)" />
+        <rect x="228" y="222" width="22" height="116" fill="url(#wallCream)" />
+        <rect x="94" y="212" width="162" height="14" rx="3" fill="#f5e1cb" />
+        <!-- Gate Signboard: "ĐẠI HỌC" -->
+        <rect x="126" y="186" width="98" height="28" rx="7" fill="#fff9ee" stroke="#7c533c" stroke-width="2" />
+        <text x="175" y="205" font-family="'Baloo 2', Nunito, sans-serif" font-weight="900" font-size="13" fill="#6e4332" text-anchor="middle" letter-spacing="1.5">ĐẠI HỌC</text>
+        <!-- Iron Gate Bars -->
+        <g stroke="#8093a3" stroke-width="2.5" opacity="0.8">
+          <line x1="130" y1="228" x2="130" y2="336" />
+          <line x1="145" y1="228" x2="145" y2="336" />
+          <line x1="160" y1="228" x2="160" y2="336" />
+          <line x1="175" y1="228" x2="175" y2="336" />
+          <line x1="190" y1="228" x2="190" y2="336" />
+          <line x1="205" y1="228" x2="205" y2="336" />
+          <line x1="220" y1="228" x2="220" y2="336" />
+        </g>
+      </g>
+
+      <!-- Wooden Deck Floor with Warm Planks -->
+      <rect x="0" y="334" width="440" height="491" fill="url(#deckWood)" />
+      <g stroke="#9c6c44" stroke-width="1.8" opacity="0.65">
+        <line x1="0" y1="384" x2="440" y2="384" />
+        <line x1="0" y1="440" x2="440" y2="440" />
+        <line x1="0" y1="504" x2="440" y2="504" />
+        <line x1="0" y1="576" x2="440" y2="576" />
+        <line x1="0" y1="656" x2="440" y2="656" />
+        <line x1="0" y1="744" x2="440" y2="744" />
+      </g>
+
+      <!-- Pergola Wooden Posts & Top Beams -->
+      <g stroke="#4a3022" stroke-width="2.4" stroke-linejoin="round">
+        <!-- Left & Right Main Columns -->
+        <rect x="18" y="24" width="22" height="340" rx="3" fill="#804d2e" />
+        <rect x="400" y="24" width="22" height="340" rx="3" fill="#804d2e" />
+        <!-- Top Horizontal Header Beam -->
+        <rect x="8" y="36" width="424" height="20" rx="4" fill="#9c5f38" />
+        <rect x="2" y="40" width="436" height="6" rx="2" fill="#ba774b" stroke="none" />
+      </g>
+
+      <!-- Hanging Fairy String Lights -->
+      <path d="M28 54 Q120 114 220 72 Q320 114 412 54" fill="none" stroke="#52392b" stroke-width="2.2" stroke-linecap="round" />
+      <g>
+        <circle cx="78" cy="84" r="14" fill="url(#bulbGlow)" />
+        <ellipse cx="78" cy="84" rx="4.5" ry="6" fill="#fff59d" stroke="#5c432d" stroke-width="1.4" />
+        <circle cx="140" cy="98" r="14" fill="url(#bulbGlow)" />
+        <ellipse cx="140" cy="98" rx="4.5" ry="6" fill="#fff59d" stroke="#5c432d" stroke-width="1.4" />
+        <circle cx="220" cy="74" r="14" fill="url(#bulbGlow)" />
+        <ellipse cx="220" cy="74" rx="4.5" ry="6" fill="#fff59d" stroke="#5c432d" stroke-width="1.4" />
+        <circle cx="300" cy="98" r="14" fill="url(#bulbGlow)" />
+        <ellipse cx="300" cy="98" rx="4.5" ry="6" fill="#fff59d" stroke="#5c432d" stroke-width="1.4" />
+        <circle cx="362" cy="84" r="14" fill="url(#bulbGlow)" />
+        <ellipse cx="362" cy="84" rx="4.5" ry="6" fill="#fff59d" stroke="#5c432d" stroke-width="1.4" />
+      </g>
+
+      <!-- Hanging Potted Plants on Pergola -->
+      <g stroke="#4a3022" stroke-width="1.8" stroke-linejoin="round">
+        <!-- Left Hanging Terracotta Planter -->
+        <path d="M52 56 L62 90 M88 56 L78 90" stroke="#755239" stroke-width="1.6" />
+        <polygon points="56,90 84,90 78,110 62,110" fill="#cf7651" />
+        <circle cx="62" cy="88" r="10" fill="#88b560" />
+        <circle cx="78" cy="88" r="10" fill="#6d9949" />
+        <circle cx="70" cy="82" r="12" fill="#a4d173" />
+        <path d="M66 98 Q58 122 66 136 M74 98 Q82 120 74 134" fill="none" stroke="#6d9949" stroke-width="2.5" stroke-linecap="round" />
+        <!-- Balcony Potted Plants Left & Right -->
+        <g transform="translate(14, 300)">
+          <polygon points="4,24 24,24 21,46 7,46" fill="#cf7651" />
+          <circle cx="14" cy="18" r="14" fill="#88b560" />
+          <circle cx="14" cy="12" r="11" fill="#a4d173" />
+        </g>
+        <g transform="translate(396, 300)">
+          <polygon points="4,24 24,24 21,46 7,46" fill="#cf7651" />
+          <circle cx="14" cy="18" r="14" fill="#88b560" />
+          <circle cx="14" cy="12" r="11" fill="#a4d173" />
+        </g>
+      </g>
+    </svg>`;
+
+const ROUNDTABLE_TABLE_SVG = `
+  <div id="round-table" class="rt-table-wrap">
+    <svg width="326" height="185" viewBox="0 0 326 185" fill="none" aria-hidden="true">
+      <defs>
+       <radialGradient id="tableTopGrad" cx="45%" cy="35%" r="65%">
+         <stop offset="0%" stop-color="#f5d1a6" />
+         <stop offset="75%" stop-color="#dea973" />
+         <stop offset="100%" stop-color="#c48a54" />
+       </radialGradient>
+      </defs>
+      <!-- Table Pedestal & Legs -->
+      <ellipse cx="163" cy="172" rx="76" ry="11" fill="#6e462b" opacity="0.32" />
+      <rect x="148" y="96" width="30" height="74" rx="8" fill="#8f5c38" stroke="#4a3228" stroke-width="2.2" />
+      <path d="M116 168 Q163 156 210 168 L204 176 Q163 166 122 176 Z" fill="#784b2c" stroke="#4a3228" stroke-width="2" />
+
+     <!-- Round Wooden Tabletop Thickness & Surface -->
+     <ellipse cx="163" cy="84" rx="146" ry="52" fill="#9c673e" stroke="#4a3228" stroke-width="2.4" />
+     <ellipse cx="163" cy="76" rx="146" ry="50" fill="url(#tableTopGrad)" stroke="#4a3228" stroke-width="2.4" />
+     <ellipse cx="163" cy="76" rx="134" ry="43" fill="none" stroke="#f7dfc1" stroke-width="1.5" opacity="0.65" />
+
+     <!-- Leader's Silver Laptop (Left-Center) -->
+     <g transform="translate(86, 44)">
+      <polygon points="8,24 54,20 66,34 18,38" fill="#d9e1eb" stroke="#4a3228" stroke-width="2" stroke-linejoin="round" />
+      <polygon points="4,0 50,-4 54,20 8,24" fill="#eef3f8" stroke="#4a3228" stroke-width="2" stroke-linejoin="round" />
+      <circle cx="29" cy="10" r="3" fill="#a4b3c7" />
+      <polygon points="7,2 47,-2 50,18 10,21" fill="#b9e1f5" />
+     </g>
+
+     <!-- Stack of Study Books (Right-Center) -->
+     <g transform="translate(196, 48)">
+      <path d="M4 18 L54 12 L60 22 L8 28 Z" fill="#db5353" stroke="#4a3228" stroke-width="1.8" />
+      <path d="M2 10 L52 4 L58 14 L6 20 Z" fill="#4d82b8" stroke="#4a3228" stroke-width="1.8" />
+      <path d="M0 2 L50 -4 L56 6 L4 12 Z" fill="#58a368" stroke="#4a3228" stroke-width="1.8" />
+      <rect x="5" y="1" width="46" height="3" fill="#ffffff" opacity="0.85" />
+     </g>
+
+     <!-- Takeout Coffee Cups with Straws -->
+     <g transform="translate(162, 70)">
+      <ellipse cx="9" cy="22" rx="7" ry="2.5" fill="#5c3822" opacity="0.3" />
+      <polygon points="2,8 16,8 14,22 4,22" fill="#f7be8b" stroke="#4a3228" stroke-width="1.6" />
+      <ellipse cx="9" cy="8" rx="7" ry="2.2" fill="#ffffff" stroke="#4a3228" stroke-width="1.6" />
+      <line x1="9" y1="8" x2="13" y2="-2" stroke="#e05353" stroke-width="2.2" stroke-linecap="round" />
+     </g>
+     <g transform="translate(122, 68)">
+      <ellipse cx="9" cy="22" rx="7" ry="2.5" fill="#5c3822" opacity="0.3" />
+      <polygon points="2,8 16,8 14,22 4,22" fill="#e6a477" stroke="#4a3228" stroke-width="1.6" />
+      <ellipse cx="9" cy="8" rx="7" ry="2.2" fill="#ffffff" stroke="#4a3228" stroke-width="1.6" />
+      <line x1="9" y1="8" x2="6" y2="-3" stroke="#5cb85c" stroke-width="2.2" stroke-linecap="round" />
+     </g>
+
+     <!-- White Notes / Papers -->
+     <polygon points="56,76 82,72 88,88 62,92" fill="#ffffff" stroke="#4a3228" stroke-width="1.6" />
+     <line x1="62" y1="78" x2="78" y2="75" stroke="#a1b0c2" stroke-width="1.2" />
+     <line x1="64" y1="83" x2="82" y2="80" stroke="#a1b0c2" stroke-width="1.2" />
+    </svg>
+  </div>`;
+
+// Standard mood mapper ensuring only valid SVG states are loaded
+function normalizeMood(mood) {
+  if (!mood) return 'idle';
+  const m = mood.toLowerCase();
+  const valid = ['happy', 'sad', 'worried', 'angry', 'confused', 'surprised', 'embarrassed', 'idle', 'talk'];
+  if (valid.includes(m)) return m;
+  if (m === 'neutral') return 'idle';
+  if (m === 'thoughtful') return 'confused';
+  if (m === 'serious' || m === 'overwhelmed') return 'worried';
+  return 'idle';
+}
+
+// Render dynamic characters seated intimately around the 3D table
+function renderRoundtableCharacters(state, moods = {}, activeSpeakerKey = null) {
+  const userRole = state?.role || 'leader';
+  const userAvatarType = state?.avatarType || 'girl';
+  const userOutfit = state?.outfit || 'vnu';
+
+  const SEATS = [
+    {
+      key: 'Leader',
+      role: 'leader',
+      label: 'Leader',
+      style: 'left: 28%; top: 37%; transform: translate(-50%, -50%); width: 96px; height: 122px; z-index: 12;',
+      chair: `
+        <svg class="rt-chair-back" viewBox="0 0 50 60" style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); width:54px; height:60px; z-index:1; pointer-events:none;">
+          <rect x="8" y="10" width="34" height="38" rx="8" fill="#ba8054" stroke="#4a3228" stroke-width="2.2"/>
+          <line x1="16" y1="16" x2="16" y2="44" stroke="#4a3228" stroke-width="2"/>
+          <line x1="25" y1="16" x2="25" y2="44" stroke="#4a3228" stroke-width="2"/>
+          <line x1="34" y1="16" x2="34" y2="44" stroke="#4a3228" stroke-width="2"/>
+        </svg>
+      `
+    },
+    {
+      key: 'QC',
+      role: 'qc',
+      label: 'QC',
+      style: 'left: 72%; top: 37%; transform: translate(-50%, -50%); width: 96px; height: 122px; z-index: 12;',
+      chair: `
+        <svg class="rt-chair-back" viewBox="0 0 50 60" style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); width:54px; height:60px; z-index:1; pointer-events:none;">
+          <rect x="8" y="10" width="34" height="38" rx="8" fill="#ba8054" stroke="#4a3228" stroke-width="2.2"/>
+          <line x1="16" y1="16" x2="16" y2="44" stroke="#4a3228" stroke-width="2"/>
+          <line x1="25" y1="16" x2="25" y2="44" stroke="#4a3228" stroke-width="2"/>
+          <line x1="34" y1="16" x2="34" y2="44" stroke="#4a3228" stroke-width="2"/>
+        </svg>
+      `
+    },
+    {
+      key: 'Doer',
+      role: 'doer',
+      label: 'Doer',
+      style: 'left: 14%; top: 50%; transform: translate(-50%, -50%); width: 96px; height: 122px; z-index: 22;',
+      chair: `
+        <svg class="rt-chair-back rt-chair-left" viewBox="0 0 50 65" style="position:absolute; top:-8px; left:10px; width:48px; height:62px; z-index:1; pointer-events:none;">
+          <rect x="8" y="10" width="34" height="42" rx="8" fill="#c48a54" stroke="#4a3228" stroke-width="2.2"/>
+          <line x1="16" y1="16" x2="16" y2="46" stroke="#4a3228" stroke-width="2"/>
+          <line x1="25" y1="16" x2="25" y2="46" stroke="#4a3228" stroke-width="2"/>
+          <line x1="34" y1="16" x2="34" y2="46" stroke="#4a3228" stroke-width="2"/>
+          <line x1="12" y1="48" x2="8" y2="62" stroke="#8c532b" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      `
+    },
+    {
+      key: 'Mediator',
+      role: 'mediator',
+      label: 'Mediator',
+      style: 'left: 86%; top: 50%; transform: translate(-50%, -50%); width: 96px; height: 122px; z-index: 22;',
+      chair: `
+        <svg class="rt-chair-back rt-chair-right" viewBox="0 0 50 65" style="position:absolute; top:-8px; right:10px; width:48px; height:62px; z-index:1; pointer-events:none;">
+          <rect x="8" y="10" width="34" height="42" rx="8" fill="#c48a54" stroke="#4a3228" stroke-width="2.2"/>
+          <line x1="16" y1="16" x2="16" y2="46" stroke="#4a3228" stroke-width="2"/>
+          <line x1="25" y1="16" x2="25" y2="46" stroke="#4a3228" stroke-width="2"/>
+          <line x1="34" y1="16" x2="34" y2="46" stroke="#4a3228" stroke-width="2"/>
+          <line x1="38" y1="48" x2="42" y2="62" stroke="#8c532b" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      `
+    },
+    {
+      key: 'BanThan',
+      role: 'follower',
+      label: 'Bạn thân',
+      style: 'left: 68%; top: 64%; transform: translate(-50%, -50%); width: 96px; height: 122px; z-index: 26;',
+      chair: `
+        <svg class="rt-stool" viewBox="0 0 54 36" style="position:absolute; bottom:-12px; left:50%; transform:translateX(-50%); width:54px; height:36px; z-index:1; pointer-events:none;">
+          <ellipse cx="27" cy="10" rx="24" ry="7" fill="#dea973" stroke="#4a3228" stroke-width="2.2"/>
+          <ellipse cx="27" cy="8" rx="22" ry="5.5" fill="#f5d1a6" stroke="none"/>
+          <line x1="12" y1="14" x2="8" y2="32" stroke="#8c532b" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="22" y1="15" x2="20" y2="34" stroke="#70401d" stroke-width="3" stroke-linecap="round"/>
+          <line x1="32" y1="15" x2="34" y2="34" stroke="#70401d" stroke-width="3" stroke-linecap="round"/>
+          <line x1="42" y1="14" x2="46" y2="32" stroke="#8c532b" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="10" y1="24" x2="44" y2="24" stroke="#4a3228" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      `
     }
-  }, 130);
+  ];
+
+  let html = '';
+
+  SEATS.forEach(seat => {
+    const isPlayer = seat.role === userRole;
+    const baseChar = isPlayer
+      ? (userAvatarType === 'boy' ? seat.role : userAvatarType)
+      : seat.role;
+
+    const rawMood = moods[seat.key] || 'idle';
+    const mood = normalizeMood(rawMood);
+    const isSpeaking = activeSpeakerKey === seat.key;
+
+    const badgeLabel = isPlayer ? `${seat.label} (Bạn)` : seat.label;
+    const badgeClass = isPlayer ? 'char-badge badge-player' : 'char-badge';
+
+    const speakingClass = isSpeaking ? 'is-speaking' : 'is-resting';
+
+    html += `
+      <div
+        id="seat-${seat.key}"
+        class="character-seat ${speakingClass}"
+        style="${seat.style}"
+        data-base="${baseChar}"
+        data-role="${seat.role}"
+      >
+        <div class="character-art" style="position:relative; width:100%; height:100%;">
+          ${seat.chair || ''}
+          <div class="rt-char-shadow" style="position:absolute; bottom:2px; left:50%; transform:translateX(-50%); width:68px; height:12px; background:radial-gradient(ellipse at center, rgba(57,93,110,0.28) 0%, rgba(57,93,110,0) 72%); z-index:2; pointer-events:none;"></div>
+          
+          <img
+            class="rt-seat-char-img rt-char-face"
+            src="assets/characters/${baseChar}_${mood}.svg"
+            alt="${badgeLabel}"
+            style="position:relative; width:100%; height:100%; object-fit:contain; z-index:3;"
+          >
+
+          ${(isPlayer && userOutfit && userOutfit !== 'vnu') ? `
+            <img
+              class="rt-seat-char-img rt-char-outfit"
+              src="assets/characters/${baseChar}_outfit_${userOutfit}.svg"
+              alt=""
+              style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:contain; clip-path: inset(50% 0 0 0); z-index:4; pointer-events:none;"
+            >
+          ` : ''}
+
+          <!-- Animated Mouth Flap: Perfectly placed over the character mouth -->
+          <div class="rt-mouth-flap" style="position:absolute; left:48%; top:33%; width:14%; height:6.5%; transform:translate(-50%, -50%); z-index:6; pointer-events:none;">
+            <svg viewBox="0 0 28 18" width="100%" height="100%" style="overflow:visible;">
+              <ellipse cx="14" cy="9" rx="12" ry="7.5" fill="#a83244" stroke="#353b4a" stroke-width="1.8"/>
+              <path d="M7 11 Q14 7 21 11 Q17 15 14 15 Q11 15 7 11 Z" fill="#ff7a8a"/>
+              <path d="M6 8 Q14 11 22 8" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+
+        <span class="${badgeClass}">${badgeLabel}</span>
+      </div>
+    `;
+  });
+
+  // Include the 3D table right in between the back characters and front characters
+  html += ROUNDTABLE_TABLE_SVG;
+
+  return html;
 }
 
-function stopMouthFlap() {
-  if (mouthTimer) {
-    clearInterval(mouthTimer);
-    mouthTimer = null;
-  }
+// Keep export for backward compatibility
+const ROUNDTABLE_CHARACTERS_HTML = '';
+
+// Update facial expressions without tearing down DOM
+function applyRoundtableExpressions(expMap, state) {
+  if (!expMap) return;
+  const userRole = state?.role || 'leader';
+  const userAvatarType = state?.avatarType || 'girl';
+
+  Object.entries(expMap).forEach(([charKey, rawMood]) => {
+    const seat = document.getElementById(`seat-${charKey}`);
+    if (!seat) return;
+    const faceImg = seat.querySelector('.rt-char-face');
+    if (!faceImg) return;
+
+    const role = seat.dataset.role || 'leader';
+    const isPlayer = role === userRole;
+    const base = isPlayer ? (userAvatarType === 'boy' ? role : userAvatarType) : role;
+
+    const mood = normalizeMood(rawMood);
+    faceImg.src = `assets/characters/${base}_${mood}.svg`;
+  });
 }
 
+// Highlight the active speaker, dim non-speakers, and activate mouth flap
 function focusRoundtableSpeaker(speakerKey) {
   ['Leader', 'QC', 'Doer', 'Mediator', 'BanThan'].forEach(key => {
     const seat = document.getElementById(`seat-${key}`);
     if (!seat) return;
-    if (!speakerKey) {
-      seat.classList.remove('is-speaking', 'is-dimmed');
-    } else if (key === speakerKey) {
+    if (key === speakerKey) {
       seat.classList.add('is-speaking');
-      seat.classList.remove('is-dimmed');
+      seat.classList.remove('is-resting');
     } else {
       seat.classList.remove('is-speaking');
-      seat.classList.add('is-dimmed');
+      seat.classList.add('is-resting');
     }
   });
 }
 
-function applyRoundtableExpressions(expMap) {
-  if (!expMap) return;
-  Object.entries(expMap).forEach(([charKey, mood]) => {
-    const seat = document.getElementById(`seat-${charKey}`);
-    if (!seat) return;
-    const browL = seat.querySelector('.brow-left');
-    const browR = seat.querySelector('.brow-right');
-    const mouth = seat.querySelector('.char-mouth');
-    if (!browL || !browR || !mouth) return;
+function startMouthFlap(speakerKey) {
+  focusRoundtableSpeaker(speakerKey);
+}
 
-    const coords = {
-      Leader: { mx: 58, by: 42, my: 63 },
-      QC:     { mx: 58, by: 42, my: 63 },
-      Doer:   { mx: 58, by: 41, my: 61 },
-      Mediator:{ mx: 55.5, by: 41, my: 61 },
-      BanThan:{ mx: 54.5, by: 36, my: 56 }
-    }[charKey] || { mx: 58, by: 42, my: 63 };
-
-    const { mx, by, my } = coords;
-
-    if (charKey === 'Leader') {
-      const sweat = seat.querySelector('.leader-sweatdrop');
-      if (sweat) {
-        sweat.setAttribute('opacity', (mood === 'worried' || mood === 'overwhelmed') ? '1' : '0');
-      }
-    }
-
-    const questionMark = seat.querySelector('.char-question');
-    if (questionMark) {
-      questionMark.setAttribute('opacity', mood === 'confused' ? '1' : '0');
-    }
-
-    mouth.setAttribute('fill', 'none');
-
-    if (mood === 'happy') {
-      browL.setAttribute('d', `M${mx - 16} ${by - 1.5} Q${mx - 11} ${by - 4.5} ${mx - 6} ${by - 1.5}`);
-      browR.setAttribute('d', `M${mx + 6} ${by - 1.5} Q${mx + 11} ${by - 4.5} ${mx + 16} ${by - 1.5}`);
-      mouth.setAttribute('d', `M${mx - 5.5} ${my - 1} Q${mx} ${my + 5.5} ${mx + 5.5} ${my - 1}`);
-    } else if (mood === 'worried' || mood === 'overwhelmed' || mood === 'embarrassed' || mood === 'sad') {
-      browL.setAttribute('d', `M${mx - 16} ${by + 1.5} Q${mx - 11} ${by - 2} ${mx - 6} ${by - 2.5}`);
-      browR.setAttribute('d', `M${mx + 6} ${by - 2.5} Q${mx + 11} ${by - 2} ${mx + 16} ${by + 1.5}`);
-      mouth.setAttribute('d', `M${mx - 4.5} ${my + 2.5} Q${mx} ${my - 1} ${mx + 4.5} ${my + 2.5}`);
-    } else if (mood === 'confused') {
-      browL.setAttribute('d', `M${mx - 16} ${by - 2.5} Q${mx - 11} ${by - 4} ${mx - 6} ${by - 1.5}`);
-      browR.setAttribute('d', `M${mx + 6} ${by + 1} Q${mx + 11} ${by - 0.5} ${mx + 16} ${by + 1.5}`);
-      mouth.setAttribute('d', `M${mx - 4.5} ${my + 1.5} Q${mx - 1.5} ${my - 0.5} ${mx + 1.5} ${my + 2} Q${mx + 3.5} ${my + 3} ${mx + 4.5} ${my + 1}`);
-    } else if (mood === 'serious' || mood === 'thoughtful' || mood === 'angry') {
-      browL.setAttribute('d', `M${mx - 16} ${by - 1} L${mx - 6} ${by + 1.2}`);
-      browR.setAttribute('d', `M${mx + 6} ${by + 1.2} L${mx + 16} ${by - 1}`);
-      mouth.setAttribute('d', `M${mx - 4.5} ${my + 1} L${mx + 4.5} ${my + 1}`);
-    } else {
-      browL.setAttribute('d', `M${mx - 16} ${by} Q${mx - 11} ${by - 2.5} ${mx - 6} ${by}`);
-      browR.setAttribute('d', `M${mx + 6} ${by} Q${mx + 11} ${by - 2.5} ${mx + 16} ${by}`);
-      mouth.setAttribute('d', `M${mx - 4.5} ${my} Q${mx} ${my + 3.5} ${mx + 4.5} ${my}`);
-    }
-  });
+function stopMouthFlap() {
+  focusRoundtableSpeaker(null);
 }
 
 const ROOT=document.getElementById('app');
@@ -2410,48 +2737,46 @@ function roundtableView(){
   const urgentClass = state.gameTime <= 15 ? 'timer-urgent' : '';
 
   let speakerKey = 'Leader';
-  let tailLeft = '32%';
-  let bubbleTop = '17%';
+  let tailLeft = '28%';
+  let bubbleTop = '15%';
 
   if (activeName) {
     const low = activeName.toLowerCase();
     if (low.includes('doer') || activeName === 'A') {
       speakerKey = 'Doer';
-      tailLeft = '18%';
-      bubbleTop = '22%';
+      tailLeft = '16%';
+      bubbleTop = '18%';
     } else if (low.includes('leader')) {
       speakerKey = 'Leader';
-      tailLeft = '32%';
-      bubbleTop = '17%';
+      tailLeft = '28%';
+      bubbleTop = '15%';
     } else if (low.includes('qc') || activeName === 'B') {
       speakerKey = 'QC';
-      tailLeft = '68%';
-      bubbleTop = '17%';
+      tailLeft = '72%';
+      bubbleTop = '15%';
     } else if (low.includes('mediator')) {
       speakerKey = 'Mediator';
-      tailLeft = '82%';
-      bubbleTop = '22%';
-    } else if (low.includes('bạn thân') || low.includes('follower')) {
+      tailLeft = '84%';
+      bubbleTop = '18%';
+    } else if (low.includes('bạn thân') || low.includes('follower') || low.includes('bạn')) {
       speakerKey = 'BanThan';
-      tailLeft = '70%';
-      bubbleTop = '26%';
+      tailLeft = '68%';
+      bubbleTop = '20%';
     }
   }
 
   const moods = done
-    ? { Leader: 'worried', QC: 'thoughtful', Doer: 'worried', Mediator: 'thoughtful', BanThan: 'worried' }
+    ? { Leader: 'worried', QC: 'worried', Doer: 'worried', Mediator: 'worried', BanThan: 'worried' }
     : getRoundtableMoodsPDF(current, step, activeMsg);
 
   setTimeout(() => {
-    applyRoundtableExpressions(moods);
+    applyRoundtableExpressions(moods, state);
     if (!done && activeName && activeName !== 'Hệ thống') {
       focusRoundtableSpeaker(speakerKey);
-      startMouthFlap(speakerKey);
     } else {
       focusRoundtableSpeaker(null);
-      stopMouthFlap();
     }
-  }, 30);
+  }, 20);
 
   const levelName = g.mode === 'reversal' ? 'Đảo Vai' : (level(g.level)?.name || 'Nhóm Bạn Thân');
 
@@ -2473,7 +2798,7 @@ function roundtableView(){
       </div>
 
       <div class="rt-chars-wrap">
-        ${ROUNDTABLE_CHARACTERS_HTML}
+        ${renderRoundtableCharacters(state, moods, (!done && activeName && activeName !== 'Hệ thống') ? speakerKey : null)}
       </div>
 
       ${!done ? `
