@@ -209,8 +209,9 @@ ${current.options.map((o,i)=>`<button class="decision-choice" data-choice="${i}"
 function getEnding(){const g=state.game;return g.mode==='reversal'?g.reversalOutcome:g.quickOutcome}
 function finishCampaign(){toast('Chúc mừng bạn đã hoàn thành toàn bộ nội dung hiện có (Ải 1 & Ải 2)! Các Ải 3, 4, 5 đang được cập nhật.');route('map')}
 
+const MOOD_EMOJI={good:'🥳',mid:'😅',bad:'🥹'};
 function endingView(){const g=state.game;const o=getEnding();const tone=o.tone||o.type||'mid';const l=level(state.level);const nextStageIndex=state.stage+1;const hasNextStage=nextStageIndex<l.stages.length;const nextLvlId=state.level+1;const nextLvl=levels.find(x=>x.id===nextLvlId);const isFinalCampaignLevel=state.level===2&&!hasNextStage;const hasNextLevel=!hasNextStage&&Boolean(nextLvl)&&!isFinalCampaignLevel;return shell('interior-page ending-page',`${topbar(g.mode==='reversal'?'Đảo vai hoàn tất':'Lesson Unlocked','stages',true)}
-<div class="page-body"><div class="ending-medal ${tone}">${avatar(tone==='good'?'follower':tone==='bad'?'qc':'mediator','medal-character',tone==='good'?'walk_a':'idle')}</div>
+<div class="page-body"><div class="ending-medal ${tone}">${avatar(state.role,'medal-character',tone==='good'?'walk_a':'idle')}<span class="mood-badge">${MOOD_EMOJI[tone]||'😐'}</span></div>
 <h2 class="ending-title">${safe(o.name||(tone==='good'?'Giải quyết hiệu quả':tone==='bad'?'Nhóm gặp khó khăn':'Cần điều chỉnh'))}</h2><p class="ending-desc">${safe(o.message||o.answer)}</p>
 <div class="lesson-card"><div class="lesson-caption">${icon('book')} LESSON UNLOCKED</div><p>${safe(o.lesson)}</p></div>
 ${o.template?`<div class="lesson-card template-card"><strong>VÍ KỊCH BẢN • MẪU TIN NHẮN</strong><p>${safe(o.template)}</p><button class="small-button" data-action="save-template">${icon('check')} Lưu mẫu tin nhắn</button></div>`:''}

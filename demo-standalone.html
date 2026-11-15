@@ -248,8 +248,10 @@ a,[role="button"]{touch-action:manipulation}
 .decision-choice{width:100%;margin-top:7px;padding:9px 10px}
 /* Endings */
 .ending-page{background:linear-gradient(#a9e1f4,#eef8df 60%,#fff8ea)}
-.ending-medal{width:145px;height:148px;display:grid;place-items:center;margin:0 auto 4px;background:linear-gradient(#fdf5c1,#f8ce69);border:6px solid white;box-shadow:0 7px 0 #d3a658;border-radius:50%}
+.ending-medal{position:relative;width:145px;height:148px;display:grid;place-items:center;margin:0 auto 4px;background:linear-gradient(#fdf5c1,#f8ce69);border:6px solid white;box-shadow:0 7px 0 #d3a658;border-radius:50%}
 .ending-medal.bad{background:linear-gradient(#ffe8db,#f7adab)}.ending-medal.mid{background:linear-gradient(#f1e9ff,#d0c1ee)}
+.mood-badge{position:absolute;right:2px;bottom:10px;font-size:34px;line-height:1;filter:drop-shadow(0 3px 0 rgba(0,0,0,.18));animation:moodPop .4s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes moodPop{0%{transform:scale(.4) rotate(-12deg);opacity:0}70%{transform:scale(1.15) rotate(6deg);opacity:1}100%{transform:scale(1) rotate(0);opacity:1}}
 .medal-character{width:105px}.ending-title{text-align:center;font-size:24px;line-height:1.2;margin:3px}.ending-desc{font-size:13px;line-height:1.55;text-align:center;color:#6e7080;margin:0 0 6px;white-space:pre-line}
 .lesson-caption{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:1000;color:#9b7b4a}.lesson-caption .icon{width:26px}
 .template-card strong{font-size:12px;color:#69916b}
@@ -1358,8 +1360,9 @@ ${current.options.map((o,i)=>`<button class="decision-choice" data-choice="${i}"
 function getEnding(){const g=state.game;return g.mode==='reversal'?g.reversalOutcome:g.quickOutcome}
 function finishCampaign(){toast('Chúc mừng bạn đã hoàn thành toàn bộ nội dung hiện có (Ải 1 & Ải 2)! Các Ải 3, 4, 5 đang được cập nhật.');route('map')}
 
+const MOOD_EMOJI={good:'🥳',mid:'😅',bad:'🥹'};
 function endingView(){const g=state.game;const o=getEnding();const tone=o.tone||o.type||'mid';const l=level(state.level);const nextStageIndex=state.stage+1;const hasNextStage=nextStageIndex<l.stages.length;const nextLvlId=state.level+1;const nextLvl=levels.find(x=>x.id===nextLvlId);const isFinalCampaignLevel=state.level===2&&!hasNextStage;const hasNextLevel=!hasNextStage&&Boolean(nextLvl)&&!isFinalCampaignLevel;return shell('interior-page ending-page',`${topbar(g.mode==='reversal'?'Đảo vai hoàn tất':'Lesson Unlocked','stages',true)}
-<div class="page-body"><div class="ending-medal ${tone}">${avatar(tone==='good'?'follower':tone==='bad'?'qc':'mediator','medal-character',tone==='good'?'walk_a':'idle')}</div>
+<div class="page-body"><div class="ending-medal ${tone}">${avatar(state.role,'medal-character',tone==='good'?'walk_a':'idle')}<span class="mood-badge">${MOOD_EMOJI[tone]||'😐'}</span></div>
 <h2 class="ending-title">${safe(o.name||(tone==='good'?'Giải quyết hiệu quả':tone==='bad'?'Nhóm gặp khó khăn':'Cần điều chỉnh'))}</h2><p class="ending-desc">${safe(o.message||o.answer)}</p>
 <div class="lesson-card"><div class="lesson-caption">${icon('book')} LESSON UNLOCKED</div><p>${safe(o.lesson)}</p></div>
 ${o.template?`<div class="lesson-card template-card"><strong>VÍ KỊCH BẢN • MẪU TIN NHẮN</strong><p>${safe(o.template)}</p><button class="small-button" data-action="save-template">${icon('check')} Lưu mẫu tin nhắn</button></div>`:''}
