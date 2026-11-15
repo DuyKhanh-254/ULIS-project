@@ -53,6 +53,8 @@ Trang chủ có nút **Shop** (cạnh nút Ví) để mở màn mua trang phục
 
 Ảnh trang phục mới được sinh bằng `node gen-shop-outfits.mjs` — lấy đúng khung hình/tóc/quần có sẵn của từng vai trò, chỉ đổi màu áo (kỹ thuật giống hệt 5 màu gốc) để giữ đồng bộ phong cách vẽ, không cần vẽ tay từng ảnh.
 
+Áo của mọi nhân vật (87 file SVG: 4 pose mặc định × 5 vai trò + học sinh nền, và toàn bộ outfit Shop) đã được `node patch-shirts.mjs` chỉnh lại: **bỏ cà vạt**, **thêm chữ "ULIS" nhỏ ở ngực áo** (chữ trắng viền xanh đậm để đọc được trên mọi màu áo) cho giống đồng phục thật.
+
 ## Mobile-native fixes đã áp dụng
 Theo checklist của skill `mobile-native` (Emil Kowalski): gỡ hover "dính" trên cảm ứng (gate bằng `@media (hover:hover) and (pointer:fine)`), tắt flash xám/xanh khi chạm (`-webkit-tap-highlight-color:transparent`), chặn pull-to-refresh/rubber-band hijack scroll (`overscroll-behavior`), thêm phản hồi tức thời khi nhấn (`:active` trên mọi nút/thẻ chạm), `touch-action:manipulation` + `user-select:none` để tap không bị trễ hay bôi đen chữ nút, và `interactive-widget=resizes-content` cho bàn phím ảo.
 

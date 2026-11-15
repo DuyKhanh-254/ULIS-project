@@ -17,7 +17,7 @@
 <path d="M58 100 L103 101 Q118 107 119 125 L118 153 L46 151 L47 123 Q48 106 58 100Z" fill="#3a3f4b"/>
 <path d="M102 102 Q115 109 118 126 L117 150 L100 150Z" fill="#000" opacity=".12" stroke="none"/>
 <path d="M68 102 L80 118 L92 102" fill="none" stroke="#fff" stroke-width="8"/>
-<path d="M79 116 L73 135 L81 143 L89 133 L84 116" fill="#345c8f" stroke-width="2"/>
+
 <path d="M45 114 L34 124 L38 144 L48 146 L56 126Z" fill="#3a3f4b"/>
 <path d="M118 113 L130 127 L124 145 L115 146 L108 127Z" fill="#3a3f4b"/>
 <path d="M36 140 L46 141 L47 153 Q40 160 34 151 Z" fill="#f3bea4"/>
@@ -27,4 +27,5 @@
 <path d="M54 174 L80 174 L80 183 Q64 190 51 183Z" fill="#493c49"/>
 <path d="M83 174 L110 174 L112 183 Q98 190 82 183Z" fill="#493c49"/>
 </g>
+<text x="80" y="134" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="9" fill="#ffffff" stroke="#2b3a52" stroke-width="0.7" paint-order="stroke" letter-spacing="0.4">ULIS</text>
 </svg>
