@@ -527,12 +527,124 @@ function chatView(){
 
 // 5.2. Roundtable View V5 (22 tình huống bàn tròn ngồi trao đổi trực tiếp)
 const RT_SEATS_5 = [
-  {left:'10%', top:'14%', role:'qc', name:'QC'},
-  {left:'38%', top:'6%', role:'leader', name:'Leader'},
-  {left:'68%', top:'14%', role:'mediator', name:'Mediator'},
-  {left:'8%', top:'44%', role:'follower', name:'Bạn thân'},
-  {left:'70%', top:'44%', role:'doer', name:'Doer'}
+  {id:'leader', role:'leader', name:'Leader', left:'26%', top:'30%', zIndex:10},
+  {id:'qc', role:'qc', name:'QC', left:'74%', top:'30%', zIndex:10},
+  {id:'doer', role:'doer', name:'Doer', left:'10%', top:'48%', zIndex:18},
+  {id:'mediator', role:'mediator', name:'Mediator', left:'90%', top:'48%', zIndex:18},
+  {id:'follower', role:'follower', name:'Bạn thân', left:'50%', top:'68%', zIndex:25}
 ];
+
+function getRoundtableMoods(current, step, activeMsg){
+  const g = state.game;
+  const stageKey = g ? `${g.level}:${state.stage}` : '';
+
+  const CURATED_MOODS = {
+    '1:1': [
+      // 0: Leader: Mọi người nghĩ ai sẽ phù hợp...
+      { leader: 'confused', doer: 'idle', qc: 'idle', mediator: 'idle', follower: 'worried' },
+      // 1: Doer: Tớ nghĩ phần đó cần người... nhưng tuần này bận 2 bài tập...
+      { leader: 'worried', doer: 'embarrassed', qc: 'idle', mediator: 'idle', follower: 'worried' },
+      // 2: QC: Phần này mà làm chưa kỹ thì sẽ ảnh hưởng...
+      { leader: 'worried', doer: 'embarrassed', qc: 'angry', mediator: 'idle', follower: 'worried' },
+      // 3: Mediator: Hay mình xem xét năng lực và thời gian...
+      { leader: 'happy', doer: 'happy', qc: 'idle', mediator: 'happy', follower: 'happy' },
+      // 4: Leader: Tớ vẫn chưa biết nên phân công thế nào...
+      { leader: 'worried', doer: 'worried', qc: 'confused', mediator: 'confused', follower: 'embarrassed' }
+    ],
+    '1:2': [
+      // 0: QC: Xem lại slide, có lỗi chính tả và số liệu...
+      { leader: 'worried', doer: 'surprised', qc: 'angry', mediator: 'idle', follower: 'worried' },
+      // 1: Doer: Dành nhiều thời gian làm rồi mà, đâu nghiêm trọng...
+      { leader: 'worried', doer: 'embarrassed', qc: 'angry', mediator: 'idle', follower: 'worried' },
+      // 2: Leader: Sắp nộp bài rồi, nên xử lý sớm...
+      { leader: 'worried', doer: 'worried', qc: 'idle', mediator: 'idle', follower: 'worried' },
+      // 3: QC: Muốn bài hoàn thiện, ảnh hưởng điểm cả nhóm...
+      { leader: 'worried', doer: 'sad', qc: 'angry', mediator: 'idle', follower: 'worried' },
+      // 4: Doer: Soi kỹ làm tớ áp lực, bạn bè sao khắt khe...
+      { leader: 'worried', doer: 'sad', qc: 'angry', mediator: 'worried', follower: 'worried' }
+    ],
+    '1:4': [
+      // 0: Leader: Tổng hợp nội dung vẫn chưa xong...
+      { leader: 'confused', doer: 'surprised', qc: 'worried', mediator: 'worried', follower: 'worried' },
+      // 1: Doer: Tưởng có người nhận rồi...
+      { leader: 'worried', doer: 'confused', qc: 'worried', mediator: 'worried', follower: 'confused' },
+      // 2: QC: Chưa nhận được bản hoàn chỉnh...
+      { leader: 'worried', doer: 'worried', qc: 'angry', mediator: 'worried', follower: 'worried' },
+      // 3: Leader: Giờ còn nhiều phần chưa xong nguy hiểm thật...
+      { leader: 'worried', doer: 'embarrassed', qc: 'angry', mediator: 'worried', follower: 'worried' },
+      // 4: Doer: Lúc đầu đâu nói rõ ai phụ trách...
+      { leader: 'embarrassed', doer: 'worried', qc: 'angry', mediator: 'worried', follower: 'worried' },
+      // 5: Mediator: Cần bình tĩnh xem lại những phần còn thiếu...
+      { leader: 'happy', doer: 'happy', qc: 'idle', mediator: 'happy', follower: 'happy' }
+    ],
+    '2:2': [
+      // 0: Active Follower: Ai nhận làm Leader không ạ?
+      { leader: 'confused', doer: 'worried', qc: 'confused', mediator: 'worried', follower: 'talk' },
+      // 1: A: Tớ yếu khoản này lắm, bận lắm...
+      { leader: 'worried', doer: 'embarrassed', qc: 'confused', mediator: 'worried', follower: 'worried' },
+      // 2: B: Tớ làm gì cũng được trừ leader...
+      { leader: 'worried', doer: 'worried', qc: 'embarrassed', mediator: 'worried', follower: 'sad' },
+      // 3: Hệ thống: Không ai lên tiếng...
+      { leader: 'sad', doer: 'worried', qc: 'confused', mediator: 'worried', follower: 'sad' }
+    ],
+    '2:3': [
+      // 0: A: Đề nghị mai 20h họp chốt outline...
+      { leader: 'worried', doer: 'angry', qc: 'worried', mediator: 'worried', follower: 'worried' },
+      // 1: B: Sớm thế làm gì, bận chết đi được...
+      { leader: 'worried', doer: 'angry', qc: 'angry', mediator: 'worried', follower: 'worried' },
+      // 2: Hệ thống: Thả phẫn nộ, đóng băng...
+      { leader: 'sad', doer: 'angry', qc: 'angry', mediator: 'sad', follower: 'worried' }
+    ],
+    '2:4': [
+      // 0: Doer: Hoàn thành phân tích thị trường...
+      { leader: 'happy', doer: 'happy', qc: 'idle', mediator: 'happy', follower: 'happy' },
+      // 1: A: Viết lủng củng quá đã xóa sạch...
+      { leader: 'worried', doer: 'surprised', qc: 'angry', mediator: 'worried', follower: 'surprised' },
+      // 2: Hệ thống: Bạn sững sờ...
+      { leader: 'worried', doer: 'sad', qc: 'angry', mediator: 'worried', follower: 'sad' }
+    ]
+  };
+
+  if (CURATED_MOODS[stageKey] && CURATED_MOODS[stageKey][step]) {
+    return CURATED_MOODS[stageKey][step];
+  }
+
+  // Dynamic Content Analysis
+  if (!activeMsg) {
+    return { leader: 'idle', qc: 'idle', doer: 'idle', mediator: 'idle', follower: 'idle' };
+  }
+  const speaker = (activeMsg[0] || '').toLowerCase();
+  const text = (activeMsg[1] || '').toLowerCase();
+
+  let speakerMood = 'talk';
+  let teamMood = 'idle';
+
+  if (text.includes('bận') || text.includes('quá tải') || text.includes('áp lực') || text.includes('ngại') || text.includes('sợ') || text.includes('lo')) {
+    speakerMood = 'worried';
+    teamMood = 'worried';
+  } else if (text.includes('lỗi') || text.includes('chưa kỹ') || text.includes('xóa') || text.includes('gay gắt') || text.includes('phẫn nộ') || text.includes('soi') || text.includes('khắt khe') || text.includes('ảnh hưởng')) {
+    speakerMood = 'angry';
+    teamMood = 'embarrassed';
+  } else if (text.includes('hay mình') || text.includes('đồng ý') || text.includes('giải pháp') || text.includes('bình tĩnh') || text.includes('cảm ơn') || text.includes('vui')) {
+    speakerMood = 'happy';
+    teamMood = 'happy';
+  } else if (text.includes('ai sẽ') || text.includes('chưa biết') || text.includes('thế nào') || text.includes('sao') || text.includes('nghĩ')) {
+    speakerMood = 'confused';
+    teamMood = 'confused';
+  }
+
+  const moods = { leader: teamMood, qc: teamMood, doer: teamMood, mediator: teamMood, follower: teamMood };
+
+  if (speaker.includes('leader')) moods.leader = speakerMood;
+  else if (speaker.includes('qc')) moods.qc = speakerMood;
+  else if (speaker.includes('doer')) moods.doer = speakerMood;
+  else if (speaker.includes('mediator')) moods.mediator = speakerMood;
+  else if (speaker.includes('bạn thân') || speaker.includes('follower')) moods.follower = speakerMood;
+  else if (speaker === 'a') moods.doer = speakerMood;
+  else if (speaker === 'b') moods.qc = speakerMood;
+
+  return moods;
+}
 
 function roundtableView(){
   const g=state.game;
@@ -542,6 +654,16 @@ function roundtableView(){
   const activeMsg=!done?current.messages[step]:null;
   const activeName=activeMsg?activeMsg[0]:null;
   const urgentClass = state.gameTime <= 15 ? 'timer-urgent' : '';
+
+  let tailLeft = '50%';
+  if (activeName) {
+    const low = activeName.toLowerCase();
+    if (low.includes('doer') || activeName === 'A') tailLeft = '18%';
+    else if (low.includes('leader')) tailLeft = '30%';
+    else if (low.includes('qc') || activeName === 'B') tailLeft = '70%';
+    else if (low.includes('mediator')) tailLeft = '82%';
+    else if (low.includes('bạn thân') || low.includes('follower')) tailLeft = '50%';
+  }
 
   return shell('interior-page rt-page',`
     <header class="chat-head" style="background:#fef7eb;border-bottom:2px solid #ecd8b8">
@@ -559,21 +681,74 @@ function roundtableView(){
       <div class="rt-deck-floor"></div>
       <div class="rt-sunbeams"></div>
       <div class="rt-center-table">
-        <div class="rt-cup c1"></div>
-        <div class="rt-cup c2"></div>
-        <div class="rt-cup c3"></div>
+        <svg width="290" height="135" viewBox="0 0 290 135" fill="none" style="display:block;width:100%;height:100%">
+          <defs>
+            <radialGradient id="rtTableWood" cx="45%" cy="32%" r="68%">
+              <stop offset="0%" stop-color="#f5d2a8" />
+              <stop offset="70%" stop-color="#d69f69" />
+              <stop offset="100%" stop-color="#b57a46" />
+            </radialGradient>
+          </defs>
+          <!-- Base Shadow -->
+          <ellipse cx="145" cy="124" rx="70" ry="9" fill="#52321c" opacity="0.28" />
+          <rect x="133" y="68" width="24" height="52" rx="6" fill="#7a4c28" stroke="#4a2c17" stroke-width="2" />
+          <path d="M105 120 Q145 110 185 120 L180 126 Q145 118 110 126 Z" fill="#633b1d" stroke="#4a2c17" stroke-width="1.8" />
+          <!-- Tabletop 3D Edge & Surface -->
+          <ellipse cx="145" cy="58" rx="138" ry="46" fill="#8c5830" stroke="#4a2c17" stroke-width="2.5" />
+          <ellipse cx="145" cy="52" rx="138" ry="44" fill="url(#rtTableWood)" stroke="#4a2c17" stroke-width="2.5" />
+          <ellipse cx="145" cy="52" rx="126" ry="38" fill="none" stroke="#fae5cc" stroke-width="1.5" opacity="0.6" />
+          <!-- Leader's Laptop (Left Side) -->
+          <g transform="translate(74, 30)">
+            <polygon points="6,18 42,15 52,26 14,29" fill="#d8e1eb" stroke="#473022" stroke-width="1.6" stroke-linejoin="round" />
+            <polygon points="3,0 39,-3 42,15 6,18" fill="#eef3f8" stroke="#473022" stroke-width="1.6" stroke-linejoin="round" />
+            <circle cx="23" cy="7" r="2.5" fill="#8fa2b8" />
+          </g>
+          <!-- QC's Tablet & Notebooks (Right Side) -->
+          <g transform="translate(156, 28)">
+            <rect x="2" y="11" width="36" height="8" rx="2.5" fill="#ea8b6e" stroke="#473022" stroke-width="1.5" />
+            <rect x="0" y="5" width="36" height="8" rx="2.5" fill="#82b87e" stroke="#473022" stroke-width="1.5" />
+            <polygon points="8,-9 38,-7 35,7 5,5" fill="#445772" stroke="#263445" stroke-width="1.5" stroke-linejoin="round" />
+          </g>
+          <!-- Boba Tea Cup with Straw (Center) -->
+          <g transform="translate(133, 38)">
+            <rect x="0" y="0" width="12" height="15" rx="3" fill="#ffffff" stroke="#473022" stroke-width="1.4" />
+            <ellipse cx="6" cy="0" rx="6" ry="2" fill="#ffe2b8" stroke="#473022" stroke-width="1.2" />
+            <line x1="6" y1="0" x2="10" y2="-6" stroke="#e05373" stroke-width="1.8" stroke-linecap="round" />
+          </g>
+          <!-- Doer's Coffee Cup -->
+          <g transform="translate(56, 46)">
+            <circle cx="5" cy="5" r="5" fill="#f8e7d2" stroke="#68422a" stroke-width="1.3" />
+            <circle cx="5" cy="5" r="3.2" fill="#58351e" />
+          </g>
+          <!-- Mediator's Matcha Cup -->
+          <g transform="translate(202, 46)">
+            <circle cx="5" cy="5" r="5" fill="#f8e7d2" stroke="#68422a" stroke-width="1.3" />
+            <circle cx="5" cy="5" r="3.2" fill="#4a7350" />
+          </g>
+        </svg>
       </div>
 
       <!-- 5 chỗ ngồi quanh bàn -->
       <div class="rt-seats-container">
         ${RT_SEATS_5.map((seat, idx)=>{
-          const isSpeaking = activeName && (activeName.includes(seat.name) || (seat.role && activeName.includes(seat.role)));
+          const activeLow = (activeName || '').toLowerCase();
+          const isSpeaking = activeName && (
+            activeLow.includes(seat.name.toLowerCase()) ||
+            activeLow.includes(seat.role.toLowerCase()) ||
+            (seat.role === 'doer' && activeName === 'A') ||
+            (seat.role === 'qc' && activeName === 'B') ||
+            (seat.role === 'follower' && (activeLow.includes('follower') || activeLow.includes('bạn thân')))
+          );
           const isUserRole = seat.role === g.role;
-          const pose = isSpeaking ? 'talk' : (done ? 'worried' : 'idle');
+          const moods = done ? { leader: 'worried', qc: 'confused', doer: 'worried', mediator: 'idle', follower: 'embarrassed' } : getRoundtableMoods(current, step, activeMsg);
+          const seatMood = moods[seat.role] || (isSpeaking ? 'talk' : 'idle');
+          const finalPose = isSpeaking && seatMood === 'idle' ? 'talk' : seatMood;
+
           return `
-            <div class="rt-v5-seat ${isSpeaking?'is-speaking':(activeName?'is-dimmed':'')}" style="left:${seat.left};top:${seat.top}">
+            <div class="rt-v5-seat ${isSpeaking?'is-speaking':(activeName?'is-dimmed':'')}" style="left:${seat.left};top:${seat.top};z-index:${seat.zIndex}">
               <div class="rt-seat-glow"></div>
-              ${isUserRole ? player(pose,'rt-seat-char') : avatar(seat.role,'rt-seat-char',pose)}
+              ${isUserRole ? player(finalPose,'rt-seat-char') : avatar(seat.role,'rt-seat-char',finalPose)}
+              ${seat.role === 'follower' ? '<div class="rt-seat-stool"></div>' : ''}
               <span class="rt-seat-tag">${safe(seat.name)} ${isUserRole?'(Bạn)':''}</span>
             </div>
           `;
@@ -585,7 +760,7 @@ function roundtableView(){
         <div class="rt-v5-bubble" data-action="rt-next">
           <div class="rt-bubble-tag">${icon('chat')} ${safe(activeName)}</div>
           <p id="rt-typewriter-text" style="margin:0;font-size:12.5px;font-weight:700;color:#3e2a1e;line-height:1.45">${safe(activeMsg[1])}</p>
-          <div class="rt-bubble-tail"></div>
+          <div class="rt-bubble-tail" style="left:${tailLeft}"></div>
         </div>
         <button class="rt-next-btn" data-action="rt-next">
           ${icon('play')} ${step+1<current.messages.length?'Tiếp tục thảo luận':'Đưa ra quyết định'}
