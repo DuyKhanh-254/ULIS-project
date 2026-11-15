@@ -248,7 +248,7 @@ export function renderRoundtableCharacters(state, moods = {}, activeSpeakerKey =
       key: 'Leader',
       role: 'leader',
       label: 'Leader',
-      style: 'left: 28%; top: 37%; transform: translate(-50%, -50%); width: 96px; height: 122px; z-index: 12;',
+      style: 'left: 31%; top: 38%; transform: translate(-50%, -50%); width: 102px; height: 130px; z-index: 12;',
       chair: `
         <svg class="rt-chair-back" viewBox="0 0 50 60" style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); width:54px; height:60px; z-index:1; pointer-events:none;">
           <rect x="8" y="10" width="34" height="38" rx="8" fill="#ba8054" stroke="#4a3228" stroke-width="2.2"/>
@@ -262,7 +262,7 @@ export function renderRoundtableCharacters(state, moods = {}, activeSpeakerKey =
       key: 'QC',
       role: 'qc',
       label: 'QC',
-      style: 'left: 72%; top: 37%; transform: translate(-50%, -50%); width: 96px; height: 122px; z-index: 12;',
+      style: 'left: 69%; top: 38%; transform: translate(-50%, -50%); width: 102px; height: 130px; z-index: 12;',
       chair: `
         <svg class="rt-chair-back" viewBox="0 0 50 60" style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); width:54px; height:60px; z-index:1; pointer-events:none;">
           <rect x="8" y="10" width="34" height="38" rx="8" fill="#ba8054" stroke="#4a3228" stroke-width="2.2"/>
@@ -276,9 +276,19 @@ export function renderRoundtableCharacters(state, moods = {}, activeSpeakerKey =
       key: 'Doer',
       role: 'doer',
       label: 'Doer',
-      style: 'left: 14%; top: 50%; transform: translate(-50%, -50%); width: 96px; height: 122px; z-index: 22;',
+      style: 'left: 17%; top: 51%; transform: translate(-50%, -50%); width: 102px; height: 130px; z-index: 22;',
+      prop: `
+        <div class="rt-prop-notepad" style="position:absolute; bottom:22px; right:4px; z-index:6; pointer-events:none;">
+          <svg width="30" height="24" viewBox="0 0 30 24" fill="none">
+            <polygon points="2,4 22,2 26,18 6,20" fill="#ffffff" stroke="#4a3228" stroke-width="1.8"/>
+            <line x1="7" y1="6" x2="19" y2="4" stroke="#8c9ba5" stroke-width="1.2"/>
+            <line x1="8" y1="10" x2="20" y2="8" stroke="#8c9ba5" stroke-width="1.2"/>
+            <line x1="19" y1="14" x2="28" y2="10" stroke="#de6e4b" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+        </div>
+      `,
       chair: `
-        <svg class="rt-chair-back rt-chair-left" viewBox="0 0 50 65" style="position:absolute; top:-8px; left:10px; width:48px; height:62px; z-index:1; pointer-events:none;">
+        <svg class="rt-chair-back rt-chair-left" viewBox="0 0 50 65" style="position:absolute; top:-8px; left:8px; width:48px; height:62px; z-index:1; pointer-events:none;">
           <rect x="8" y="10" width="34" height="42" rx="8" fill="#c48a54" stroke="#4a3228" stroke-width="2.2"/>
           <line x1="16" y1="16" x2="16" y2="46" stroke="#4a3228" stroke-width="2"/>
           <line x1="25" y1="16" x2="25" y2="46" stroke="#4a3228" stroke-width="2"/>
@@ -291,9 +301,21 @@ export function renderRoundtableCharacters(state, moods = {}, activeSpeakerKey =
       key: 'Mediator',
       role: 'mediator',
       label: 'Mediator',
-      style: 'left: 86%; top: 50%; transform: translate(-50%, -50%); width: 96px; height: 122px; z-index: 22;',
+      style: 'left: 83%; top: 51%; transform: translate(-50%, -50%); width: 102px; height: 130px; z-index: 22;',
+      prop: `
+        <div class="rt-prop-boba" style="position:absolute; bottom:20px; left:4px; z-index:6; pointer-events:none;">
+          <svg width="24" height="30" viewBox="0 0 24 30" fill="none">
+            <polygon points="4,10 20,10 18,26 6,26" fill="#eed9c4" stroke="#4a3228" stroke-width="1.6"/>
+            <ellipse cx="12" cy="10" rx="8" ry="2.4" fill="#ffffff" stroke="#4a3228" stroke-width="1.5"/>
+            <line x1="12" y1="10" x2="9" y2="2" stroke="#e05353" stroke-width="2.4" stroke-linecap="round"/>
+            <circle cx="9" cy="22" r="1.6" fill="#3a2518"/>
+            <circle cx="12" cy="23.5" r="1.6" fill="#3a2518"/>
+            <circle cx="15" cy="22" r="1.6" fill="#3a2518"/>
+          </svg>
+        </div>
+      `,
       chair: `
-        <svg class="rt-chair-back rt-chair-right" viewBox="0 0 50 65" style="position:absolute; top:-8px; right:10px; width:48px; height:62px; z-index:1; pointer-events:none;">
+        <svg class="rt-chair-back rt-chair-right" viewBox="0 0 50 65" style="position:absolute; top:-8px; right:8px; width:48px; height:62px; z-index:1; pointer-events:none;">
           <rect x="8" y="10" width="34" height="42" rx="8" fill="#c48a54" stroke="#4a3228" stroke-width="2.2"/>
           <line x1="16" y1="16" x2="16" y2="46" stroke="#4a3228" stroke-width="2"/>
           <line x1="25" y1="16" x2="25" y2="46" stroke="#4a3228" stroke-width="2"/>
@@ -306,16 +328,15 @@ export function renderRoundtableCharacters(state, moods = {}, activeSpeakerKey =
       key: 'BanThan',
       role: 'follower',
       label: 'Bạn thân',
-      style: 'left: 68%; top: 64%; transform: translate(-50%, -50%); width: 96px; height: 122px; z-index: 26;',
+      style: 'left: 52%; top: 68%; transform: translate(-50%, -50%); width: 102px; height: 130px; z-index: 26;',
       chair: `
-        <svg class="rt-stool" viewBox="0 0 54 36" style="position:absolute; bottom:-12px; left:50%; transform:translateX(-50%); width:54px; height:36px; z-index:1; pointer-events:none;">
-          <ellipse cx="27" cy="10" rx="24" ry="7" fill="#dea973" stroke="#4a3228" stroke-width="2.2"/>
-          <ellipse cx="27" cy="8" rx="22" ry="5.5" fill="#f5d1a6" stroke="none"/>
-          <line x1="12" y1="14" x2="8" y2="32" stroke="#8c532b" stroke-width="3.5" stroke-linecap="round"/>
-          <line x1="22" y1="15" x2="20" y2="34" stroke="#70401d" stroke-width="3" stroke-linecap="round"/>
-          <line x1="32" y1="15" x2="34" y2="34" stroke="#70401d" stroke-width="3" stroke-linecap="round"/>
-          <line x1="42" y1="14" x2="46" y2="32" stroke="#8c532b" stroke-width="3.5" stroke-linecap="round"/>
-          <line x1="10" y1="24" x2="44" y2="24" stroke="#4a3228" stroke-width="1.8" stroke-linecap="round"/>
+        <svg class="rt-chair-back rt-chair-front" viewBox="0 0 54 60" style="position:absolute; bottom:-12px; left:50%; transform:translateX(-50%); width:52px; height:58px; z-index:1; pointer-events:none;">
+          <rect x="8" y="8" width="38" height="38" rx="8" fill="#c48a54" stroke="#4a3228" stroke-width="2.2"/>
+          <line x1="17" y1="14" x2="17" y2="42" stroke="#4a3228" stroke-width="2"/>
+          <line x1="27" y1="14" x2="27" y2="42" stroke="#4a3228" stroke-width="2"/>
+          <line x1="37" y1="14" x2="37" y2="42" stroke="#4a3228" stroke-width="2"/>
+          <line x1="11" y1="46" x2="9" y2="58" stroke="#8c532b" stroke-width="3.2" stroke-linecap="round"/>
+          <line x1="43" y1="46" x2="45" y2="58" stroke="#8c532b" stroke-width="3.2" stroke-linecap="round"/>
         </svg>
       `
     }
@@ -365,6 +386,8 @@ export function renderRoundtableCharacters(state, moods = {}, activeSpeakerKey =
               style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:contain; clip-path: inset(50% 0 0 0); z-index:4; pointer-events:none;"
             >
           ` : ''}
+
+          ${seat.prop || ''}
         </div>
 
         <span class="${badgeClass}">${badgeLabel}</span>

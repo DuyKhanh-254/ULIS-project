@@ -1,5 +1,6 @@
 import {roles, personas, quizQuestions, levels, quickScenarios, reversals, stageRoleMap, stageUIMode, charTypes, allOutfits} from './data.js';
 import {ROUNDTABLE_BACKDROP_SVG, renderRoundtableCharacters, startMouthFlap, stopMouthFlap, focusRoundtableSpeaker, applyRoundtableExpressions} from './roundtable-scene-v5.js';
+import {drawPersonaCard, drawLevelCompleteCard} from './persona-card.js';
 
 const ROOT=document.getElementById('app');
 const TURN_SECONDS=60; // Nâng cấp V5: 60 giây mỗi lượt quyết định tình huống
@@ -31,7 +32,8 @@ const initialOutfit = (saved.outfit && VALID_OUTFITS.includes(saved.outfit)) ? s
 
 // State trung tâm của game V5
 const state = {
-  screen: saved.avatarType ? 'home' : 'charSelect', // Nếu chưa chọn nhân vật thì vào chọn trước
+  screen: (saved.avatarType && saved.nickname) ? 'home' : 'charSelect', // Nếu chưa chọn nhân vật hoặc tên thì vào chọn trước
+  nickname: saved.nickname || 'DUY KHÁNH',
   avatarType: saved.avatarType || 'boy',            // boy | girl | cat | rabbit | bear | frog
   level: 1,
   stage: 0,
@@ -63,6 +65,7 @@ const level=id=>levels.find(l=>l.id===Number(id))||levels[0];
 function save(){
   try{
     const payload = {
+      nickname: state.nickname,
       avatarType: state.avatarType,
       role: state.role,
       outfit: state.outfit,
@@ -156,8 +159,17 @@ function charSelectView(){
     <div class="page-body">
       <div class="page-intro">
         <strong>Chào mừng bạn đến với TEAM-CRAFT!</strong><br>
-        Hãy chọn diện mạo đại diện của bạn. Giới tính và vai trò trong nhóm hoàn toàn độc lập với nhau.
+        Nhập tên và chọn diện mạo đại diện của bạn. Giới tính và vai trò trong nhóm hoàn toàn độc lập với nhau.
       </div>
+
+      <div class="char-select-name-box">
+        <label for="player-nickname-intro" class="nickname-label">✨ TÊN CỦA BẠN (IN LÊN THẺ TEAM-CRAFT LICENSE):</label>
+        <div class="nick-wrap">
+          <input id="player-nickname-intro" type="text" maxlength="22" value="${safe(state.nickname || 'DUY KHÁNH')}" placeholder="Nhập tên của bạn...">
+          <button id="btn-focus-intro-nick" class="nick-pencil" type="button" title="Đổi tên">✏️</button>
+        </div>
+      </div>
+
       <div class="char-select-grid">
         ${charTypes.map(c => `
           <button class="char-select-tile ${state.avatarType===c.id?'active':''}" data-set-avatar="${c.id}">
@@ -168,7 +180,7 @@ function charSelectView(){
           </button>
         `).join('')}
       </div>
-      <button class="game-btn green full large" style="margin-top:12px" data-action="confirm-avatar">
+      <button class="game-btn green full large" style="margin-top:14px" data-action="confirm-avatar">
         ${icon('check')} Xác Nhận & Bắt Đầu
       </button>
     </div>
@@ -192,6 +204,13 @@ function home(){
       <div class="home-ribbon">WEBGAME MÔ PHỎNG KỸ NĂNG LÀM VIỆC NHÓM</div>
       ${logo()}
       <p class="hero-tagline">Mọi mắt xích đều tạo nên chiến thắng!</p>
+
+      <div class="home-player-badge" data-go="charSelect" title="Nhấn để đổi tên hoặc diện mạo">
+        <span class="home-player-avatar">${player('happy','home-player-mini')}</span>
+        <span class="home-player-name">${safe(state.nickname || 'DUY KHÁNH')}</span>
+        <span class="home-edit-nick-btn" title="Chỉnh sửa tên">✏️</span>
+      </div>
+
       <div class="character-group">
         <div class="podium podium-left"></div><div class="podium podium-right"></div>
         ${avatar('mediator','home-person left','happy')}
@@ -533,11 +552,16 @@ function getRoundtableMoodsPDF(current, step, activeMsg) {
 
   const CURATED_PDF_MOODS = {
     '1:1': [
-      { Leader: 'thoughtful', Doer: 'neutral', QC: 'neutral', Mediator: 'neutral', BanThan: 'thoughtful' },
-      { Leader: 'neutral', Doer: 'worried', QC: 'neutral', Mediator: 'neutral', BanThan: 'worried' },
-      { Leader: 'worried', Doer: 'neutral', QC: 'serious', Mediator: 'neutral', BanThan: 'worried' },
-      { Leader: 'neutral', Doer: 'neutral', QC: 'neutral', Mediator: 'happy', BanThan: 'thoughtful' },
-      { Leader: 'worried', Doer: 'worried', QC: 'thoughtful', Mediator: 'thoughtful', BanThan: 'worried' }
+      // 0: Leader: Mọi người nghĩ ai sẽ phù hợp... (Image 2: Leader happy, nhóm tập trung)
+      { Leader: 'happy', Doer: 'neutral', QC: 'neutral', Mediator: 'neutral', BanThan: 'neutral' },
+      // 1: Doer: Tớ nghĩ phần đó cần người có khả năng... (Image 3: Doer nói, Bạn thân lo lắng)
+      { Leader: 'neutral', Doer: 'talk', QC: 'neutral', Mediator: 'neutral', BanThan: 'worried' },
+      // 2: QC: Phần này mà làm chưa kỹ thì...
+      { Leader: 'worried', Doer: 'sad', QC: 'serious', Mediator: 'neutral', BanThan: 'worried' },
+      // 3: Mediator: Hay mình xem xét năng lực và thời gian...
+      { Leader: 'happy', Doer: 'happy', QC: 'neutral', Mediator: 'happy', BanThan: 'thoughtful' },
+      // 4: Leader: Tớ vẫn chưa biết nên phân công thế nào...
+      { Leader: 'worried', Doer: 'worried', QC: 'thoughtful', Mediator: 'neutral', BanThan: 'worried' }
     ],
     '1:2': [
       { Leader: 'worried', Doer: 'neutral', QC: 'serious', Mediator: 'neutral', BanThan: 'worried' },
@@ -617,31 +641,26 @@ function roundtableView(){
   const urgentClass = state.gameTime <= 15 ? 'timer-urgent' : '';
 
   let speakerKey = 'Leader';
-  let tailLeft = '28%';
-  let bubbleTop = '15%';
+  let tailLeft = '31%';
+  const bubbleTop = '10%';
 
   if (activeName) {
     const low = activeName.toLowerCase();
     if (low.includes('doer') || activeName === 'A') {
       speakerKey = 'Doer';
-      tailLeft = '16%';
-      bubbleTop = '18%';
+      tailLeft = '17%';
     } else if (low.includes('leader')) {
       speakerKey = 'Leader';
-      tailLeft = '28%';
-      bubbleTop = '15%';
+      tailLeft = '31%';
     } else if (low.includes('qc') || activeName === 'B') {
       speakerKey = 'QC';
-      tailLeft = '72%';
-      bubbleTop = '15%';
+      tailLeft = '69%';
     } else if (low.includes('mediator')) {
       speakerKey = 'Mediator';
-      tailLeft = '84%';
-      bubbleTop = '18%';
+      tailLeft = '83%';
     } else if (low.includes('bạn thân') || low.includes('follower') || low.includes('bạn')) {
       speakerKey = 'BanThan';
-      tailLeft = '68%';
-      bubbleTop = '20%';
+      tailLeft = '52%';
     }
   }
 
@@ -998,33 +1017,41 @@ function levelCompleteView(){
   const l=level(state.completedLevelId||state.level);
   const r=role(state.role);
   const hasNext=state.completedLevelId===1;
-  const code=`AI${l.id}-CLEAR-0${l.stages.length}0${l.stages.length}`;
-  return shell('interior-page ending-page',`
+  const currentNick=(state.nickname&&state.nickname.trim())?state.nickname.trim():'DUY KHÁNH';
+
+  return shell('interior-page ending-page persona-result-page',`
     ${topbar('Hoàn thành Ải','map',true)}
-    <div class="page-body">
-      <div class="id-card theme-green" id="level-complete-card">
-        <span class="id-star s1">${icon('star')}</span>
-        <span class="id-star s2">${icon('star')}</span>
-        <span class="id-star s3">${icon('star')}</span>
-        <div class="id-card-title">ẢI ${l.id}: ${safe(l.name).toUpperCase()}</div>
-        <div class="id-card-body">
-          <div class="id-photo"><div class="id-photo-frame">${player('happy','id-photo-char')}</div></div>
-          <div class="id-info">
-            <small>MÃ HOÀN THÀNH</small>
-            <span class="id-handle">${code}</span>
-            <small>VAI TRÒ ĐÃ CHƠI</small>
-            <span class="id-team">${safe(r.name)} (${state.avatarType.toUpperCase()})</span>
-          </div>
+    <div class="page-body persona-result-body">
+      <div class="card-context">
+        <p class="subtitle">🎉 CHÚC MỪNG BẠN ĐÃ HOÀN THÀNH ẢI ${l.id} · ${safe(l.name).toUpperCase()}!</p>
+        <h1 class="headline">THẺ HÀNH NGHỀ TEAM-CRAFT LICENSE</h1>
+        <p class="context-desc">Chứng nhận kỹ năng làm việc nhóm thực chiến dành riêng cho bạn. Đã vượt qua ${l.stages.length}/${l.stages.length} tình huống mô phỏng.</p>
+      </div>
+
+      <div class="persona-canvas-wrap">
+        <canvas id="level-card-render" width="900" height="1190" role="img" aria-label="Thẻ hành nghề Team-Craft"></canvas>
+      </div>
+
+      <div class="nickname-edit-box">
+        <label for="player-nickname" class="nickname-label">TÊN HIỂN THỊ TRÊN THẺ (CHẠM ĐỂ SỬA):</label>
+        <div class="nick-wrap">
+          <input id="player-nickname" type="text" maxlength="22" autocomplete="off" placeholder="Nhập biệt danh của bạn..." value="${safe(currentNick)}">
+          <button type="button" class="nick-pencil" id="btn-focus-nick" aria-label="Chỉnh sửa biệt danh">✏️</button>
         </div>
-        <p class="id-desc">Đã vượt qua ${l.stages.length}/${l.stages.length} tình huống mô phỏng. Tích lũy được ${icon('heart')} ${state.hearts} Thấu cảm · ${icon('coin')} ${state.coins} Xu.</p>
-        <div class="id-card-foot"><span>TEAM-CRAFT · HOÀN THÀNH ẢI ${l.id}</span></div>
-        <div class="id-stamp"><span>TEAM<br>CRAFT</span><small>HOÀN THÀNH</small></div>
       </div>
-      <div class="persona-actions">
-        <button class="game-btn sky" data-action="download-level">${icon('book')} Tải ảnh</button>
-        <button class="game-btn pale" data-action="share-level">${icon('send')} Chia sẻ</button>
+
+      <div class="card-actions">
+        <button class="card-action download" data-action="download-level-card">
+          <span class="act-icon">⬇</span> TẢI ẢNH THẺ ID (PNG)
+        </button>
+        <button class="card-action share" data-action="share-level-card">
+          <span class="act-icon">↗</span> CHIA SẺ
+        </button>
       </div>
-      <button class="game-btn green full" data-action="continue-after-level">${icon('play')} ${hasNext?'Sang Ải tiếp theo':'Xem lộ trình tiếp theo'}</button>
+
+      <button class="game-btn green full large" style="margin-top:14px" data-action="continue-after-level">
+        ${icon('play')} ${hasNext?'Sang Ải tiếp theo':'Xem lộ trình tiếp theo'}
+      </button>
     </div>
   `);
 }
@@ -1084,63 +1111,187 @@ function quizView(){
 }
 
 function quizResult(){
-  const p=personas.find(x=>x.id===state.persona)||personas[0];
-  return shell('quiz-page',`
-    ${topbar('Thẻ phong cách','home')}
-    <div class="page-body">
-      <div class="id-card" id="persona-card">
-        <span class="id-star s1">${icon('star')}</span><span class="id-star s2">${icon('star')}</span><span class="id-star s3">${icon('star')}</span>
-        <div class="id-card-title">${safe(p.title)}</div>
-        <div class="id-card-body">
-          <div class="id-photo"><div class="id-photo-frame">${player('happy','id-photo-char')}</div></div>
-          <div class="id-info">
-            <small>MÃ ĐỊNH DANH</small>
-            <span class="id-handle">${safe(p.handle)}</span>
-            <small>ĐỘI</small>
-            <span class="id-team">TEAM-CRAFT · ĐHQGHN</span>
-          </div>
+  const p=personas.find(x=>x.id===(state.previewPersona||state.persona))||personas[0];
+  const isPreview=Boolean(state.previewPersona);
+  const currentNick=(state.nickname&&state.nickname.trim())?state.nickname.trim():'DUY KHÁNH';
+
+  return shell('quiz-page persona-result-page',`
+    ${topbar(isPreview?'Xem thử thẻ':'Thẻ nhân vật của bạn','home',true)}
+    <div class="page-body persona-result-body">
+      <div class="card-context">
+        <span class="card-context-spark">✦</span>
+        <div>
+          <strong>${isPreview?'Bộ sưu tập phong cách':'Xin chào, đồng đội!'}</strong>
+          <p>${isPreview?'Bản xem thử · Hoàn thành Quiz để nhận thẻ của chính bạn':'Thẻ nhân vật đã sẵn sàng để lưu và đăng Story'}</p>
         </div>
-        <p class="id-desc">${safe(p.desc)}</p>
-        <div class="id-card-foot"><span>THẺ KHÁM PHÁ PHONG CÁCH LÀM VIỆC NHÓM</span></div>
-        <div class="id-stamp"><span>TEAM<br>CRAFT</span><small>ĐÃ XÁC NHẬN</small></div>
       </div>
-      <div class="persona-actions">
-        <button class="game-btn sky" data-action="download-persona">${icon('book')} Tải ảnh</button>
-        <button class="game-btn pale" data-action="share-persona">${icon('send')} Chia sẻ</button>
+
+      <div class="persona-canvas-wrap">
+        <canvas id="persona-render" width="900" height="1190" role="img" aria-label="Thẻ vui nhộn ${safe(p.title)}"></canvas>
       </div>
-      <div class="lesson-card"><strong>Gợi ý của TEAM-CRAFT</strong><p>${safe(p.tip)}</p></div>
-      ${btn(`${icon('play')} Vào game mô phỏng`,'map','green full')}
+
+      <label class="nickname-label" for="player-nickname">TÊN HIỂN THỊ TRÊN THẺ <small>(chạm để đổi)</small></label>
+      <div class="nick-wrap">
+        <input id="player-nickname" type="text" maxlength="22" autocomplete="off" placeholder="Nhập biệt danh của bạn..." value="${safe(currentNick)}">
+        <button type="button" class="nick-pencil" id="btn-focus-nick" aria-label="Chỉnh sửa biệt danh">✏️</button>
+      </div>
+
+      <div class="card-actions">
+        <button class="card-action download" data-action="download-persona-card">⬇ TẢI ẢNH PNG</button>
+        <button class="card-action share" data-action="share-persona-card">↗ CHIA SẺ</button>
+      </div>
+
+      <div class="card-cta-box">
+        <p class="cta-question">Muốn thử nghiệm cách điều chỉnh phong cách làm việc?</p>
+        <button class="game-btn green full persona-enter" data-go="map">${icon('play')} VÀO GAME MÔ PHỎNG NGAY!</button>
+      </div>
+      <div class="persona-secondary">
+        <button data-action="start-quiz">↻ Làm Quiz lại</button>
+      </div>
+      <p class="card-privacy">Kết quả để khám phá và giải trí, không phải chẩn đoán hay điểm EQ. Tính năng chia sẻ sử dụng trình chia sẻ của thiết bị khi được hỗ trợ.</p>
     </div>
   `);
 }
 
-async function captureEl(id){
-  const el=document.getElementById(id);if(!el)return null;
-  if(typeof window.html2canvas!=='function'){toast('Thiếu thư viện html2canvas, cần kết nối mạng để tải ảnh');return null}
-  try{if(document.fonts?.ready)await document.fonts.ready;return await window.html2canvas(el,{backgroundColor:null,scale:2,useCORS:true})}catch{toast('Tạo ảnh thất bại, thử lại nhé');return null}
+function imageBlob(canvas){
+  return new Promise(resolve=>canvas.toBlob(resolve,'image/png'));
 }
-function cardBlob(canvas){return new Promise(res=>canvas.toBlob(res,'image/png'))}
-async function downloadCard(id,filename){
-  toast('Đang tạo ảnh...');
-  const canvas=await captureEl(id);
-  if(!canvas)return;
-  const a=document.createElement('a');a.href=canvas.toDataURL('image/png');a.download=filename;a.click();
-  toast('Đã tải ảnh về máy');
+
+function saveFile(file){
+  const a=document.createElement('a');
+  const url=URL.createObjectURL(file);
+  a.href=url;
+  a.download=file.name;
+  document.body.append(a);
+  a.click();
+  a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
-async function shareCard(id,filename,title,text){
-  toast('Đang tạo ảnh...');
-  const canvas=await captureEl(id);
+
+// Level complete card rendering
+async function updateLevelCardCanvas(){
+  if(state.screen!=='levelComplete')return;
+  const canvas=document.getElementById('level-card-render');
   if(!canvas)return;
-  const blob=await cardBlob(canvas);
-  if(!blob)return toast('Tạo ảnh thất bại, thử lại nhé');
-  const file=new File([blob],filename,{type:'image/png'});
-  if(navigator.canShare && navigator.canShare({files:[file]})){
-    try{await navigator.share({files:[file],title,text})}
-    catch(err){if(err?.name!=='AbortError')toast('Không thể chia sẻ lúc này')}
-    return;
+  const l=level(state.completedLevelId||state.level);
+  const r=role(state.role);
+  const nick=(state.nickname&&state.nickname.trim())?state.nickname.trim():'DUY KHÁNH';
+
+  const levelData={
+    id: l.id,
+    name: l.name,
+    stagesCount: l.stages?l.stages.length:5
+  };
+  const playerData={
+    avatarType: state.avatarType||'girl',
+    outfit: state.outfit||'vnu',
+    role: state.role||'leader',
+    roleName: r?r.name:'Trưởng nhóm',
+    empathy: state.empathy||state.hearts||50,
+    hearts: state.hearts||60,
+    coins: state.coins||200
+  };
+
+  try{
+    await drawLevelCompleteCard(canvas,levelData,playerData,nick);
+  }catch(err){
+    console.error('Lỗi vẽ Thẻ Level Complete:', err);
   }
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=filename;a.click();
-  toast('Đã tải ảnh về để bạn tự đăng lên Story/Post nhé!');
+}
+
+async function getLevelCardFile(){
+  const canvas=document.getElementById('level-card-render');
+  if(!canvas)return null;
+  await updateLevelCardCanvas();
+  const blob=await imageBlob(canvas);
+  if(!blob)return null;
+  const l=level(state.completedLevelId||state.level);
+  const nick=(state.nickname||'player').replace(/[^a-z0-9_-]/gi,'_');
+  return new File([blob],`TEAM-CRAFT-license-AI${l.id}-${nick}.png`,{type:'image/png'});
+}
+
+async function downloadLevelCard(){
+  toast('Đang xuất ảnh PNG chuẩn 900x1190...');
+  const file=await getLevelCardFile();
+  if(!file)return toast('Chưa tạo được ảnh.');
+  saveFile(file);
+  toast('Đã tải Thẻ License PNG thành công!');
+}
+
+async function shareLevelCard(){
+  const file=await getLevelCardFile();
+  if(!file)return toast('Chưa tạo được ảnh.');
+  try{
+    if(navigator.share&&navigator.canShare?.({files:[file]})){
+      await navigator.share({
+        files:[file],
+        title:'Thẻ License TEAM-CRAFT của mình',
+        text:'Mình vừa hoàn thành Ải mô phỏng kỹ năng làm việc nhóm trên TEAM-CRAFT!'
+      });
+    }else{
+      saveFile(file);
+      toast('Thiết bị chưa hỗ trợ chia sẻ trực tiếp. Đã tải PNG để bạn đăng Story!');
+    }
+  }catch(e){
+    if(e.name!=='AbortError'){
+      saveFile(file);
+      toast('Đã tải ảnh PNG để bạn chia sẻ thủ công.');
+    }
+  }
+}
+
+// Persona card rendering (from Quiz)
+async function updatePersonaCanvas(){
+  if(state.screen!=='quizResult')return;
+  const canvas=document.getElementById('persona-render');
+  if(!canvas)return;
+  const current=state.previewPersona||state.persona||'bee';
+  const p=personas.find(x=>x.id===current)||personas[0];
+  const nick=(state.nickname&&state.nickname.trim())?state.nickname.trim():'DUY KHÁNH';
+  try{
+    await drawPersonaCard(canvas,p,nick);
+  }catch(err){
+    console.error(err);
+  }
+}
+
+async function getPersonaCardFile(){
+  const canvas=document.getElementById('persona-render');
+  if(!canvas)return null;
+  await updatePersonaCanvas();
+  const blob=await imageBlob(canvas);
+  if(!blob)return null;
+  const id=(state.previewPersona||state.persona||'bee').replace(/[^a-z0-9_-]/gi,'');
+  return new File([blob],`TEAM-CRAFT-persona-${id}.png`,{type:'image/png'});
+}
+
+async function downloadPersonaCard(){
+  const file=await getPersonaCardFile();
+  if(!file)return toast('Chưa tạo được ảnh.');
+  saveFile(file);
+  toast('Đã tạo ảnh PNG để đăng Story!');
+}
+
+async function sharePersonaCard(){
+  const file=await getPersonaCardFile();
+  if(!file)return toast('Chưa tạo được ảnh.');
+  try{
+    if(navigator.share&&navigator.canShare?.({files:[file]})){
+      await navigator.share({
+        files:[file],
+        title:'Thẻ phong cách TEAM-CRAFT của mình',
+        text:'Còn bạn thuộc phong cách làm việc nhóm nào?'
+      });
+    }else{
+      saveFile(file);
+      toast('Thiết bị chưa hỗ trợ chia sẻ trực tiếp. Đã tải PNG để bạn đăng Story.');
+    }
+  }catch(e){
+    if(e.name!=='AbortError'){
+      saveFile(file);
+      toast('Đã tải ảnh PNG để chia sẻ thủ công.');
+    }
+  }
 }
 
 // -------------------------------------------------------------
@@ -1171,6 +1322,12 @@ function render(){
     runGameClock();
   }
   if(state.screen==='quiz') runQuizClock();
+  if(state.screen==='levelComplete'){
+    setTimeout(()=>updateLevelCardCanvas(), 30);
+  }
+  if(state.screen==='quizResult'){
+    setTimeout(()=>updatePersonaCanvas(), 30);
+  }
 }
 
 function runQuizClock(){
@@ -1424,8 +1581,23 @@ ROOT.addEventListener('click',e=>{
   if(x)return buyOutfit(x.dataset.buy);
 
   x=e.target.closest('[data-action]');
+  if(e.target.closest('#btn-focus-nick')){
+    const el=document.getElementById('player-nickname');
+    if(el){el.focus();el.select();}
+    return;
+  }
+  if(e.target.closest('#btn-focus-intro-nick')){
+    const el=document.getElementById('player-nickname-intro');
+    if(el){el.focus();el.select();}
+    return;
+  }
+
   if(!x)return;
   if(x.dataset.action==='confirm-avatar'){
+    const introInput=document.getElementById('player-nickname-intro');
+    if(introInput && introInput.value.trim()){
+      state.nickname=introInput.value.trim().slice(0,22);
+    }
     save();
     route('home');
   }
@@ -1435,6 +1607,10 @@ ROOT.addEventListener('click',e=>{
   if(x.dataset.action==='share-persona')shareCard('persona-card','teamcraft-the-phong-cach.png','Thẻ phong cách TEAM-CRAFT','Mình vừa khám phá phong cách làm việc nhóm trên TEAM-CRAFT V5!');
   if(x.dataset.action==='download-level')downloadCard('level-complete-card','teamcraft-hoan-thanh-ai.png');
   if(x.dataset.action==='share-level')shareCard('level-complete-card','teamcraft-hoan-thanh-ai.png','Hoàn thành Ải TEAM-CRAFT','Mình vừa vượt qua một Ải drama nhóm trên TEAM-CRAFT!');
+  if(x.dataset.action==='download-level-card')downloadLevelCard();
+  if(x.dataset.action==='share-level-card')shareLevelCard();
+  if(x.dataset.action==='download-persona-card')downloadPersonaCard();
+  if(x.dataset.action==='share-persona-card')sharePersonaCard();
   if(x.dataset.action==='reversal')startReversal();
   if(x.dataset.action==='rt-next')advanceRT();
   if(x.dataset.action==='rt-show-choices'){
@@ -1460,6 +1636,24 @@ ROOT.addEventListener('click',e=>{
   if(x.dataset.action==='next-stage')nextStage();
   if(x.dataset.action==='level-complete')openLevelComplete();
   if(x.dataset.action==='continue-after-level')continueAfterLevel();
+});
+
+ROOT.addEventListener('input', e => {
+  if (e.target.id === 'player-nickname') {
+    const val = e.target.value.trim().slice(0, 22);
+    state.nickname = val || 'DUY KHÁNH';
+    save();
+    clearTimeout(state.rtTypingTimer);
+    state.rtTypingTimer = setTimeout(() => {
+      if (state.screen === 'levelComplete') updateLevelCardCanvas();
+      if (state.screen === 'quizResult') updatePersonaCanvas();
+    }, 180);
+  }
+  if (e.target.id === 'player-nickname-intro') {
+    const val = e.target.value.trim().slice(0, 22);
+    state.nickname = val || 'DUY KHÁNH';
+    save();
+  }
 });
 
 route(state.screen);
