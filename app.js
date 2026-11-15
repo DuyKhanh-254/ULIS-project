@@ -1,6 +1,8 @@
 import {roles, personas, quizQuestions, levels, quickScenarios, reversals, stageRoleMap} from './data.js';
 
 const ROOT=document.getElementById('app');
+const TURN_SECONDS=120;
+const fmtTime=s=>`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
 const TOAST=document.getElementById('toast');
 const STORE='teamcraft-redesign-v3';
 let saved={}; try{saved=JSON.parse(localStorage.getItem(STORE)||'{}')}catch{}
@@ -15,7 +17,7 @@ if(initialStages.includes('1:4')||(saved.done&&saved.done.some(k=>k.startsWith('
 if(initialStages.includes('2:5')||(saved.done&&saved.done.some(k=>k.startsWith('2:5:')))){
   if(!initialLevels.includes(3))initialLevels.push(3);
 }
-const state={screen:'home',level:1,stage:0,role:saved.role||'leader',outfit:saved.outfit||'blue',persona:saved.persona||null,quizAnswers:[],quizIndex:0,quizTime:60,gameTime:20,game:null,done:saved.done||[],wallet:saved.wallet||[],unlockedStages:initialStages,unlockedLevels:initialLevels,hearts:typeof saved.hearts==='number'?saved.hearts:60,coins:typeof saved.coins==='number'?saved.coins:200};
+const state={screen:'home',level:1,stage:0,role:saved.role||'leader',outfit:saved.outfit||'blue',persona:saved.persona||null,quizAnswers:[],quizIndex:0,quizTime:60,gameTime:TURN_SECONDS,game:null,done:saved.done||[],wallet:saved.wallet||[],unlockedStages:initialStages,unlockedLevels:initialLevels,hearts:typeof saved.hearts==='number'?saved.hearts:60,coins:typeof saved.coins==='number'?saved.coins:200};
 let clock=null;
 const allOutfits=[
  {id:'blue',name:'Xanh ULIS',cost:0},{id:'rose',name:'Hồng pastel',cost:0},{id:'leaf',name:'Xanh lá',cost:0},{id:'violet',name:'Tím nhạt',cost:0},{id:'gold',name:'Vàng mật ong',cost:0},
@@ -200,9 +202,9 @@ if(g.mode==='reversal'){const r=reversals[stageKey]||reversals['1:0'];return {me
 if(quickScenarios[stageKey]){const q=quickScenarios[stageKey];return {...q,prompt:q.prompt||q.title,options:q.choices}}
 const q=quickScenarios[`${g.level}:${g.role}`];return {...q,prompt:q.prompt||q.title,options:q.choices}}
 function chatView(){const g=state.game;const current=currentNode();const lines=[...g.history,...current.messages.map(([name,text])=>({name,text}))];return shell('chat-page',`
-<header class="chat-head"><button class="circle-action" data-go="stages" aria-label="Quay lại">${icon('back')}</button><span class="chat-head-face">${player('idle')}</span><div class="chat-head-text"><strong>${g.mode==='reversal'?'ĐẢO VAI / GÓC NHÌN KHÁC':'Nhóm Bài Tập · Ải '+g.level}</strong><small>Bạn đang là ${safe(role(g.role).name)}</small></div><span class="timer" id="game-count">${state.gameTime}s</span></header>
+<header class="chat-head"><button class="circle-action" data-go="stages" aria-label="Quay lại">${icon('back')}</button><span class="chat-head-face">${player('idle')}</span><div class="chat-head-text"><strong>${g.mode==='reversal'?'ĐẢO VAI / GÓC NHÌN KHÁC':'Nhóm Bài Tập · Ải '+g.level}</strong><small>Bạn đang là ${safe(role(g.role).name)}</small></div><span class="timer" id="game-count">${fmtTime(state.gameTime)}</span></header>
 <div class="message-zone" id="message-zone"><div class="privacy-note">MÔ PHỎNG CHAT • KHÔNG GỬI TIN THẬT</div>${lines.map(x=>bubble(x.name,x.text)).join('')}</div>
-<div class="decision-box"><div class="decision-head"><b>${safe(current.prompt||current.title||'Bạn sẽ phản hồi thế nào?')}</b><small>20 GIÂY / LƯỢT</small></div><div class="time-track"><span id="time-fill" style="width:${state.gameTime*5}%"></span></div>
+<div class="decision-box"><div class="decision-head"><b>${safe(current.prompt||current.title||'Bạn sẽ phản hồi thế nào?')}</b><small>2 PHÚT / LƯỢT</small></div><div class="time-track"><span id="time-fill" style="width:${state.gameTime/TURN_SECONDS*100}%"></span></div>
 ${current.options.map((o,i)=>`<button class="decision-choice" data-choice="${i}"><span>${String.fromCharCode(65+i)}</span>${safe(o.text)}</button>`).join('')}</div>`)}
 function getEnding(){const g=state.game;return g.mode==='reversal'?g.reversalOutcome:g.quickOutcome}
 function finishCampaign(){toast('Chúc mừng bạn đã hoàn thành toàn bộ nội dung hiện có (Ải 1 & Ải 2)! Các Ải 3, 4, 5 đang được cập nhật.');route('map')}
@@ -244,13 +246,13 @@ function buyOutfit(id){if(state.ownedOutfits.includes(id))return;const item=allO
 function render(){const mapRender={home,map,roles:rolesView,custom:customView,shop:shopView,stages:stagesView,stagePreview,comingSoon:comingSoonView,quiz:quizView,quizResult,chat:chatView,ending:endingView,levelComplete:levelCompleteView,wallet:walletView,replay:()=>{startGame();return ''}};
 ROOT.innerHTML=(mapRender[state.screen]||home)();if(state.screen==='chat'){document.getElementById('message-zone')?.scrollTo(0,9999)}if(state.screen==='quiz')runQuizClock();if(state.screen==='chat')runGameClock();}
 function runQuizClock(){stopClock();clock=setInterval(()=>{if(state.screen!=='quiz'){stopClock();return;}state.quizTime=Math.max(0,state.quizTime-1);const el=document.getElementById('quiz-count');if(el)el.textContent=state.quizTime+'s';if(state.quizTime===0)finishQuiz()},1000)}
-function runGameClock(){stopClock();clock=setInterval(()=>{if(state.screen!=='chat'){stopClock();return;}state.gameTime=Math.max(0,state.gameTime-1);const el=document.getElementById('game-count');const bar=document.getElementById('time-fill');if(el)el.textContent=state.gameTime+'s';if(bar)bar.style.width=(state.gameTime*5)+'%';if(state.gameTime===0)autoGameEnd()},1000)}
+function runGameClock(){stopClock();clock=setInterval(()=>{if(state.screen!=='chat'){stopClock();return;}state.gameTime=Math.max(0,state.gameTime-1);const el=document.getElementById('game-count');const bar=document.getElementById('time-fill');if(el)el.textContent=fmtTime(state.gameTime);if(bar)bar.style.width=(state.gameTime/TURN_SECONDS*100)+'%';if(state.gameTime===0)autoGameEnd()},1000)}
 function startQuiz(){state.quizIndex=0;state.quizAnswers=[];state.quizTime=60;route('quiz')}
 function chooseQuiz(index){const ans=quizQuestions[state.quizIndex].answers[index];if(!ans)return;state.quizAnswers.push(ans[1]);if(state.quizIndex===4)finishQuiz();else {state.quizIndex++;render()}}
 function finishQuiz(){const tally={};state.quizAnswers.forEach(x=>tally[x]=(tally[x]||0)+1);state.persona=Object.entries(tally).sort((a,b)=>b[1]-a[1])[0]?.[0]||'bee';save();route('quizResult')}
 function openLevel(id){const lvlId=Number(id);state.level=lvlId;if(lvlId>2)return route('comingSoon');route('stages')}
 function openStage(index){state.stage=Number(index);const l=level(state.level);if(l.id>2)return route('comingSoon');if(!isLevelUnlocked(l.id)){toast(`Ải ${l.id} chưa mở khóa!`);return route('map')}if(!isStageUnlocked(l.id,state.stage)){toast(`Màn ${state.stage+1} chưa mở khóa! Hãy hoàn thành màn trước.`);return route('stages')}const stageKey=`${l.id}:${state.stage}`;if(!quickScenarios[stageKey])return route('stagePreview');const targetRole=stageRoleMap?.[stageKey]||(l.roles.includes(state.role)?state.role:l.roles[0]);state.role=targetRole;save();startGame()}
-function startGame(){state.game={level:state.level,role:state.role,mode:'main',history:[],quickOutcome:null,reversalOutcome:null};state.gameTime=20;route('chat')}
+function startGame(){state.game={level:state.level,role:state.role,mode:'main',history:[],quickOutcome:null,reversalOutcome:null};state.gameTime=TURN_SECONDS;route('chat')}
 function finishMain(){const key=`${state.game.level}:${state.stage}:${state.role}`;if(!state.done.includes(key))state.done.push(key);const l=level(state.level);if(state.stage<l.stages.length-1){unlockStage(state.level,state.stage+1)}else{const nextLvlId=state.level+1;if(nextLvlId<=levels.length){unlockLevel(nextLvlId)}}save();route('ending')}
 function nextStage(){const l=level(state.level);const nextIndex=state.stage+1;if(nextIndex<l.stages.length){state.stage=nextIndex;unlockStage(state.level,nextIndex);openStage(nextIndex)}else{if(state.level>=2){finishCampaign()}else{nextLevel()}}}
 function nextLevel(){const nextLvlId=state.level+1;const nextLvl=levels.find(x=>x.id===nextLvlId);if(!nextLvl||nextLvlId>2)return finishCampaign();state.level=nextLvlId;state.stage=0;unlockLevel(nextLvlId);unlockStage(nextLvlId,0);const stageKey=`${nextLvlId}:0`;const targetRole=stageRoleMap?.[stageKey]||nextLvl.roles[0];state.role=targetRole;save();toast(`Bắt đầu Ải ${nextLvl.id}: ${nextLvl.name}`);startGame()}
@@ -259,7 +261,7 @@ function answerGame(index){const g=state.game;const node=currentNode();const o=n
  applyReward(o.type,20);
  g.quickOutcome={name:o.name||(o.type==='good'?'Cả nhóm đã tiến lên!':o.type==='bad'?'Nhóm vẫn bế tắc':'Có điều cần cải thiện'),type:o.type,answer:o.answer,lesson:o.lesson,template:o.template};finishMain()}
 function autoGameEnd(){const g=state.game;if(!g)return;applyReward('bad',0);if(g.mode==='reversal'){g.reversalOutcome={name:'Bỏ lỡ lượt phản hồi',type:'mid',answer:'Cả nhóm không biết bạn đang nghĩ gì.',lesson:'Im lặng cũng ảnh hưởng đến việc phối hợp.'};route('ending');return}g.quickOutcome={name:'Bỏ lỡ lượt phản hồi',type:'mid',answer:'Không có phản hồi kịp thời.',lesson:'Chủ động lên tiếng giúp nhóm hoạt động hiệu quả.'};finishMain()}
-function startReversal(){state.game={...state.game,mode:'reversal',history:[]};state.gameTime=20;route('chat')}
+function startReversal(){state.game={...state.game,mode:'reversal',history:[]};state.gameTime=TURN_SECONDS;route('chat')}
 function saveTemplate(){const o=getEnding();if(!o?.template)return;state.wallet.unshift({level:state.game.level,text:o.template});state.wallet=state.wallet.slice(0,30);save();toast('Đã lưu mẫu tin nhắn vào ví')}
 async function copyWallet(index){const w=state.wallet[index];if(!w)return;try{await navigator.clipboard.writeText(w.text);toast('Đã sao chép')}catch{toast('Trình duyệt không cho phép sao chép tự động')}}
 ROOT.addEventListener('click',e=>{
