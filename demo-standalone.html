@@ -250,7 +250,15 @@ a,[role="button"]{touch-action:manipulation}
 .rt-next-btn{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);display:flex;align-items:center;gap:6px;background:linear-gradient(#fff6df,#f5d393);border:2.5px solid #7c533c;border-radius:999px;padding:9px 18px;font-size:12.5px;font-weight:1000;color:#4a3228;box-shadow:0 4px 0 #7c533c}
 .rt-next-btn .icon{width:18px;height:18px}
 .rt-next-btn:active{transform:translateX(-50%) translateY(3px);box-shadow:0 1px 0 #7c533c}
-.rt-decision{position:absolute;left:0;right:0;bottom:0;background:#fffef9;border-top:2px solid #d7e9d5;padding:14px 14px calc(17px + env(safe-area-inset-bottom));border-radius:20px 20px 0 0;box-shadow:0 -6px 25px #356a4842;animation:slideUpSoft .22s cubic-bezier(.22,1,.36,1) both}
+.rt-decision{position:absolute;left:0;right:0;bottom:0;background:#fffef9;border-top:3px solid #7c533c;padding:14px 14px calc(18px + env(safe-area-inset-bottom));border-radius:22px 22px 0 0;box-shadow:0 -8px 30px rgba(74,50,40,0.35);z-index:100 !important;display:flex;flex-direction:column;gap:9px;max-height:82vh;overflow-y:auto;animation:slideUpSoft .22s cubic-bezier(.22,1,.36,1) both}
+.rt-decision-top{display:flex;align-items:center;gap:10px}
+.rt-decision-avatar{width:44px;height:44px;border-radius:50%;background:#fdf2e2;border:2px solid #7c533c;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.rt-decision-avatar img{width:100%;height:100%;object-fit:contain}
+.rt-choices-list{display:flex;flex-direction:column;gap:8px}
+.rt-btn-choices-toggle{padding:8px 14px;border-radius:999px;background:linear-gradient(180deg,#fffae8 0%,#ffe9a6 100%);border:2px solid #9c673e;color:#4a280e;font-size:12px;font-weight:800;box-shadow:inset 0 2px 0 #ffffff,0 3px 0 rgba(74,50,40,0.25);cursor:pointer;display:inline-flex;align-items:center;gap:4px;transition:all .15s ease}
+.rt-btn-choices-toggle:active{transform:translateY(2px);box-shadow:inset 0 1px 0 #ffffff,0 1px 0 rgba(74,50,40,0.25)}
+.rt-btn-back-chat{width:28px;height:28px;border-radius:50%;background:#f5e4d0;border:1.8px solid #7c533c;color:#5c3c2c;font-size:13px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.rt-btn-review{background:none;border:none;color:#7c533c;font-size:11.5px;font-weight:800;cursor:pointer;text-decoration:underline;padding:4px}
 @keyframes slideUpSoft{from{transform:translateY(16px);opacity:0}to{transform:translateY(0);opacity:1}}
 /* Hiệu ứng "chụp khoảnh khắc" khi vừa vào màn kết quả */
 .cam-flash{position:absolute;inset:0;background:#fff;z-index:95;pointer-events:none;animation:camFlash .55s ease-out forwards}
@@ -2748,13 +2756,15 @@ function roundtableView(){
     }
   }
 
-  const moods = done
+  const isShowChoices = done || (g && g.showChoices);
+
+  const moods = (done || isShowChoices)
     ? { Leader: 'worried', QC: 'worried', Doer: 'worried', Mediator: 'worried', BanThan: 'worried' }
     : getRoundtableMoodsPDF(current, step, activeMsg);
 
   setTimeout(() => {
     applyRoundtableExpressions(moods, state);
-    if (!done && activeName && activeName !== 'Hệ thống') {
+    if (!done && !isShowChoices && activeName && activeName !== 'Hệ thống') {
       focusRoundtableSpeaker(speakerKey);
     } else {
       focusRoundtableSpeaker(null);
@@ -2775,16 +2785,16 @@ function roundtableView(){
       </div>
     </header>
 
-    <div class="rt-v5-scene ${done ? 'rt-dimmed' : ''}">
+    <div class="rt-v5-scene ${(done || isShowChoices) ? 'rt-dimmed' : ''}">
       <div class="rt-backdrop-wrap">
         ${ROUNDTABLE_BACKDROP_SVG}
       </div>
 
       <div class="rt-chars-wrap">
-        ${renderRoundtableCharacters(state, moods, (!done && activeName && activeName !== 'Hệ thống') ? speakerKey : null)}
+        ${renderRoundtableCharacters(state, moods, (!done && !isShowChoices && activeName && activeName !== 'Hệ thống') ? speakerKey : null)}
       </div>
 
-      ${!done ? `
+      ${!isShowChoices ? `
         <div class="rt-bubble-v5" style="top:${bubbleTop}" data-action="rt-next">
           <div class="rt-bubble-header">
             <span class="rt-speaker-badge speaker-${speakerKey.toLowerCase()}">${safe(activeName)}</span>
@@ -2793,25 +2803,7 @@ function roundtableView(){
           <p class="rt-bubble-quote">“${safe(activeMsg[1].replace(/^[“"]|[”"]$/g, ''))}”</p>
           <div class="rt-bubble-tail" style="left:${tailLeft}"></div>
         </div>
-      ` : `
-        <div class="rt-decision">
-          <div class="decision-head">
-            <b>${safe(current.prompt || current.title || 'Bạn sẽ phản hồi thế nào?')}</b>
-            <small>60 GIÂY / LƯỢT</small>
-          </div>
-          <div class="time-track">
-            <span id="time-fill" style="width:${state.gameTime / TURN_SECONDS * 100}%"></span>
-          </div>
-          ${current.options.map((o, i) => `
-            <button class="decision-choice" data-choice="${i}">
-              <span>${String.fromCharCode(65 + i)}</span>
-              ${safe(o.text)}
-            </button>
-          `).join('')}
-        </div>
-      `}
 
-      ${!done ? `
         <div class="rt-bottom-bar">
           <button class="rt-btn-restart" data-action="rt-restart">
             <span class="rt-btn-icon">↺</span> Chơi lại
@@ -2820,8 +2812,44 @@ function roundtableView(){
             <span>${step + 1 < current.messages.length ? 'Tiếp theo' : 'Đưa ra quyết định'}</span>
             <span class="rt-btn-arrow">▶</span>
           </button>
+          <button class="rt-btn-choices-toggle" data-action="rt-show-choices">
+            <span>⚡ Chọn đáp án (${current.options.length})</span>
+          </button>
         </div>
-      ` : ''}
+      ` : `
+        <div class="rt-decision">
+          <div class="rt-decision-top">
+            <div class="rt-decision-avatar">${player('worried')}</div>
+            <div class="decision-head" style="flex:1;">
+              <b>${safe(current.prompt || current.title || 'Bạn sẽ phản hồi thế nào?')}</b>
+              <small>60 GIÂY / LƯỢT</small>
+            </div>
+            ${!done ? `
+              <button class="rt-btn-back-chat" data-action="rt-hide-choices" title="Thu nhỏ để xem tiếp bàn tròn">
+                ✕
+              </button>
+            ` : ''}
+          </div>
+          <div class="time-track">
+            <span id="time-fill" style="width:${state.gameTime / TURN_SECONDS * 100}%"></span>
+          </div>
+          <div class="rt-choices-list">
+            ${current.options.map((o, i) => `
+              <button class="decision-choice" data-choice="${i}">
+                <span>${String.fromCharCode(65 + i)}</span>
+                <p style="margin:0;flex:1;">${safe(o.text)}</p>
+              </button>
+            `).join('')}
+          </div>
+          ${!done ? `
+            <div style="text-align:center;margin-top:2px;">
+              <button class="rt-btn-review" data-action="rt-hide-choices">
+                ‹ Quay lại nghe thảo luận (${step + 1}/${current.messages.length})
+              </button>
+            </div>
+          ` : ''}
+        </div>
+      `}
     </div>
   `);
 }
@@ -2830,7 +2858,11 @@ function advanceRT(){
   const g=state.game;
   if(!g)return;
   const current=currentNode();
-  g.rtStep=Math.min((g.rtStep||0)+1,current.messages.length);
+  const nextStep=(g.rtStep||0)+1;
+  g.rtStep=Math.min(nextStep,current.messages.length);
+  if(g.rtStep>=current.messages.length){
+    g.showChoices=true;
+  }
   render();
 }
 
@@ -3281,7 +3313,7 @@ function openStage(index){
 }
 
 function startGame(){
-  state.game={level:state.level, role:state.role, mode:'main', history:[], quickOutcome:null, reversalOutcome:null, lastOutcome:null, rtStep:0};
+  state.game={level:state.level, role:state.role, mode:'main', history:[], quickOutcome:null, reversalOutcome:null, lastOutcome:null, rtStep:0, showChoices:false};
   state.gameTime=TURN_SECONDS;
   route('chat');
 }
@@ -3479,9 +3511,22 @@ ROOT.addEventListener('click',e=>{
   if(x.dataset.action==='share-level')shareCard('level-complete-card','teamcraft-hoan-thanh-ai.png','Hoàn thành Ải TEAM-CRAFT','Mình vừa vượt qua một Ải drama nhóm trên TEAM-CRAFT!');
   if(x.dataset.action==='reversal')startReversal();
   if(x.dataset.action==='rt-next')advanceRT();
+  if(x.dataset.action==='rt-show-choices'){
+    if(state.game){
+      state.game.showChoices=true;
+      render();
+    }
+  }
+  if(x.dataset.action==='rt-hide-choices'){
+    if(state.game){
+      state.game.showChoices=false;
+      render();
+    }
+  }
   if(x.dataset.action==='rt-restart'){
     if(state.game){
       state.game.rtStep=0;
+      state.game.showChoices=false;
       stopMouthFlap();
       render();
     }

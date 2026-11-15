@@ -645,13 +645,15 @@ function roundtableView(){
     }
   }
 
-  const moods = done
+  const isShowChoices = done || (g && g.showChoices);
+
+  const moods = (done || isShowChoices)
     ? { Leader: 'worried', QC: 'worried', Doer: 'worried', Mediator: 'worried', BanThan: 'worried' }
     : getRoundtableMoodsPDF(current, step, activeMsg);
 
   setTimeout(() => {
     applyRoundtableExpressions(moods, state);
-    if (!done && activeName && activeName !== 'Hệ thống') {
+    if (!done && !isShowChoices && activeName && activeName !== 'Hệ thống') {
       focusRoundtableSpeaker(speakerKey);
     } else {
       focusRoundtableSpeaker(null);
@@ -672,16 +674,16 @@ function roundtableView(){
       </div>
     </header>
 
-    <div class="rt-v5-scene ${done ? 'rt-dimmed' : ''}">
+    <div class="rt-v5-scene ${(done || isShowChoices) ? 'rt-dimmed' : ''}">
       <div class="rt-backdrop-wrap">
         ${ROUNDTABLE_BACKDROP_SVG}
       </div>
 
       <div class="rt-chars-wrap">
-        ${renderRoundtableCharacters(state, moods, (!done && activeName && activeName !== 'Hệ thống') ? speakerKey : null)}
+        ${renderRoundtableCharacters(state, moods, (!done && !isShowChoices && activeName && activeName !== 'Hệ thống') ? speakerKey : null)}
       </div>
 
-      ${!done ? `
+      ${!isShowChoices ? `
         <div class="rt-bubble-v5" style="top:${bubbleTop}" data-action="rt-next">
           <div class="rt-bubble-header">
             <span class="rt-speaker-badge speaker-${speakerKey.toLowerCase()}">${safe(activeName)}</span>
@@ -690,25 +692,7 @@ function roundtableView(){
           <p class="rt-bubble-quote">“${safe(activeMsg[1].replace(/^[“"]|[”"]$/g, ''))}”</p>
           <div class="rt-bubble-tail" style="left:${tailLeft}"></div>
         </div>
-      ` : `
-        <div class="rt-decision">
-          <div class="decision-head">
-            <b>${safe(current.prompt || current.title || 'Bạn sẽ phản hồi thế nào?')}</b>
-            <small>60 GIÂY / LƯỢT</small>
-          </div>
-          <div class="time-track">
-            <span id="time-fill" style="width:${state.gameTime / TURN_SECONDS * 100}%"></span>
-          </div>
-          ${current.options.map((o, i) => `
-            <button class="decision-choice" data-choice="${i}">
-              <span>${String.fromCharCode(65 + i)}</span>
-              ${safe(o.text)}
-            </button>
-          `).join('')}
-        </div>
-      `}
 
-      ${!done ? `
         <div class="rt-bottom-bar">
           <button class="rt-btn-restart" data-action="rt-restart">
             <span class="rt-btn-icon">↺</span> Chơi lại
@@ -717,8 +701,44 @@ function roundtableView(){
             <span>${step + 1 < current.messages.length ? 'Tiếp theo' : 'Đưa ra quyết định'}</span>
             <span class="rt-btn-arrow">▶</span>
           </button>
+          <button class="rt-btn-choices-toggle" data-action="rt-show-choices">
+            <span>⚡ Chọn đáp án (${current.options.length})</span>
+          </button>
         </div>
-      ` : ''}
+      ` : `
+        <div class="rt-decision">
+          <div class="rt-decision-top">
+            <div class="rt-decision-avatar">${player('worried')}</div>
+            <div class="decision-head" style="flex:1;">
+              <b>${safe(current.prompt || current.title || 'Bạn sẽ phản hồi thế nào?')}</b>
+              <small>60 GIÂY / LƯỢT</small>
+            </div>
+            ${!done ? `
+              <button class="rt-btn-back-chat" data-action="rt-hide-choices" title="Thu nhỏ để xem tiếp bàn tròn">
+                ✕
+              </button>
+            ` : ''}
+          </div>
+          <div class="time-track">
+            <span id="time-fill" style="width:${state.gameTime / TURN_SECONDS * 100}%"></span>
+          </div>
+          <div class="rt-choices-list">
+            ${current.options.map((o, i) => `
+              <button class="decision-choice" data-choice="${i}">
+                <span>${String.fromCharCode(65 + i)}</span>
+                <p style="margin:0;flex:1;">${safe(o.text)}</p>
+              </button>
+            `).join('')}
+          </div>
+          ${!done ? `
+            <div style="text-align:center;margin-top:2px;">
+              <button class="rt-btn-review" data-action="rt-hide-choices">
+                ‹ Quay lại nghe thảo luận (${step + 1}/${current.messages.length})
+              </button>
+            </div>
+          ` : ''}
+        </div>
+      `}
     </div>
   `);
 }
@@ -727,7 +747,11 @@ function advanceRT(){
   const g=state.game;
   if(!g)return;
   const current=currentNode();
-  g.rtStep=Math.min((g.rtStep||0)+1,current.messages.length);
+  const nextStep=(g.rtStep||0)+1;
+  g.rtStep=Math.min(nextStep,current.messages.length);
+  if(g.rtStep>=current.messages.length){
+    g.showChoices=true;
+  }
   render();
 }
 
@@ -1178,7 +1202,7 @@ function openStage(index){
 }
 
 function startGame(){
-  state.game={level:state.level, role:state.role, mode:'main', history:[], quickOutcome:null, reversalOutcome:null, lastOutcome:null, rtStep:0};
+  state.game={level:state.level, role:state.role, mode:'main', history:[], quickOutcome:null, reversalOutcome:null, lastOutcome:null, rtStep:0, showChoices:false};
   state.gameTime=TURN_SECONDS;
   route('chat');
 }
@@ -1376,9 +1400,22 @@ ROOT.addEventListener('click',e=>{
   if(x.dataset.action==='share-level')shareCard('level-complete-card','teamcraft-hoan-thanh-ai.png','Hoàn thành Ải TEAM-CRAFT','Mình vừa vượt qua một Ải drama nhóm trên TEAM-CRAFT!');
   if(x.dataset.action==='reversal')startReversal();
   if(x.dataset.action==='rt-next')advanceRT();
+  if(x.dataset.action==='rt-show-choices'){
+    if(state.game){
+      state.game.showChoices=true;
+      render();
+    }
+  }
+  if(x.dataset.action==='rt-hide-choices'){
+    if(state.game){
+      state.game.showChoices=false;
+      render();
+    }
+  }
   if(x.dataset.action==='rt-restart'){
     if(state.game){
       state.game.rtStep=0;
+      state.game.showChoices=false;
       stopMouthFlap();
       render();
     }
