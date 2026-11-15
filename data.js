@@ -128,6 +128,13 @@ export const stageRoleMap = {
   '2:5': 'leader'
 };
 
+// 'chat' = giao diện nhắn tin nhóm (chat-page hiện có). 'round' = giao diện bàn tròn
+// (các nhân vật ngồi quanh bàn, nói trực tiếp, lời thoại nổi trên đầu người nói).
+export const stageUIMode = {
+  '1:0': 'chat', '1:1': 'round', '1:2': 'round', '1:3': 'chat', '1:4': 'round',
+  '2:0': 'chat', '2:1': 'chat', '2:2': 'round', '2:3': 'round', '2:4': 'round', '2:5': 'chat'
+};
+
 export const stageScenarios = {
   // ẢI 1 - MÀN 1 (Tình huống 1)
   '1:0': {

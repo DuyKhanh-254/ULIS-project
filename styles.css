@@ -230,6 +230,31 @@ a,[role="button"]{touch-action:manipulation}
 .id-card.theme-green .id-stamp{border-color:#3f9e52;color:#3f9e52;background:#f1fbf0}
 .id-desc .icon{width:15px;height:15px;margin:0 1px;vertical-align:-3px}
 /* Chat */
+/* Round-table conversation screen (nhân vật ngồi bàn tròn, nói trực tiếp) */
+.rt-page{height:100dvh;min-height:690px;display:flex;flex-direction:column}
+.rt-scene{position:relative;flex:1;overflow:hidden;transition:filter .3s ease}
+.rt-scene.rt-dimmed{filter:brightness(.8) saturate(.85)}
+.rt-table{position:absolute;left:50%;bottom:9%;transform:translateX(-50%);width:78%;max-width:300px;height:92px;background:radial-gradient(ellipse at 40% 30%,#e3b98f,#bd895b);border:3px solid #8a5c38;border-radius:50%;box-shadow:0 10px 0 #7c533c40}
+.rt-seat{position:absolute;display:flex;flex-direction:column;align-items:center;width:84px;transition:transform .25s cubic-bezier(.22,1,.36,1),filter .25s ease;filter:brightness(.93)}
+.rt-seat-glow{position:absolute;top:4px;width:72px;height:72px;border-radius:50%;background:radial-gradient(circle,#fff6c4cc,transparent 70%);opacity:0;transition:opacity .25s ease}
+.rt-seat-char{width:64px;position:relative;z-index:1}
+.rt-seat-tag{margin-top:-6px;position:relative;z-index:1;background:#fffaf2;border:2px solid #7c533c88;border-radius:99px;padding:2px 9px;font-size:9.5px;font-weight:1000;color:#4a3228;white-space:nowrap}
+.rt-seat.is-speaking{transform:scale(1.12) translateY(-4px);filter:brightness(1)}
+.rt-seat.is-speaking .rt-seat-glow{opacity:1}
+.rt-seat.is-speaking .rt-seat-tag{background:linear-gradient(#fff3c4,#ffd97d);border-color:#c9972f}
+.rt-bubble{position:absolute;left:50%;top:14px;transform:translateX(-50%);width:88%;max-width:340px;background:#fff9ee;border:2.5px solid #7c533c;border-radius:16px;padding:10px 14px;box-shadow:0 5px 0 #7c533c3a,0 10px 18px #3a25221f;cursor:pointer;animation:rtBubbleIn .22s cubic-bezier(.22,1,.36,1) both}
+@keyframes rtBubbleIn{0%{transform:translateX(-50%) translateY(-8px) scale(.96);opacity:0}100%{transform:translateX(-50%) translateY(0) scale(1);opacity:1}}
+.rt-bubble small{display:block;font-weight:1000;color:#8c674f;font-size:10px;margin-bottom:3px}
+.rt-bubble p{margin:0;font-size:13px;font-weight:700;color:#4a3228;line-height:1.4}
+.rt-next-btn{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);display:flex;align-items:center;gap:6px;background:linear-gradient(#fff6df,#f5d393);border:2.5px solid #7c533c;border-radius:999px;padding:9px 18px;font-size:12.5px;font-weight:1000;color:#4a3228;box-shadow:0 4px 0 #7c533c}
+.rt-next-btn .icon{width:18px;height:18px}
+.rt-next-btn:active{transform:translateX(-50%) translateY(3px);box-shadow:0 1px 0 #7c533c}
+.rt-decision{position:absolute;left:0;right:0;bottom:0;background:#fffef9;border-top:2px solid #d7e9d5;padding:14px 14px calc(17px + env(safe-area-inset-bottom));border-radius:20px 20px 0 0;box-shadow:0 -6px 25px #356a4842;animation:slideUpSoft .22s cubic-bezier(.22,1,.36,1) both}
+@keyframes slideUpSoft{from{transform:translateY(16px);opacity:0}to{transform:translateY(0);opacity:1}}
+/* Hiệu ứng "chụp khoảnh khắc" khi vừa vào màn kết quả */
+.cam-flash{position:absolute;inset:0;background:#fff;z-index:95;pointer-events:none;animation:camFlash .55s ease-out forwards}
+@keyframes camFlash{0%{opacity:.92}100%{opacity:0}}
+
 .chat-page{height:100dvh;min-height:690px;display:flex;flex-direction:column;background:#eff8f1}
 .chat-head{height:75px;display:flex;align-items:center;gap:8px;padding:9px 12px;background:#fffef7;border-bottom:2px solid #dcecd9;flex-shrink:0}
 .chat-head .circle-action{width:36px;height:36px;flex-shrink:0}.chat-head .circle-action .icon{width:28px;height:28px}

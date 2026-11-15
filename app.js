@@ -1,4 +1,4 @@
-import {roles, personas, quizQuestions, levels, quickScenarios, reversals, stageRoleMap} from './data.js';
+import {roles, personas, quizQuestions, levels, quickScenarios, reversals, stageRoleMap, stageUIMode} from './data.js';
 
 const ROOT=document.getElementById('app');
 const TURN_SECONDS=120;
@@ -206,11 +206,25 @@ function chatView(){const g=state.game;const current=currentNode();const lines=[
 <div class="message-zone" id="message-zone"><div class="privacy-note">MÔ PHỎNG CHAT • KHÔNG GỬI TIN THẬT</div>${lines.map(x=>bubble(x.name,x.text)).join('')}</div>
 <div class="decision-box"><div class="decision-head"><b>${safe(current.prompt||current.title||'Bạn sẽ phản hồi thế nào?')}</b><small>2 PHÚT / LƯỢT</small></div><div class="time-track"><span id="time-fill" style="width:${state.gameTime/TURN_SECONDS*100}%"></span></div>
 ${current.options.map((o,i)=>`<button class="decision-choice" data-choice="${i}"><span>${String.fromCharCode(65+i)}</span>${safe(o.text)}</button>`).join('')}</div>`)}
+const RT_SEATS=[{left:'18%',top:'8%'},{left:'58%',top:'8%'},{left:'8%',top:'40%'},{left:'68%',top:'40%'}];
+function uniqueSpeakers(messages){const seen=[];for(const [name] of messages){if(name==='Hệ thống')continue;const id=talkSprites[name];if(id===undefined)continue;if(!seen.find(s=>s.name===name))seen.push({name,id:id||'follower'})}return seen.slice(0,4)}
+function roundtableView(){const g=state.game;const current=currentNode();const seats=uniqueSpeakers(current.messages);const step=g.rtStep||0;const done=step>=current.messages.length;const activeMsg=!done?current.messages[step]:null;const activeName=activeMsg?activeMsg[0]:null;
+return shell('interior-page rt-page',`${topbar(g.mode==='reversal'?'Đảo vai':'Nhóm Bài Tập · Ải '+g.level,'stages',true)}
+<div class="rt-scene ${done?'rt-dimmed':''}">
+<div class="rt-table"></div>
+${seats.map((s,i)=>{const pos=RT_SEATS[i]||RT_SEATS[0];const speaking=activeName===s.name;
+return `<div class="rt-seat ${speaking?'is-speaking':''}" style="left:${pos.left};top:${pos.top}"><div class="rt-seat-glow"></div>${avatar(s.id,'rt-seat-char',speaking?'talk':'idle')}<span class="rt-seat-tag">${safe(s.name)}</span></div>`}).join('')}
+${!done?`<div class="rt-bubble" data-action="rt-next"><small>${safe(activeName)}</small><p>${safe(activeMsg[1])}</p></div>
+<button class="rt-next-btn" data-action="rt-next">${icon('play')} ${step+1<current.messages.length?'Tiếp theo':'Xem câu hỏi'}</button>`:
+`<div class="rt-decision"><div class="decision-head"><b>${safe(current.prompt||current.title||'Bạn sẽ phản hồi thế nào?')}</b><small>2 PHÚT / LƯỢT</small></div><div class="time-track"><span id="time-fill" style="width:${state.gameTime/TURN_SECONDS*100}%"></span></div>${current.options.map((o,i)=>`<button class="decision-choice" data-choice="${i}"><span>${String.fromCharCode(65+i)}</span>${safe(o.text)}</button>`).join('')}</div>`}
+</div>`)}
+function advanceRT(){const g=state.game;if(!g)return;const current=currentNode();g.rtStep=Math.min((g.rtStep||0)+1,current.messages.length);render()}
+function chatOrRoundtable(){const g=state.game;if(!g||g.mode==='reversal')return chatView();const mode=stageUIMode[`${g.level}:${state.stage}`]||'chat';return mode==='round'?roundtableView():chatView()}
 function getEnding(){const g=state.game;return g.mode==='reversal'?g.reversalOutcome:g.quickOutcome}
 function finishCampaign(){toast('Chúc mừng bạn đã hoàn thành toàn bộ nội dung hiện có (Ải 1 & Ải 2)! Các Ải 3, 4, 5 đang được cập nhật.');route('map')}
 
 const MOOD_EMOJI={good:'🥳',mid:'😅',bad:'🥹'};
-function endingView(){const g=state.game;const o=getEnding();const tone=o.tone||o.type||'mid';const l=level(state.level);const nextStageIndex=state.stage+1;const hasNextStage=nextStageIndex<l.stages.length;const nextLvlId=state.level+1;const nextLvl=levels.find(x=>x.id===nextLvlId);const isFinalCampaignLevel=state.level===2&&!hasNextStage;const hasNextLevel=!hasNextStage&&Boolean(nextLvl)&&!isFinalCampaignLevel;return shell('interior-page ending-page',`${topbar(g.mode==='reversal'?'Đảo vai hoàn tất':'Lesson Unlocked','stages',true)}
+function endingView(){const g=state.game;const o=getEnding();const tone=o.tone||o.type||'mid';const l=level(state.level);const nextStageIndex=state.stage+1;const hasNextStage=nextStageIndex<l.stages.length;const nextLvlId=state.level+1;const nextLvl=levels.find(x=>x.id===nextLvlId);const isFinalCampaignLevel=state.level===2&&!hasNextStage;const hasNextLevel=!hasNextStage&&Boolean(nextLvl)&&!isFinalCampaignLevel;return shell('interior-page ending-page',`<div class="cam-flash"></div>${topbar(g.mode==='reversal'?'Đảo vai hoàn tất':'Lesson Unlocked','stages',true)}
 <div class="page-body"><div class="ending-medal ${tone}">${avatar(state.role,'medal-character',tone==='good'?'walk_a':'idle')}<span class="mood-badge">${MOOD_EMOJI[tone]||'😐'}</span></div>
 <h2 class="ending-title">${safe(o.name||(tone==='good'?'Giải quyết hiệu quả':tone==='bad'?'Nhóm gặp khó khăn':'Cần điều chỉnh'))}</h2><p class="ending-desc">${safe(o.message||o.answer)}</p>
 <div class="lesson-card"><div class="lesson-caption">${icon('book')} LESSON UNLOCKED</div><p>${safe(o.lesson)}</p></div>
@@ -244,7 +258,7 @@ function walletView(){return shell('interior-page',`${topbar('Ví kịch bản',
 function buyOutfit(id){if(state.ownedOutfits.includes(id))return;const item=allOutfits.find(o=>o.id===id);if(!item)return;
  if(state.coins<item.cost){toast('Không đủ Xu, hãy chơi thêm để kiếm Xu nhé!');return}
  state.coins-=item.cost;state.ownedOutfits.push(id);state.outfit=id;save();toast(`Đã mua và mặc "${item.name}"!`);render()}
-function render(){const mapRender={home,map,roles:rolesView,custom:customView,shop:shopView,stages:stagesView,stagePreview,comingSoon:comingSoonView,quiz:quizView,quizResult,chat:chatView,ending:endingView,levelComplete:levelCompleteView,wallet:walletView,replay:()=>{startGame();return ''}};
+function render(){const mapRender={home,map,roles:rolesView,custom:customView,shop:shopView,stages:stagesView,stagePreview,comingSoon:comingSoonView,quiz:quizView,quizResult,chat:chatOrRoundtable,ending:endingView,levelComplete:levelCompleteView,wallet:walletView,replay:()=>{startGame();return ''}};
 ROOT.innerHTML=(mapRender[state.screen]||home)();if(state.screen==='chat'){document.getElementById('message-zone')?.scrollTo(0,9999)}if(state.screen==='quiz')runQuizClock();if(state.screen==='chat')runGameClock();}
 function runQuizClock(){stopClock();clock=setInterval(()=>{if(state.screen!=='quiz'){stopClock();return;}state.quizTime=Math.max(0,state.quizTime-1);const el=document.getElementById('quiz-count');if(el)el.textContent=state.quizTime+'s';if(state.quizTime===0)finishQuiz()},1000)}
 function runGameClock(){stopClock();clock=setInterval(()=>{if(state.screen!=='chat'){stopClock();return;}state.gameTime=Math.max(0,state.gameTime-1);const el=document.getElementById('game-count');const bar=document.getElementById('time-fill');if(el)el.textContent=fmtTime(state.gameTime);if(bar)bar.style.width=(state.gameTime/TURN_SECONDS*100)+'%';if(state.gameTime===0)autoGameEnd()},1000)}
@@ -253,7 +267,7 @@ function chooseQuiz(index){const ans=quizQuestions[state.quizIndex].answers[inde
 function finishQuiz(){const tally={};state.quizAnswers.forEach(x=>tally[x]=(tally[x]||0)+1);state.persona=Object.entries(tally).sort((a,b)=>b[1]-a[1])[0]?.[0]||'bee';save();route('quizResult')}
 function openLevel(id){const lvlId=Number(id);state.level=lvlId;if(lvlId>2)return route('comingSoon');route('stages')}
 function openStage(index){state.stage=Number(index);const l=level(state.level);if(l.id>2)return route('comingSoon');if(!isLevelUnlocked(l.id)){toast(`Ải ${l.id} chưa mở khóa!`);return route('map')}if(!isStageUnlocked(l.id,state.stage)){toast(`Màn ${state.stage+1} chưa mở khóa! Hãy hoàn thành màn trước.`);return route('stages')}const stageKey=`${l.id}:${state.stage}`;if(!quickScenarios[stageKey])return route('stagePreview');const targetRole=stageRoleMap?.[stageKey]||(l.roles.includes(state.role)?state.role:l.roles[0]);state.role=targetRole;save();startGame()}
-function startGame(){state.game={level:state.level,role:state.role,mode:'main',history:[],quickOutcome:null,reversalOutcome:null};state.gameTime=TURN_SECONDS;route('chat')}
+function startGame(){state.game={level:state.level,role:state.role,mode:'main',history:[],quickOutcome:null,reversalOutcome:null,rtStep:0};state.gameTime=TURN_SECONDS;route('chat')}
 function finishMain(){const key=`${state.game.level}:${state.stage}:${state.role}`;if(!state.done.includes(key))state.done.push(key);const l=level(state.level);if(state.stage<l.stages.length-1){unlockStage(state.level,state.stage+1)}else{const nextLvlId=state.level+1;if(nextLvlId<=levels.length){unlockLevel(nextLvlId)}}save();route('ending')}
 function nextStage(){const l=level(state.level);const nextIndex=state.stage+1;if(nextIndex<l.stages.length){state.stage=nextIndex;unlockStage(state.level,nextIndex);openStage(nextIndex)}else{if(state.level>=2){finishCampaign()}else{nextLevel()}}}
 function nextLevel(){const nextLvlId=state.level+1;const nextLvl=levels.find(x=>x.id===nextLvlId);if(!nextLvl||nextLvlId>2)return finishCampaign();state.level=nextLvlId;state.stage=0;unlockLevel(nextLvlId);unlockStage(nextLvlId,0);const stageKey=`${nextLvlId}:0`;const targetRole=stageRoleMap?.[stageKey]||nextLvl.roles[0];state.role=targetRole;save();toast(`Bắt đầu Ải ${nextLvl.id}: ${nextLvl.name}`);startGame()}
@@ -262,7 +276,7 @@ function answerGame(index){const g=state.game;const node=currentNode();const o=n
  applyReward(o.type,20);
  g.quickOutcome={name:o.name||(o.type==='good'?'Cả nhóm đã tiến lên!':o.type==='bad'?'Nhóm vẫn bế tắc':'Có điều cần cải thiện'),type:o.type,answer:o.answer,lesson:o.lesson,template:o.template};finishMain()}
 function autoGameEnd(){const g=state.game;if(!g)return;applyReward('bad',0);if(g.mode==='reversal'){g.reversalOutcome={name:'Bỏ lỡ lượt phản hồi',type:'mid',answer:'Cả nhóm không biết bạn đang nghĩ gì.',lesson:'Im lặng cũng ảnh hưởng đến việc phối hợp.'};route('ending');return}g.quickOutcome={name:'Bỏ lỡ lượt phản hồi',type:'mid',answer:'Không có phản hồi kịp thời.',lesson:'Chủ động lên tiếng giúp nhóm hoạt động hiệu quả.'};finishMain()}
-function startReversal(){state.game={...state.game,mode:'reversal',history:[]};state.gameTime=TURN_SECONDS;route('chat')}
+function startReversal(){state.game={...state.game,mode:'reversal',history:[],rtStep:0};state.gameTime=TURN_SECONDS;route('chat')}
 function saveTemplate(){const o=getEnding();if(!o?.template)return;state.wallet.unshift({level:state.game.level,text:o.template});state.wallet=state.wallet.slice(0,30);save();toast('Đã lưu mẫu tin nhắn vào ví')}
 async function copyWallet(index){const w=state.wallet[index];if(!w)return;try{await navigator.clipboard.writeText(w.text);toast('Đã sao chép')}catch{toast('Trình duyệt không cho phép sao chép tự động')}}
 ROOT.addEventListener('click',e=>{
@@ -283,6 +297,7 @@ ROOT.addEventListener('click',e=>{
  if(x.dataset.action==='download-level')downloadCard('level-complete-card','teamcraft-hoan-thanh-ai.png');
  if(x.dataset.action==='share-level')shareCard('level-complete-card','teamcraft-hoan-thanh-ai.png','Mình vừa hoàn thành một Ải trên TEAM-CRAFT!','Thử sức xem bạn xử lý drama nhóm giỏi đến đâu nhé!');
  if(x.dataset.action==='reversal')startReversal();
+ if(x.dataset.action==='rt-next')advanceRT();
  if(x.dataset.action==='next-stage')nextStage();
  if(x.dataset.action==='level-complete')openLevelComplete();
  if(x.dataset.action==='continue-after-level')continueAfterLevel();
